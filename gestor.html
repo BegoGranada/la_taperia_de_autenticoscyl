@@ -77,7 +77,7 @@
       <!-- ---------- AGENDA ---------- -->
       <section id="p-agenda" class="pantalla activa">
         <div class="flex items-center justify-between gap-3">
-          <h2 id="lblDia" class="font-display text-3xl font-semibold capitalize"></h2>
+          <h2 id="lblDia" class="font-display text-3xl font-semibold first-letter:uppercase"></h2>
           <button id="btnHoy" class="rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300">Hoy</button>
         </div>
         <div id="tiraDias" class="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1"></div>
@@ -187,7 +187,7 @@
             <input name="telefono" type="tel" autocomplete="off" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
           <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Canal</span>
             <select name="origen" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3">
-              <option value="telefono">Teléfono</option><option value="whatsapp">WhatsApp</option><option value="presencial">En el local</option><option value="web">Web</option>
+              <option value="telefono">Teléfono</option><option value="whatsapp">WhatsApp</option><option value="presencial">En el local</option><option value="web">Web</option><option value="agente">🤖 Agente IA</option>
             </select></label>
         </div>
         <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Estado</span>
@@ -319,18 +319,30 @@
     noshow: ['No vinieron', 'bg-white/10 text-crema-500'],
     cancelada: ['Cancelada', 'bg-white/10 text-crema-500']
   };
-  const ORIGEN = { web: 'Web', telefono: 'Teléfono', whatsapp: 'WhatsApp', presencial: 'En el local' };
+  const ORIGEN = { web: 'Web', telefono: 'Teléfono', whatsapp: 'WhatsApp', presencial: 'En el local', agente: '🤖 Agente IA' };
   const cuentaAforo = r => ['pendiente', 'confirmada', 'sentada'].includes(r.estado);
 
   /* =====================================================================
      Datos (modo demostración: localStorage)
      ===================================================================== */
-  const CLAVE = 'taperia-gestor-v1';
+  const CLAVE = 'taperia-gestor-v2';  // v2: demo con solicitudes del agente IA y solo en días con servicio
   let D;
   function semilla() {
     const h = hoyS(), R = [];
-    const add = (dia, turno, hora, personas, nombre, telefono, estado, origen, notas = '') =>
-      R.push({ id: uid(), fecha: sumar(h, dia), turno, hora, personas, nombre, telefono, estado, origen, notas, creado: new Date().toISOString() });
+    // «dia» cuenta días con servicio de ese turno (0 = hoy o el siguiente con servicio, -1 = el anterior),
+    // para que la demo nunca ponga reservas en martes o miércoles
+    const conServicio = (turno, n) => {
+      let f = h; const paso = n < 0 ? -1 : 1, ok = x => C.diasServicio[turno].includes(new Date(x + 'T12:00').getDay());
+      if (n < 0) f = sumar(f, -1);
+      while (!ok(f)) f = sumar(f, paso);
+      for (let i = 0; i < Math.abs(n) - (n < 0 ? 1 : 0); i++) { f = sumar(f, paso); while (!ok(f)) f = sumar(f, paso); }
+      return f;
+    };
+    const add = (dia, turno, hora, personas, nombre, telefono, estado, origen, notas = '') => {
+      const fecha = conServicio(turno, dia);
+      if (estado === 'sentada' && fecha > h) estado = 'confirmada';  // nadie «ha llegado» a un día futuro
+      R.push({ id: uid(), fecha, turno, hora, personas, nombre, telefono, estado, origen, notas, creado: new Date().toISOString() });
+    };
     add(0, 'comida', '14:00', 4, 'Familia Sanz', '600112233', 'confirmada', 'telefono', 'Una trona');
     add(0, 'comida', '14:30', 2, 'Pedro Alonso', '611223344', 'sentada', 'presencial');
     add(0, 'comida', '15:00', 6, 'Cumpleaños de Marta', '622334455', 'confirmada', 'whatsapp', 'Traen tarta; avisar al servir postres');
@@ -338,7 +350,7 @@
     add(0, 'cena', '21:30', 5, 'Grupo ciclista Coca', '644556677', 'pendiente', 'web', 'Vienen en bici; ¿dónde dejarlas?');
     add(0, 'cena', '22:00', 3, 'Ana Gil', '655667788', 'pendiente', 'telefono', 'Una persona celíaca');
     add(1, 'comida', '14:00', 8, 'Comida de empresa Iturri', '666778899', 'confirmada', 'telefono', 'Factura a nombre de la empresa');
-    add(1, 'cena', '21:00', 4, 'Rubén Castro', '677889900', 'pendiente', 'web');
+    add(1, 'cena', '21:00', 4, 'Rubén Castro', '677889900', 'pendiente', 'agente', 'Recogida por el asistente de WhatsApp · preguntó por opciones sin gluten');
     add(2, 'cena', '21:30', 2, 'Elena Martín', '688990011', 'confirmada', 'whatsapp', 'Aniversario');
     add(3, 'comida', '14:30', 10, 'Peña El Castillo', '699001122', 'pendiente', 'telefono', 'Menú para grupo: preguntar opciones');
     add(-1, 'cena', '21:00', 4, 'Hugo Prieto', '600998877', 'noshow', 'web');
@@ -373,7 +385,9 @@
   $('#btnSalir').addEventListener('click', () => { try { sessionStorage.removeItem('taperia-sesion'); } catch (e) {} $('#vistaApp').classList.add('hidden'); $('#vistaLogin').classList.remove('hidden'); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && D) { importarWeb(); pintar(); } });
 
-  let pantalla = 'agenda', dia = hoyS();
+  // Si hoy no hay servicio (martes y miércoles), la agenda abre en el próximo día con servicio
+  const proximoServicio = () => { let f = hoyS(); for (let i = 0; i < 7 && !['comida', 'cena'].some(t => C.diasServicio[t].includes(new Date(f + 'T12:00').getDay())); i++) f = sumar(f, 1); return f; };
+  let pantalla = 'agenda', dia = proximoServicio();
   function ir(p) {
     pantalla = p;
     $$('.pantalla').forEach(s => s.classList.toggle('activa', s.id === 'p-' + p));

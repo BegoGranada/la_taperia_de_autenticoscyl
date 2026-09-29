@@ -46,3 +46,15 @@ Con base de datos, *Publicar* lo hará directamente para todos los clientes.
 4. Al confirmarla, el gestor ofrece avisar al cliente por WhatsApp con el mensaje ya escrito.
 
 Para usarlo de verdad hay que sustituir el guardado en el navegador por una base de datos, como se hizo en el gestor de Cabañas Los Pinos.
+
+## Asistente IA por WhatsApp
+
+El asistente atiende el WhatsApp del bar:
+
+- responde sobre la carta, los alérgenos, el horario y la tienda;
+- recoge solicitudes de reserva, que llegan al gestor como **pendientes** con la etiqueta **🤖 Agente IA**;
+- no confirma nada por su cuenta: lo hacen siempre los propietarios.
+
+`tools/generar.py` genera `datos/asistente.json`, con todo lo que el asistente necesita saber: horario, turnos, carta con alérgenos y servicios. Así, el asistente dice siempre lo mismo que la web.
+
+Las herramientas, el prompt, los requisitos legales y los pasos para ponerlo en marcha están en [docs/agente-whatsapp.md](docs/agente-whatsapp.md).

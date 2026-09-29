@@ -696,6 +696,7 @@ def pagina_privacidad():
       {h2('2. Qué datos tratamos')}
       <p>Cuando solicitas una reserva: nombre, teléfono, email (si lo indicas), día, hora y número de personas, y los comentarios que quieras añadir. Si en los comentarios nos cuentas alergias o intolerancias, las usaremos solo para preparar tu visita; es voluntario y lo tratamos con tu consentimiento expreso.</p>
       <p>Si nos escribes por WhatsApp, teléfono, email o redes sociales, tratamos los datos que nos facilites para responderte.</p>
+      <p><b>Asistente automático de WhatsApp.</b> Si nos escribes por WhatsApp, puede responderte primero un asistente automático con inteligencia artificial, que te lo indicará al empezar la conversación. Usa lo que le cuentes (nombre, teléfono, día, hora, número de personas y comentarios) solo para contestar tus preguntas sobre la carta, el horario y las reservas, y para dejarnos tu solicitud de reserva. No toma decisiones por nosotros: cada reserva la revisa y confirma una persona del equipo, y puedes pedir hablar con una persona en cualquier momento.</p>
       {h2('3. Para qué los usamos y con qué base legal')}
       {lista(['<b>Gestionar tu reserva</b> y contactarte para confirmarla, cambiarla o avisarte de cualquier incidencia. Base legal: la aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).',
               '<b>Tener en cuenta alergias o necesidades especiales</b> que nos indiques. Base legal: tu consentimiento explícito (art. 9.2.a RGPD), que puedes retirar cuando quieras.',
@@ -704,7 +705,7 @@ def pagina_privacidad():
       {h2('4. Cuánto tiempo los guardamos')}
       <p>Durante el tiempo necesario para gestionar la reserva y, después, hasta un año como máximo, salvo que una obligación legal exija conservarlos más tiempo. Pasado ese plazo se borran.</p>
       {h2('5. Con quién los compartimos')}
-      <p>No cedemos tus datos a terceros, salvo obligación legal. Pueden acceder a ellos los proveedores que nos prestan servicios técnicos (alojamiento de la web y, si nos escribes por ese canal, WhatsApp), siempre con las garantías que exige el RGPD. Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo, amparados en decisiones de adecuación o en cláusulas contractuales tipo de la Comisión Europea.</p>
+      <p>No cedemos tus datos a terceros, salvo obligación legal. Pueden acceder a ellos los proveedores que nos prestan servicios técnicos (alojamiento de la web, WhatsApp y el proveedor de inteligencia artificial del asistente automático, si nos escribes por ese canal), siempre con las garantías que exige el RGPD. Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo, amparados en decisiones de adecuación o en cláusulas contractuales tipo de la Comisión Europea.</p>
       {h2('6. Tus derechos')}
       <p>Puedes pedir el acceso, la rectificación o la supresión de tus datos, la limitación u oposición a su tratamiento y su portabilidad, y retirar el consentimiento dado. Escríbenos a <a class="text-oro-300 underline underline-offset-4" href="mailto:{T["email"]}">{e(T["email"])}</a> indicando qué derecho quieres ejercer. Si crees que no hemos tratado bien tus datos, puedes reclamar ante la Agencia Española de Protección de Datos (<a class="text-oro-300 underline underline-offset-4" href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).</p>
       {h2('7. Menores de edad')}
@@ -732,6 +733,46 @@ def pagina_cookies():
     return pagina_legal('cookies.html', 'Política de cookies', 'Política de cookies de la web de Auténticos CyL.', cuerpo)
 
 
+def datos_asistente():
+    """Conocimiento para el asistente IA de WhatsApp: un único JSON que el agente (n8n)
+    descarga de la web publicada. Se regenera con el resto de la web, así que siempre
+    coincide con lo que ve el cliente. Ver docs/agente-whatsapp.md."""
+    import re
+    conf = (RAIZ / 'js' / 'config.js').read_text(encoding='utf-8')
+    dias = {k: json.loads(v) for k, v in re.findall(r'(comida|cena):\s*(\[[\d,\s]*\])', conf)}
+    horas = {k: json.loads(v.replace("'", '"')) for k, v in re.findall(r"(comida|cena):\s*\{[^}]*horas:\s*(\[[^\]]*\])", conf)}
+    nombres_dia = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
+    carta = []
+    for s in CARTA['secciones']:
+        if s.get('estado') == 'oculto':
+            continue
+        carta.append({'seccion': s['nombre'], 'aviso': s.get('aviso') or None, 'platos': [
+            {'nombre': pl['nombre'], 'descripcion': pl.get('desc') or None, 'precio': pl['precio'],
+             'por_unidad': bool(pl.get('unidad')), 'alergenos': [ALERGENOS[a] for a in pl.get('alergenos', [])],
+             'etiquetas': pl.get('etiquetas', []), 'agotado': pl.get('estado') == 'agotado'}
+            for pl in s['platos'] if pl.get('estado') != 'oculto']})
+    return {
+        'generado': 'tools/generar.py',
+        'negocio': {'nombre': 'Auténticos CyL · Bar Tapería y Tienda', 'direccion': DIRECCION, 'como_llegar': MAPA,
+                    'telefono': TEL_VISIBLE, 'whatsapp': TEL, 'email': TITULAR['email'], 'web': 'https://' + TITULAR['dominio'],
+                    'tienda_online': TIENDA_ONLINE, 'reconocimientos': ['Solete Guía Repsol 2025'],
+                    'redes': {n: u for n, u, _ in REDES}},
+        'horario': {d: h for d, h in HORARIO}, 'horario_nota': 'Martes y miércoles cerrado, salvo festivos.',
+        'reservas': {
+            'turnos': {t: {'dias': [nombres_dia[d] for d in dias.get(t, [])], 'horas': horas.get(t, [])} for t in ('comida', 'cena')},
+            'max_personas': 12,
+            'reglas': ['El asistente nunca confirma una reserva: deja una solicitud pendiente y los propietarios la confirman por WhatsApp.',
+                       'Grupos de más de 12 personas, menús de empresa y encargos: pasar el caso a una persona.',
+                       'Para reservas en el mismo día, recomendar llamar al ' + TEL_VISIBLE + '.',
+                       'Las noches de Auténticos (hamburguesas de autor) solo en servicio de cenas.']},
+        'servicios': ['Comida para llevar (encargo por teléfono o WhatsApp)', 'Menús de empresa y grupos', 'Encargos de Navidad',
+                      'Tienda de productos de Castilla y León: ' + ', '.join(TIENDA)],
+        'alergenos_aviso': 'Informamos de los 14 alérgenos de declaración obligatoria (Reglamento UE 1169/2011). '
+                           'Ante una alergia o intolerancia, avisar al personal: el asistente no puede garantizar la ausencia de trazas.',
+        'carta': {'temporada': CARTA.get('temporada'), 'secciones': carta},
+        'privacidad': 'https://' + TITULAR['dominio'] + '/privacidad.html'}
+
+
 def main():
     for nombre, html in [('index.html', pagina_inicio()), ('carta.html', pagina_carta()),
                          ('noticias.html', pagina_noticias()), ('reservas.html', pagina_reservas()),
@@ -744,6 +785,8 @@ def main():
         '/* Generado por tools/generar.py a partir de datos/carta.json: no editar a mano */\n'
         'window.CARTA_BASE = ' + json.dumps(CARTA, ensure_ascii=False, indent=1) + ';\n', encoding='utf-8')
     print('escrito js/carta-datos.js')
+    (RAIZ / 'datos' / 'asistente.json').write_text(json.dumps(datos_asistente(), ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    print('escrito datos/asistente.json')
 
 
 if __name__ == '__main__':
