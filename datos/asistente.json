@@ -2,6 +2,7 @@
  "generado": "tools/generar.py",
  "negocio": {
   "nombre": "Auténticos CyL · Bar Tapería y Tienda",
+  "lema": "Cocinamos con cabeza, trabajamos con el corazón",
   "direccion": "C/ Calixto del Río, 8 · 40480 Coca (Segovia)",
   "como_llegar": "https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia",
   "telefono": "647 41 31 86",
