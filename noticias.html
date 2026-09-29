@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Noticias y reconocimientos · Auténticos CyL, Coca</title>
+  <meta name="description" content="Novedades de la carta, Las noches de Auténticos y reconocimientos del bar tapería Auténticos CyL en Coca (Segovia)." />
+  <meta name="theme-color" content="#121315" />
+  <meta property="og:title" content="Noticias y reconocimientos · Auténticos CyL, Coca" />
+  <meta property="og:description" content="Novedades de la carta, Las noches de Auténticos y reconocimientos del bar tapería Auténticos CyL en Coca (Segovia)." />
+  <meta property="og:image" content="img/fachada.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pizarra: { 950: '#121315', 900: '#1a1c1f', 800: '#24272b', 700: '#34383d', 600: '#4a4f55' },
+            vino:    { 600: '#6e1f2c', 500: '#8c2a3a', 400: '#b0455a', 300: '#d98c9b' },
+            oro:     { 500: '#b38d45', 400: '#c9a45c', 300: '#dcc08a' },
+            crema:   { 100: '#f4efe6', 300: '#d9d2c5', 500: '#a39c90' }
+          },
+          fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Manrope', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; scroll-padding-top: 8rem; }
+    body { background: #121315; }
+    input, select, textarea { font-size: 16px; }
+    .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+    :focus-visible { outline: 2px solid #c9a45c; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-crema-100 antialiased">
+
+  <header class="sticky top-0 z-40 border-b border-white/5 bg-pizarra-950/90 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+      <a href="index.html" class="min-w-0 leading-tight">
+        <span class="block font-display text-xl font-semibold text-crema-100">Auténticos CyL</span>
+        <span class="block text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Bar Tapería · Tienda · Coca</span>
+      </a>
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Principal">
+        <a href="index.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Inicio</a><a href="carta.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Carta</a><a href="noticias.html" class="rounded-full px-4 py-2 text-sm font-semibold transition bg-white/10 text-crema-100" aria-current="page">Noticias</a><a href="reservas.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Reservas</a>
+        <a href="gestor.html" class="ml-2 inline-flex items-center gap-2 rounded-full border border-oro-400/40 px-4 py-2 text-sm font-semibold text-oro-300 transition hover:bg-oro-400 hover:text-pizarra-950"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Propietarios</a>
+      </nav>
+      <button id="menuBtn" class="rounded-full p-2 text-crema-100 md:hidden" aria-controls="menuMovil" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="menuMovil" class="hidden border-t border-white/5 px-5 pb-5 pt-2 md:hidden" aria-label="Principal (móvil)">
+      <a href="index.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Inicio</a><a href="carta.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Carta</a><a href="noticias.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold bg-white/10 text-crema-100">Noticias</a><a href="reservas.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Reservas</a>
+      <a href="gestor.html" class="mt-2 flex items-center gap-2 rounded-2xl border border-oro-400/30 px-4 py-3 font-semibold text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-5 pb-20 pt-14">
+    <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Noticias y reconocimientos</p>
+    <h1 class="mt-3 font-display text-5xl font-semibold">Lo que pasa en Auténticos</h1>
+    <p class="mt-4 max-w-xl leading-relaxed text-crema-300">Novedades de la carta, propuestas de temporada y lo que dicen de nosotros.</p>
+    <section class="mt-12" aria-labelledby="tNoticias">
+      <h2 id="tNoticias" class="sr-only">Noticias</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <article id="carta-verano" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/chipirones.webp" alt="" loading="lazy" class="aspect-[16/9] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Temporada de verano</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">Llega nuestra carta de verano</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-crema-300">Producto de temporada, cocina a la brasa y platos nuevos como los chipirones en texturas, la ensalada de ahumados con cereza y avellana o la burrata con cerezas asadas.</p>
+            <a href="carta.html#imprescindibles" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver los imprescindibles →</a>
+          </div>
+        </article>
+        <article id="las-noches" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/rabo-de-toro.webp" alt="" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Solo en cenas</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">Las noches de Auténticos</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-crema-300">Cuando cae el sol se enciende la brasa: La Bestia Castellana, Rock &amp; Rolla, Deluxe Macarra y el resto de hamburguesas de autor con buey 100 % certificado, solo en el servicio de cenas.</p>
+            <a href="carta.html#noches" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver Las Noches →</a>
+          </div>
+        </article>
+        <article id="postres-nuevos" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/huevo-de-corral.webp" alt="" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Novedad</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">Dos postres nuevos: Mojito Auténticos y Huerta en Flor</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-crema-300">La repostería de la casa estrena un granizado de lima con helado de yogur y gel de ron, y un postre de tomate rosa, melocotón y fresa con albahaca.</p>
+            <a href="carta.html#postres" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver la repostería →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="mt-20" aria-labelledby="tReconocimientos">
+      <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Reconocimientos</p>
+      <h2 id="tReconocimientos" class="mt-3 font-display text-4xl font-semibold">Lo que dicen de nosotros</h2>
+      <ul class="mt-8 grid gap-5 md:grid-cols-2">
+        <li class="rounded-3xl border border-oro-400/20 bg-oro-400/5 p-6">
+          <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Tripadvisor</p>
+          <p class="mt-2 font-display text-xl font-semibold leading-snug">Entre los mejor valorados de Coca</p>
+          <p class="mt-2 text-sm leading-relaxed text-crema-300">Nuestros clientes nos sitúan entre los restaurantes mejor valorados de Coca.</p>
+          <a href="https://www.tripadvisor.es/Restaurant_Review-g1985750-d17766922-Reviews-Bar_Taperia_tienda_Autenticos_CYL-Coca_Province_of_Segovia_Castile_and_Leo.html" target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver opiniones →</a>
+        </li>
+        <li class="rounded-3xl border border-oro-400/20 bg-oro-400/5 p-6">
+          <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Nuestra tienda</p>
+          <p class="mt-2 font-display text-xl font-semibold leading-snug">Productos con denominación de origen de Castilla y León</p>
+          <p class="mt-2 text-sm leading-relaxed text-crema-300">Desde 2014 reunimos productos artesanos de las nueve provincias de Castilla y León.</p>
+          
+        </li>
+      </ul>
+    </section>
+    <div class="mt-14 flex flex-wrap gap-3"><a href="reservas.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Reservar mesa</a><a href="carta.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition border border-crema-100/30 text-crema-100 hover:bg-white/10">Ver la carta</a></div>
+  </main>
+
+  <footer class="border-t border-white/5 bg-pizarra-900">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3">
+      <div>
+        <p class="font-display text-2xl font-semibold">Auténticos CyL</p>
+        <p class="mt-1 font-display italic text-oro-300">Sabores, Sensaciones y +</p>
+        <p class="mt-4 text-sm leading-relaxed text-crema-500">Bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.</p>
+      </div>
+      <div class="text-sm leading-relaxed text-crema-300">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Visítanos</p>
+        <p class="mt-3">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
+        <p class="mt-1">Teléfono <a href="tel:+34921050483" class="font-semibold text-crema-100 hover:text-oro-300">921 05 04 83</a></p>
+        <p class="mt-1"><a href="https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Cómo llegar</a> · <a href="https://www.autenticoscyl.com/" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Tienda online</a></p>
+      </div>
+      <div class="text-sm">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">La web</p>
+        <ul class="mt-3 space-y-1.5 text-crema-300">
+          <li><a href="index.html" class="hover:text-oro-300">Inicio</a></li><li><a href="carta.html" class="hover:text-oro-300">Carta</a></li><li><a href="noticias.html" class="hover:text-oro-300">Noticias</a></li><li><a href="reservas.html" class="hover:text-oro-300">Reservas</a></li>
+          <li><a href="gestor.html" class="inline-flex items-center gap-1.5 hover:text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+  </footer>
+  <script src="js/config.js"></script>
+  <script>
+    (() => {
+      const b = document.getElementById('menuBtn'), m = document.getElementById('menuMovil');
+      b.addEventListener('click', () => { const abierto = m.classList.toggle('hidden') === false; b.setAttribute('aria-expanded', abierto); });
+      document.querySelectorAll('[data-anio]').forEach(el => el.textContent = new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>

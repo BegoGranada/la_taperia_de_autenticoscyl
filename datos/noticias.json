@@ -1,0 +1,42 @@
+{
+  "noticias": [
+    {
+      "id": "carta-verano",
+      "fecha": "Temporada de verano",
+      "titulo": "Llega nuestra carta de verano",
+      "entradilla": "Producto de temporada, cocina a la brasa y platos nuevos como los chipirones en texturas, la ensalada de ahumados con cereza y avellana o la burrata con cerezas asadas.",
+      "foto": "img/chipirones.webp",
+      "enlace": ["carta.html#imprescindibles", "Ver los imprescindibles"]
+    },
+    {
+      "id": "las-noches",
+      "fecha": "Solo en cenas",
+      "titulo": "Las noches de Auténticos",
+      "entradilla": "Cuando cae el sol se enciende la brasa: La Bestia Castellana, Rock & Rolla, Deluxe Macarra y el resto de hamburguesas de autor con buey 100 % certificado, solo en el servicio de cenas.",
+      "foto": "img/rabo-de-toro.webp",
+      "enlace": ["carta.html#noches", "Ver Las Noches"]
+    },
+    {
+      "id": "postres-nuevos",
+      "fecha": "Novedad",
+      "titulo": "Dos postres nuevos: Mojito Auténticos y Huerta en Flor",
+      "entradilla": "La repostería de la casa estrena un granizado de lima con helado de yogur y gel de ron, y un postre de tomate rosa, melocotón y fresa con albahaca.",
+      "foto": "img/huevo-de-corral.webp",
+      "enlace": ["carta.html#postres", "Ver la repostería"]
+    }
+  ],
+  "reconocimientos": [
+    {
+      "titulo": "Entre los mejor valorados de Coca",
+      "origen": "Tripadvisor",
+      "texto": "Nuestros clientes nos sitúan entre los restaurantes mejor valorados de Coca.",
+      "enlace": "https://www.tripadvisor.es/Restaurant_Review-g1985750-d17766922-Reviews-Bar_Taperia_tienda_Autenticos_CYL-Coca_Province_of_Segovia_Castile_and_Leo.html"
+    },
+    {
+      "titulo": "Productos con denominación de origen de Castilla y León",
+      "origen": "Nuestra tienda",
+      "texto": "Desde 2014 reunimos productos artesanos de las nueve provincias de Castilla y León.",
+      "enlace": null
+    }
+  ]
+}

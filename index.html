@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Carta · La Tapería de Auténticos CyL</title>
-  <meta name="description" content="Carta digital de La Tapería de Auténticos CyL, a los pies del castillo de Coca (Segovia): imprescindibles, brasa y mar, hamburguesas de autor, bodega de Castilla y León y repostería." />
+  <title>Auténticos CyL · Bar Tapería y tienda en Coca (Segovia)</title>
+  <meta name="description" content="Bar tapería y tienda de productos de Castilla y León a los pies del castillo de Coca: cocina a la brasa, producto de temporada y más de 500 vinos de nuestra tierra." />
   <meta name="theme-color" content="#121315" />
+  <meta property="og:title" content="Auténticos CyL · Bar Tapería y tienda en Coca (Segovia)" />
+  <meta property="og:description" content="Bar tapería y tienda de productos de Castilla y León a los pies del castillo de Coca: cocina a la brasa, producto de temporada y más de 500 vinos de nuestra tierra." />
+  <meta property="og:image" content="img/fachada.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -20,597 +23,259 @@
             oro:     { 500: '#b38d45', 400: '#c9a45c', 300: '#dcc08a' },
             crema:   { 100: '#f4efe6', 300: '#d9d2c5', 500: '#a39c90' }
           },
-          fontFamily: {
-            display: ['Fraunces', 'Georgia', 'serif'],
-            sans: ['Manrope', 'system-ui', 'sans-serif']
-          }
+          fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Manrope', 'system-ui', 'sans-serif'] }
         }
       }
     };
   </script>
   <style>
-    html { -webkit-tap-highlight-color: transparent; scroll-padding-top: 76px; }
+    html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; scroll-padding-top: 8rem; }
     body { background: #121315; }
-    input, select, textarea { font-size: 16px; } /* evita el zoom automático en iPhone */
+    input, select, textarea { font-size: 16px; }
     .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
-    /* Textura de pizarra muy sutil en la cabecera */
-    .pizarra-tex { background:
-      linear-gradient(180deg, rgba(18,19,21,.55) 0%, rgba(18,19,21,.78) 55%, #121315 100%),
-      radial-gradient(120% 80% at 50% -10%, rgba(140,42,58,.35), transparent 60%),
-      url(img/local.webp) center 35% / cover no-repeat,
-      #121315; }
-    .panel { display: none; } .panel.activo { display: block; animation: entra .28s ease-out; }
-    @keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    .hoja { transition: transform .32s cubic-bezier(.2,.8,.2,1); }
-    .hoja-fondo { transition: opacity .25s; }
-    .pop { animation: pop .35s ease-out; }
-    @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
-    @media (prefers-reduced-motion: reduce) { .panel.activo, .pop { animation: none; } .hoja, .hoja-fondo { transition: none; } }
     :focus-visible { outline: 2px solid #c9a45c; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
-
 <body class="min-h-screen font-sans text-crema-100 antialiased">
 
-  <!-- =================== CABECERA =================== -->
-  <header class="pizarra-tex border-b border-white/5 px-5 pb-8 pt-[max(1.5rem,env(safe-area-inset-top))]" role="banner" aria-label="La Tapería de Auténticos CyL: barra de madera y azulejos junto al castillo de Coca">
-    <div class="mx-auto max-w-2xl">
-      <div class="flex items-center justify-between gap-3">
-        <span class="rounded-full border border-oro-400/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.18em] text-oro-300">Modo demostración</span>
-        <span id="lblMesa" class="hidden rounded-full bg-vino-500/90 px-3 py-1 text-xs font-semibold text-crema-100"></span>
-      </div>
-      <p class="mt-7 text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Coca · Segovia · desde 2014</p>
-      <h1 class="mt-2 font-display text-[2.6rem] font-semibold leading-[1.05] text-crema-100">La Tapería<br><span class="italic font-normal text-oro-300">de Auténticos CyL</span></h1>
-      <p class="mt-3 font-display text-lg italic text-oro-300">Sabores, Sensaciones y +</p>
-      <p class="mt-3 max-w-md text-[15px] leading-relaxed text-crema-300">Producto de temporada y cocina a la brasa, a los pies del castillo de Coca. Toca un plato para verlo, elige la cantidad y envíanos tu comanda.</p>
+  <header class="sticky top-0 z-40 border-b border-white/5 bg-pizarra-950/90 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+      <a href="index.html" class="min-w-0 leading-tight">
+        <span class="block font-display text-xl font-semibold text-crema-100">Auténticos CyL</span>
+        <span class="block text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Bar Tapería · Tienda · Coca</span>
+      </a>
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Principal">
+        <a href="index.html" class="rounded-full px-4 py-2 text-sm font-semibold transition bg-white/10 text-crema-100" aria-current="page">Inicio</a><a href="carta.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Carta</a><a href="noticias.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Noticias</a><a href="reservas.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Reservas</a>
+        <a href="gestor.html" class="ml-2 inline-flex items-center gap-2 rounded-full border border-oro-400/40 px-4 py-2 text-sm font-semibold text-oro-300 transition hover:bg-oro-400 hover:text-pizarra-950"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Propietarios</a>
+      </nav>
+      <button id="menuBtn" class="rounded-full p-2 text-crema-100 md:hidden" aria-controls="menuMovil" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
+    <nav id="menuMovil" class="hidden border-t border-white/5 px-5 pb-5 pt-2 md:hidden" aria-label="Principal (móvil)">
+      <a href="index.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold bg-white/10 text-crema-100">Inicio</a><a href="carta.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Carta</a><a href="noticias.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Noticias</a><a href="reservas.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Reservas</a>
+      <a href="gestor.html" class="mt-2 flex items-center gap-2 rounded-2xl border border-oro-400/30 px-4 py-3 font-semibold text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a>
+    </nav>
   </header>
 
-  <!-- =================== PESTAÑAS =================== -->
-  <nav class="sticky top-0 z-30 border-b border-white/5 bg-pizarra-950/95 backdrop-blur" aria-label="Secciones de la carta">
-    <div class="mx-auto max-w-2xl">
-      <div id="pestanas" role="tablist" class="no-scrollbar relative flex gap-1 overflow-x-auto px-3 py-2.5"></div>
-    </div>
-  </nav>
+  <main>
+    <!-- Portada -->
+    <section class="relative isolate overflow-hidden">
+      <img src="img/fachada.webp" alt="Fachada de Auténticos CyL en Coca, con los carteles de bar, comidas, tapería y tienda" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-pizarra-950/70 via-pizarra-950/75 to-pizarra-950"></div>
+      <div class="mx-auto max-w-6xl px-5 pb-20 pt-24 sm:pb-28 sm:pt-32">
+        <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Coca · Segovia · a los pies del castillo</p>
+        <h1 class="mt-4 max-w-3xl font-display text-5xl font-semibold leading-[1.02] sm:text-7xl">Auténticos CyL</h1>
+        <p class="mt-3 font-display text-2xl italic text-oro-300 sm:text-3xl">Sabores, Sensaciones y +</p>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-crema-300">Bar tapería y tienda de productos de Castilla y León. Cocina a la brasa, producto de temporada y una bodega con más de 500 vinos de nuestra tierra.</p>
+        <div class="mt-9 flex flex-wrap gap-3"><a href="reservas.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Reservar mesa</a><a href="carta.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition border border-crema-100/30 text-crema-100 hover:bg-white/10">Ver la carta</a></div>
+      </div>
+    </section>
 
-  <!-- =================== CARTA =================== -->
-  <main id="carta" class="mx-auto max-w-2xl px-4 pb-40 pt-5"></main>
+    <!-- Datos -->
+    <section class="border-y border-white/5 bg-pizarra-900">
+      <dl class="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-white/5 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div class="py-6 sm:px-6"><dt class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Desde 2014</dt><dd class="mt-1 text-crema-300">En Coca, junto a uno de los castillos más bonitos de España.</dd></div>
+        <div class="py-6 sm:px-6"><dt class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Castilla y León</dt><dd class="mt-1 text-crema-300">Productos artesanos de las nueve provincias.</dd></div>
+        <div class="py-6 sm:px-6"><dt class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">+500 referencias</dt><dd class="mt-1 text-crema-300">De vino, en nuestra bodega y tienda.</dd></div>
+      </dl>
+    </section>
 
-  <!-- =================== PIE =================== -->
-  <footer class="mx-auto max-w-2xl px-5 pb-44 text-sm text-crema-500">
-    <div class="border-t border-white/10 pt-6">
-      <img src="img/fachada.webp" alt="Fachada de Auténticos CyL en Coca: bar, comidas, tapería y tienda" loading="lazy" class="mb-5 aspect-[2/1] w-full rounded-3xl object-cover" />
-      <p class="font-display text-lg text-crema-300">Auténticos CyL · Bar Tapería y tienda</p>
-      <p class="mt-1">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
-      <p class="mt-1">Teléfono <span class="select-all text-crema-300">921 05 04 83</span></p>
-      <p class="mt-4 text-xs leading-relaxed">Se cobrará un suplemento de 1,50 € por servicio de pan y comensal. IVA incluido. Si tienes alguna alergia o intolerancia, pregunta a nuestro equipo.</p>
-      <p class="mt-3 text-xs leading-relaxed text-crema-500"><span class="font-semibold text-crema-300">Alérgenos:</span> 1 Gluten · 2 Crustáceos · 3 Moluscos · 4 Pescado · 5 Huevos · 6 Soja · 7 Mostaza · 8 Apio · 9 Frutos secos · 10 Cacahuetes · 11 Sésamo · 12 Sulfitos · 13 Lácteos · 14 Altramuces</p>
-      <p class="mt-3 rounded-xl border border-oro-400/20 bg-oro-400/5 px-3 py-2 text-xs leading-relaxed text-oro-300">Modo demostración: el pedido por WhatsApp está simulado y la selección de vinos es de ejemplo.</p>
+    <!-- El restaurante -->
+    <section id="restaurante" class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 md:grid-cols-2 md:gap-16">
+      <img src="img/local.webp" alt="Interior de la tapería: barra de madera con azulejos azules y mesas de madera" loading="lazy" class="aspect-[4/3] w-full rounded-3xl object-cover" />
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">El restaurante</p>
+        <h2 class="mt-3 font-display text-4xl font-semibold leading-tight">Tradición y creatividad en cada plato</h2>
+        <p class="mt-5 leading-relaxed text-crema-300">Nuestra carta nace del mejor producto de temporada y de la cocina a la brasa. Respetamos el producto, el fuego y el tiempo para llevar cada ingrediente a su máxima expresión: platos memorables, honestos y sorprendentes.</p>
+        <p class="mt-4 leading-relaxed text-crema-300">De día, los imprescindibles de siempre, las carnes maduradas al josper y el mar. Cuando cae el sol llegan <strong class="text-crema-100">Las noches de Auténticos</strong>: hamburguesas de autor y bocados para disfrutar sin prisas, solo en las cenas.</p>
+        <div class="mt-8 flex flex-wrap gap-3"><a href="carta.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Ver la carta</a><a href="reservas.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition border border-crema-100/30 text-crema-100 hover:bg-white/10">Reservar</a></div>
+      </div>
+    </section>
+
+    <!-- Destacados -->
+    <section class="mx-auto max-w-6xl px-5 pb-20">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">De nuestra cocina</p>
+          <h2 class="mt-3 font-display text-4xl font-semibold">Para abrir boca</h2>
+        </div>
+        <a href="carta.html" class="font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Toda la carta →</a>
+      </div>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="carta.html#imprescindibles" class="group block overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/chipirones.webp" alt="Chipirones en texturas" loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div class="p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Nuestros imprescindibles</p>
+            <p class="mt-1 font-display text-xl font-semibold leading-snug">Chipirones en texturas</p>
+          </div>
+        </a>
+        <a href="carta.html#brasa" class="group block overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/tabla-duroc.webp" alt="Tabla de carnes Duroc a la brasa" loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div class="p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">A la brasa y el mar</p>
+            <p class="mt-1 font-display text-xl font-semibold leading-snug">Tabla de carnes Duroc a la brasa</p>
+          </div>
+        </a>
+        <a href="carta.html#noches" class="group block overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/rabo-de-toro.webp" alt="La Rabo de Toro" loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div class="p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Las noches de Auténticos</p>
+            <p class="mt-1 font-display text-xl font-semibold leading-snug">La Rabo de Toro</p>
+          </div>
+        </a>
+        <a href="carta.html#imprescindibles" class="group block overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/croquetas.webp" alt="Croquetas súper cremosas de jamón" loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div class="p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Nuestros imprescindibles</p>
+            <p class="mt-1 font-display text-xl font-semibold leading-snug">Croquetas súper cremosas de jamón</p>
+          </div>
+        </a>
+        <a href="carta.html#imprescindibles" class="group block overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/torreznos.webp" alt="Torrezno de Soria bien crujiente" loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div class="p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Nuestros imprescindibles</p>
+            <p class="mt-1 font-display text-xl font-semibold leading-snug">Torrezno de Soria bien crujiente</p>
+          </div>
+        </a>
+        <a href="carta.html#postres" class="group block overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/huevo-de-corral.webp" alt="Huevo de corral" loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div class="p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">La repostería de Auténticos</p>
+            <p class="mt-1 font-display text-xl font-semibold leading-snug">Huevo de corral</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- La tienda -->
+    <section id="tienda" class="border-y border-white/5 bg-pizarra-900">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 md:grid-cols-2 md:gap-16">
+        <div class="md:order-2"><img src="img/tienda.webp" alt="La tienda: estanterías con vinos, conservas y productos de Castilla y León junto a la barra" loading="lazy" class="aspect-[4/3] w-full rounded-3xl object-cover" /></div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">La tienda</p>
+          <h2 class="mt-3 font-display text-4xl font-semibold leading-tight">Lo mejor de Castilla y León, para llevar</h2>
+          <p class="mt-5 leading-relaxed text-crema-300">Un espacio gastronómico con productos artesanos de Segovia, Valladolid, Soria, Palencia, Burgos, Ávila, Zamora, Salamanca y León. Lo que pruebas en la mesa lo puedes llevar a casa.</p>
+          <ul class="mt-6 flex flex-wrap gap-2"><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Vinos de Castilla y León</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Embutidos</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Quesos</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Patés</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Mieles</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Conservas artesanas de Segovia</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Licores y vermut</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Dulces y chocolates artesanos</li><li class="rounded-full border border-white/10 px-4 py-2 text-sm text-crema-300">Recuerdos de Coca</li></ul>
+          <p class="mt-6 text-sm text-crema-500">¿No puedes venir? Tenemos <a href="https://www.autenticoscyl.com/" target="_blank" rel="noopener" class="font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">tienda online</a> con envíos a toda España.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Las noches -->
+    <section class="relative isolate overflow-hidden">
+      <img src="img/rabo-de-toro.webp" alt="" loading="lazy" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <div class="absolute inset-0 -z-10 bg-pizarra-950/80"></div>
+      <div class="mx-auto max-w-6xl px-5 py-20 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Solo en servicio de cenas</p>
+        <h2 class="mt-3 font-display text-4xl font-semibold sm:text-5xl">Las noches de Auténticos</h2>
+        <p class="mx-auto mt-4 max-w-xl leading-relaxed text-crema-300">La Bestia Castellana, Rock &amp; Rolla, Deluxe Macarra, La Castiza… Hamburguesas de buey 100 % certificado y bocados para compartir.</p>
+        <div class="mt-8 flex justify-center"><a href="carta.html#noches" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Descubrir Las Noches</a></div>
+      </div>
+    </section>
+
+    <!-- Noticias -->
+    <section class="mx-auto max-w-6xl px-5 pt-20">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Noticias y reconocimientos</p>
+          <h2 class="mt-3 font-display text-4xl font-semibold">Lo último en Auténticos</h2>
+        </div>
+        <a href="noticias.html" class="font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Todas las noticias →</a>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <article id="carta-verano" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/chipirones.webp" alt="" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Temporada de verano</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">Llega nuestra carta de verano</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-crema-300">Producto de temporada, cocina a la brasa y platos nuevos como los chipirones en texturas, la ensalada de ahumados con cereza y avellana o la burrata con cerezas asadas.</p>
+            <a href="carta.html#imprescindibles" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver los imprescindibles →</a>
+          </div>
+        </article>
+        <article id="las-noches" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/rabo-de-toro.webp" alt="" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Solo en cenas</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">Las noches de Auténticos</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-crema-300">Cuando cae el sol se enciende la brasa: La Bestia Castellana, Rock &amp; Rolla, Deluxe Macarra y el resto de hamburguesas de autor con buey 100 % certificado, solo en el servicio de cenas.</p>
+            <a href="carta.html#noches" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver Las Noches →</a>
+          </div>
+        </article>
+        <article id="postres-nuevos" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
+          <img src="img/huevo-de-corral.webp" alt="" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Novedad</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">Dos postres nuevos: Mojito Auténticos y Huerta en Flor</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-crema-300">La repostería de la casa estrena un granizado de lima con helado de yogur y gel de ron, y un postre de tomate rosa, melocotón y fresa con albahaca.</p>
+            <a href="carta.html#postres" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver la repostería →</a>
+          </div>
+        </article>
+      </div>
+      <ul class="mt-5 grid gap-5 md:grid-cols-2">
+        <li class="rounded-3xl border border-oro-400/20 bg-oro-400/5 p-6">
+          <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Tripadvisor</p>
+          <p class="mt-2 font-display text-xl font-semibold leading-snug">Entre los mejor valorados de Coca</p>
+          <p class="mt-2 text-sm leading-relaxed text-crema-300">Nuestros clientes nos sitúan entre los restaurantes mejor valorados de Coca.</p>
+          <a href="https://www.tripadvisor.es/Restaurant_Review-g1985750-d17766922-Reviews-Bar_Taperia_tienda_Autenticos_CYL-Coca_Province_of_Segovia_Castile_and_Leo.html" target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver opiniones →</a>
+        </li>
+        <li class="rounded-3xl border border-oro-400/20 bg-oro-400/5 p-6">
+          <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Nuestra tienda</p>
+          <p class="mt-2 font-display text-xl font-semibold leading-snug">Productos con denominación de origen de Castilla y León</p>
+          <p class="mt-2 text-sm leading-relaxed text-crema-300">Desde 2014 reunimos productos artesanos de las nueve provincias de Castilla y León.</p>
+          
+        </li>
+      </ul>
+    </section>
+
+    <!-- Dónde estamos -->
+    <section id="contacto" class="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2 md:gap-16">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Dónde estamos</p>
+        <h2 class="mt-3 font-display text-4xl font-semibold leading-tight">En el corazón de Coca</h2>
+        <p class="mt-5 leading-relaxed text-crema-300">A unos pasos del castillo de Coca, joya del mudéjar castellano. Ven a comer, a cenar o a tomar algo en la barra, y llévate un trocito de Castilla y León.</p>
+        <dl class="mt-8 space-y-4">
+          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Dirección</dt><dd class="mt-1">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</dd></div>
+          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Teléfono</dt><dd class="mt-1"><a href="tel:+34921050483" class="text-lg font-semibold hover:text-oro-300">921 05 04 83</a></dd></div>
+          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Horario</dt><dd class="mt-1 text-crema-300">Llámanos para consultar el horario de cocina y de tienda.</dd></div>
+        </dl>
+        <div class="mt-8 flex flex-wrap gap-3"><a href="reservas.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Reservar mesa</a><a href="https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Cómo llegar</a></div>
+      </div>
+      <img src="img/fachada.webp" alt="Fachada de ladrillo y piedra de Auténticos CyL, con un barril de vino en la puerta" loading="lazy" class="aspect-[4/3] w-full rounded-3xl object-cover" />
+    </section>
+  </main>
+
+  <footer class="border-t border-white/5 bg-pizarra-900">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3">
+      <div>
+        <p class="font-display text-2xl font-semibold">Auténticos CyL</p>
+        <p class="mt-1 font-display italic text-oro-300">Sabores, Sensaciones y +</p>
+        <p class="mt-4 text-sm leading-relaxed text-crema-500">Bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.</p>
+      </div>
+      <div class="text-sm leading-relaxed text-crema-300">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Visítanos</p>
+        <p class="mt-3">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
+        <p class="mt-1">Teléfono <a href="tel:+34921050483" class="font-semibold text-crema-100 hover:text-oro-300">921 05 04 83</a></p>
+        <p class="mt-1"><a href="https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Cómo llegar</a> · <a href="https://www.autenticoscyl.com/" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Tienda online</a></p>
+      </div>
+      <div class="text-sm">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">La web</p>
+        <ul class="mt-3 space-y-1.5 text-crema-300">
+          <li><a href="index.html" class="hover:text-oro-300">Inicio</a></li><li><a href="carta.html" class="hover:text-oro-300">Carta</a></li><li><a href="noticias.html" class="hover:text-oro-300">Noticias</a></li><li><a href="reservas.html" class="hover:text-oro-300">Reservas</a></li>
+          <li><a href="gestor.html" class="inline-flex items-center gap-1.5 hover:text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a></li>
+        </ul>
+      </div>
     </div>
+    <p class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
   </footer>
-
-  <!-- =================== BARRA FLOTANTE DE COMANDA =================== -->
-  <div id="barra" class="pointer-events-none fixed inset-x-0 bottom-0 z-40 translate-y-full px-3 pb-[max(.75rem,env(safe-area-inset-bottom))] transition-transform duration-300">
-    <div class="pointer-events-auto mx-auto flex max-w-2xl items-center gap-2">
-      <button id="btnVerComanda" class="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-full bg-crema-100 py-2 pl-2 pr-5 text-pizarra-950 shadow-2xl shadow-black/60">
-        <span class="flex items-center gap-3">
-          <span id="barraCant" class="grid h-10 min-w-[2.5rem] place-items-center rounded-full bg-vino-500 px-2 text-sm font-bold text-crema-100">0</span>
-          <span class="text-left leading-tight"><span class="block text-[11px] font-semibold uppercase tracking-wider text-pizarra-600">Tu comanda</span><span class="block text-sm font-semibold">Ver desglose</span></span>
-        </span>
-        <span id="barraTotal" class="font-display text-xl font-semibold tabular-nums">0,00 €</span>
-      </button>
-      <button id="btnWhatsApp" class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl shadow-black/60" aria-label="Enviar la comanda por WhatsApp">
-        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5c.1.2 1.6 2.5 3.9 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.4Z"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- =================== HOJA: DETALLE DEL PLATO =================== -->
-  <div id="hojaPlato" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="platoNombre">
-    <div data-cerrar class="hoja-fondo absolute inset-0 bg-black/70 opacity-0"></div>
-    <div class="hoja absolute inset-x-0 bottom-0 mx-auto max-h-[92svh] max-w-2xl translate-y-full overflow-y-auto rounded-t-[28px] border-t border-white/10 bg-pizarra-900 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
-      <div class="mx-auto h-1.5 w-12 rounded-full bg-white/15"></div>
-      <img id="platoFoto" alt="" class="mt-4 hidden aspect-[4/3] w-full rounded-3xl object-cover object-[center_30%]" />
-      <div class="mt-4 flex items-start justify-between gap-4">
-        <div class="min-w-0">
-          <p id="platoSeccion" class="text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400"></p>
-          <h2 id="platoNombre" class="mt-1 font-display text-3xl font-semibold leading-tight"></h2>
-        </div>
-        <button data-cerrar class="shrink-0 rounded-full bg-white/5 p-2.5 text-crema-300" aria-label="Cerrar">
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
-        </button>
-      </div>
-      <div id="platoEtiquetas" class="mt-3 flex flex-wrap gap-2"></div>
-      <p id="platoDesc" class="mt-4 text-[15px] leading-relaxed text-crema-300"></p>
-      <div id="platoAlergenos" class="mt-4"></div>
-
-      <p class="mt-6 text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Elige formato</p>
-      <div id="platoFormatos" class="mt-2 grid gap-2" role="radiogroup" aria-label="Formato"></div>
-
-      <div class="mt-5 flex items-center justify-between gap-4">
-        <p class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Cantidad</p>
-        <div class="flex items-center gap-1 rounded-full border border-white/10 bg-pizarra-800 p-1">
-          <button id="platoMenos" class="grid h-10 w-10 place-items-center rounded-full text-xl text-crema-100 disabled:opacity-30" aria-label="Quitar una">−</button>
-          <span id="platoCant" class="w-8 text-center text-lg font-semibold tabular-nums" aria-live="polite">1</span>
-          <button id="platoMas" class="grid h-10 w-10 place-items-center rounded-full text-xl text-crema-100" aria-label="Añadir una">+</button>
-        </div>
-      </div>
-      <label class="mt-5 block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Indicaciones (opcional)</span>
-        <input id="platoNota" maxlength="80" autocomplete="off" placeholder="Ej.: sin cebolla, poco hecha…" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
-      <button id="platoAnadir" class="mt-6 flex w-full items-center justify-between rounded-full bg-vino-500 px-6 py-4 font-semibold text-crema-100 transition hover:bg-vino-400 active:scale-[.99]">
-        <span>Añadir a la comanda</span><span id="platoTotal" class="font-display text-lg tabular-nums"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- =================== HOJA: COMANDA =================== -->
-  <div id="hojaComanda" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="comandaTitulo">
-    <div data-cerrar class="hoja-fondo absolute inset-0 bg-black/70 opacity-0"></div>
-    <div class="hoja absolute inset-x-0 bottom-0 mx-auto flex max-h-[92svh] max-w-2xl translate-y-full flex-col rounded-t-[28px] border-t border-white/10 bg-pizarra-900">
-      <div class="px-5 pt-3">
-        <div class="mx-auto h-1.5 w-12 rounded-full bg-white/15"></div>
-        <div class="mt-4 flex items-center justify-between gap-4">
-          <h2 id="comandaTitulo" class="font-display text-3xl font-semibold">Tu comanda</h2>
-          <button data-cerrar class="rounded-full bg-white/5 p-2.5 text-crema-300" aria-label="Cerrar">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="flex-1 overflow-y-auto px-5 pb-4">
-        <ul id="comandaLineas" class="mt-3 divide-y divide-white/5"></ul>
-        <div class="mt-3 flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-pizarra-800/60 px-4 py-3">
-          <div class="min-w-0">
-            <p class="font-semibold leading-snug">Comensales</p>
-            <p class="text-xs text-crema-500">Servicio de pan: 1,50 € por comensal</p>
-          </div>
-          <div class="flex items-center gap-1 rounded-full border border-white/10 bg-pizarra-800 p-0.5">
-            <button id="comMenos" class="grid h-8 w-8 place-items-center rounded-full text-lg" aria-label="Un comensal menos">−</button>
-            <span id="comCant" class="w-6 text-center text-sm font-semibold tabular-nums" aria-live="polite">0</span>
-            <button id="comMas" class="grid h-8 w-8 place-items-center rounded-full text-lg" aria-label="Un comensal más">+</button>
-          </div>
-        </div>
-        <div class="mt-4 grid grid-cols-[6rem_1fr] gap-3">
-          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Mesa</span>
-            <input id="comandaMesa" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="Nº" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-center text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
-          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Tu nombre (opcional)</span>
-            <input id="comandaNombre" maxlength="40" autocomplete="given-name" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 focus:border-oro-400 focus:outline-none" /></label>
-        </div>
-        <label class="mt-3 block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Comentario para cocina (opcional)</span>
-          <textarea id="comandaNota" rows="2" maxlength="200" placeholder="Ej.: traed primero los vinos" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none"></textarea></label>
-      </div>
-      <div class="border-t border-white/10 bg-pizarra-950/60 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4">
-        <div class="mb-2 space-y-1 text-sm text-crema-500">
-          <div class="flex justify-between"><span>Platos y bebidas</span><span id="comandaSubtotal" class="tabular-nums">0,00 €</span></div>
-          <div class="flex justify-between"><span>Servicio de pan (<span id="comandaPanN">0</span> × 1,50 €)</span><span id="comandaPan" class="tabular-nums">0,00 €</span></div>
-        </div>
-        <div class="flex items-baseline justify-between">
-          <span class="text-sm text-crema-300"><span id="comandaUnidades">0</span> artículos · IVA incluido</span>
-          <span class="font-display text-3xl font-semibold tabular-nums text-oro-300" id="comandaTotal">0,00 €</span>
-        </div>
-        <button id="comandaEnviar" class="mt-4 flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] py-4 font-semibold text-pizarra-950 transition active:scale-[.99]">
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
-          Enviar comanda por WhatsApp
-        </button>
-        <button id="comandaVaciar" class="mt-3 w-full py-2 text-sm text-crema-500 underline-offset-4 hover:underline">Vaciar comanda</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- =================== HOJA: ENVÍO POR WHATSAPP (simulación) =================== -->
-  <div id="hojaEnvio" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true" aria-labelledby="envioTitulo">
-    <div data-cerrar class="hoja-fondo absolute inset-0 bg-black/75 opacity-0"></div>
-    <div class="hoja absolute inset-x-0 bottom-0 mx-auto max-h-[94svh] max-w-2xl translate-y-full overflow-y-auto rounded-t-[28px] bg-pizarra-900 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
-      <div class="mx-auto h-1.5 w-12 rounded-full bg-white/15"></div>
-      <p class="mt-4 text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Simulación · modo demostración</p>
-      <h2 id="envioTitulo" class="mt-1 font-display text-3xl font-semibold">Así llega tu comanda</h2>
-      <!-- Vista previa estilo WhatsApp -->
-      <div class="mt-4 overflow-hidden rounded-3xl border border-white/10">
-        <div class="flex items-center gap-3 bg-[#1f2c33] px-4 py-3">
-          <span class="grid h-10 w-10 place-items-center rounded-full bg-vino-500 font-display text-lg font-semibold">A</span>
-          <span class="leading-tight"><span class="block text-sm font-semibold">Auténticos CyL · Tapería</span><span id="envioDestino" class="block text-xs text-crema-500"></span></span>
-        </div>
-        <div class="bg-[#0b141a] px-3 py-4">
-          <div class="ml-auto max-w-[88%] rounded-2xl rounded-tr-sm bg-[#005c4b] px-4 py-3 text-[14px] leading-relaxed text-[#e9edef] shadow">
-            <pre id="envioTexto" class="whitespace-pre-wrap font-sans"></pre>
-            <p class="mt-1 text-right text-[11px] text-[#8fb3a9]" id="envioHora"></p>
-          </div>
-        </div>
-      </div>
-      <p id="envioAviso" class="mt-3 text-xs leading-relaxed text-crema-500"></p>
-      <div class="mt-5 grid gap-3">
-        <a id="envioAbrir" target="_blank" rel="noopener" class="flex items-center justify-center gap-3 rounded-full bg-[#25D366] py-4 font-semibold text-pizarra-950">Abrir WhatsApp y enviar</a>
-        <div class="grid grid-cols-2 gap-3">
-          <button id="envioCopiar" class="rounded-full border border-white/15 py-3 text-sm font-semibold text-crema-100">Copiar texto</button>
-          <button id="envioNueva" class="rounded-full border border-white/15 py-3 text-sm font-semibold text-crema-100">Nueva comanda</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Aviso flotante -->
-  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-0 bottom-28 z-[70] flex justify-center px-4 opacity-0 transition-opacity">
-    <p class="rounded-full bg-oro-400 px-5 py-2.5 text-sm font-semibold text-pizarra-950 shadow-xl"></p>
-  </div>
-
+  <script src="js/config.js"></script>
   <script>
-  /* =====================================================================
-     CONFIGURACIÓN
-     whatsapp: número del WhatsApp del local en formato internacional sin
-     "+" (p. ej. '34600123456'). Vacío = modo demostración: se muestra la
-     simulación y el botón abre WhatsApp para elegir el contacto.
-     ===================================================================== */
-  const CONFIG = {
-    local: 'La Tapería de Auténticos CyL',
-    whatsapp: ''
-  };
-
-  /* =====================================================================
-     CARTA del local (verano). Solo la bodega es de ejemplo.
-     formatos: [nombre, precio]. alergenos: números de ALERGENOS.
-     grupo: subtítulo dentro de la sección.
-     ===================================================================== */
-  // Numeración de alérgenos de la carta del local
-  const ALERGENOS = { 1: 'Gluten', 2: 'Crustáceos', 3: 'Moluscos', 4: 'Pescado', 5: 'Huevos', 6: 'Soja', 7: 'Mostaza',
-    8: 'Apio', 9: 'Frutos secos', 10: 'Cacahuetes', 11: 'Sésamo', 12: 'Sulfitos', 13: 'Lácteos', 14: 'Altramuces' };
-  const PAN = 1.5;   // suplemento por servicio de pan y comensal
-  const SECCIONES = [
-    {
-      id: 'imprescindibles', nombre: 'Nuestros imprescindibles', corto: 'Imprescindibles', lema: 'Verano · Brasa · Temporada',
-      foto: ['img/brasa-mar.webp', 'Chipirones en texturas con tomate y crujiente de torreznos'],
-      intro: 'Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.',
-      platos: [
-        { id: 'bravas', nombre: 'Patatas bravas de la Retamilla', desc: '', formatos: [['Ración', 12]], alergenos: [7] },
-        { id: 'torrezno', nombre: 'Torrezno de Soria bien crujiente', desc: '', formatos: [['Ración', 8.95]], alergenos: [5], foto: 'img/torreznos.webp' },
-        { id: 'croquetas', nombre: 'Croquetas súper cremosas de jamón', desc: '', formatos: [['Ración', 15.95]], alergenos: [1, 5, 13], foto: 'img/croquetas.webp' },
-        { id: 'chipirones', nombre: 'Chipirones en texturas', desc: 'Tomate al estilo tradicional y crujiente de torreznos de Soria.', formatos: [['Ración', 18.95]], alergenos: [1, 4, 5], etiquetas: ['Opción sin gluten'], foto: 'img/chipirones.webp' },
-        { id: 'huevosrotos', nombre: 'Huevos rotos, torreznos de Soria y tartufata', desc: '', formatos: [['Ración', 17.95]], alergenos: [5] },
-        { id: 'ensaladatomate', nombre: 'Ensalada de tomate de la huerta', desc: 'Con ventresca y pimientos asados al carbón.', formatos: [['Ración', 15]], alergenos: [4, 13] },
-        { id: 'ensaladaahumados', nombre: 'Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica', desc: 'Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.', formatos: [['Ración', 16.95]], alergenos: [4, 6, 7] },
-        { id: 'burrata', nombre: 'Burrata, cerezas asadas, remolacha ahumada y pistachos tostados', desc: '', formatos: [['Ración', 16]], alergenos: [5, 13] },
-        { id: 'bikinioreja', nombre: 'Bikini de oreja plancha', desc: 'Queso pata de mulo ahumado y mojo rojo.', formatos: [['Unidad', 12]], alergenos: [1, 5, 7, 11, 13] },
-        { id: 'taco', nombre: 'Taco de maíz con atún rojo salvaje de Almadraba', desc: 'Marinado en michelada.', formatos: [['Unidad', 8]], alergenos: [1, 4], unidad: true },
-        { id: 'pizza', nombre: 'Pizza de sartén de salmón ahumado', desc: 'Stracciatella, aguacate y tomate semiseco.', formatos: [['Unidad', 12.95]], alergenos: [1, 4, 5] },
-        { id: 'empanada', nombre: 'Empanada de pipián con ají de maní', desc: 'Masa de empanada argentina, rellena de verduras y cacahuete.', formatos: [['Unidad', 4.5]], alergenos: [1, 9], unidad: true }
-      ]
-    },
-    {
-      id: 'brasa', nombre: 'A la brasa y el mar', corto: 'Brasa y mar', lema: 'Sabores · Sensaciones y +',
-      foto: ['img/tabla-duroc.webp', 'Tabla de carnes Duroc a la brasa con chorizo ibérico, pebre y chimichurri'],
-      intro: 'Sabores que nacen del respeto al producto, del fuego y del tiempo. En Auténticos CyL elevamos cada ingrediente a su máxima expresión para ofrecerte platos memorables, honestos y sorprendentes.',
-      platos: [
-        { id: 'albondigas', nombre: 'Albóndigas crujientes de cochinillo segoviano', desc: 'En su propio jugo, manzana ácida y kimchi.', formatos: [['Ración', 18.95]], alergenos: [1, 2, 5, 7, 10, 12, 14] },
-        { id: 'entrecot', nombre: 'Entrecot de vaca a la brasa del josper', desc: 'Madurado un mínimo de 35 días para lograr la máxima terneza y un sabor profundo. 400 g aprox.', formatos: [['Ración', 24.95]], alergenos: [], etiquetas: ['400 g aprox.'] },
-        { id: 'duroc', nombre: 'Tabla de carnes Duroc a la brasa', desc: 'Solomillo, secreto, presa, pluma y chorizo ibérico. Selección premium para 2 personas.', formatos: [['Tabla', 36]], alergenos: [], etiquetas: ['Para 2 personas'], foto: 'img/tabla-duroc.webp' },
-        { id: 'picana', nombre: 'Picaña de vaca madurada a la brasa', desc: '', formatos: [['Ración', 22]], alergenos: [12] },
-        { id: 'presa', nombre: 'Presa ibérica a baja temperatura', desc: 'Crema de maíz ahumado y melocotón a la brasa.', formatos: [['Ración', 19]], alergenos: [12, 13] },
-        { id: 'lasana', nombre: 'Lasaña de morcillo madurado a fuego lento', desc: 'Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.', formatos: [['Ración', 16]], alergenos: [1, 7, 12] },
-        { id: 'hamburabo', nombre: 'Hamburguesa de rabo de toro', desc: 'Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 12], foto: 'img/rabo-de-toro.webp' },
-        { id: 'lubina', grupo: 'Del mar', nombre: 'Lubina curada marcada en brasa', desc: 'Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.', formatos: [['Ración', 21.95]], alergenos: [4, 7, 8] },
-        { id: 'bonito', grupo: 'Del mar', nombre: 'Bonito semicurado, ligeramente marcado a la brasa', desc: 'Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.', formatos: [['Ración', 19.9]], alergenos: [4, 7, 12] },
-        { id: 'bowl', grupo: 'Para acompañar nuestros platos', nombre: 'Bowl de lechuga, tomate y cebolla encurtida', desc: '', formatos: [['Ración', 6.95]], alergenos: [] },
-        { id: 'fritas', grupo: 'Para acompañar nuestros platos', nombre: 'Patatas fritas', desc: '', formatos: [['Ración', 4.5]], alergenos: [] },
-        { id: 'asadas', grupo: 'Para acompañar nuestros platos', nombre: 'Patatas asadas con alioli de kimchi', desc: '', formatos: [['Ración', 7.5]], alergenos: [8, 12, 13] },
-        { id: 'verduras', grupo: 'Para acompañar nuestros platos', nombre: 'Verduras al josper', desc: '', formatos: [['Ración', 7.95]], alergenos: [] }
-      ]
-    },
-    {
-      id: 'noches', nombre: 'Las noches de Auténticos', corto: 'Las Noches', lema: 'Noches · Brasa · Bocados',
-      foto: ['img/rabo-de-toro.webp', 'Hamburguesa de rabo de toro con cebolla encurtida y maíz crujiente, con patatas, en tabla de madera'],
-      intro: 'Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.',
-      aviso: 'Solo disponible en servicio de cenas',
-      platos: [
-        { id: 'larabo', nombre: 'La Rabo de Toro', desc: 'Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 9, 10, 11, 12, 13, 14], foto: 'img/rabo-de-toro.webp' },
-        { id: 'bestia', nombre: 'La Bestia Castellana', desc: 'Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.', formatos: [['Unidad', 17.95]], alergenos: [1, 5, 7, 9, 10, 11, 13], etiquetas: ['Buey 100 %', 'Guanciale', 'Opción sin gluten'] },
-        { id: 'rockrolla', nombre: 'Rock & Rolla', desc: 'Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.', formatos: [['Unidad', 16.95]], alergenos: [1, 7, 10, 11, 13, 14], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
-        { id: 'macarra', nombre: 'Deluxe Macarra', desc: 'Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.', formatos: [['Unidad', 16.95]], alergenos: [1, 7, 10, 11, 12, 13], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
-        { id: 'castiza', nombre: 'La Castiza', desc: 'Hamburguesa de buey 100 % certificada, queso de pata de mulo y beicon.', formatos: [['Unidad', 14.95]], alergenos: [1, 7, 10, 11, 13], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
-        { id: 'bikiniiberico', nombre: 'Bikini de Oreja Ibérico', desc: 'Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.', formatos: [['Unidad', 12]], alergenos: [1, 5, 7, 11, 13], etiquetas: ['Opción sin gluten'] },
-        { id: 'bretzel', nombre: 'Bretzel de Pollo', desc: 'Pollo crujiente, queso pata de mulo, cebolla caramelizada, bacon, alioli de kimchi, lechuga y tomate en pan bretzel.', formatos: [['Unidad', 14.95]], alergenos: [1, 5, 7, 11, 12] }
-      ]
-    },
-    {
-      id: 'bodega', nombre: 'Vinoteca · Bodega de CyL', corto: 'Bodega CyL', lema: 'Vinos de Castilla y León',
-      foto: ['img/tienda.webp', 'La barra de azulejos y la tienda con los vinos de Castilla y León'],
-      intro: 'Más de 500 referencias de Castilla y León en nuestra tienda. Pregúntanos por la bodega completa.',
-      aviso: 'Selección de ejemplo: pendiente de la carta de vinos real del local',
-      platos: [
-        { id: 'verdejo', nombre: 'Verdejo · D.O. Rueda', desc: 'Blanco fresco y aromático.', formatos: [['Copa', 3], ['Botella', 16]], alergenos: [12], etiquetas: ['Blanco'] },
-        { id: 'roble', nombre: 'Tinto Roble · D.O. Ribera del Duero', desc: 'Tempranillo con un paso corto por barrica.', formatos: [['Copa', 3.5], ['Botella', 19]], alergenos: [12], etiquetas: ['Tinto'] },
-        { id: 'crianza', nombre: 'Tinto Crianza · D.O. Ribera del Duero', desc: 'Estructura, fruta madura y final largo.', formatos: [['Copa', 4.5], ['Botella', 26]], alergenos: [12], etiquetas: ['Tinto'] },
-        { id: 'toro', nombre: 'Tinta de Toro · D.O. Toro', desc: 'Potente y carnoso, ideal con la brasa.', formatos: [['Copa', 4], ['Botella', 22]], alergenos: [12], etiquetas: ['Tinto'] },
-        { id: 'mencia', nombre: 'Mencía · D.O. Bierzo', desc: 'Tinto atlántico, fresco y floral.', formatos: [['Copa', 3.5], ['Botella', 20]], alergenos: [12], etiquetas: ['Tinto'] },
-        { id: 'cigales', nombre: 'Rosado · D.O. Cigales', desc: 'El rosado clásico de Valladolid.', formatos: [['Copa', 3], ['Botella', 15]], alergenos: [12], etiquetas: ['Rosado'] },
-        { id: 'vermut', nombre: 'Vermut de Coca', desc: 'Nuestro vermut, tinto de barrica o blanco.', formatos: [['Copa', 3]], alergenos: [12], etiquetas: ['De la casa'] }
-      ]
-    },
-    {
-      id: 'postres', nombre: 'La repostería de Auténticos', corto: 'Repostería', lema: 'El cierre de nuestra cocina',
-      foto: ['img/postre.webp', 'Postre de autor: esfera naranja sobre tierra de chocolate'],
-      intro: 'En Auténticos creemos que un gran postre no destaca por ser el más dulce, sino por estar elaborado con el mismo respeto por el producto, la misma técnica y la misma pasión que el resto de nuestra cocina.',
-      platos: [
-        { id: 'tartaqueso', nombre: 'Tarta cremosa de queso', desc: 'Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.', formatos: [['Porción', 7.95]], alergenos: [5, 9, 13] },
-        { id: 'pavlova', nombre: 'Pavlova primaveral de mango, pasión, yogur y lima', desc: 'Pavlova de vainilla y lima, curd de mango y pasión, helado de yogur, crumble de coco y lima, mango fresco aliñado y aceite de albahaca.', formatos: [['Porción', 8.95]], alergenos: [1, 5, 13], etiquetas: ['Opcional sin gluten'] },
-        { id: 'huevocorral', nombre: 'Huevo de corral', desc: 'Trampantojo de mousse de chocolate blanco, núcleo de fruta de la pasión, nido de pasta kataifi, yogur y chocolate.', formatos: [['Porción', 8.95]], alergenos: [1, 5, 7, 9, 13], foto: 'img/huevo-de-corral.webp' },
-        { id: 'mojito', nombre: 'Mojito Auténticos', desc: 'Granizado de lima, helado de yogur, espuma de hierbabuena y menta, teja de azúcar y gel de ron.', formatos: [['Porción', 8.95]], alergenos: [13], etiquetas: ['Nuevo'] },
-        { id: 'huerta', nombre: 'Huerta en Flor', desc: 'Crema inglesa de vainilla, tomate rosa osmotizado, tartar de melocotón marinado, crujiente de almendra, gel de tomate, consomé de fresa y albahaca, aceite de albahaca y helado de yogur.', formatos: [['Porción', 9.5]], alergenos: [5, 9, 13], etiquetas: ['Nuevo'] }
-      ],
-      cierre: 'Nuestro mejor reconocimiento es que el último bocado despierte las ganas de volver.'
-    }
-  ];
-
-  /* =====================================================================
-     UTILIDADES
-     ===================================================================== */
-  const $ = (s, el = document) => el.querySelector(s);
-  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const euros = n => n.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 });
-  const PLATOS = Object.fromEntries(SECCIONES.flatMap(s => s.platos.map(p => [p.id, { etiquetas: [], ...p, seccion: s }])));
-  const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
-  const leer = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (e) { return d; } };
-  function toast(msg) { const t = $('#toast'); t.firstElementChild.textContent = msg; t.style.opacity = 1; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.opacity = 0, 1800); }
-
-  // Mesa: el QR de cada mesa puede llevar ?mesa=5
-  const MESA_URL = (new URLSearchParams(location.search).get('mesa') || '').replace(/\D/g, '').slice(0, 4);
-  if (MESA_URL) { $('#lblMesa').textContent = 'Mesa ' + MESA_URL; $('#lblMesa').classList.remove('hidden'); }
-
-  /* =====================================================================
-     COMANDA: líneas { id, formato, precio, cant, nota }
-     ===================================================================== */
-  let comanda = leer('taperia-comanda', []).filter(l => PLATOS[l.id]);
-  const clave = l => `${l.id}|${l.formato}|${l.nota || ''}`;
-  const unidades = () => comanda.reduce((t, l) => t + l.cant, 0);
-  let comensales = leer('taperia-comensales', 0);
-  const subtotal = () => Math.round(comanda.reduce((t, l) => t + l.precio * l.cant, 0) * 100) / 100;
-  const totalPan = () => comanda.length ? comensales * PAN : 0;
-  const total = () => Math.round((subtotal() + totalPan()) * 100) / 100;
-  const cantPlato = id => comanda.filter(l => l.id === id).reduce((t, l) => t + l.cant, 0);
-
-  function anadir(id, formato, precio, cant, nota = '') {
-    const nueva = { id, formato, precio, cant, nota: nota.trim() };
-    const ya = comanda.find(l => clave(l) === clave(nueva));
-    if (ya) ya.cant += cant; else comanda.push(nueva);
-    cambio();
-    const b = $('#barraCant'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
-    toast(`Añadido: ${cant} × ${PLATOS[id].nombre}`);
-  }
-  function cambio() {
-    comanda = comanda.filter(l => l.cant > 0);
-    guardar('taperia-comanda', comanda);
-    const n = unidades();
-    $('#barraCant').textContent = n;
-    $('#barraTotal').textContent = euros(total());
-    $('#barra').classList.toggle('translate-y-full', n === 0);
-    $$('[data-insignia]').forEach(el => { const c = cantPlato(el.dataset.insignia); el.textContent = c; el.classList.toggle('hidden', !c); });
-    if (!$('#hojaComanda').classList.contains('hidden')) pintarComanda();
-  }
-
-  /* =====================================================================
-     CARTA Y PESTAÑAS
-     ===================================================================== */
-  let seccionActiva = SECCIONES.some(s => s.id === location.hash.slice(1)) ? location.hash.slice(1) : SECCIONES[0].id;
-
-  function tarjeta(p) {
-    const desde = Math.min(...p.formatos.map(f => f[1]));
-    p = PLATOS[p.id];
-    return `<li>
-      <article class="group relative flex gap-4 rounded-3xl border border-white/[.06] bg-pizarra-900 p-4 transition hover:border-oro-400/30">
-        <button data-abrir="${p.id}" class="absolute inset-0 rounded-3xl" aria-label="Ver ${esc(p.nombre)}"></button>
-        ${p.foto ? `<img src="${p.foto}" alt="" loading="lazy" class="h-24 w-24 shrink-0 self-center rounded-2xl object-cover" />` : ''}
-        <div class="min-w-0 flex-1">
-          <div class="flex flex-wrap gap-1.5">${p.etiquetas.map(e => `<span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">${esc(e)}</span>`).join('')}</div>
-          <h3 class="${p.etiquetas.length ? 'mt-2' : ''} font-display text-[1.2rem] font-semibold leading-snug text-crema-100">${esc(p.nombre)}</h3>
-          ${p.desc ? `<p class="mt-1 line-clamp-2 text-sm leading-relaxed text-crema-500">${esc(p.desc)}</p>` : ''}
-          <p class="mt-2 text-sm text-crema-300"><span class="font-semibold text-oro-300 tabular-nums">${p.formatos.length > 1 ? 'desde ' : ''}${euros(desde)}${p.unidad ? ' / ud.' : ''}</span>${p.formatos.length > 1 ? ` · ${p.formatos.map(f => esc(f[0])).join(' · ')}` : ''}
-            ${p.alergenos.length ? `<span class="ml-1 text-xs text-crema-500">(${p.alergenos.join(', ')})</span>` : ''}</p>
-        </div>
-        <div class="relative flex shrink-0 flex-col items-end justify-between">
-          <span data-insignia="${p.id}" class="hidden grid h-6 min-w-[1.5rem] place-items-center rounded-full bg-oro-400 px-1.5 text-xs font-bold text-pizarra-950"></span>
-          <button data-rapido="${p.id}" class="relative z-10 mt-auto grid h-11 w-11 place-items-center rounded-full border border-oro-400/40 text-2xl leading-none text-oro-300 transition hover:bg-oro-400 hover:text-pizarra-950 active:scale-90" aria-label="Añadir ${esc(p.nombre)}">+</button>
-        </div>
-      </article></li>`;
-  }
-
-  function pintarCarta() {
-    $('#pestanas').innerHTML = SECCIONES.map(s => `<button role="tab" id="tab-${s.id}" aria-controls="panel-${s.id}" aria-selected="${s.id === seccionActiva}" data-seccion="${s.id}"
-      class="shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${s.id === seccionActiva ? 'bg-crema-100 text-pizarra-950' : 'text-crema-300 hover:text-crema-100'}">${esc(s.corto)}</button>`).join('');
-    $('#carta').innerHTML = SECCIONES.map(s => {
-      let grupo;
-      const filas = s.platos.map(p => {
-        const cab = p.grupo && p.grupo !== grupo ? `<li class="pt-4"><h3 class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-oro-400">${esc(p.grupo)}<span class="h-px flex-1 bg-oro-400/25"></span></h3></li>` : '';
-        grupo = p.grupo; return cab + tarjeta(p);
-      }).join('');
-      return `<section role="tabpanel" id="panel-${s.id}" aria-labelledby="tab-${s.id}" class="panel ${s.id === seccionActiva ? 'activo' : ''}">
-        ${s.foto ? `<figure class="mb-5 overflow-hidden rounded-3xl border border-white/5"><img src="${s.foto[0]}" alt="${esc(s.foto[1])}" loading="lazy" class="h-48 w-full object-cover object-[center_40%] sm:h-60" /></figure>` : ''}
-        <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">${esc(s.lema)}</p>
-        <h2 class="mt-1 font-display text-[2rem] font-semibold leading-tight">${esc(s.nombre)}</h2>
-        <p class="mt-2 text-[15px] italic leading-relaxed text-crema-500">${esc(s.intro)}</p>
-        ${s.aviso ? `<p class="mt-3 inline-block rounded-full border border-vino-400/40 bg-vino-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-vino-300">${esc(s.aviso)}</p>` : ''}
-        <ul class="mt-5 grid gap-3">${filas}</ul>
-        ${s.cierre ? `<p class="mt-6 text-center font-display text-lg italic text-oro-300">${esc(s.cierre)}</p>` : ''}
-      </section>`;
-    }).join('');
-    cambio();
-  }
-  function irSeccion(id, dir) {
-    if (id === seccionActiva) return;
-    seccionActiva = id;
-    history.replaceState(null, '', '#' + id);
-    pintarCarta();
-    $('#tab-' + id).scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
-    const nav = $('nav'); if (window.scrollY > nav.offsetTop) window.scrollTo({ top: nav.offsetTop, behavior: 'smooth' });
-  }
-  $('#pestanas').addEventListener('click', ev => { const b = ev.target.closest('[data-seccion]'); if (b) irSeccion(b.dataset.seccion); });
-  $('#pestanas').addEventListener('keydown', ev => {
-    if (!['ArrowRight', 'ArrowLeft'].includes(ev.key)) return;
-    const i = SECCIONES.findIndex(s => s.id === seccionActiva) + (ev.key === 'ArrowRight' ? 1 : -1);
-    if (SECCIONES[i]) { irSeccion(SECCIONES[i].id); $('#tab-' + SECCIONES[i].id).focus(); }
-  });
-  $('#carta').addEventListener('click', ev => {
-    const r = ev.target.closest('[data-rapido]');
-    if (r) { const p = PLATOS[r.dataset.rapido]; return p.formatos.length > 1 ? abrirPlato(p.id) : anadir(p.id, p.formatos[0][0], p.formatos[0][1], 1); }
-    const a = ev.target.closest('[data-abrir]'); if (a) abrirPlato(a.dataset.abrir);
-  });
-  // Deslizar a izquierda/derecha cambia de sección
-  let toque = null;
-  $('#carta').addEventListener('touchstart', ev => { toque = ev.touches.length === 1 ? [ev.touches[0].clientX, ev.touches[0].clientY, Date.now()] : null; }, { passive: true });
-  $('#carta').addEventListener('touchend', ev => {
-    if (!toque) return;
-    const dx = ev.changedTouches[0].clientX - toque[0], dy = ev.changedTouches[0].clientY - toque[1], ok = Date.now() - toque[2] < 700;
-    toque = null;
-    if (!ok || Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.8) return;
-    const i = SECCIONES.findIndex(s => s.id === seccionActiva) + (dx < 0 ? 1 : -1);
-    if (SECCIONES[i]) irSeccion(SECCIONES[i].id);
-  }, { passive: true });
-
-  /* =====================================================================
-     HOJAS (abrir / cerrar con animación, Escape y botón atrás)
-     ===================================================================== */
-  function abrirHoja(id) {
-    const h = $('#' + id);
-    h.classList.remove('hidden');
-    requestAnimationFrame(() => { $('.hoja-fondo', h).classList.remove('opacity-0'); $('.hoja', h).classList.remove('translate-y-full'); });
-    document.body.style.overflow = 'hidden';
-    history.pushState({ hoja: id }, '');
-  }
-  function cerrarHoja(id, desdeHistorial) {
-    const h = $('#' + id); if (h.classList.contains('hidden')) return;
-    $('.hoja-fondo', h).classList.add('opacity-0'); $('.hoja', h).classList.add('translate-y-full');
-    setTimeout(() => { h.classList.add('hidden'); if (!$$('[role=dialog]').some(d => !d.classList.contains('hidden'))) document.body.style.overflow = ''; }, 260);
-    if (!desdeHistorial && history.state && history.state.hoja === id) history.back();
-  }
-  const abiertas = () => ['hojaEnvio', 'hojaPlato', 'hojaComanda'].filter(id => !$('#' + id).classList.contains('hidden'));
-  window.addEventListener('popstate', () => { const a = abiertas()[0]; if (a) cerrarHoja(a, true); });
-  document.addEventListener('keydown', ev => { if (ev.key === 'Escape') { const a = abiertas()[0]; if (a) cerrarHoja(a); } });
-  $$('[role=dialog]').forEach(d => d.addEventListener('click', ev => { if (ev.target.closest('[data-cerrar]')) cerrarHoja(d.id); }));
-
-  /* =====================================================================
-     DETALLE DE PLATO
-     ===================================================================== */
-  let sel = null; // { id, formato, cant }
-  function abrirPlato(id) {
-    const p = PLATOS[id];
-    sel = { id, formato: 0, cant: 1 };
-    $('#platoSeccion').textContent = p.seccion.nombre;
-    $('#platoNombre').textContent = p.nombre;
-    const foto = $('#platoFoto'); foto.classList.toggle('hidden', !p.foto);
-    if (p.foto) { foto.src = p.foto; foto.alt = p.nombre; } else foto.removeAttribute('src');
-    $('#platoDesc').textContent = p.desc;
-    $('#platoEtiquetas').innerHTML = p.etiquetas.map(e => `<span class="rounded-full bg-vino-500/15 px-3 py-1 text-xs font-semibold text-vino-300">${esc(e)}</span>`).join('');
-    $('#platoAlergenos').innerHTML = p.alergenos.length
-      ? `<div class="flex flex-wrap gap-1.5"><span class="mr-1 text-xs font-semibold text-crema-300">Alérgenos:</span>${p.alergenos.map(a => `<span class="rounded-full border border-white/10 px-2 py-0.5 text-xs text-crema-300"><b class="text-oro-300">${a}</b> ${ALERGENOS[a]}</span>`).join('')}</div>`
-      : `<p class="text-xs text-crema-500">Sin alérgenos declarados. Consulta con nuestro equipo.</p>`;
-    $('#platoNota').value = '';
-    pintarPlato();
-    abrirHoja('hojaPlato');
-  }
-  function pintarPlato() {
-    const p = PLATOS[sel.id];
-    $('#platoFormatos').innerHTML = p.formatos.map(([f, pr], i) => `<button role="radio" aria-checked="${i === sel.formato}" data-formato="${i}"
-      class="flex items-center justify-between rounded-2xl border px-4 py-3.5 text-left transition ${i === sel.formato ? 'border-oro-400 bg-oro-400/10' : 'border-white/10 bg-pizarra-800'}">
-      <span class="flex items-center gap-3"><span class="grid h-5 w-5 place-items-center rounded-full border ${i === sel.formato ? 'border-oro-400' : 'border-white/25'}">${i === sel.formato ? '<span class="h-2.5 w-2.5 rounded-full bg-oro-400"></span>' : ''}</span>
-      <span class="font-medium">${esc(f)}</span></span><span class="font-semibold tabular-nums text-oro-300">${euros(pr)}</span></button>`).join('');
-    $('#platoCant').textContent = sel.cant;
-    $('#platoMenos').disabled = sel.cant <= 1;
-    $('#platoTotal').textContent = euros(p.formatos[sel.formato][1] * sel.cant);
-  }
-  $('#platoFormatos').addEventListener('click', ev => { const b = ev.target.closest('[data-formato]'); if (b) { sel.formato = +b.dataset.formato; pintarPlato(); } });
-  $('#platoMenos').addEventListener('click', () => { sel.cant = Math.max(1, sel.cant - 1); pintarPlato(); });
-  $('#platoMas').addEventListener('click', () => { sel.cant = Math.min(50, sel.cant + 1); pintarPlato(); });
-  $('#platoAnadir').addEventListener('click', () => {
-    const [f, pr] = PLATOS[sel.id].formatos[sel.formato];
-    anadir(sel.id, f, pr, sel.cant, $('#platoNota').value);
-    cerrarHoja('hojaPlato');
-  });
-
-  /* =====================================================================
-     COMANDA (desglose)
-     ===================================================================== */
-  function pintarComanda() {
-    $('#comandaLineas').innerHTML = comanda.length ? comanda.map((l, i) => `<li class="flex items-center gap-3 py-3.5">
-      <div class="min-w-0 flex-1">
-        <p class="font-semibold leading-snug">${esc(PLATOS[l.id].nombre)}</p>
-        <p class="text-xs text-crema-500">${esc(l.formato)} · ${euros(l.precio)}${l.nota ? ` · <span class="italic text-crema-300">«${esc(l.nota)}»</span>` : ''}</p>
-      </div>
-      <div class="flex items-center gap-1 rounded-full border border-white/10 bg-pizarra-800 p-0.5">
-        <button data-menos="${i}" class="grid h-8 w-8 place-items-center rounded-full text-lg" aria-label="Quitar una">${l.cant === 1 ? '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M5 7h14M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>' : '−'}</button>
-        <span class="w-6 text-center text-sm font-semibold tabular-nums">${l.cant}</span>
-        <button data-mas="${i}" class="grid h-8 w-8 place-items-center rounded-full text-lg" aria-label="Añadir una">+</button>
-      </div>
-      <span class="w-20 text-right font-semibold tabular-nums">${euros(l.precio * l.cant)}</span>
-    </li>`).join('') : `<li class="py-10 text-center text-crema-500">Tu comanda está vacía.<br>Toca un plato de la carta para añadirlo.</li>`;
-    $('#comandaUnidades').textContent = unidades();
-    $('#comCant').textContent = comensales; $('#comMenos').disabled = comensales <= 0;
-    $('#comandaSubtotal').textContent = euros(subtotal());
-    $('#comandaPanN').textContent = comensales; $('#comandaPan').textContent = euros(totalPan());
-    $('#comandaTotal').textContent = euros(total());
-    $('#comandaEnviar').disabled = !comanda.length; $('#comandaEnviar').classList.toggle('opacity-40', !comanda.length);
-  }
-  $('#comandaLineas').addEventListener('click', ev => {
-    const m = ev.target.closest('[data-menos]'), p = ev.target.closest('[data-mas]');
-    if (m) comanda[+m.dataset.menos].cant--; else if (p) comanda[+p.dataset.mas].cant++; else return;
-    cambio();
-  });
-  function abrirComanda() {
-    $('#comandaMesa').value = $('#comandaMesa').value || MESA_URL || leer('taperia-mesa', '');
-    $('#comandaNombre').value = $('#comandaNombre').value || leer('taperia-nombre', '');
-    pintarComanda(); abrirHoja('hojaComanda');
-  }
-  $('#btnVerComanda').addEventListener('click', abrirComanda);
-  const ponComensales = n => { comensales = Math.max(0, Math.min(40, n)); guardar('taperia-comensales', comensales); cambio(); pintarComanda(); };
-  $('#comMenos').addEventListener('click', () => ponComensales(comensales - 1));
-  $('#comMas').addEventListener('click', () => ponComensales(comensales + 1));
-  $('#comandaVaciar').addEventListener('click', () => { if (!comanda.length) return; comanda = []; cambio(); toast('Comanda vaciada'); });
-
-  /* =====================================================================
-     ENVÍO POR WHATSAPP (simulado en modo demostración)
-     ===================================================================== */
-  function textoComanda() {
-    const mesa = $('#comandaMesa').value.trim() || MESA_URL, nombre = $('#comandaNombre').value.trim(), nota = $('#comandaNota').value.trim();
-    const lineas = comanda.map(l => `• ${l.cant} × ${PLATOS[l.id].nombre}${PLATOS[l.id].formatos.length > 1 ? ` · ${l.formato}` : ''}${l.nota ? ` (${l.nota})` : ''}: ${euros(l.precio * l.cant)}`);
-    return [
-      `🧾 *COMANDA · ${CONFIG.local}*`,
-      [mesa ? `Mesa ${mesa}` : 'Sin mesa indicada', `${comensales} comensal${comensales === 1 ? '' : 'es'}`, nombre ? `a nombre de ${nombre}` : ''].filter(Boolean).join(' · '),
-      '',
-      ...lineas,
-      `• Servicio de pan: ${comensales} × ${euros(PAN)}: ${euros(totalPan())}`,
-      '',
-      `*TOTAL: ${euros(total())}* (IVA incluido)`,
-      nota ? `\n📝 ${nota}` : ''
-    ].join('\n').trim();
-  }
-  function enviar() {
-    if (!comanda.length) return toast('Añade algún plato a la comanda');
-    if (!comensales) {
-      if ($('#hojaComanda').classList.contains('hidden')) abrirComanda();
-      return toast('Indica cuántos comensales sois');
-    }
-    guardar('taperia-mesa', $('#comandaMesa').value.trim()); guardar('taperia-nombre', $('#comandaNombre').value.trim());
-    const texto = textoComanda();
-    $('#envioTexto').textContent = texto;
-    $('#envioHora').textContent = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }) + ' ✓✓';
-    $('#envioDestino').textContent = CONFIG.whatsapp ? '+' + CONFIG.whatsapp : 'WhatsApp del local (pendiente de configurar)';
-    $('#envioAbrir').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
-    $('#envioAviso').textContent = CONFIG.whatsapp
-      ? 'Al pulsar se abrirá WhatsApp con el mensaje listo; solo tienes que enviarlo.'
-      : 'Modo demostración: todavía no hay número de WhatsApp configurado. El botón abre WhatsApp con el mensaje escrito para que elijas el contacto.';
-    abrirHoja('hojaEnvio');
-  }
-  $('#btnWhatsApp').addEventListener('click', enviar);
-  $('#comandaEnviar').addEventListener('click', enviar);
-  $('#envioCopiar').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText($('#envioTexto').textContent); toast('Texto copiado'); }
-    catch (e) { const r = document.createRange(); r.selectNodeContents($('#envioTexto')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selecciona y copia el texto'); }
-  });
-  $('#envioNueva').addEventListener('click', () => {
-    comanda = []; $('#comandaNota').value = ''; cambio();
-    const abiertasAhora = abiertas();
-    abiertasAhora.forEach(id => cerrarHoja(id, true));
-    history.go(-abiertasAhora.length);
-    toast('Lista para una nueva comanda');
-  });
-
-  pintarCarta();
+    (() => {
+      const b = document.getElementById('menuBtn'), m = document.getElementById('menuMovil');
+      b.addEventListener('click', () => { const abierto = m.classList.toggle('hidden') === false; b.setAttribute('aria-expanded', abierto); });
+      document.querySelectorAll('[data-anio]').forEach(el => el.textContent = new Date().getFullYear());
+    })();
   </script>
 </body>
 </html>

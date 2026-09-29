@@ -1,32 +1,37 @@
-# La Tapería de Auténticos CyL · Carta digital
+# Auténticos CyL · Web del bar tapería y tienda
 
-Carta digital interactiva para móvil de **La Tapería de Auténticos CyL** (C/ Calixto del Río, 8 · Coca, Segovia), pensada para abrirse escaneando un código QR en la mesa.
+Web de **Auténticos CyL** (C/ Calixto del Río, 8 · Coca, Segovia): bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.
 
-> Carta real del local (verano): imprescindibles, brasa y mar, «Las noches de Auténticos» (solo cenas) y repostería, con sus precios y la numeración de alérgenos (1–14). **Modo demostración:** el pedido por WhatsApp está simulado y la selección de vinos es de ejemplo, a la espera de la carta de vinos.
+> **Modo demostración:** las reservas se guardan en el navegador (no hay base de datos todavía).
 
-## Qué incluye
+## Páginas
 
-- **Carta por pestañas**, sin recargar la página: Imprescindibles, Brasa y mar, Las Noches (hamburguesas de autor, solo cenas), Bodega CyL y Repostería. También se cambia de sección deslizando el dedo.
-- **Ficha de cada plato**: descripción, etiquetas, alérgenos, formato (tapa, media, ración, copa, botella…), cantidad e indicaciones para cocina.
-- **Suplemento de pan**: 1,50 € por comensal, que se indica en la comanda.
-- **Comanda en tiempo real**: barra flotante con el número de artículos y el total, y un desglose donde se cambian cantidades, mesa, nombre y comentario. Se guarda en el navegador.
-- **Envío por WhatsApp**: prepara un mensaje limpio con platos, cantidades y total, muestra cómo llegará y abre WhatsApp con el texto listo.
+| Página | Qué es |
+|---|---|
+| `index.html` | **Inicio**: el restaurante, platos destacados, la tienda, Las noches de Auténticos, noticias y dónde estamos. |
+| `carta.html` | **Carta** de verano, solo para consultar: imprescindibles, brasa y mar, Las noches de Auténticos (solo cenas), repostería y bodega. Incluye precios, alérgenos (1–14) y suplemento de pan. |
+| `noticias.html` | **Noticias y reconocimientos**. |
+| `reservas.html` | **Reservas**: formulario de solicitud (día, turno, hora, personas y datos de contacto). |
+| `gestor.html` | **Área de propietarios**: agenda por día y turno, aforo, solicitudes pendientes (confirmar o rechazar), llegadas y no presentados, reservas a mano, llamada y WhatsApp con mensaje de confirmación preparado. |
 
-## Configuración
+Todas las páginas públicas tienen el mismo menú: Inicio · Carta · Noticias · Reservas · Propietarios.
 
-En `index.html`, bloque `CONFIG`:
+## Editar el contenido
 
-```js
-const CONFIG = {
-  local: 'La Tapería de Auténticos CyL',
-  whatsapp: ''   // móvil del WhatsApp del local, p. ej. '34600123456'
-};
-```
+Las páginas públicas se generan con `python3 tools/generar.py`. Para cambiar el contenido:
 
-- Sin número (modo demostración), el botón abre WhatsApp con el mensaje escrito para elegir el contacto.
-- **QR por mesa:** `index.html?mesa=5` muestra «Mesa 5» y la pone en la comanda.
-- **Enlace directo a una sección:** `index.html#bodega` (también `#imprescindibles`, `#brasa`, `#noches` y `#postres`).
+- **Carta:** `datos/carta.json` (secciones, platos, precios, alérgenos y fotos).
+- **Noticias y reconocimientos:** `datos/noticias.json`.
+- **Teléfono, WhatsApp y horas de reserva:** `js/config.js`. Lo usan la web y el área de propietarios.
+- **Fotos:** `img/` (webp optimizado para móvil).
 
-La carta está en el bloque `SECCIONES`. Cada plato tiene nombre, descripción, formatos con precio, alérgenos, etiquetas y, si hay, `foto`. Cada sección puede llevar una `foto` de cabecera. Las imágenes están en `img/` (webp, recortadas y optimizadas para móvil).
+Después de editar, vuelve a ejecutar `python3 tools/generar.py`.
 
-Un solo archivo HTML con Tailwind CSS por CDN, sin dependencias ni compilación.
+## Cómo funciona la demo de reservas
+
+1. El cliente envía una solicitud en `reservas.html`.
+2. La solicitud se guarda en el navegador.
+3. Al entrar en `gestor.html` desde el mismo navegador, aparece como **pendiente** en *Solicitudes*.
+4. Al confirmarla, el gestor ofrece avisar al cliente por WhatsApp con el mensaje ya escrito.
+
+Para usarlo de verdad hay que sustituir el guardado en el navegador por una base de datos, como se hizo en el gestor de Cabañas Los Pinos.

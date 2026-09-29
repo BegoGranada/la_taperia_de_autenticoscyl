@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Área de propietarios · Auténticos CyL</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#121315" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pizarra: { 950: '#121315', 900: '#1a1c1f', 800: '#24272b', 700: '#34383d', 600: '#4a4f55' },
+            vino:    { 600: '#6e1f2c', 500: '#8c2a3a', 400: '#b0455a', 300: '#d98c9b' },
+            oro:     { 500: '#b38d45', 400: '#c9a45c', 300: '#dcc08a' },
+            crema:   { 100: '#f4efe6', 300: '#d9d2c5', 500: '#a39c90' }
+          },
+          fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Manrope', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { -webkit-tap-highlight-color: transparent; }
+    body { background: #121315; }
+    input, select, textarea { font-size: 16px; }
+    .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+    .pantalla { display: none; } .pantalla.activa { display: block; }
+    :focus-visible { outline: 2px solid #c9a45c; outline-offset: 2px; }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-crema-100 antialiased">
+
+  <!-- =================== ACCESO =================== -->
+  <section id="vistaLogin" class="flex min-h-screen items-center justify-center px-5 py-10">
+    <div class="w-full max-w-sm">
+      <p class="text-center text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Área de propietarios</p>
+      <h1 class="mt-2 text-center font-display text-4xl font-semibold">Auténticos CyL</h1>
+      <p class="mt-2 text-center text-sm text-crema-500">Gestión de reservas del restaurante</p>
+      <form id="formLogin" class="mt-8 space-y-4 rounded-3xl border border-white/10 bg-pizarra-900 p-6" novalidate>
+        <div class="rounded-2xl bg-oro-400/10 p-4 text-sm leading-relaxed text-oro-300">
+          <strong>Modo demostración.</strong> Todavía no hay base de datos: los datos son de ejemplo y se guardan solo en este navegador. Las solicitudes hechas desde la página de Reservas aparecen aquí.
+        </div>
+        <button id="btnEntrar" type="submit" class="w-full rounded-full bg-vino-500 py-4 font-semibold transition hover:bg-vino-400">Entrar en la demostración</button>
+        <button id="btnReset" type="button" class="w-full text-sm text-crema-500 underline underline-offset-4">Restablecer datos de ejemplo</button>
+      </form>
+      <p class="mt-6 text-center text-sm"><a href="index.html" class="text-crema-500 hover:text-crema-100">← Volver a la web</a></p>
+    </div>
+  </section>
+
+  <!-- =================== APLICACIÓN =================== -->
+  <div id="vistaApp" class="hidden pb-28">
+    <header class="sticky top-0 z-30 border-b border-white/5 bg-pizarra-950/95 backdrop-blur">
+      <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
+        <div class="flex min-w-0 items-center gap-1">
+          <a href="index.html" class="-ml-2 rounded-full p-2 hover:bg-white/10" aria-label="Volver a la web" title="Volver a la web">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg>
+          </a>
+          <div class="min-w-0 leading-tight">
+            <p class="truncate font-display text-lg font-semibold">Auténticos CyL</p>
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Reservas · modo demostración</p>
+          </div>
+        </div>
+        <button id="btnSalir" class="rounded-full px-3 py-2 text-sm text-crema-300 hover:bg-white/10">Salir</button>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-4 pt-4">
+      <!-- ---------- AGENDA ---------- -->
+      <section id="p-agenda" class="pantalla activa">
+        <div class="flex items-center justify-between gap-3">
+          <h2 id="lblDia" class="font-display text-3xl font-semibold capitalize"></h2>
+          <button id="btnHoy" class="rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300">Hoy</button>
+        </div>
+        <div id="tiraDias" class="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1"></div>
+        <div id="resumenDia" class="mt-4 grid grid-cols-3 gap-2"></div>
+        <div id="turnosDia" class="mt-4 space-y-6"></div>
+      </section>
+
+      <!-- ---------- SOLICITUDES ---------- -->
+      <section id="p-solicitudes" class="pantalla">
+        <h2 class="font-display text-3xl font-semibold">Solicitudes</h2>
+        <p class="mt-1 text-sm text-crema-500">Reservas pendientes de confirmar, de la web y del resto de canales.</p>
+        <div id="listaSolicitudes" class="mt-4 space-y-3"></div>
+      </section>
+
+      <!-- ---------- AJUSTES ---------- -->
+      <section id="p-ajustes" class="pantalla">
+        <h2 class="font-display text-3xl font-semibold">Ajustes</h2>
+        <form id="formAjustes" class="mt-4 space-y-4 rounded-3xl border border-white/10 bg-pizarra-900 p-5">
+          <p class="font-semibold">Aforo por turno</p>
+          <p class="-mt-2 text-sm text-crema-500">Número de comensales que caben en cada turno. El gestor avisa al pasarse.</p>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Comida</span>
+              <input name="comida" type="number" min="1" max="500" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+            <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Cena</span>
+              <input name="cena" type="number" min="1" max="500" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+          </div>
+          <button class="w-full rounded-full bg-vino-500 py-3 font-semibold">Guardar</button>
+        </form>
+        <div class="mt-4 rounded-3xl border border-white/10 bg-pizarra-900 p-5 text-sm leading-relaxed text-crema-300">
+          <p class="font-semibold text-crema-100">Horas de reserva</p>
+          <p class="mt-1">Comida: <span id="horasComida"></span><br>Cena: <span id="horasCena"></span></p>
+          <p class="mt-2 text-crema-500">Se cambian en <code>js/config.js</code> y se aplican también al formulario de la web.</p>
+        </div>
+        <button id="btnResetApp" class="mt-4 w-full rounded-full border border-white/15 py-3 text-sm font-semibold text-crema-300">Restablecer datos de ejemplo</button>
+      </section>
+    </main>
+
+    <!-- Navegación inferior -->
+    <nav class="fixed inset-x-0 bottom-0 z-30 border-t border-white/5 bg-pizarra-950/95 pb-[env(safe-area-inset-bottom)] backdrop-blur" aria-label="Secciones">
+      <div class="mx-auto grid max-w-md grid-cols-4 text-[11px] font-semibold text-crema-500">
+        <button data-ir="agenda" class="flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path stroke-linecap="round" d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda</button>
+        <button data-ir="solicitudes" class="relative flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v11H8l-4 4V5Z"/></svg>Solicitudes
+          <span id="badge" class="absolute right-3 top-1.5 hidden min-w-[20px] rounded-full bg-vino-500 px-1.5 py-0.5 text-[10px] font-bold text-crema-100"></span></button>
+        <button id="btnNueva" class="flex flex-col items-center gap-1 py-2" aria-label="Nueva reserva"><span class="grid h-11 w-11 place-items-center rounded-full bg-vino-500 text-2xl text-crema-100 shadow-lg">+</span>Nueva</button>
+        <button data-ir="ajustes" class="flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Ajustes</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- =================== FICHA DE RESERVA =================== -->
+  <div id="hoja" class="fixed inset-0 z-50 hidden items-end justify-center bg-black/70 sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="hojaTitulo">
+    <div class="max-h-[94svh] w-full max-w-xl overflow-y-auto rounded-t-3xl bg-pizarra-900 p-5 sm:rounded-3xl">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <p id="hojaSub" class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Reserva</p>
+          <h2 id="hojaTitulo" class="font-display text-3xl font-semibold">Nueva reserva</h2>
+        </div>
+        <button data-cerrar class="rounded-full bg-white/5 p-2.5 text-crema-300" aria-label="Cerrar">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <form id="formReserva" class="mt-5 space-y-4" novalidate>
+        <input type="hidden" name="id" />
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Día</span>
+            <input name="fecha" type="date" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3" /></label>
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Personas</span>
+            <input name="personas" type="number" min="1" max="60" value="2" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Turno</span>
+            <select name="turno" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3"></select></label>
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Hora</span>
+            <input name="hora" type="time" step="900" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3" /></label>
+        </div>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Nombre</span>
+          <input name="nombre" autocomplete="off" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Teléfono</span>
+            <input name="telefono" type="tel" autocomplete="off" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Canal</span>
+            <select name="origen" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3">
+              <option value="telefono">Teléfono</option><option value="whatsapp">WhatsApp</option><option value="presencial">En el local</option><option value="web">Web</option>
+            </select></label>
+        </div>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Estado</span>
+          <select name="estado" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3">
+            <option value="pendiente">Pendiente</option><option value="confirmada">Confirmada</option><option value="sentada">Han llegado</option>
+            <option value="noshow">No se presentaron</option><option value="cancelada">Cancelada</option>
+          </select></label>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Notas</span>
+          <textarea name="notas" rows="2" placeholder="Alergias, trona, celebración, mesa preferida…" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 placeholder:text-crema-500"></textarea></label>
+        <p id="avisoAforo" class="hidden rounded-2xl bg-oro-400/10 px-4 py-3 text-sm text-oro-300"></p>
+        <p id="errorReserva" class="hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300" role="alert"></p>
+        <button type="submit" class="w-full rounded-full bg-vino-500 py-4 font-semibold transition hover:bg-vino-400">Guardar</button>
+        <div id="accionesFicha" class="hidden grid-cols-3 gap-2">
+          <a id="accLlamar" class="rounded-full border border-white/15 py-3 text-center text-sm font-semibold">Llamar</a>
+          <a id="accWhatsApp" target="_blank" rel="noopener" class="rounded-full border border-white/15 py-3 text-center text-sm font-semibold">WhatsApp</a>
+          <button type="button" id="accEliminar" class="rounded-full border border-vino-400/40 py-3 text-sm font-semibold text-vino-300">Eliminar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-0 bottom-24 z-[60] flex justify-center px-4 opacity-0 transition-opacity">
+    <p class="rounded-full bg-oro-400 px-5 py-2.5 text-sm font-semibold text-pizarra-950 shadow-xl"></p>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script>
+  /* =====================================================================
+     Utilidades
+     ===================================================================== */
+  const C = window.TAPERIA;
+  const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+  const hoyS = () => iso(new Date());
+  const sumar = (s, n) => { const d = new Date(s + 'T12:00'); d.setDate(d.getDate() + n); return iso(d); };
+  const fLarga = s => new Date(s + 'T12:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  const fCorta = s => new Date(s + 'T12:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
+  const uid = () => 'r-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const toast = m => { const t = $('#toast'); t.firstElementChild.textContent = m; t.style.opacity = 1; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.opacity = 0, 2200); };
+  const telIntl = t => { let n = String(t || '').replace(/\D/g, ''); if (n.length === 9) n = '34' + n; return n; };
+
+  const ESTADOS = {
+    pendiente: ['Pendiente', 'bg-oro-400/15 text-oro-300'],
+    confirmada: ['Confirmada', 'bg-emerald-400/15 text-emerald-300'],
+    sentada: ['Han llegado', 'bg-sky-400/15 text-sky-300'],
+    noshow: ['No vinieron', 'bg-white/10 text-crema-500'],
+    cancelada: ['Cancelada', 'bg-white/10 text-crema-500']
+  };
+  const ORIGEN = { web: 'Web', telefono: 'Teléfono', whatsapp: 'WhatsApp', presencial: 'En el local' };
+  const cuentaAforo = r => ['pendiente', 'confirmada', 'sentada'].includes(r.estado);
+
+  /* =====================================================================
+     Datos (modo demostración: localStorage)
+     ===================================================================== */
+  const CLAVE = 'taperia-gestor-v1';
+  let D;
+  function semilla() {
+    const h = hoyS(), R = [];
+    const add = (dia, turno, hora, personas, nombre, telefono, estado, origen, notas = '') =>
+      R.push({ id: uid(), fecha: sumar(h, dia), turno, hora, personas, nombre, telefono, estado, origen, notas, creado: new Date().toISOString() });
+    add(0, 'comida', '14:00', 4, 'Familia Sanz', '600112233', 'confirmada', 'telefono', 'Una trona');
+    add(0, 'comida', '14:30', 2, 'Pedro Alonso', '611223344', 'sentada', 'presencial');
+    add(0, 'comida', '15:00', 6, 'Cumpleaños de Marta', '622334455', 'confirmada', 'whatsapp', 'Traen tarta; avisar al servir postres');
+    add(0, 'cena', '21:00', 2, 'Laura y Jorge', '633445566', 'confirmada', 'web');
+    add(0, 'cena', '21:30', 5, 'Grupo ciclista Coca', '644556677', 'pendiente', 'web', 'Vienen en bici; ¿dónde dejarlas?');
+    add(0, 'cena', '22:00', 3, 'Ana Gil', '655667788', 'pendiente', 'telefono', 'Una persona celíaca');
+    add(1, 'comida', '14:00', 8, 'Comida de empresa Iturri', '666778899', 'confirmada', 'telefono', 'Factura a nombre de la empresa');
+    add(1, 'cena', '21:00', 4, 'Rubén Castro', '677889900', 'pendiente', 'web');
+    add(2, 'cena', '21:30', 2, 'Elena Martín', '688990011', 'confirmada', 'whatsapp', 'Aniversario');
+    add(3, 'comida', '14:30', 10, 'Peña El Castillo', '699001122', 'pendiente', 'telefono', 'Menú para grupo: preguntar opciones');
+    add(-1, 'cena', '21:00', 4, 'Hugo Prieto', '600998877', 'noshow', 'web');
+    add(-1, 'comida', '14:00', 3, 'Irene Vela', '611887766', 'sentada', 'telefono');
+    return { reservas: R, ajustes: { aforo: { comida: 40, cena: 40 } }, importadas: [] };
+  }
+  function cargar() {
+    try { const d = JSON.parse(localStorage.getItem(CLAVE)); if (d && d.reservas) return d; } catch (e) {}
+    const d = semilla(); guardar(d); return d;
+  }
+  function guardar(d = D) { try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {} }
+  // Recoge las solicitudes enviadas desde reservas.html (mismo navegador en la demo)
+  function importarWeb() {
+    let l = []; try { l = JSON.parse(localStorage.getItem(C.claveSolicitudes) || '[]'); } catch (e) {}
+    const nuevas = l.filter(s => !D.importadas.includes(s.id));
+    nuevas.forEach(s => { D.reservas.push({ ...s, estado: 'pendiente', origen: 'web' }); D.importadas.push(s.id); });
+    if (nuevas.length) { guardar(); toast(`${nuevas.length} solicitud${nuevas.length === 1 ? '' : 'es'} nueva${nuevas.length === 1 ? '' : 's'} desde la web`); }
+  }
+
+  /* =====================================================================
+     Acceso y navegación
+     ===================================================================== */
+  function entrar() {
+    D = cargar(); importarWeb();
+    $('#vistaLogin').classList.add('hidden'); $('#vistaApp').classList.remove('hidden');
+    ir(pantalla); pintar();
+  }
+  $('#formLogin').addEventListener('submit', ev => { ev.preventDefault(); try { sessionStorage.setItem('taperia-sesion', '1'); } catch (e) {} entrar(); });
+  const reset = () => { try { localStorage.removeItem(CLAVE); } catch (e) {} D = cargar(); importarWeb(); if (!$('#vistaApp').classList.contains('hidden')) pintar(); toast('Datos de ejemplo restablecidos'); };
+  $('#btnReset').addEventListener('click', reset);
+  $('#btnResetApp').addEventListener('click', () => { if (confirm('¿Restablecer los datos de ejemplo? Se perderán los cambios de la demostración.')) reset(); });
+  $('#btnSalir').addEventListener('click', () => { try { sessionStorage.removeItem('taperia-sesion'); } catch (e) {} $('#vistaApp').classList.add('hidden'); $('#vistaLogin').classList.remove('hidden'); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && D) { importarWeb(); pintar(); } });
+
+  let pantalla = 'agenda', dia = hoyS();
+  function ir(p) {
+    pantalla = p;
+    $$('.pantalla').forEach(s => s.classList.toggle('activa', s.id === 'p-' + p));
+    $$('[data-ir]').forEach(b => { b.classList.toggle('text-oro-300', b.dataset.ir === p); b.toggleAttribute('aria-current', b.dataset.ir === p); });
+    scrollTo(0, 0);
+  }
+  $$('[data-ir]').forEach(b => b.addEventListener('click', () => ir(b.dataset.ir)));
+
+  /* =====================================================================
+     Pintado
+     ===================================================================== */
+  function tarjeta(r, conFecha) {
+    const [et, ec] = ESTADOS[r.estado];
+    const acciones = r.estado === 'pendiente'
+      ? `<button data-accion="confirmada" data-id="${r.id}" class="rounded-full bg-emerald-500/90 px-4 py-2 text-sm font-semibold text-pizarra-950">Confirmar</button>
+         <button data-accion="cancelada" data-id="${r.id}" class="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">Rechazar</button>`
+      : r.estado === 'confirmada' && r.fecha <= hoyS()
+      ? `<button data-accion="sentada" data-id="${r.id}" class="rounded-full bg-sky-400/90 px-4 py-2 text-sm font-semibold text-pizarra-950">Han llegado</button>
+         <button data-accion="noshow" data-id="${r.id}" class="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">No vinieron</button>` : '';
+    return `<article class="rounded-3xl border border-white/5 bg-pizarra-900 p-4 ${['cancelada', 'noshow'].includes(r.estado) ? 'opacity-60' : ''}">
+      <button data-abrir="${r.id}" class="block w-full text-left">
+        <div class="flex items-start gap-3">
+          <p class="w-14 shrink-0 font-display text-2xl font-semibold tabular-nums text-oro-300">${esc(r.hora)}</p>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-start justify-between gap-2">
+              <p class="truncate text-lg font-semibold">${esc(r.nombre)}</p>
+              <span class="shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${ec}">${et}</span>
+            </div>
+            <p class="text-sm text-crema-300">${r.personas} ${r.personas === 1 ? 'persona' : 'personas'}${conFecha ? ` · <span class="capitalize">${fCorta(r.fecha)}</span> · ${C.turnos[r.turno].nombre}` : ''} · ${ORIGEN[r.origen] || r.origen}</p>
+            ${r.notas ? `<p class="mt-1 text-sm italic text-crema-500">${esc(r.notas)}</p>` : ''}
+          </div>
+        </div>
+      </button>
+      ${acciones ? `<div class="mt-3 flex flex-wrap gap-2 pl-[4.25rem]">${acciones}${r.telefono ? `<a href="tel:+${telIntl(r.telefono)}" class="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">Llamar</a>` : ''}</div>` : ''}
+    </article>`;
+  }
+  function pintar() {
+    const h = hoyS();
+    // Tira de días
+    $('#lblDia').textContent = dia === h ? 'Hoy' : fLarga(dia);
+    $('#btnHoy').classList.toggle('invisible', dia === h);
+    $('#tiraDias').innerHTML = Array.from({ length: 22 }, (_, i) => sumar(h, i - 2)).map(d => {
+      const n = D.reservas.filter(r => r.fecha === d && cuentaAforo(r)).length, pend = D.reservas.some(r => r.fecha === d && r.estado === 'pendiente');
+      const dd = new Date(d + 'T12:00');
+      return `<button data-dia="${d}" class="relative flex w-14 shrink-0 flex-col items-center rounded-2xl border py-2 ${d === dia ? 'border-oro-400 bg-oro-400/10' : 'border-white/10'} ${d < h ? 'opacity-50' : ''}">
+        <span class="text-[11px] uppercase text-crema-500">${dd.toLocaleDateString('es-ES', { weekday: 'short' }).replace('.', '')}</span>
+        <span class="text-lg font-semibold">${dd.getDate()}</span>
+        <span class="text-[10px] ${n ? 'text-oro-300' : 'text-crema-500'}">${n ? n + ' res.' : '—'}</span>
+        ${pend ? '<span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-vino-400"></span>' : ''}</button>`;
+    }).join('');
+    const delDia = D.reservas.filter(r => r.fecha === dia).sort((a, b) => a.hora.localeCompare(b.hora));
+    const act = delDia.filter(cuentaAforo), com = t => act.filter(r => r.turno === t).reduce((s, r) => s + r.personas, 0);
+    const tile = (n, t, c = '') => `<div class="rounded-2xl border border-white/5 bg-pizarra-900 p-3 ${c}"><p class="text-2xl font-semibold tabular-nums">${n}</p><p class="text-xs text-crema-500">${t}</p></div>`;
+    $('#resumenDia').innerHTML = tile(act.length, 'reservas') + tile(com('comida') + com('cena'), 'comensales') + tile(delDia.filter(r => r.estado === 'pendiente').length, 'por confirmar', 'text-oro-300');
+    $('#turnosDia').innerHTML = Object.entries(C.turnos).map(([k, t]) => {
+      const lista = delDia.filter(r => r.turno === k), ocup = com(k), afo = D.ajustes.aforo[k], pct = Math.min(100, Math.round(ocup / afo * 100));
+      return `<div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="font-display text-2xl font-semibold">${t.nombre}</h3>
+          <p class="text-sm tabular-nums ${ocup > afo ? 'font-semibold text-vino-300' : 'text-crema-300'}">${ocup} / ${afo} comensales</p>
+        </div>
+        <div class="mt-2 h-2 overflow-hidden rounded-full bg-white/5"><div class="h-full rounded-full ${ocup > afo ? 'bg-vino-400' : pct > 80 ? 'bg-oro-400' : 'bg-emerald-400'}" style="width:${pct}%"></div></div>
+        <div class="mt-3 space-y-3">${lista.length ? lista.map(r => tarjeta(r)).join('') : `<button data-nueva-turno="${k}" class="w-full rounded-3xl border border-dashed border-white/15 p-5 text-sm text-crema-500">Sin reservas · añadir una</button>`}</div>
+      </div>`;
+    }).join('');
+    // Solicitudes
+    const pend = D.reservas.filter(r => r.estado === 'pendiente' && r.fecha >= h).sort((a, b) => (a.fecha + a.hora).localeCompare(b.fecha + b.hora));
+    $('#listaSolicitudes').innerHTML = pend.length ? pend.map(r => tarjeta(r, true)).join('') : '<p class="rounded-3xl border border-white/5 bg-pizarra-900 p-8 text-center text-crema-500">No hay solicitudes pendientes.</p>';
+    const b = $('#badge'); b.textContent = pend.length; b.classList.toggle('hidden', !pend.length);
+    // Ajustes
+    $('#formAjustes').comida.value = D.ajustes.aforo.comida; $('#formAjustes').cena.value = D.ajustes.aforo.cena;
+    $('#horasComida').textContent = C.turnos.comida.horas.join(' · '); $('#horasCena').textContent = C.turnos.cena.horas.join(' · ');
+  }
+  $('#tiraDias').addEventListener('click', ev => { const b = ev.target.closest('[data-dia]'); if (b) { dia = b.dataset.dia; pintar(); } });
+  $('#btnHoy').addEventListener('click', () => { dia = hoyS(); pintar(); });
+  document.addEventListener('click', ev => {
+    const a = ev.target.closest('[data-accion]');
+    if (a) {
+      const r = D.reservas.find(x => x.id === a.dataset.id);
+      if (a.dataset.accion === 'cancelada' && !confirm(`¿Rechazar la reserva de ${r.nombre}?`)) return;
+      r.estado = a.dataset.accion; guardar(); pintar();
+      toast({ confirmada: 'Reserva confirmada', cancelada: 'Reserva rechazada', sentada: 'Marcada como llegada', noshow: 'Marcada como no presentada' }[r.estado]);
+      if (r.estado === 'confirmada' && r.telefono) abrirReserva(r, true);
+      return;
+    }
+    const o = ev.target.closest('[data-abrir]'); if (o) return abrirReserva(D.reservas.find(x => x.id === o.dataset.abrir));
+    const n = ev.target.closest('[data-nueva-turno]'); if (n) abrirReserva(null, false, { turno: n.dataset.nuevaTurno, fecha: dia });
+  });
+  $('#formAjustes').addEventListener('submit', ev => {
+    ev.preventDefault(); const f = ev.target, c = +f.comida.value, n = +f.cena.value;
+    if (!(c > 0 && n > 0)) return toast('El aforo debe ser mayor que 0');
+    D.ajustes.aforo = { comida: c, cena: n }; guardar(); pintar(); toast('Aforo guardado');
+  });
+
+  /* =====================================================================
+     Ficha de reserva
+     ===================================================================== */
+  const F = $('#formReserva');
+  F.turno.innerHTML = Object.entries(C.turnos).map(([k, t]) => `<option value="${k}">${t.nombre}</option>`).join('');
+  function mensajeWhatsApp(r) {
+    return `Hola ${r.nombre}, le confirmamos su reserva en Auténticos CyL para ${r.personas} ${r.personas === 1 ? 'persona' : 'personas'} el ${fLarga(r.fecha)} a las ${r.hora}. ¡Le esperamos en ${C.direccion}!`;
+  }
+  function avisoAforo() {
+    const f = Object.fromEntries(new FormData(F)), afo = D.ajustes.aforo[f.turno];
+    const ocup = D.reservas.filter(r => r.id !== f.id && r.fecha === f.fecha && r.turno === f.turno && cuentaAforo(r)).reduce((s, r) => s + r.personas, 0);
+    const total = ocup + (['pendiente', 'confirmada', 'sentada'].includes(f.estado) ? +f.personas || 0 : 0), av = $('#avisoAforo');
+    av.classList.toggle('hidden', total <= afo);
+    av.textContent = `Con esta reserva el turno queda en ${total} comensales y el aforo es de ${afo}.`;
+  }
+  ['fecha', 'turno', 'personas', 'estado'].forEach(k => F[k].addEventListener('input', avisoAforo));
+  F.turno.addEventListener('change', () => { if (!F.hora.value || !C.turnos[F.turno.value].horas.includes(F.hora.value)) F.hora.value = C.turnos[F.turno.value].horas[0]; });
+  function abrirReserva(r, trasConfirmar = false, previo = {}) {
+    F.reset();
+    const v = r || { fecha: dia, turno: 'cena', hora: C.turnos.cena.horas[1], personas: 2, estado: 'confirmada', origen: 'telefono', ...previo };
+    if (!r && previo.turno) v.hora = C.turnos[previo.turno].horas[0];
+    ['id', 'fecha', 'turno', 'hora', 'personas', 'nombre', 'telefono', 'origen', 'estado', 'notas'].forEach(k => F[k].value = v[k] ?? '');
+    $('#hojaTitulo').textContent = r ? r.nombre : 'Nueva reserva';
+    $('#hojaSub').textContent = r ? `${ORIGEN[r.origen] || ''} · ${ESTADOS[r.estado][0]}` : 'Reserva';
+    const acc = $('#accionesFicha'); acc.classList.toggle('hidden', !r); acc.classList.toggle('grid', !!r);
+    if (r) {
+      $('#accLlamar').href = r.telefono ? `tel:+${telIntl(r.telefono)}` : '#';
+      $('#accWhatsApp').href = r.telefono ? `https://wa.me/${telIntl(r.telefono)}?text=${encodeURIComponent(mensajeWhatsApp(r))}` : '#';
+      $('#accWhatsApp').textContent = trasConfirmar ? 'Avisar por WhatsApp' : 'WhatsApp';
+      $('#accWhatsApp').classList.toggle('bg-emerald-500', trasConfirmar); $('#accWhatsApp').classList.toggle('text-pizarra-950', trasConfirmar);
+    }
+    $('#errorReserva').classList.add('hidden'); avisoAforo();
+    $('#hoja').classList.replace('hidden', 'flex'); document.body.style.overflow = 'hidden';
+    history.pushState({ hoja: 1 }, '');
+  }
+  function cerrarHoja(desdeHistorial) {
+    if ($('#hoja').classList.contains('hidden')) return;
+    $('#hoja').classList.replace('flex', 'hidden'); document.body.style.overflow = '';
+    if (!desdeHistorial && history.state && history.state.hoja) history.back();
+  }
+  window.addEventListener('popstate', () => cerrarHoja(true));
+  $('#hoja').addEventListener('click', ev => { if (ev.target === $('#hoja') || ev.target.closest('[data-cerrar]')) cerrarHoja(); });
+  document.addEventListener('keydown', ev => { if (ev.key === 'Escape') cerrarHoja(); });
+  $('#btnNueva').addEventListener('click', () => abrirReserva(null));
+  F.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const f = Object.fromEntries(new FormData(F)), err = $('#errorReserva');
+    const msg = !f.fecha ? 'Indica el día.' : !f.hora ? 'Indica la hora.' : !f.nombre.trim() ? 'Escribe el nombre de la reserva.'
+      : !(+f.personas >= 1) ? 'Indica cuántas personas son.' : f.telefono && !/^\+?[\d\s]{9,16}$/.test(f.telefono) ? 'El teléfono no parece correcto.' : '';
+    if (msg) { err.textContent = msg; err.classList.remove('hidden'); return; }
+    const r = { ...f, personas: +f.personas, nombre: f.nombre.trim(), telefono: f.telefono.replace(/\s/g, ''), notas: f.notas.trim() };
+    if (r.id) D.reservas = D.reservas.map(x => x.id === r.id ? { ...x, ...r } : x);
+    else D.reservas.push({ ...r, id: uid(), creado: new Date().toISOString() });
+    guardar(); dia = r.fecha; cerrarHoja(); pintar(); toast('Reserva guardada');
+  });
+  $('#accEliminar').addEventListener('click', () => {
+    if (!confirm('¿Eliminar esta reserva? Si solo se anula, mejor márcala como cancelada.')) return;
+    D.reservas = D.reservas.filter(x => x.id !== F.id.value); guardar(); cerrarHoja(); pintar(); toast('Reserva eliminada');
+  });
+
+  try { if (sessionStorage.getItem('taperia-sesion') === '1') entrar(); } catch (e) {}
+  </script>
+</body>
+</html>

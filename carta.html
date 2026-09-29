@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Carta · Auténticos CyL, Coca</title>
+  <meta name="description" content="Carta de Auténticos CyL: imprescindibles, carnes a la brasa y pescados, hamburguesas de autor para las cenas y repostería. Precios y alérgenos." />
+  <meta name="theme-color" content="#121315" />
+  <meta property="og:title" content="Carta · Auténticos CyL, Coca" />
+  <meta property="og:description" content="Carta de Auténticos CyL: imprescindibles, carnes a la brasa y pescados, hamburguesas de autor para las cenas y repostería. Precios y alérgenos." />
+  <meta property="og:image" content="img/fachada.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pizarra: { 950: '#121315', 900: '#1a1c1f', 800: '#24272b', 700: '#34383d', 600: '#4a4f55' },
+            vino:    { 600: '#6e1f2c', 500: '#8c2a3a', 400: '#b0455a', 300: '#d98c9b' },
+            oro:     { 500: '#b38d45', 400: '#c9a45c', 300: '#dcc08a' },
+            crema:   { 100: '#f4efe6', 300: '#d9d2c5', 500: '#a39c90' }
+          },
+          fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Manrope', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; scroll-padding-top: 8rem; }
+    body { background: #121315; }
+    input, select, textarea { font-size: 16px; }
+    .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+    :focus-visible { outline: 2px solid #c9a45c; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-crema-100 antialiased">
+
+  <header class="sticky top-0 z-40 border-b border-white/5 bg-pizarra-950/90 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+      <a href="index.html" class="min-w-0 leading-tight">
+        <span class="block font-display text-xl font-semibold text-crema-100">Auténticos CyL</span>
+        <span class="block text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Bar Tapería · Tienda · Coca</span>
+      </a>
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Principal">
+        <a href="index.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Inicio</a><a href="carta.html" class="rounded-full px-4 py-2 text-sm font-semibold transition bg-white/10 text-crema-100" aria-current="page">Carta</a><a href="noticias.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Noticias</a><a href="reservas.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Reservas</a>
+        <a href="gestor.html" class="ml-2 inline-flex items-center gap-2 rounded-full border border-oro-400/40 px-4 py-2 text-sm font-semibold text-oro-300 transition hover:bg-oro-400 hover:text-pizarra-950"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Propietarios</a>
+      </nav>
+      <button id="menuBtn" class="rounded-full p-2 text-crema-100 md:hidden" aria-controls="menuMovil" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="menuMovil" class="hidden border-t border-white/5 px-5 pb-5 pt-2 md:hidden" aria-label="Principal (móvil)">
+      <a href="index.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Inicio</a><a href="carta.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold bg-white/10 text-crema-100">Carta</a><a href="noticias.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Noticias</a><a href="reservas.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Reservas</a>
+      <a href="gestor.html" class="mt-2 flex items-center gap-2 rounded-2xl border border-oro-400/30 px-4 py-3 font-semibold text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-5 pb-20">
+    <header class="pt-14">
+      <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Carta de verano</p>
+      <h1 class="mt-3 font-display text-5xl font-semibold">La carta</h1>
+      <p class="mt-4 max-w-xl leading-relaxed text-crema-300">Producto de temporada, cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.</p>
+    </header>
+    <nav class="sticky top-[61px] z-30 -mx-5 mt-8 border-y border-white/5 bg-pizarra-950/95 px-5 py-3 backdrop-blur" aria-label="Secciones de la carta">
+      <div class="no-scrollbar flex gap-2 overflow-x-auto"><a href="#imprescindibles" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Imprescindibles</a><a href="#brasa" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Brasa y mar</a><a href="#noches" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Las Noches</a><a href="#postres" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Repostería</a><a href="#bodega" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Bodega</a></div>
+    </nav>
+    
+      <section id="imprescindibles" class="pt-14">
+        <img src="img/brasa-mar.webp" alt="Chipirones en texturas con tomate y crujiente de torreznos" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover object-[center_40%] sm:h-72" />
+        <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Verano · Brasa · Temporada</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold leading-tight">Nuestros imprescindibles</h2>
+        <p class="mt-3 max-w-2xl italic leading-relaxed text-crema-500">Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.</p>
+        
+        <ul class="mt-4 divide-y divide-white/5">
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Patatas bravas de la Retamilla</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">12,00 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Mostaza">(7)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            <img src="img/torreznos.webp" alt="Torrezno de Soria bien crujiente" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Torrezno de Soria bien crujiente</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">8,95 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Huevos">(5)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            <img src="img/croquetas.webp" alt="Croquetas súper cremosas de jamón" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Croquetas súper cremosas de jamón</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">15,95 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Lácteos">(1, 5, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            <img src="img/chipirones.webp" alt="Chipirones en texturas" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Chipirones en texturas</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">18,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Tomate al estilo tradicional y crujiente de torreznos de Soria.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opción sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Pescado, Huevos">(1, 4, 5)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Huevos rotos, torreznos de Soria y tartufata</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">17,95 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Huevos">(5)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Ensalada de tomate de la huerta</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">15,00 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Con ventresca y pimientos asados al carbón.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Pescado, Lácteos">(4, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Pescado, Soja, Mostaza">(4, 6, 7)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Burrata, cerezas asadas, remolacha ahumada y pistachos tostados</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,00 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Huevos, Lácteos">(5, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Bikini de oreja plancha</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">12,00 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Queso pata de mulo ahumado y mojo rojo.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Sésamo, Lácteos">(1, 5, 7, 11, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Taco de maíz con atún rojo salvaje de Almadraba</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">8,00 € /ud.</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Marinado en michelada.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Pescado">(1, 4)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Pizza de sartén de salmón ahumado</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">12,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Stracciatella, aguacate y tomate semiseco.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Pescado, Huevos">(1, 4, 5)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Empanada de pipián con ají de maní</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">4,50 € /ud.</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Masa de empanada argentina, rellena de verduras y cacahuete.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Frutos secos">(1, 9)</span></div>
+            </div>
+          </li>
+        </ul>
+        
+      </section>
+      <section id="brasa" class="pt-14">
+        <img src="img/tabla-duroc.webp" alt="Tabla de carnes Duroc a la brasa con chorizo ibérico, pebre y chimichurri" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover object-[center_40%] sm:h-72" />
+        <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Sabores · Sensaciones y +</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold leading-tight">A la brasa y el mar</h2>
+        <p class="mt-3 max-w-2xl italic leading-relaxed text-crema-500">Sabores que nacen del respeto al producto, del fuego y del tiempo. En Auténticos CyL elevamos cada ingrediente a su máxima expresión para ofrecerte platos memorables, honestos y sorprendentes.</p>
+        
+        <ul class="mt-4 divide-y divide-white/5">
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Albóndigas crujientes de cochinillo segoviano</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">18,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">En su propio jugo, manzana ácida y kimchi.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Crustáceos, Huevos, Mostaza, Cacahuetes, Sulfitos, Altramuces">(1, 2, 5, 7, 10, 12, 14)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Entrecot de vaca a la brasa del josper</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">24,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Madurado un mínimo de 35 días para lograr la máxima terneza y un sabor profundo. 400 g aprox.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">400 g aprox.</span> </div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            <img src="img/tabla-duroc.webp" alt="Tabla de carnes Duroc a la brasa" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Tabla de carnes Duroc a la brasa</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">36,00 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Solomillo, secreto, presa, pluma y chorizo ibérico. Selección premium para 2 personas.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Para 2 personas</span> </div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Picaña de vaca madurada a la brasa</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">22,00 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Sulfitos">(12)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Presa ibérica a baja temperatura</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">19,00 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Crema de maíz ahumado y melocotón a la brasa.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Sulfitos, Lácteos">(12, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Lasaña de morcillo madurado a fuego lento</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,00 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Mostaza, Sulfitos">(1, 7, 12)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            <img src="img/rabo-de-toro.webp" alt="Hamburguesa de rabo de toro" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Hamburguesa de rabo de toro</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Sulfitos">(1, 5, 7, 12)</span></div>
+            </div>
+          </li></ul><h3 class="mt-8 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Del mar<span class="h-px flex-1 bg-oro-400/25"></span></h3><ul class="divide-y divide-white/5">
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Lubina curada marcada en brasa</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">21,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Pescado, Mostaza, Apio">(4, 7, 8)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Bonito semicurado, ligeramente marcado a la brasa</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">19,90 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Pescado, Mostaza, Sulfitos">(4, 7, 12)</span></div>
+            </div>
+          </li></ul><h3 class="mt-8 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Para acompañar nuestros platos<span class="h-px flex-1 bg-oro-400/25"></span></h3><ul class="divide-y divide-white/5">
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Bowl de lechuga, tomate y cebolla encurtida</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">6,95 €</p>
+              </div>
+              
+              
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Patatas fritas</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">4,50 €</p>
+              </div>
+              
+              
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Patatas asadas con alioli de kimchi</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">7,50 €</p>
+              </div>
+              
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Apio, Sulfitos, Lácteos">(8, 12, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Verduras al josper</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">7,95 €</p>
+              </div>
+              
+              
+            </div>
+          </li>
+        </ul>
+        
+      </section>
+      <section id="noches" class="pt-14">
+        <img src="img/rabo-de-toro.webp" alt="Hamburguesa de rabo de toro con cebolla encurtida y maíz crujiente, con patatas, en tabla de madera" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover object-[center_40%] sm:h-72" />
+        <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Noches · Brasa · Bocados</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold leading-tight">Las noches de Auténticos</h2>
+        <p class="mt-3 max-w-2xl italic leading-relaxed text-crema-500">Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.</p>
+        <p class="mt-4 inline-block rounded-full border border-vino-400/40 bg-vino-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-vino-300">Solo disponible en servicio de cenas</p>
+        <ul class="mt-4 divide-y divide-white/5">
+          <li class="flex gap-4 py-5">
+            <img src="img/rabo-de-toro.webp" alt="La Rabo de Toro" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">La Rabo de Toro</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Frutos secos, Cacahuetes, Sésamo, Sulfitos, Lácteos, Altramuces">(1, 5, 7, 9, 10, 11, 12, 13, 14)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">La Bestia Castellana</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">17,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Buey 100 %</span><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Guanciale</span><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opción sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Frutos secos, Cacahuetes, Sésamo, Lácteos">(1, 5, 7, 9, 10, 11, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Rock &amp; Rolla</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Buey 100 %</span><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opción sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Mostaza, Cacahuetes, Sésamo, Lácteos, Altramuces">(1, 7, 10, 11, 13, 14)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Deluxe Macarra</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">16,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Buey 100 %</span><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opción sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Mostaza, Cacahuetes, Sésamo, Sulfitos, Lácteos">(1, 7, 10, 11, 12, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">La Castiza</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">14,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Hamburguesa de buey 100 % certificada, queso de pata de mulo y beicon.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Buey 100 %</span><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opción sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Mostaza, Cacahuetes, Sésamo, Lácteos">(1, 7, 10, 11, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Bikini de Oreja Ibérico</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">12,00 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opción sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Sésamo, Lácteos">(1, 5, 7, 11, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Bretzel de Pollo</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">14,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Pollo crujiente, queso pata de mulo, cebolla caramelizada, bacon, alioli de kimchi, lechuga y tomate en pan bretzel.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Sésamo, Sulfitos">(1, 5, 7, 11, 12)</span></div>
+            </div>
+          </li>
+        </ul>
+        
+      </section>
+      <section id="postres" class="pt-14">
+        <img src="img/postre.webp" alt="Postre de autor: esfera naranja sobre tierra de chocolate" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover object-[center_40%] sm:h-72" />
+        <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">El cierre de nuestra cocina</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold leading-tight">La repostería de Auténticos</h2>
+        <p class="mt-3 max-w-2xl italic leading-relaxed text-crema-500">En Auténticos creemos que un gran postre no destaca por ser el más dulce, sino por estar elaborado con el mismo respeto por el producto, la misma técnica y la misma pasión que el resto de nuestra cocina.</p>
+        
+        <ul class="mt-4 divide-y divide-white/5">
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Tarta cremosa de queso</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">7,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Huevos, Frutos secos, Lácteos">(5, 9, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Pavlova primaveral de mango, pasión, yogur y lima</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">8,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Pavlova de vainilla y lima, curd de mango y pasión, helado de yogur, crumble de coco y lima, mango fresco aliñado y aceite de albahaca.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Opcional sin gluten</span> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Lácteos">(1, 5, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            <img src="img/huevo-de-corral.webp" alt="Huevo de corral" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Huevo de corral</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">8,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Trampantojo de mousse de chocolate blanco, núcleo de fruta de la pasión, nido de pasta kataifi, yogur y chocolate.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"> <span class="text-xs text-crema-500" title="Alérgenos: Gluten, Huevos, Mostaza, Frutos secos, Lácteos">(1, 5, 7, 9, 13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Mojito Auténticos</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">8,95 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Granizado de lima, helado de yogur, espuma de hierbabuena y menta, teja de azúcar y gel de ron.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Nuevo</span> <span class="text-xs text-crema-500" title="Alérgenos: Lácteos">(13)</span></div>
+            </div>
+          </li>
+          <li class="flex gap-4 py-5">
+            
+            <div class="min-w-0 flex-1">
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">Huerta en Flor</h3>
+                <p class="shrink-0 font-semibold tabular-nums text-oro-300">9,50 €</p>
+              </div>
+              <p class="mt-1 text-sm leading-relaxed text-crema-500">Crema inglesa de vainilla, tomate rosa osmotizado, tartar de melocotón marinado, crujiente de almendra, gel de tomate, consomé de fresa y albahaca, aceite de albahaca y helado de yogur.</p>
+              <div class="mt-2 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">Nuevo</span> <span class="text-xs text-crema-500" title="Alérgenos: Huevos, Frutos secos, Lácteos">(5, 9, 13)</span></div>
+            </div>
+          </li>
+        </ul>
+        <p class="mt-6 text-center font-display text-lg italic text-oro-300">Nuestro mejor reconocimiento es que el último bocado despierte las ganas de volver.</p>
+      </section>
+    <section id="bodega" class="pt-14">
+      <img src="img/tienda.webp" alt="Estanterías de vinos y productos de Castilla y León junto a la barra" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover sm:h-72" />
+      <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Vinos de Castilla y León</p>
+      <h2 class="mt-2 font-display text-4xl font-semibold">Nuestra bodega</h2>
+      <p class="mt-3 max-w-2xl leading-relaxed text-crema-300">Más de 500 referencias de Castilla y León en nuestra bodega y tienda: Ribera del Duero, Rueda, Toro, Bierzo, Cigales, León y muchas más. Pregúntanos y te recomendamos el vino perfecto para cada plato.</p>
+    </section>
+    <section class="mt-14 rounded-3xl border border-white/10 bg-pizarra-900 p-6 text-sm leading-relaxed text-crema-300">
+      <p>Se cobrará un suplemento de <strong class="text-crema-100">1,50 €</strong> por servicio de pan y comensal. IVA incluido.</p>
+      <p class="mt-3">Si tienes alguna alergia o intolerancia, pregunta a nuestro equipo. Los números junto a cada plato indican sus alérgenos:</p>
+      <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-crema-500"><span><b class="text-oro-300">1</b> Gluten</span> · <span><b class="text-oro-300">2</b> Crustáceos</span> · <span><b class="text-oro-300">3</b> Moluscos</span> · <span><b class="text-oro-300">4</b> Pescado</span> · <span><b class="text-oro-300">5</b> Huevos</span> · <span><b class="text-oro-300">6</b> Soja</span> · <span><b class="text-oro-300">7</b> Mostaza</span> · <span><b class="text-oro-300">8</b> Apio</span> · <span><b class="text-oro-300">9</b> Frutos secos</span> · <span><b class="text-oro-300">10</b> Cacahuetes</span> · <span><b class="text-oro-300">11</b> Sésamo</span> · <span><b class="text-oro-300">12</b> Sulfitos</span> · <span><b class="text-oro-300">13</b> Lácteos</span> · <span><b class="text-oro-300">14</b> Altramuces</span></p>
+    </section>
+    <div class="mt-10 flex flex-wrap justify-center gap-3"><a href="reservas.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Reservar mesa</a></div>
+  </main>
+
+  <footer class="border-t border-white/5 bg-pizarra-900">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3">
+      <div>
+        <p class="font-display text-2xl font-semibold">Auténticos CyL</p>
+        <p class="mt-1 font-display italic text-oro-300">Sabores, Sensaciones y +</p>
+        <p class="mt-4 text-sm leading-relaxed text-crema-500">Bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.</p>
+      </div>
+      <div class="text-sm leading-relaxed text-crema-300">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Visítanos</p>
+        <p class="mt-3">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
+        <p class="mt-1">Teléfono <a href="tel:+34921050483" class="font-semibold text-crema-100 hover:text-oro-300">921 05 04 83</a></p>
+        <p class="mt-1"><a href="https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Cómo llegar</a> · <a href="https://www.autenticoscyl.com/" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Tienda online</a></p>
+      </div>
+      <div class="text-sm">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">La web</p>
+        <ul class="mt-3 space-y-1.5 text-crema-300">
+          <li><a href="index.html" class="hover:text-oro-300">Inicio</a></li><li><a href="carta.html" class="hover:text-oro-300">Carta</a></li><li><a href="noticias.html" class="hover:text-oro-300">Noticias</a></li><li><a href="reservas.html" class="hover:text-oro-300">Reservas</a></li>
+          <li><a href="gestor.html" class="inline-flex items-center gap-1.5 hover:text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+  </footer>
+  <script src="js/config.js"></script>
+  <script>
+    (() => {
+      const b = document.getElementById('menuBtn'), m = document.getElementById('menuMovil');
+      b.addEventListener('click', () => { const abierto = m.classList.toggle('hidden') === false; b.setAttribute('aria-expanded', abierto); });
+      document.querySelectorAll('[data-anio]').forEach(el => el.textContent = new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>

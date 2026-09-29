@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Reservas · Auténticos CyL, Coca</title>
+  <meta name="description" content="Reserva mesa en Auténticos CyL, bar tapería en Coca (Segovia). Elige día, turno y número de personas y te confirmamos la reserva." />
+  <meta name="theme-color" content="#121315" />
+  <meta property="og:title" content="Reservas · Auténticos CyL, Coca" />
+  <meta property="og:description" content="Reserva mesa en Auténticos CyL, bar tapería en Coca (Segovia). Elige día, turno y número de personas y te confirmamos la reserva." />
+  <meta property="og:image" content="img/fachada.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pizarra: { 950: '#121315', 900: '#1a1c1f', 800: '#24272b', 700: '#34383d', 600: '#4a4f55' },
+            vino:    { 600: '#6e1f2c', 500: '#8c2a3a', 400: '#b0455a', 300: '#d98c9b' },
+            oro:     { 500: '#b38d45', 400: '#c9a45c', 300: '#dcc08a' },
+            crema:   { 100: '#f4efe6', 300: '#d9d2c5', 500: '#a39c90' }
+          },
+          fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['Manrope', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; scroll-padding-top: 8rem; }
+    body { background: #121315; }
+    input, select, textarea { font-size: 16px; }
+    .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+    :focus-visible { outline: 2px solid #c9a45c; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-crema-100 antialiased">
+
+  <header class="sticky top-0 z-40 border-b border-white/5 bg-pizarra-950/90 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+      <a href="index.html" class="min-w-0 leading-tight">
+        <span class="block font-display text-xl font-semibold text-crema-100">Auténticos CyL</span>
+        <span class="block text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Bar Tapería · Tienda · Coca</span>
+      </a>
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Principal">
+        <a href="index.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Inicio</a><a href="carta.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Carta</a><a href="noticias.html" class="rounded-full px-4 py-2 text-sm font-semibold transition text-crema-300 hover:text-crema-100">Noticias</a><a href="reservas.html" class="rounded-full px-4 py-2 text-sm font-semibold transition bg-white/10 text-crema-100" aria-current="page">Reservas</a>
+        <a href="gestor.html" class="ml-2 inline-flex items-center gap-2 rounded-full border border-oro-400/40 px-4 py-2 text-sm font-semibold text-oro-300 transition hover:bg-oro-400 hover:text-pizarra-950"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Propietarios</a>
+      </nav>
+      <button id="menuBtn" class="rounded-full p-2 text-crema-100 md:hidden" aria-controls="menuMovil" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <nav id="menuMovil" class="hidden border-t border-white/5 px-5 pb-5 pt-2 md:hidden" aria-label="Principal (móvil)">
+      <a href="index.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Inicio</a><a href="carta.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Carta</a><a href="noticias.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold text-crema-300">Noticias</a><a href="reservas.html" class="block rounded-2xl px-4 py-3 text-lg font-semibold bg-white/10 text-crema-100">Reservas</a>
+      <a href="gestor.html" class="mt-2 flex items-center gap-2 rounded-2xl border border-oro-400/30 px-4 py-3 font-semibold text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1fr_22rem]">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Reservas</p>
+      <h1 class="mt-3 font-display text-5xl font-semibold">Reserva tu mesa</h1>
+      <p class="mt-4 max-w-xl leading-relaxed text-crema-300">Envíanos tu solicitud y te confirmamos la reserva por teléfono o WhatsApp lo antes posible.</p>
+
+      <form id="formReserva" class="mt-10 grid gap-5 sm:grid-cols-2" novalidate>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Día</span>
+          <input name="fecha" type="date" required class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Personas</span>
+          <select name="personas" required class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none"></select></label>
+        <fieldset class="sm:col-span-2">
+          <legend class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Turno</legend>
+          <div class="mt-2 grid grid-cols-2 gap-3" id="turnos"></div>
+        </fieldset>
+        <fieldset class="sm:col-span-2">
+          <legend class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Hora</legend>
+          <div class="mt-2 flex flex-wrap gap-2" id="horas"></div>
+        </fieldset>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Nombre</span>
+          <input name="nombre" required autocomplete="name" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Teléfono</span>
+          <input name="telefono" type="tel" required autocomplete="tel" placeholder="600 000 000" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
+        <label class="block sm:col-span-2"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Email (opcional)</span>
+          <input name="email" type="email" autocomplete="email" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
+        <label class="block sm:col-span-2"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Comentarios (opcional)</span>
+          <textarea name="notas" rows="3" maxlength="300" placeholder="Alergias, trona, celebración, terraza…" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none"></textarea></label>
+        <label class="flex items-start gap-3 text-sm text-crema-300 sm:col-span-2">
+          <input name="privacidad" type="checkbox" required class="mt-1 h-5 w-5 accent-vino-500" />
+          <span>Acepto que Auténticos CyL use mis datos solo para gestionar esta reserva.</span></label>
+        <p id="errorReserva" class="hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300 sm:col-span-2" role="alert"></p>
+        <button type="submit" class="rounded-full bg-vino-500 py-4 font-semibold text-crema-100 transition hover:bg-vino-400 sm:col-span-2">Solicitar reserva</button>
+      </form>
+
+      <div id="reservaOk" class="mt-10 hidden rounded-3xl border border-oro-400/30 bg-pizarra-900 p-7" role="status" tabindex="-1">
+        <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Solicitud recibida</p>
+        <h2 class="mt-2 font-display text-3xl font-semibold">¡Gracias, <span id="okNombre"></span>!</h2>
+        <p id="okResumen" class="mt-3 leading-relaxed text-crema-300"></p>
+        <p class="mt-3 text-sm text-crema-500">Te confirmaremos la reserva por teléfono o WhatsApp. Si necesitas cambiar algo, llámanos al <a href="tel:+34921050483" class="font-semibold text-crema-100">921 05 04 83</a>.</p>
+        <p class="mt-4 rounded-2xl bg-oro-400/10 px-4 py-3 text-xs leading-relaxed text-oro-300">Modo demostración: la solicitud se ha guardado en este navegador y ya aparece en el área de propietarios.</p>
+        <button id="otraReserva" class="mt-6 rounded-full border border-crema-100/30 px-6 py-3 text-sm font-semibold">Hacer otra reserva</button>
+      </div>
+    </div>
+
+    <aside class="space-y-5 lg:pt-28">
+      <div class="rounded-3xl border border-white/10 bg-pizarra-900 p-6">
+        <p class="font-display text-xl font-semibold">Cómo funciona</p>
+        <ol class="mt-4 space-y-3 text-sm leading-relaxed text-crema-300">
+          <li><b class="text-oro-300">1.</b> Elige día, turno, hora y número de personas.</li>
+          <li><b class="text-oro-300">2.</b> Recibimos tu solicitud al momento.</li>
+          <li><b class="text-oro-300">3.</b> Te confirmamos por teléfono o WhatsApp.</li>
+        </ol>
+      </div>
+      <div class="rounded-3xl border border-white/10 bg-pizarra-900 p-6 text-sm leading-relaxed text-crema-300">
+        <p class="font-display text-xl font-semibold text-crema-100">¿Prefieres llamar?</p>
+        <p class="mt-2">Para grupos grandes o reservas para hoy, llámanos:</p>
+        <a href="tel:+34921050483" class="mt-3 block text-2xl font-semibold text-oro-300">921 05 04 83</a>
+      </div>
+      <div class="rounded-3xl border border-vino-400/30 bg-vino-500/10 p-6 text-sm leading-relaxed text-crema-300">
+        <p class="font-semibold text-vino-300">Las noches de Auténticos</p>
+        <p class="mt-1">Nuestras hamburguesas de autor solo se sirven en el turno de cenas.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="border-t border-white/5 bg-pizarra-900">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3">
+      <div>
+        <p class="font-display text-2xl font-semibold">Auténticos CyL</p>
+        <p class="mt-1 font-display italic text-oro-300">Sabores, Sensaciones y +</p>
+        <p class="mt-4 text-sm leading-relaxed text-crema-500">Bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.</p>
+      </div>
+      <div class="text-sm leading-relaxed text-crema-300">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Visítanos</p>
+        <p class="mt-3">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
+        <p class="mt-1">Teléfono <a href="tel:+34921050483" class="font-semibold text-crema-100 hover:text-oro-300">921 05 04 83</a></p>
+        <p class="mt-1"><a href="https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Cómo llegar</a> · <a href="https://www.autenticoscyl.com/" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Tienda online</a></p>
+      </div>
+      <div class="text-sm">
+        <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">La web</p>
+        <ul class="mt-3 space-y-1.5 text-crema-300">
+          <li><a href="index.html" class="hover:text-oro-300">Inicio</a></li><li><a href="carta.html" class="hover:text-oro-300">Carta</a></li><li><a href="noticias.html" class="hover:text-oro-300">Noticias</a></li><li><a href="reservas.html" class="hover:text-oro-300">Reservas</a></li>
+          <li><a href="gestor.html" class="inline-flex items-center gap-1.5 hover:text-oro-300"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Área de propietarios</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+  </footer>
+  <script src="js/config.js"></script>
+  <script>
+    (() => {
+      const b = document.getElementById('menuBtn'), m = document.getElementById('menuMovil');
+      b.addEventListener('click', () => { const abierto = m.classList.toggle('hidden') === false; b.setAttribute('aria-expanded', abierto); });
+      document.querySelectorAll('[data-anio]').forEach(el => el.textContent = new Date().getFullYear());
+    })();
+  </script>
+
+  <script>
+  (() => {
+    const C = window.TAPERIA, F = document.getElementById('formReserva'), $ = s => document.querySelector(s);
+    const hoy = new Date(); const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+    F.fecha.min = iso(hoy); F.fecha.value = iso(hoy);
+    F.personas.innerHTML = Array.from({ length: C.maxPersonasWeb }, (_, i) => `<option value="${i + 1}" ${i === 1 ? 'selected' : ''}>${i + 1} ${i ? 'personas' : 'persona'}</option>`).join('');
+    let turno = 'cena', hora = '';
+    const chip = (sel, extra = '') => `rounded-2xl border px-4 py-3 text-sm font-semibold transition ${sel ? 'border-oro-400 bg-oro-400/10 text-oro-300' : 'border-white/10 text-crema-300 hover:border-white/30'} ${extra}`;
+    function pintar() {
+      $('#turnos').innerHTML = Object.entries(C.turnos).map(([k, t]) => `<button type="button" data-turno="${k}" aria-pressed="${k === turno}" class="${chip(k === turno)}">${t.nombre}<span class="block text-xs font-normal opacity-70">${t.horas[0]} – ${t.horas.at(-1)}</span></button>`).join('');
+      // Hoy no se ofrecen horas que ya han pasado (margen de 30 minutos)
+      const ahora = new Date(Date.now() + 30 * 6e4), limite = F.fecha.value === iso(hoy) ? ahora.toTimeString().slice(0, 5) : '';
+      const pasada = h => limite && h < limite;
+      if (!C.turnos[turno].horas.includes(hora) || pasada(hora)) hora = '';
+      $('#horas').innerHTML = C.turnos[turno].horas.map(h => pasada(h)
+        ? `<button type="button" disabled class="min-w-[5.5rem] rounded-2xl border border-white/5 px-4 py-3 text-sm tabular-nums text-crema-500/40 line-through">${h}</button>`
+        : `<button type="button" data-hora="${h}" aria-pressed="${h === hora}" class="${chip(h === hora, 'min-w-[5.5rem] tabular-nums')}">${h}</button>`).join('');
+    }
+    $('#turnos').addEventListener('click', ev => { const b = ev.target.closest('[data-turno]'); if (b) { turno = b.dataset.turno; pintar(); } });
+    $('#horas').addEventListener('click', ev => { const b = ev.target.closest('[data-hora]'); if (b) { hora = b.dataset.hora; pintar(); } });
+    F.fecha.addEventListener('change', pintar);
+    pintar();
+    const fechaLarga = s => new Date(s + 'T12:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+    F.addEventListener('submit', ev => {
+      ev.preventDefault();
+      const f = Object.fromEntries(new FormData(F)), err = $('#errorReserva');
+      const tel = (f.telefono || '').replace(/[\s.-]/g, '');
+      const msg = !f.fecha || f.fecha < iso(hoy) ? 'Elige un día a partir de hoy.'
+        : !hora ? 'Elige la hora a la que quieres venir.'
+        : !f.nombre.trim() ? 'Escribe tu nombre.'
+        : !/^\+?\d{9,15}$/.test(tel) ? 'Escribe un teléfono válido para poder confirmarte.'
+        : f.email && !/^\S+@\S+\.\S+$/.test(f.email) ? 'El email no parece correcto.'
+        : !f.privacidad ? 'Acepta el uso de tus datos para gestionar la reserva.' : '';
+      if (msg) { err.textContent = msg; err.classList.remove('hidden'); return; }
+      err.classList.add('hidden');
+      const sol = { id: 'web-' + Date.now().toString(36), fecha: f.fecha, turno, hora, personas: +f.personas, nombre: f.nombre.trim(),
+        telefono: tel, email: f.email.trim(), notas: f.notas.trim(), origen: 'web', estado: 'pendiente', creado: new Date().toISOString() };
+      try { const l = JSON.parse(localStorage.getItem(C.claveSolicitudes) || '[]'); l.push(sol); localStorage.setItem(C.claveSolicitudes, JSON.stringify(l)); } catch (e) {}
+      $('#okNombre').textContent = sol.nombre.split(' ')[0];
+      $('#okResumen').textContent = `Has solicitado mesa para ${sol.personas} ${sol.personas === 1 ? 'persona' : 'personas'} el ${fechaLarga(sol.fecha)} a las ${sol.hora} (${C.turnos[turno].nombre.toLowerCase()}).`;
+      F.classList.add('hidden'); const ok = $('#reservaOk'); ok.classList.remove('hidden'); ok.focus(); ok.scrollIntoView({ block: 'center' });
+    });
+    $('#otraReserva').addEventListener('click', () => { F.reset(); F.fecha.value = iso(hoy); F.personas.value = 2; hora = ''; pintar(); $('#reservaOk').classList.add('hidden'); F.classList.remove('hidden'); });
+  })();
+  </script>
+</body>
+</html>
