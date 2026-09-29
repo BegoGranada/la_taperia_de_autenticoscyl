@@ -1,6 +1,23 @@
 {
   "noticias": [
     {
+      "id": "solete-repsol",
+      "fecha": "Diciembre de 2025",
+      "titulo": "Auténticos CyL recibe un Solete de la Guía Repsol",
+      "entradilla": "La Guía Repsol nos incluye entre los nuevos Soletes de Castilla y León por nuestras tapas y nuestra cocina castellana y viajera junto al castillo de Coca, y por la tienda gourmet donde llevarse un trocito de Castilla a casa. La provincia de Segovia sumó cinco Soletes en esta edición.",
+      "insignia": true,
+      "enlace": ["https://www.guiarepsol.com/es/fichas/solete/autenticos-cyl-334575/", "Ver la ficha en la Guía Repsol"],
+      "prensa": ["https://eladelantado.com/segovia/2025/12/15/la-provincia-de-segovia-suma-cinco-soletes-en-la-guia-repsol/", "Leer en El Adelantado de Segovia"]
+    },
+    {
+      "id": "economia-digital",
+      "fecha": "En la prensa",
+      "titulo": "Economía Digital nos recomienda para comer en Coca",
+      "entradilla": "El diario incluye Auténticos CyL en su selección de sitios donde disfrutar de la gastronomía segoviana en Coca.",
+      "foto": "img/tabla-duroc.webp",
+      "enlace": ["https://www.economiadigital.es/tendenciashoy/gastronomia/comer-coca-segoviana.html", "Leer el artículo"]
+    },
+    {
       "id": "carta-verano",
       "fecha": "Temporada de verano",
       "titulo": "Llega nuestra carta de verano",
@@ -27,10 +44,26 @@
   ],
   "reconocimientos": [
     {
+      "titulo": "Solete Guía Repsol",
+      "origen": "Guía Repsol · diciembre de 2025",
+      "texto": "Distinción a los sitios con esencia propia que sorprenden por su producto, su trato o su personalidad.",
+      "enlace": "https://www.guiarepsol.com/es/fichas/solete/autenticos-cyl-334575/",
+      "enlaceTexto": "Ver la ficha",
+      "insignia": true
+    },
+    {
+      "titulo": "Recomendado para comer en Coca",
+      "origen": "Economía Digital",
+      "texto": "Incluido en la selección de sitios donde disfrutar de la gastronomía segoviana en Coca.",
+      "enlace": "https://www.economiadigital.es/tendenciashoy/gastronomia/comer-coca-segoviana.html",
+      "enlaceTexto": "Leer el artículo"
+    },
+    {
       "titulo": "Entre los mejor valorados de Coca",
       "origen": "Tripadvisor",
       "texto": "Nuestros clientes nos sitúan entre los restaurantes mejor valorados de Coca.",
-      "enlace": "https://www.tripadvisor.es/Restaurant_Review-g1985750-d17766922-Reviews-Bar_Taperia_tienda_Autenticos_CYL-Coca_Province_of_Segovia_Castile_and_Leo.html"
+      "enlace": "https://www.tripadvisor.es/Restaurant_Review-g1985750-d17766922-Reviews-Bar_Taperia_tienda_Autenticos_CYL-Coca_Province_of_Segovia_Castile_and_Leo.html",
+      "enlaceTexto": "Ver opiniones"
     },
     {
       "titulo": "Productos con denominación de origen de Castilla y León",

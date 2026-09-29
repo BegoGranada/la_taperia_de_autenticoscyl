@@ -324,7 +324,9 @@
           <p class="text-sm tabular-nums ${ocup > afo ? 'font-semibold text-vino-300' : 'text-crema-300'}">${ocup} / ${afo} comensales</p>
         </div>
         <div class="mt-2 h-2 overflow-hidden rounded-full bg-white/5"><div class="h-full rounded-full ${ocup > afo ? 'bg-vino-400' : pct > 80 ? 'bg-oro-400' : 'bg-emerald-400'}" style="width:${pct}%"></div></div>
-        <div class="mt-3 space-y-3">${lista.length ? lista.map(r => tarjeta(r)).join('') : `<button data-nueva-turno="${k}" class="w-full rounded-3xl border border-dashed border-white/15 p-5 text-sm text-crema-500">Sin reservas · añadir una</button>`}</div>
+        <div class="mt-3 space-y-3">${lista.length ? lista.map(r => tarjeta(r)).join('') : !C.diasServicio[k].includes(new Date(dia + 'T12:00').getDay())
+          ? `<p class="rounded-3xl border border-white/5 p-5 text-sm text-crema-500">Sin servicio de ${t.nombre.toLowerCase()} este día.</p>`
+          : `<button data-nueva-turno="${k}" class="w-full rounded-3xl border border-dashed border-white/15 p-5 text-sm text-crema-500">Sin reservas · añadir una</button>`}</div>
       </div>`;
     }).join('');
     // Solicitudes

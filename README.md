@@ -22,7 +22,7 @@ Las páginas públicas se generan con `python3 tools/generar.py`. Para cambiar e
 
 - **Carta:** `datos/carta.json` (secciones, platos, precios, alérgenos y fotos).
 - **Noticias y reconocimientos:** `datos/noticias.json`.
-- **Teléfono, WhatsApp y horas de reserva:** `js/config.js`. Lo usan la web y el área de propietarios.
+- **Teléfono, WhatsApp, horas y días de servicio:** `js/config.js`. Lo usan la web y el área de propietarios. El horario del bar y la tienda está en `HORARIO`, dentro de `tools/generar.py`.
 - **Fotos:** `img/` (webp optimizado para móvil).
 
 Después de editar, vuelve a ejecutar `python3 tools/generar.py`.

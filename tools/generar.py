@@ -16,7 +16,11 @@ RAIZ = Path(__file__).resolve().parent.parent
 CARTA = json.loads((RAIZ / 'datos' / 'carta.json').read_text(encoding='utf-8'))
 NOTICIAS = json.loads((RAIZ / 'datos' / 'noticias.json').read_text(encoding='utf-8'))
 
-TEL, TEL_VISIBLE = '+34921050483', '921 05 04 83'
+TEL, TEL_VISIBLE = '+34647413186', '647 41 31 86'
+WHATSAPP = 'https://wa.me/34647413186'
+REPSOL = 'https://www.guiarepsol.com/es/fichas/solete/autenticos-cyl-334575/'
+HORARIO = [('Lunes', '9:00 – 14:00 · 17:00 – 20:00'), ('Martes', '9:00 – 14:00'), ('Miércoles', '9:00 – 14:00 · 17:00 – 20:00'),
+           ('Jueves', '9:00 – 23:30'), ('Viernes', '9:00 – 23:30'), ('Sábado', '9:00 – 24:00'), ('Domingo', '9:00 – 24:00')]
 DIRECCION = 'C/ Calixto del Río, 8 · 40480 Coca (Segovia)'
 MAPA = 'https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia'
 TIENDA_ONLINE = 'https://www.autenticoscyl.com/'
@@ -114,11 +118,13 @@ def pie():
         <p class="font-display text-2xl font-semibold">Auténticos CyL</p>
         <p class="mt-1 font-display italic text-oro-300">Sabores, Sensaciones y +</p>
         <p class="mt-4 text-sm leading-relaxed text-crema-500">Bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.</p>
+        <div class="mt-5">{sello_solete()}</div>
       </div>
       <div class="text-sm leading-relaxed text-crema-300">
         <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Visítanos</p>
         <p class="mt-3">{e(DIRECCION)}</p>
         <p class="mt-1">Teléfono <a href="tel:{TEL}" class="font-semibold text-crema-100 hover:text-oro-300">{TEL_VISIBLE}</a></p>
+        <p class="mt-1">WhatsApp <a href="{WHATSAPP}" target="_blank" rel="noopener" class="font-semibold text-crema-100 hover:text-oro-300">escríbenos</a></p>
         <p class="mt-1"><a href="{MAPA}" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Cómo llegar</a> · <a href="{TIENDA_ONLINE}" target="_blank" rel="noopener" class="underline decoration-oro-400/40 underline-offset-4 hover:text-oro-300">Tienda online</a></p>
       </div>
       <div class="text-sm">
@@ -148,15 +154,35 @@ def boton(href, texto, primario=True):
     return f'<a href="{href}" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition {clase}">{texto}</a>'
 
 
+def sol(clase='h-10 w-10'):
+    rayos = ''.join(f'<line x1="24" y1="3" x2="24" y2="9" transform="rotate({a} 24 24)" />' for a in range(0, 360, 30))
+    return (f'<svg class="{clase}" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">'
+            f'{rayos}<circle cx="24" cy="24" r="10" fill="currentColor" stroke="none" /></svg>')
+
+
+def sello_solete(tam='normal'):
+    grande = tam == 'grande'
+    return f'''<a href="{REPSOL}" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 rounded-full border border-oro-400/40 bg-pizarra-950/60 py-2 pl-2 {"pr-6" if grande else "pr-5"} backdrop-blur transition hover:border-oro-300">
+          <span class="grid {"h-12 w-12" if grande else "h-10 w-10"} place-items-center rounded-full bg-oro-400 text-pizarra-950">{sol("h-8 w-8" if grande else "h-7 w-7")}</span>
+          <span class="leading-tight"><span class="block text-[11px] font-semibold uppercase tracking-[.2em] text-oro-300">Guía Repsol</span><span class="block font-display {"text-xl" if grande else "text-lg"} font-semibold text-crema-100">Solete 2025</span></span>
+        </a>'''
+
+
+def enlace(href, texto, clase):
+    externo = href.startswith('http')
+    destino = ' target="_blank" rel="noopener"' if externo else ''
+    return f'<a href="{href}"{destino} class="{clase}">{e(texto)} →</a>'
+
+
 def tarjeta_noticia(n, grande=False):
     return f'''
         <article id="{n["id"]}" class="flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900">
-          <img src="{n["foto"]}" alt="" loading="lazy" class="{"aspect-[16/9]" if grande else "aspect-[4/3]"} w-full object-cover" />
+          {f'<div class="{"aspect-[16/9]" if grande else "aspect-[4/3]"} grid w-full place-items-center bg-[radial-gradient(circle_at_50%_40%,rgba(201,164,92,.35),transparent_65%)]"><div class="text-center"><span class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-oro-400 text-pizarra-950 shadow-[0_0_60px_rgba(201,164,92,.45)]">{sol("h-16 w-16")}</span><p class="mt-4 text-xs font-semibold uppercase tracking-[.25em] text-oro-300">Guía Repsol</p><p class="font-display text-3xl font-semibold">Solete</p></div></div>' if n.get("insignia") else f'<img src="{n["foto"]}" alt="" loading="lazy" class="{"aspect-[16/9]" if grande else "aspect-[4/3]"} w-full object-cover" />'}
           <div class="flex flex-1 flex-col p-6">
             <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">{e(n["fecha"])}</p>
             <h3 class="mt-2 font-display text-2xl font-semibold leading-snug">{e(n["titulo"])}</h3>
             <p class="mt-3 flex-1 leading-relaxed text-crema-300">{e(n["entradilla"])}</p>
-            <a href="{n["enlace"][0]}" class="mt-5 font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">{e(n["enlace"][1])} →</a>
+            <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2">{enlace(n["enlace"][0], n["enlace"][1], "font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4")}{enlace(n["prensa"][0], n["prensa"][1], "font-semibold text-crema-300 underline decoration-white/20 underline-offset-4") if n.get("prensa") else ""}</div>
           </div>
         </article>'''
 
@@ -164,10 +190,11 @@ def tarjeta_noticia(n, grande=False):
 def bloque_reconocimientos():
     return ''.join(f'''
         <li class="rounded-3xl border border-oro-400/20 bg-oro-400/5 p-6">
+          {f'<span class="mb-3 grid h-12 w-12 place-items-center rounded-full bg-oro-400 text-pizarra-950">{sol("h-8 w-8")}</span>' if r.get("insignia") else ''}
           <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">{e(r["origen"])}</p>
           <p class="mt-2 font-display text-xl font-semibold leading-snug">{e(r["titulo"])}</p>
           <p class="mt-2 text-sm leading-relaxed text-crema-300">{e(r["texto"])}</p>
-          {f'<a href="{r["enlace"]}" target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">Ver opiniones →</a>' if r.get("enlace") else ''}
+          {f'<a href="{r["enlace"]}" target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4">{e(r.get("enlaceTexto", "Ver más"))} →</a>' if r.get("enlace") else ''}
         </li>''' for r in NOTICIAS['reconocimientos'])
 
 
@@ -209,6 +236,7 @@ def pagina_inicio():
         <p class="mt-3 font-display text-2xl italic text-oro-300 sm:text-3xl">Sabores, Sensaciones y +</p>
         <p class="mt-6 max-w-xl text-lg leading-relaxed text-crema-300">Bar tapería y tienda de productos de Castilla y León. Cocina a la brasa, producto de temporada y una bodega con más de 500 vinos de nuestra tierra.</p>
         <div class="mt-9 flex flex-wrap gap-3">{boton('reservas.html', 'Reservar mesa')}{boton('carta.html', 'Ver la carta', False)}</div>
+        <div class="mt-10">{sello_solete('grande')}</div>
       </div>
     </section>
 
@@ -296,9 +324,9 @@ def pagina_inicio():
         <dl class="mt-8 space-y-4">
           <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Dirección</dt><dd class="mt-1">{e(DIRECCION)}</dd></div>
           <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Teléfono</dt><dd class="mt-1"><a href="tel:{TEL}" class="text-lg font-semibold hover:text-oro-300">{TEL_VISIBLE}</a></dd></div>
-          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Horario</dt><dd class="mt-1 text-crema-300">Llámanos para consultar el horario de cocina y de tienda.</dd></div>
+          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Horario</dt><dd><table class="mt-2 w-full max-w-sm text-sm"><tbody>{''.join(f'<tr class="border-b border-white/5"><th scope="row" class="py-1.5 pr-4 text-left font-medium text-crema-300">{d}</th><td class="py-1.5 text-right tabular-nums text-crema-100">{h}</td></tr>' for d, h in HORARIO)}</tbody></table><p class="mt-2 text-xs text-crema-500">Horario del bar y la tienda. Servicio de comidas y cenas según día: consúltanos.</p></dd></div>
         </dl>
-        <div class="mt-8 flex flex-wrap gap-3">{boton('reservas.html', 'Reservar mesa')}<a href="{MAPA}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Cómo llegar</a></div>
+        <div class="mt-8 flex flex-wrap gap-3">{boton('reservas.html', 'Reservar mesa')}<a href="{WHATSAPP}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">WhatsApp</a><a href="{MAPA}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Cómo llegar</a></div>
       </div>
       <img src="img/fachada.webp" alt="Fachada de ladrillo y piedra de Auténticos CyL, con un barril de vino en la puerta" loading="lazy" class="aspect-[4/3] w-full rounded-3xl object-cover" />
     </section>
@@ -471,12 +499,14 @@ def pagina_reservas():
       </div>
       <div class="rounded-3xl border border-white/10 bg-pizarra-900 p-6 text-sm leading-relaxed text-crema-300">
         <p class="font-display text-xl font-semibold text-crema-100">¿Prefieres llamar?</p>
-        <p class="mt-2">Para grupos grandes o reservas para hoy, llámanos:</p>
+        <p class="mt-2">Para grupos grandes o reservas para hoy, llámanos o escríbenos:</p>
         <a href="tel:{TEL}" class="mt-3 block text-2xl font-semibold text-oro-300">{TEL_VISIBLE}</a>
+        <a href="{WHATSAPP}" target="_blank" rel="noopener" class="mt-3 inline-flex rounded-full border border-white/15 px-4 py-2 font-semibold text-crema-100">Escribir por WhatsApp</a>
       </div>
       <div class="rounded-3xl border border-vino-400/30 bg-vino-500/10 p-6 text-sm leading-relaxed text-crema-300">
         <p class="font-semibold text-vino-300">Las noches de Auténticos</p>
         <p class="mt-1">Nuestras hamburguesas de autor solo se sirven en el turno de cenas.</p>
+        <p class="mt-3 text-crema-500">Cenas de jueves a domingo. Los martes no hay servicio de comidas ni cenas.</p>
       </div>
     </aside>
   </main>
@@ -489,8 +519,14 @@ def pagina_reservas():
     F.personas.innerHTML = Array.from({ length: C.maxPersonasWeb }, (_, i) => `<option value="${i + 1}" ${i === 1 ? 'selected' : ''}>${i + 1} ${i ? 'personas' : 'persona'}</option>`).join('');
     let turno = 'cena', hora = '';
     const chip = (sel, extra = '') => `rounded-2xl border px-4 py-3 text-sm font-semibold transition ${sel ? 'border-oro-400 bg-oro-400/10 text-oro-300' : 'border-white/10 text-crema-300 hover:border-white/30'} ${extra}`;
+    const hay = k => F.fecha.value && C.diasServicio[k].includes(new Date(F.fecha.value + 'T12:00').getDay());
     function pintar() {
-      $('#turnos').innerHTML = Object.entries(C.turnos).map(([k, t]) => `<button type="button" data-turno="${k}" aria-pressed="${k === turno}" class="${chip(k === turno)}">${t.nombre}<span class="block text-xs font-normal opacity-70">${t.horas[0]} – ${t.horas.at(-1)}</span></button>`).join('');
+      if (!hay(turno)) turno = Object.keys(C.turnos).find(hay) || turno;
+      const ninguno = !Object.keys(C.turnos).some(hay);
+      $('#turnos').innerHTML = Object.entries(C.turnos).map(([k, t]) => hay(k)
+        ? `<button type="button" data-turno="${k}" aria-pressed="${k === turno}" class="${chip(k === turno)}">${t.nombre}<span class="block text-xs font-normal opacity-70">${t.horas[0]} – ${t.horas.at(-1)}</span></button>`
+        : `<button type="button" disabled class="rounded-2xl border border-white/5 px-4 py-3 text-sm font-semibold text-crema-500/50">${t.nombre}<span class="block text-xs font-normal">Sin servicio este día</span></button>`).join('');
+      if (ninguno) { hora = ''; $('#horas').innerHTML = '<p class="rounded-2xl bg-white/5 px-4 py-3 text-sm text-crema-300">Ese día no hay servicio de comidas ni cenas. Elige otro día.</p>'; return; }
       // Hoy no se ofrecen horas que ya han pasado (margen de 30 minutos)
       const ahora = new Date(Date.now() + 30 * 6e4), limite = F.fecha.value === iso(hoy) ? ahora.toTimeString().slice(0, 5) : '';
       const pasada = h => limite && h < limite;
@@ -509,6 +545,7 @@ def pagina_reservas():
       const f = Object.fromEntries(new FormData(F)), err = $('#errorReserva');
       const tel = (f.telefono || '').replace(/[\s.-]/g, '');
       const msg = !f.fecha || f.fecha < iso(hoy) ? 'Elige un día a partir de hoy.'
+        : !hay(turno) ? 'Ese día no hay servicio: elige otro día.'
         : !hora ? 'Elige la hora a la que quieres venir.'
         : !f.nombre.trim() ? 'Escribe tu nombre.'
         : !/^\+?\d{9,15}$/.test(tel) ? 'Escribe un teléfono válido para poder confirmarte.'
