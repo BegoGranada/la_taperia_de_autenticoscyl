@@ -79,6 +79,7 @@
   <!-- =================== PIE =================== -->
   <footer class="mx-auto max-w-2xl px-5 pb-44 text-sm text-crema-500">
     <div class="border-t border-white/10 pt-6">
+      <img src="img/fachada.webp" alt="Fachada de Auténticos CyL en Coca: bar, comidas, tapería y tienda" loading="lazy" class="mb-5 aspect-[2/1] w-full rounded-3xl object-cover" />
       <p class="font-display text-lg text-crema-300">Auténticos CyL · Bar Tapería y tienda</p>
       <p class="mt-1">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
       <p class="mt-1">Teléfono <span class="select-all text-crema-300">921 05 04 83</span></p>
@@ -259,8 +260,8 @@
       intro: 'Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.',
       platos: [
         { id: 'bravas', nombre: 'Patatas bravas de la Retamilla', desc: '', formatos: [['Ración', 12]], alergenos: [7] },
-        { id: 'torrezno', nombre: 'Torrezno de Soria bien crujiente', desc: '', formatos: [['Ración', 8.95]], alergenos: [5] },
-        { id: 'croquetas', nombre: 'Croquetas súper cremosas de jamón', desc: '', formatos: [['Ración', 15.95]], alergenos: [1, 5, 13] },
+        { id: 'torrezno', nombre: 'Torrezno de Soria bien crujiente', desc: '', formatos: [['Ración', 8.95]], alergenos: [5], foto: 'img/torreznos.webp' },
+        { id: 'croquetas', nombre: 'Croquetas súper cremosas de jamón', desc: '', formatos: [['Ración', 15.95]], alergenos: [1, 5, 13], foto: 'img/croquetas.webp' },
         { id: 'chipirones', nombre: 'Chipirones en texturas', desc: 'Tomate al estilo tradicional y crujiente de torreznos de Soria.', formatos: [['Ración', 18.95]], alergenos: [1, 4, 5], etiquetas: ['Opción sin gluten'], foto: 'img/chipirones.webp' },
         { id: 'huevosrotos', nombre: 'Huevos rotos, torreznos de Soria y tartufata', desc: '', formatos: [['Ración', 17.95]], alergenos: [5] },
         { id: 'ensaladatomate', nombre: 'Ensalada de tomate de la huerta', desc: 'Con ventresca y pimientos asados al carbón.', formatos: [['Ración', 15]], alergenos: [4, 13] },
@@ -282,7 +283,7 @@
         { id: 'picana', nombre: 'Picaña de vaca madurada a la brasa', desc: '', formatos: [['Ración', 22]], alergenos: [12] },
         { id: 'presa', nombre: 'Presa ibérica a baja temperatura', desc: 'Crema de maíz ahumado y melocotón a la brasa.', formatos: [['Ración', 19]], alergenos: [12, 13] },
         { id: 'lasana', nombre: 'Lasaña de morcillo madurado a fuego lento', desc: 'Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.', formatos: [['Ración', 16]], alergenos: [1, 7, 12] },
-        { id: 'hamburabo', nombre: 'Hamburguesa de rabo de toro', desc: 'Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 12] },
+        { id: 'hamburabo', nombre: 'Hamburguesa de rabo de toro', desc: 'Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 12], foto: 'img/rabo-de-toro.webp' },
         { id: 'lubina', grupo: 'Del mar', nombre: 'Lubina curada marcada en brasa', desc: 'Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.', formatos: [['Ración', 21.95]], alergenos: [4, 7, 8] },
         { id: 'bonito', grupo: 'Del mar', nombre: 'Bonito semicurado, ligeramente marcado a la brasa', desc: 'Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.', formatos: [['Ración', 19.9]], alergenos: [4, 7, 12] },
         { id: 'bowl', grupo: 'Para acompañar nuestros platos', nombre: 'Bowl de lechuga, tomate y cebolla encurtida', desc: '', formatos: [['Ración', 6.95]], alergenos: [] },
@@ -293,11 +294,11 @@
     },
     {
       id: 'noches', nombre: 'Las noches de Auténticos', corto: 'Las Noches', lema: 'Noches · Brasa · Bocados',
-      foto: ['img/hamburguesa.webp', 'Hamburguesa de buey en pan brioche con patatas, servida en tabla de madera'],
+      foto: ['img/rabo-de-toro.webp', 'Hamburguesa de rabo de toro con cebolla encurtida y maíz crujiente, con patatas, en tabla de madera'],
       intro: 'Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.',
       aviso: 'Solo disponible en servicio de cenas',
       platos: [
-        { id: 'larabo', nombre: 'La Rabo de Toro', desc: 'Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 9, 10, 11, 12, 13, 14] },
+        { id: 'larabo', nombre: 'La Rabo de Toro', desc: 'Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 9, 10, 11, 12, 13, 14], foto: 'img/rabo-de-toro.webp' },
         { id: 'bestia', nombre: 'La Bestia Castellana', desc: 'Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.', formatos: [['Unidad', 17.95]], alergenos: [1, 5, 7, 9, 10, 11, 13], etiquetas: ['Buey 100 %', 'Guanciale', 'Opción sin gluten'] },
         { id: 'rockrolla', nombre: 'Rock & Rolla', desc: 'Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.', formatos: [['Unidad', 16.95]], alergenos: [1, 7, 10, 11, 13, 14], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
         { id: 'macarra', nombre: 'Deluxe Macarra', desc: 'Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.', formatos: [['Unidad', 16.95]], alergenos: [1, 7, 10, 11, 12, 13], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
@@ -308,6 +309,7 @@
     },
     {
       id: 'bodega', nombre: 'Vinoteca · Bodega de CyL', corto: 'Bodega CyL', lema: 'Vinos de Castilla y León',
+      foto: ['img/tienda.webp', 'La barra de azulejos y la tienda con los vinos de Castilla y León'],
       intro: 'Más de 500 referencias de Castilla y León en nuestra tienda. Pregúntanos por la bodega completa.',
       aviso: 'Selección de ejemplo: pendiente de la carta de vinos real del local',
       platos: [
