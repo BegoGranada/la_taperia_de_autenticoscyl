@@ -91,7 +91,8 @@
           <textarea name="notas" rows="3" maxlength="300" placeholder="Alergias, trona, celebración, terraza…" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none"></textarea></label>
         <label class="flex items-start gap-3 text-sm text-crema-300 sm:col-span-2">
           <input name="privacidad" type="checkbox" required class="mt-1 h-5 w-5 accent-vino-500" />
-          <span>Acepto que Auténticos CyL use mis datos solo para gestionar esta reserva.</span></label>
+          <span>He leído la <a href="privacidad.html" target="_blank" class="font-semibold text-oro-300 underline underline-offset-4">política de privacidad</a> y acepto que Auténticos CyL use mis datos solo para gestionar esta reserva.</span></label>
+        <p class="-mt-2 text-xs leading-relaxed text-crema-500 sm:col-span-2"><b class="text-crema-300">Información básica sobre protección de datos.</b> Responsable: Alfonso Galindo. Finalidad: gestionar tu reserva y avisarte de su confirmación. Legitimación: tu solicitud de reserva. Destinatarios: no se ceden datos a terceros salvo obligación legal. Derechos: acceso, rectificación, supresión y demás derechos en autenticoscyl@gmail.com. Más información en la <a href="privacidad.html" class="underline underline-offset-4">política de privacidad</a>.</p>
         <p id="errorReserva" class="hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300 sm:col-span-2" role="alert"></p>
         <button type="submit" class="rounded-full bg-vino-500 py-4 font-semibold text-crema-100 transition hover:bg-vino-400 sm:col-span-2">Solicitar reserva</button>
       </form>
@@ -156,7 +157,12 @@
         </ul>
       </div>
     </div>
-    <p class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+    <div class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">
+      <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2" aria-label="Textos legales">
+        <a href="aviso-legal.html" class="hover:text-oro-300">Aviso legal</a><a href="privacidad.html" class="hover:text-oro-300">Política de privacidad</a><a href="cookies.html" class="hover:text-oro-300">Política de cookies</a>
+      </nav>
+      <p class="mt-3">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+    </div>
   </footer>
   <script src="js/config.js"></script>
   <script>

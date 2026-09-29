@@ -35,6 +35,20 @@ TIENDA_ONLINE = 'https://www.autenticoscyl.com/'
 ALERGENOS = {1: 'Gluten', 2: 'Crustáceos', 3: 'Moluscos', 4: 'Pescado', 5: 'Huevos', 6: 'Soja', 7: 'Mostaza',
              8: 'Apio', 9: 'Frutos secos', 10: 'Cacahuetes', 11: 'Sésamo', 12: 'Sulfitos', 13: 'Lácteos', 14: 'Altramuces'}
 NAV = [('index.html', 'Inicio'), ('carta.html', 'Carta'), ('noticias.html', 'Noticias'), ('reservas.html', 'Reservas')]
+LEGALES = [('aviso-legal.html', 'Aviso legal'), ('privacidad.html', 'Política de privacidad'), ('cookies.html', 'Política de cookies')]
+
+# Datos del titular para los textos legales. Los que van entre corchetes los tiene
+# que facilitar el cliente antes de publicar la web.
+TITULAR = {
+    'nombre': 'Alfonso Galindo',       # según el aviso legal de autenticoscyl.com
+    'nif': '[NIF / CIF]',
+    'domicilio': 'C/ Calixto del Río, 8 · 40480 Coca (Segovia)',
+    'email': 'autenticoscyl@gmail.com',
+    'telefono': '647 41 31 86',
+    'registro': '[Si es una sociedad: datos de inscripción en el Registro Mercantil; si es autónomo, no aplica]',
+    'dominio': 'www.autenticoscyl.com',
+    'actualizado': 'septiembre de 2026',
+}
 
 ACTUAL = ' aria-current="page"'
 CANDADO = '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>'
@@ -147,7 +161,12 @@ def pie():
         </ul>
       </div>
     </div>
-    <p class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+    <div class="border-t border-white/5 px-5 py-5 text-center text-xs text-crema-500">
+      <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2" aria-label="Textos legales">
+        {''.join(f'<a href="{h}" class="hover:text-oro-300">{t}</a>' for h, t in LEGALES)}
+      </nav>
+      <p class="mt-3">© <span data-anio></span> Auténticos CyL · Coca (Segovia) · Web en modo demostración</p>
+    </div>
   </footer>
   <script src="js/config.js"></script>
   <script>
@@ -328,8 +347,8 @@ def pagina_inicio():
     <!-- Instagram -->
     <section class="mx-auto max-w-6xl px-5 pt-20">
       <a href="{REDES[0][1]}" target="_blank" rel="noopener" class="group flex flex-col items-start gap-5 rounded-3xl border border-white/5 bg-gradient-to-br from-vino-600/40 via-pizarra-900 to-pizarra-900 p-8 sm:flex-row sm:items-center sm:justify-between">
-        <span class="flex items-center gap-4"><img src="img/logo.webp" alt="" class="h-16 w-16 rounded-full" loading="lazy" />
-          <span><span class="block text-xs font-semibold uppercase tracking-[.25em] text-oro-400">Síguenos</span><span class="block font-display text-2xl font-semibold">@autenticoscylbartaperia</span><span class="block text-sm text-crema-300">Platos del día, novedades y horarios especiales.</span></span></span>
+        <span class="flex min-w-0 items-center gap-4"><img src="img/logo.webp" alt="" class="h-16 w-16 shrink-0 rounded-full" loading="lazy" />
+          <span class="min-w-0"><span class="block text-xs font-semibold uppercase tracking-[.25em] text-oro-400">Síguenos</span><span class="block break-all font-display text-xl font-semibold sm:text-2xl">@autenticoscylbartaperia</span><span class="block text-sm text-crema-300">Platos del día, novedades y horarios especiales.</span></span></span>
         <span class="inline-flex items-center gap-2 rounded-full bg-crema-100 px-6 py-3 font-semibold text-pizarra-950">{ICONOS['Instagram']}Ver Instagram</span>
       </a>
     </section>
@@ -516,7 +535,8 @@ def pagina_reservas():
           <textarea name="notas" rows="3" maxlength="300" placeholder="Alergias, trona, celebración, terraza…" class="{campo}"></textarea></label>
         <label class="flex items-start gap-3 text-sm text-crema-300 sm:col-span-2">
           <input name="privacidad" type="checkbox" required class="mt-1 h-5 w-5 accent-vino-500" />
-          <span>Acepto que Auténticos CyL use mis datos solo para gestionar esta reserva.</span></label>
+          <span>He leído la <a href="privacidad.html" target="_blank" class="font-semibold text-oro-300 underline underline-offset-4">política de privacidad</a> y acepto que Auténticos CyL use mis datos solo para gestionar esta reserva.</span></label>
+        <p class="-mt-2 text-xs leading-relaxed text-crema-500 sm:col-span-2"><b class="text-crema-300">Información básica sobre protección de datos.</b> Responsable: {e(TITULAR["nombre"])}. Finalidad: gestionar tu reserva y avisarte de su confirmación. Legitimación: tu solicitud de reserva. Destinatarios: no se ceden datos a terceros salvo obligación legal. Derechos: acceso, rectificación, supresión y demás derechos en {e(TITULAR["email"])}. Más información en la <a href="privacidad.html" class="underline underline-offset-4">política de privacidad</a>.</p>
         <p id="errorReserva" class="hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300 sm:col-span-2" role="alert"></p>
         <button type="submit" class="rounded-full bg-vino-500 py-4 font-semibold text-crema-100 transition hover:bg-vino-400 sm:col-span-2">Solicitar reserva</button>
       </form>
@@ -611,9 +631,112 @@ def pagina_reservas():
 '''
 
 
+# ---------------------------------------------------------------------------
+# TEXTOS LEGALES (LSSI-CE, RGPD y LOPDGDD)
+# Texto base: el titular debe completar los datos entre corchetes y revisarlo
+# con su asesoría antes de publicar.
+# ---------------------------------------------------------------------------
+def pagina_legal(archivo, titulo, descripcion, cuerpo):
+    T = TITULAR
+    return cabeza(f'{titulo} · Auténticos CyL', descripcion) + cabecera(archivo) + f'''
+  <main class="mx-auto max-w-3xl px-5 pb-20 pt-14">
+    <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Información legal</p>
+    <h1 class="mt-3 font-display text-5xl font-semibold">{e(titulo)}</h1>
+    <p class="mt-3 text-sm text-crema-500">Última actualización: {e(T["actualizado"])}</p>
+    <p class="mt-6 rounded-2xl border border-oro-400/30 bg-oro-400/10 px-4 py-3 text-sm leading-relaxed text-oro-300">Web en modo demostración: los datos entre corchetes los tiene que completar el titular, y conviene que su asesoría revise el texto antes de publicar la web.</p>
+    <div class="legal mt-10 space-y-4 leading-relaxed text-crema-300">{cuerpo}</div>
+    <nav class="mt-14 flex flex-wrap gap-3 border-t border-white/5 pt-6 text-sm" aria-label="Otros textos legales">
+      {''.join(f'<a href="{h}" class="rounded-full border border-white/10 px-4 py-2 {"text-oro-300" if h == archivo else "text-crema-300 hover:text-oro-300"}">{t}</a>' for h, t in LEGALES)}
+    </nav>
+  </main>
+''' + pie() + '</body>\n</html>\n'
+
+
+def h2(t):
+    return f'<h2 class="pt-6 font-display text-2xl font-semibold text-crema-100">{t}</h2>'
+
+
+def lista(items):
+    return '<ul class="list-disc space-y-1.5 pl-6">' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
+
+
+def pagina_aviso_legal():
+    T = TITULAR
+    cuerpo = f'''
+      {h2('1. Datos del titular')}
+      <p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), estos son los datos del titular de esta web:</p>
+      {lista([f'<b>Titular:</b> {e(T["nombre"])}', f'<b>NIF / CIF:</b> {e(T["nif"])}', f'<b>Nombre comercial:</b> Auténticos CyL · Bar Tapería y tienda',
+              f'<b>Domicilio:</b> {e(T["domicilio"])}', f'<b>Correo electrónico:</b> <a class="text-oro-300 underline underline-offset-4" href="mailto:{T["email"]}">{e(T["email"])}</a>',
+              f'<b>Teléfono:</b> <a class="text-oro-300 underline underline-offset-4" href="tel:{TEL}">{e(T["telefono"])}</a>', f'<b>Datos registrales:</b> {e(T["registro"])}',
+              '<b>Actividad:</b> bar, restaurante y tienda de productos de alimentación de Castilla y León.'])}
+      {h2('2. Objeto y condiciones de uso')}
+      <p>Esta web informa sobre el restaurante y la tienda: carta, noticias, horario, ubicación y la posibilidad de solicitar una reserva. Al navegar por ella aceptas usarla de buena fe y conforme a la ley, sin dañar la web ni a terceros.</p>
+      {h2('3. Reservas')}
+      <p>El formulario de reservas envía una <b>solicitud</b>. La reserva queda hecha cuando el restaurante la confirma por teléfono o WhatsApp. Si no puedes venir, avísanos cuanto antes en el {e(T["telefono"])}. La reserva no tiene coste.</p>
+      {h2('4. Carta, precios y alérgenos')}
+      <p>La carta y los precios publicados son informativos y pueden cambiar según la temporada y el producto disponible. Los precios incluyen IVA. La información sobre alérgenos se ofrece según el Reglamento (UE) 1169/2011; si tienes alguna alergia o intolerancia, consúltalo siempre con nuestro equipo antes de pedir.</p>
+      {h2('5. Propiedad intelectual e industrial')}
+      <p>Los textos, las fotografías, el logotipo, el diseño de esta web y el nombre de dominio {e(T["dominio"])} pertenecen al titular o se usan con permiso, y no pueden reproducirse sin autorización. Se permite enlazar a esta web y citar sus contenidos sin ánimo de lucro, indicando la fuente. «Guía Repsol» y «Solete» son marcas de sus titulares; se citan solo para informar del reconocimiento recibido. El resto de marcas mencionadas pertenecen a sus respectivos propietarios.</p>
+      {h2('6. Enlaces a otras webs')}
+      <p>La web enlaza a servicios de terceros (Instagram, Facebook, Threads, WhatsApp, Google Maps, Tripadvisor, Guía Repsol, medios de comunicación y nuestra tienda online). El titular no se hace responsable de sus contenidos ni de sus políticas, que puedes consultar en cada uno.</p>
+      {h2('7. Responsabilidad')}
+      <p>El titular procura que la información sea correcta y esté al día, pero no garantiza la ausencia de errores ni la disponibilidad continua de la web, y no responde de los daños que pudieran derivarse de su uso indebido.</p>
+      {h2('8. Legislación aplicable')}
+      <p>Este aviso se rige por la legislación española. Para cualquier controversia con consumidores serán competentes los juzgados y tribunales del domicilio del consumidor.</p>'''
+    return pagina_legal('aviso-legal.html', 'Aviso legal', 'Aviso legal de la web de Auténticos CyL, bar tapería y tienda en Coca (Segovia).', cuerpo)
+
+
+def pagina_privacidad():
+    T = TITULAR
+    cuerpo = f'''
+      <p>En Auténticos CyL tratamos tus datos personales con cuidado y solo para lo que nos pides. Esta política explica cómo, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+      {h2('1. Responsable del tratamiento')}
+      {lista([f'<b>Responsable:</b> {e(T["nombre"])} · NIF / CIF {e(T["nif"])}', f'<b>Dirección:</b> {e(T["domicilio"])}',
+              f'<b>Contacto:</b> <a class="text-oro-300 underline underline-offset-4" href="mailto:{T["email"]}">{e(T["email"])}</a> · {e(T["telefono"])}'])}
+      {h2('2. Qué datos tratamos')}
+      <p>Cuando solicitas una reserva: nombre, teléfono, email (si lo indicas), día, hora y número de personas, y los comentarios que quieras añadir. Si en los comentarios nos cuentas alergias o intolerancias, las usaremos solo para preparar tu visita; es voluntario y lo tratamos con tu consentimiento expreso.</p>
+      <p>Si nos escribes por WhatsApp, teléfono, email o redes sociales, tratamos los datos que nos facilites para responderte.</p>
+      {h2('3. Para qué los usamos y con qué base legal')}
+      {lista(['<b>Gestionar tu reserva</b> y contactarte para confirmarla, cambiarla o avisarte de cualquier incidencia. Base legal: la aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).',
+              '<b>Tener en cuenta alergias o necesidades especiales</b> que nos indiques. Base legal: tu consentimiento explícito (art. 9.2.a RGPD), que puedes retirar cuando quieras.',
+              '<b>Responder a tus consultas.</b> Base legal: tu consentimiento al escribirnos (art. 6.1.a RGPD).'])}
+      <p>No usamos tus datos para enviarte publicidad ni tomamos decisiones automatizadas sobre ti.</p>
+      {h2('4. Cuánto tiempo los guardamos')}
+      <p>Durante el tiempo necesario para gestionar la reserva y, después, hasta un año como máximo, salvo que una obligación legal exija conservarlos más tiempo. Pasado ese plazo se borran.</p>
+      {h2('5. Con quién los compartimos')}
+      <p>No cedemos tus datos a terceros, salvo obligación legal. Pueden acceder a ellos los proveedores que nos prestan servicios técnicos (alojamiento de la web y, si nos escribes por ese canal, WhatsApp), siempre con las garantías que exige el RGPD. Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo, amparados en decisiones de adecuación o en cláusulas contractuales tipo de la Comisión Europea.</p>
+      {h2('6. Tus derechos')}
+      <p>Puedes pedir el acceso, la rectificación o la supresión de tus datos, la limitación u oposición a su tratamiento y su portabilidad, y retirar el consentimiento dado. Escríbenos a <a class="text-oro-300 underline underline-offset-4" href="mailto:{T["email"]}">{e(T["email"])}</a> indicando qué derecho quieres ejercer. Si crees que no hemos tratado bien tus datos, puedes reclamar ante la Agencia Española de Protección de Datos (<a class="text-oro-300 underline underline-offset-4" href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).</p>
+      {h2('7. Menores de edad')}
+      <p>El formulario de reservas está pensado para mayores de 14 años. Si eres menor, pide a tu madre, padre o tutor que haga la reserva.</p>
+      {h2('8. Seguridad')}
+      <p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos frente a pérdidas, accesos no autorizados o usos indebidos.</p>'''
+    return pagina_legal('privacidad.html', 'Política de privacidad', 'Cómo trata Auténticos CyL los datos personales de las reservas y consultas.', cuerpo)
+
+
+def pagina_cookies():
+    T = TITULAR
+    cuerpo = f'''
+      <p>Esta política explica qué cookies y tecnologías parecidas usa esta web, conforme al artículo 22.2 de la LSSI-CE y a la guía sobre cookies de la Agencia Española de Protección de Datos.</p>
+      {h2('1. ¿Usamos cookies de seguimiento?')}
+      <p><b>No.</b> Esta web no usa cookies de análisis, de publicidad ni de redes sociales, por eso no te mostramos un aviso para aceptarlas.</p>
+      {h2('2. Almacenamiento técnico')}
+      <p>La web guarda en tu navegador (almacenamiento local) solo lo necesario para que funcione lo que tú pides, por ejemplo la solicitud de reserva que envías o el acceso al área de propietarios. Es almacenamiento técnico, exento de consentimiento, y puedes borrarlo desde la configuración de tu navegador.</p>
+      {h2('3. Servicios de terceros')}
+      <p>Para mostrar la web cargamos las tipografías desde Google Fonts y una librería de estilos desde un servidor externo (CDN). Estos servicios reciben tu dirección IP para poder enviarte los archivos, pero no instalamos con ellos cookies de seguimiento.</p>
+      <p>Los enlaces a Instagram, Facebook, Threads, WhatsApp, Google Maps, Tripadvisor o Guía Repsol te llevan a sus webs, que tienen sus propias políticas de cookies. Solo se aplican si pulsas el enlace.</p>
+      {h2('4. Cómo gestionar las cookies')}
+      <p>Puedes ver, bloquear o borrar las cookies y los datos guardados desde la configuración de tu navegador: Chrome, Safari, Firefox o Edge. Si en el futuro la web incorpora cookies no técnicas (por ejemplo, de estadísticas), te pediremos antes tu consentimiento y actualizaremos esta política.</p>
+      {h2('5. Contacto')}
+      <p>Si tienes cualquier duda, escríbenos a <a class="text-oro-300 underline underline-offset-4" href="mailto:{T["email"]}">{e(T["email"])}</a>.</p>'''
+    return pagina_legal('cookies.html', 'Política de cookies', 'Política de cookies de la web de Auténticos CyL.', cuerpo)
+
+
 def main():
     for nombre, html in [('index.html', pagina_inicio()), ('carta.html', pagina_carta()),
-                         ('noticias.html', pagina_noticias()), ('reservas.html', pagina_reservas())]:
+                         ('noticias.html', pagina_noticias()), ('reservas.html', pagina_reservas()),
+                         ('aviso-legal.html', pagina_aviso_legal()), ('privacidad.html', pagina_privacidad()),
+                         ('cookies.html', pagina_cookies())]:
         (RAIZ / nombre).write_text(html, encoding='utf-8')
         print('escrito', nombre)
     # La carta base, para el editor de propietarios y para la carta de la demo
