@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Carta · La Tapería de Auténticos CyL</title>
-  <meta name="description" content="Carta digital de La Tapería de Auténticos CyL, a los pies del castillo de Coca (Segovia): tapas y raciones, hamburguesas gourmet, bodega de Castilla y León y postres artesanales." />
+  <meta name="description" content="Carta digital de La Tapería de Auténticos CyL, a los pies del castillo de Coca (Segovia): imprescindibles, brasa y mar, hamburguesas de autor, bodega de Castilla y León y repostería." />
   <meta name="theme-color" content="#121315" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -61,7 +61,8 @@
       </div>
       <p class="mt-7 text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Coca · Segovia · desde 2014</p>
       <h1 class="mt-2 font-display text-[2.6rem] font-semibold leading-[1.05] text-crema-100">La Tapería<br><span class="italic font-normal text-oro-300">de Auténticos CyL</span></h1>
-      <p class="mt-4 max-w-md text-[15px] leading-relaxed text-crema-300">Cocina de producto de Castilla y León, a los pies del castillo de Coca. Toca un plato para verlo, elige la cantidad y envíanos tu comanda.</p>
+      <p class="mt-3 font-display text-lg italic text-oro-300">Sabores, Sensaciones y +</p>
+      <p class="mt-3 max-w-md text-[15px] leading-relaxed text-crema-300">Producto de temporada y cocina a la brasa, a los pies del castillo de Coca. Toca un plato para verlo, elige la cantidad y envíanos tu comanda.</p>
     </div>
   </header>
 
@@ -81,8 +82,9 @@
       <p class="font-display text-lg text-crema-300">Auténticos CyL · Bar Tapería y tienda</p>
       <p class="mt-1">C/ Calixto del Río, 8 · 40480 Coca (Segovia)</p>
       <p class="mt-1">Teléfono <span class="select-all text-crema-300">921 05 04 83</span></p>
-      <p class="mt-4 text-xs leading-relaxed">Si tienes alguna alergia o intolerancia, pregunta a nuestro equipo: te informamos de los alérgenos de cada plato. IVA incluido.</p>
-      <p class="mt-3 rounded-xl border border-oro-400/20 bg-oro-400/5 px-3 py-2 text-xs leading-relaxed text-oro-300">Carta de demostración: los platos y precios son orientativos y se ajustarán a la carta real del local.</p>
+      <p class="mt-4 text-xs leading-relaxed">Se cobrará un suplemento de 1,50 € por servicio de pan y comensal. IVA incluido. Si tienes alguna alergia o intolerancia, pregunta a nuestro equipo.</p>
+      <p class="mt-3 text-xs leading-relaxed text-crema-500"><span class="font-semibold text-crema-300">Alérgenos:</span> 1 Gluten · 2 Crustáceos · 3 Moluscos · 4 Pescado · 5 Huevos · 6 Soja · 7 Mostaza · 8 Apio · 9 Frutos secos · 10 Cacahuetes · 11 Sésamo · 12 Sulfitos · 13 Lácteos · 14 Altramuces</p>
+      <p class="mt-3 rounded-xl border border-oro-400/20 bg-oro-400/5 px-3 py-2 text-xs leading-relaxed text-oro-300">Modo demostración: el pedido por WhatsApp está simulado y la selección de vinos es de ejemplo.</p>
     </div>
   </footer>
 
@@ -154,6 +156,17 @@
       </div>
       <div class="flex-1 overflow-y-auto px-5 pb-4">
         <ul id="comandaLineas" class="mt-3 divide-y divide-white/5"></ul>
+        <div class="mt-3 flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-pizarra-800/60 px-4 py-3">
+          <div class="min-w-0">
+            <p class="font-semibold leading-snug">Comensales</p>
+            <p class="text-xs text-crema-500">Servicio de pan: 1,50 € por comensal</p>
+          </div>
+          <div class="flex items-center gap-1 rounded-full border border-white/10 bg-pizarra-800 p-0.5">
+            <button id="comMenos" class="grid h-8 w-8 place-items-center rounded-full text-lg" aria-label="Un comensal menos">−</button>
+            <span id="comCant" class="w-6 text-center text-sm font-semibold tabular-nums" aria-live="polite">0</span>
+            <button id="comMas" class="grid h-8 w-8 place-items-center rounded-full text-lg" aria-label="Un comensal más">+</button>
+          </div>
+        </div>
         <div class="mt-4 grid grid-cols-[6rem_1fr] gap-3">
           <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Mesa</span>
             <input id="comandaMesa" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="Nº" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-center text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" /></label>
@@ -164,6 +177,10 @@
           <textarea id="comandaNota" rows="2" maxlength="200" placeholder="Ej.: traed primero los vinos" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none"></textarea></label>
       </div>
       <div class="border-t border-white/10 bg-pizarra-950/60 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4">
+        <div class="mb-2 space-y-1 text-sm text-crema-500">
+          <div class="flex justify-between"><span>Platos y bebidas</span><span id="comandaSubtotal" class="tabular-nums">0,00 €</span></div>
+          <div class="flex justify-between"><span>Servicio de pan (<span id="comandaPanN">0</span> × 1,50 €)</span><span id="comandaPan" class="tabular-nums">0,00 €</span></div>
+        </div>
         <div class="flex items-baseline justify-between">
           <span class="text-sm text-crema-300"><span id="comandaUnidades">0</span> artículos · IVA incluido</span>
           <span class="font-display text-3xl font-semibold tabular-nums text-oro-300" id="comandaTotal">0,00 €</span>
@@ -226,71 +243,91 @@
   };
 
   /* =====================================================================
-     CARTA (demostración: platos y precios orientativos)
-     formatos: [nombre, precio]. alergenos: claves de ALERGENOS.
+     CARTA del local (verano). Solo la bodega es de ejemplo.
+     formatos: [nombre, precio]. alergenos: números de ALERGENOS.
+     grupo: subtítulo dentro de la sección.
      ===================================================================== */
-  const ALERGENOS = {
-    gluten: 'Gluten', crustaceos: 'Crustáceos', huevo: 'Huevo', pescado: 'Pescado', cacahuete: 'Cacahuete',
-    soja: 'Soja', leche: 'Lácteos', frutos: 'Frutos de cáscara', apio: 'Apio', mostaza: 'Mostaza',
-    sesamo: 'Sésamo', sulfitos: 'Sulfitos', altramuces: 'Altramuces', moluscos: 'Moluscos'
-  };
+  // Numeración de alérgenos de la carta del local
+  const ALERGENOS = { 1: 'Gluten', 2: 'Crustáceos', 3: 'Moluscos', 4: 'Pescado', 5: 'Huevos', 6: 'Soja', 7: 'Mostaza',
+    8: 'Apio', 9: 'Frutos secos', 10: 'Cacahuetes', 11: 'Sésamo', 12: 'Sulfitos', 13: 'Lácteos', 14: 'Altramuces' };
+  const PAN = 1.5;   // suplemento por servicio de pan y comensal
   const SECCIONES = [
     {
-      id: 'tapas', nombre: 'Tapas y Raciones', corto: 'Tapas y raciones',
-      intro: 'La despensa de Castilla y León, en versión clásica o con una vuelta de autor.',
-      filtros: [['tradicion', 'Tradición'], ['vanguardia', 'Vanguardia']],
+      id: 'imprescindibles', nombre: 'Nuestros imprescindibles', corto: 'Imprescindibles', lema: 'Verano · Brasa · Temporada',
+      intro: 'Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.',
       platos: [
-        { id: 'croquetas', estilo: 'tradicion', nombre: 'Croquetas caseras de jamón ibérico', desc: 'Bechamel cremosa de leche fresca y jamón ibérico de Guijuelo, rebozado crujiente.', formatos: [['Tapa (2 uds.)', 3], ['Ración (8 uds.)', 11]], alergenos: ['gluten', 'huevo', 'leche'], etiquetas: ['La favorita'] },
-        { id: 'morcilla', estilo: 'tradicion', nombre: 'Pincho de morcilla de Burgos', desc: 'Morcilla de arroz a la plancha sobre pan de pueblo, con pimiento rojo asado y un toque de miel.', formatos: [['Tapa', 3], ['Ración', 10]], alergenos: ['gluten'], etiquetas: ['Muy pedido'] },
-        { id: 'torreznos', estilo: 'tradicion', nombre: 'Torreznos de Soria', desc: 'Panceta adobada, confitada y terminada al horno hasta que la corteza cruje.', formatos: [['Tapa', 3], ['Ración', 9]], alergenos: [], etiquetas: [] },
-        { id: 'revolconas', estilo: 'tradicion', nombre: 'Patatas revolconas', desc: 'Puré de patata con pimentón de la Vera y ajo, coronado con torreznillos. Receta abulense.', formatos: [['Tapa', 3], ['Ración', 8]], alergenos: [], etiquetas: [] },
-        { id: 'ibericos', estilo: 'tradicion', nombre: 'Tabla de ibéricos de Guijuelo', desc: 'Jamón, lomo, chorizo y salchichón ibéricos cortados al momento, con picos artesanos.', formatos: [['Media tabla', 12], ['Tabla', 20]], alergenos: ['gluten'], etiquetas: ['Para compartir'] },
-        { id: 'quesos', estilo: 'tradicion', nombre: 'Tabla de quesos de Castilla y León', desc: 'Queso Zamorano DOP, Valdeón y oveja curado, con membrillo y nueces.', formatos: [['Media tabla', 11], ['Tabla', 18]], alergenos: ['leche', 'frutos'], etiquetas: ['Para compartir'] },
-        { id: 'bacalao', estilo: 'tradicion', nombre: 'Lomo de bacalao confitado', desc: 'Lomo de bacalao confitado a baja temperatura sobre pisto castellano.', formatos: [['Ración', 17]], alergenos: ['pescado'], etiquetas: [] },
-        { id: 'pulpo', estilo: 'tradicion', nombre: 'Pulpo a la brasa', desc: 'Sobre parmentier de patata, aceite de oliva virgen extra y pimentón.', formatos: [['Media ración', 11], ['Ración', 18]], alergenos: ['moluscos', 'leche'], etiquetas: [] },
-        { id: 'cabra', estilo: 'vanguardia', nombre: 'Queso de cabra con mermelada', desc: 'Rulo de cabra gratinado con mermelada de pimiento y crujiente de pan.', formatos: [['Tapa', 3.5], ['Ración', 11]], alergenos: ['leche', 'gluten'], etiquetas: ['Vegetariano'] },
-        { id: 'tartar', estilo: 'vanguardia', nombre: 'Tartar de solomillo', desc: 'Solomillo de vacuno picado a cuchillo, aliñado en mesa, con yema curada y pan tostado.', formatos: [['Ración', 19]], alergenos: ['huevo', 'mostaza', 'gluten', 'soja'], etiquetas: ['Del chef'] },
-        { id: 'lechazo', estilo: 'vanguardia', nombre: 'Brioche de lechazo churro', desc: 'Lechazo asado y deshilachado en pan brioche, con alioli de ajo negro y encurtidos.', formatos: [['Unidad', 4.5], ['Ración (3 uds.)', 12.5]], alergenos: ['gluten', 'huevo', 'leche'], etiquetas: ['Del chef'] },
-        { id: 'huevo', estilo: 'vanguardia', nombre: 'Huevo a baja temperatura', desc: 'Huevo campero a 63 °C sobre cremoso de boletus y lámina de trufa.', formatos: [['Tapa', 4], ['Ración', 12]], alergenos: ['huevo', 'leche'], etiquetas: ['Vegetariano'] },
-        { id: 'canape', estilo: 'vanguardia', nombre: 'Canapé de autor del día', desc: 'Pregunta al equipo por la creación de hoy, hecha con producto de temporada.', formatos: [['Unidad', 3.5]], alergenos: ['gluten'], etiquetas: [] }
+        { id: 'bravas', nombre: 'Patatas bravas de la Retamilla', desc: '', formatos: [['Ración', 12]], alergenos: [7] },
+        { id: 'torrezno', nombre: 'Torrezno de Soria bien crujiente', desc: '', formatos: [['Ración', 8.95]], alergenos: [5] },
+        { id: 'croquetas', nombre: 'Croquetas súper cremosas de jamón', desc: '', formatos: [['Ración', 15.95]], alergenos: [1, 5, 13] },
+        { id: 'chipirones', nombre: 'Chipirones en texturas', desc: 'Tomate al estilo tradicional y crujiente de torreznos de Soria.', formatos: [['Ración', 18.95]], alergenos: [1, 4, 5], etiquetas: ['Opción sin gluten'] },
+        { id: 'huevosrotos', nombre: 'Huevos rotos, torreznos de Soria y tartufata', desc: '', formatos: [['Ración', 17.95]], alergenos: [5] },
+        { id: 'ensaladatomate', nombre: 'Ensalada de tomate de la huerta', desc: 'Con ventresca y pimientos asados al carbón.', formatos: [['Ración', 15]], alergenos: [4, 13] },
+        { id: 'ensaladaahumados', nombre: 'Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica', desc: 'Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.', formatos: [['Ración', 16.95]], alergenos: [4, 6, 7] },
+        { id: 'burrata', nombre: 'Burrata, cerezas asadas, remolacha ahumada y pistachos tostados', desc: '', formatos: [['Ración', 16]], alergenos: [5, 13] },
+        { id: 'bikinioreja', nombre: 'Bikini de oreja plancha', desc: 'Queso pata de mulo ahumado y mojo rojo.', formatos: [['Unidad', 12]], alergenos: [1, 5, 7, 11, 13] },
+        { id: 'taco', nombre: 'Taco de maíz con atún rojo salvaje de Almadraba', desc: 'Marinado en michelada.', formatos: [['Unidad', 8]], alergenos: [1, 4], unidad: true },
+        { id: 'pizza', nombre: 'Pizza de sartén de salmón ahumado', desc: 'Stracciatella, aguacate y tomate semiseco.', formatos: [['Unidad', 12.95]], alergenos: [1, 4, 5] },
+        { id: 'empanada', nombre: 'Empanada de pipián con ají de maní', desc: 'Masa de empanada argentina, rellena de verduras y cacahuete.', formatos: [['Unidad', 4.5]], alergenos: [1, 9], unidad: true }
       ]
     },
     {
-      id: 'hamburguesas', nombre: 'Hamburguesas Gourmet', corto: 'Hamburguesas',
-      intro: '180 g de carne picada cada día, en pan brioche tostado y con patatas caseras.',
+      id: 'brasa', nombre: 'A la brasa y el mar', corto: 'Brasa y mar', lema: 'Sabores · Sensaciones y +',
+      intro: 'Sabores que nacen del respeto al producto, del fuego y del tiempo. En Auténticos CyL elevamos cada ingrediente a su máxima expresión para ofrecerte platos memorables, honestos y sorprendentes.',
       platos: [
-        { id: 'autentica', nombre: 'La Auténtica', desc: 'Buey madurado, queso Zamorano DOP, cebolla caramelizada al vino de Toro y rúcula.', formatos: [['Hamburguesa', 15]], alergenos: ['gluten', 'leche', 'sulfitos'], etiquetas: ['Buey madurado', 'La de la casa'] },
-        { id: 'guanciale', nombre: 'Buey & Guanciale', desc: 'Buey madurado, guanciale curado y crujiente, cheddar ahumado y mayonesa de trufa negra.', formatos: [['Hamburguesa', 16.5]], alergenos: ['gluten', 'huevo', 'leche'], etiquetas: ['Buey madurado', 'Guanciale'] },
-        { id: 'castillo', nombre: 'La del Castillo', desc: 'Ternera de Ávila IGP, morcilla de Burgos, pimiento asado y queso de cabra.', formatos: [['Hamburguesa', 15.5]], alergenos: ['gluten', 'leche'], etiquetas: ['Ternera IGP'] },
-        { id: 'lechazob', nombre: 'Lechazo', desc: 'Burger de lechazo churro, cebolla morada encurtida, tomate asado y salsa de yogur y menta.', formatos: [['Hamburguesa', 16]], alergenos: ['gluten', 'leche'], etiquetas: [] },
-        { id: 'huerta', nombre: 'Tierra de Campos', desc: 'Burger vegetal de lenteja pardina y boletus, queso de oveja, tomate y brotes.', formatos: [['Hamburguesa', 13.5]], alergenos: ['gluten', 'leche', 'apio'], etiquetas: ['Vegetariana'] }
+        { id: 'albondigas', nombre: 'Albóndigas crujientes de cochinillo segoviano', desc: 'En su propio jugo, manzana ácida y kimchi.', formatos: [['Ración', 18.95]], alergenos: [1, 2, 5, 7, 10, 12, 14] },
+        { id: 'entrecot', nombre: 'Entrecot de vaca a la brasa del josper', desc: 'Madurado un mínimo de 35 días para lograr la máxima terneza y un sabor profundo. 400 g aprox.', formatos: [['Ración', 24.95]], alergenos: [], etiquetas: ['400 g aprox.'] },
+        { id: 'duroc', nombre: 'Tabla de carnes Duroc a la brasa', desc: 'Solomillo, secreto, presa, pluma y chorizo ibérico. Selección premium para 2 personas.', formatos: [['Tabla', 36]], alergenos: [], etiquetas: ['Para 2 personas'] },
+        { id: 'picana', nombre: 'Picaña de vaca madurada a la brasa', desc: '', formatos: [['Ración', 22]], alergenos: [12] },
+        { id: 'presa', nombre: 'Presa ibérica a baja temperatura', desc: 'Crema de maíz ahumado y melocotón a la brasa.', formatos: [['Ración', 19]], alergenos: [12, 13] },
+        { id: 'lasana', nombre: 'Lasaña de morcillo madurado a fuego lento', desc: 'Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.', formatos: [['Ración', 16]], alergenos: [1, 7, 12] },
+        { id: 'hamburabo', nombre: 'Hamburguesa de rabo de toro', desc: 'Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 12] },
+        { id: 'lubina', grupo: 'Del mar', nombre: 'Lubina curada marcada en brasa', desc: 'Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.', formatos: [['Ración', 21.95]], alergenos: [4, 7, 8] },
+        { id: 'bonito', grupo: 'Del mar', nombre: 'Bonito semicurado, ligeramente marcado a la brasa', desc: 'Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.', formatos: [['Ración', 19.9]], alergenos: [4, 7, 12] },
+        { id: 'bowl', grupo: 'Para acompañar nuestros platos', nombre: 'Bowl de lechuga, tomate y cebolla encurtida', desc: '', formatos: [['Ración', 6.95]], alergenos: [] },
+        { id: 'fritas', grupo: 'Para acompañar nuestros platos', nombre: 'Patatas fritas', desc: '', formatos: [['Ración', 4.5]], alergenos: [] },
+        { id: 'asadas', grupo: 'Para acompañar nuestros platos', nombre: 'Patatas asadas con alioli de kimchi', desc: '', formatos: [['Ración', 7.5]], alergenos: [8, 12, 13] },
+        { id: 'verduras', grupo: 'Para acompañar nuestros platos', nombre: 'Verduras al josper', desc: '', formatos: [['Ración', 7.95]], alergenos: [] }
       ]
     },
     {
-      id: 'bodega', nombre: 'Vinoteca · Bodega de CyL', corto: 'Bodega CyL',
-      intro: 'Una selección de nuestra tienda, con más de 500 referencias de Castilla y León. Pregúntanos por la bodega completa.',
+      id: 'noches', nombre: 'Las noches de Auténticos', corto: 'Las Noches', lema: 'Noches · Brasa · Bocados',
+      intro: 'Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.',
+      aviso: 'Solo disponible en servicio de cenas',
       platos: [
-        { id: 'verdejo', nombre: 'Verdejo · D.O. Rueda', desc: 'Blanco fresco y aromático, con notas de hinojo y fruta blanca.', formatos: [['Copa', 3], ['Botella', 16]], alergenos: ['sulfitos'], etiquetas: ['Blanco'] },
-        { id: 'roble', nombre: 'Tinto Roble · D.O. Ribera del Duero', desc: 'Tempranillo con un paso corto por barrica: fruta roja y toque tostado.', formatos: [['Copa', 3.5], ['Botella', 19]], alergenos: ['sulfitos'], etiquetas: ['Tinto'] },
-        { id: 'crianza', nombre: 'Tinto Crianza · D.O. Ribera del Duero', desc: 'Doce meses en barrica. Estructura, fruta madura y final largo.', formatos: [['Copa', 4.5], ['Botella', 26]], alergenos: ['sulfitos'], etiquetas: ['Tinto'] },
-        { id: 'toro', nombre: 'Tinta de Toro · D.O. Toro', desc: 'Potente y carnoso, ideal con el chuletón y las hamburguesas.', formatos: [['Copa', 4], ['Botella', 22]], alergenos: ['sulfitos'], etiquetas: ['Tinto'] },
-        { id: 'mencia', nombre: 'Mencía · D.O. Bierzo', desc: 'Tinto atlántico, fresco y floral.', formatos: [['Copa', 3.5], ['Botella', 20]], alergenos: ['sulfitos'], etiquetas: ['Tinto'] },
-        { id: 'prieto', nombre: 'Prieto Picudo · D.O. León', desc: 'Variedad autóctona leonesa, frutal y con buena acidez.', formatos: [['Copa', 3.5], ['Botella', 18]], alergenos: ['sulfitos'], etiquetas: ['Tinto'] },
-        { id: 'cigales', nombre: 'Rosado · D.O. Cigales', desc: 'El rosado clásico de Valladolid, seco y afrutado.', formatos: [['Copa', 3], ['Botella', 15]], alergenos: ['sulfitos'], etiquetas: ['Rosado'] },
-        { id: 'vermut', nombre: 'Vermut de la casa', desc: 'Nuestro vermut de Coca, tinto de barrica o blanco, con hielo y naranja.', formatos: [['Copa', 3]], alergenos: ['sulfitos'], etiquetas: ['Hecho en Coca'] },
-        { id: 'cerveza', nombre: 'Cerveza artesana de Castilla y León', desc: 'Pregunta por las variedades del día.', formatos: [['Botellín', 3.5]], alergenos: ['gluten'], etiquetas: [] }
+        { id: 'larabo', nombre: 'La Rabo de Toro', desc: 'Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.', formatos: [['Unidad', 16.95]], alergenos: [1, 5, 7, 9, 10, 11, 12, 13, 14] },
+        { id: 'bestia', nombre: 'La Bestia Castellana', desc: 'Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.', formatos: [['Unidad', 17.95]], alergenos: [1, 5, 7, 9, 10, 11, 13], etiquetas: ['Buey 100 %', 'Guanciale', 'Opción sin gluten'] },
+        { id: 'rockrolla', nombre: 'Rock & Rolla', desc: 'Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.', formatos: [['Unidad', 16.95]], alergenos: [1, 7, 10, 11, 13, 14], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
+        { id: 'macarra', nombre: 'Deluxe Macarra', desc: 'Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.', formatos: [['Unidad', 16.95]], alergenos: [1, 7, 10, 11, 12, 13], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
+        { id: 'castiza', nombre: 'La Castiza', desc: 'Hamburguesa de buey 100 % certificada, queso de pata de mulo y beicon.', formatos: [['Unidad', 14.95]], alergenos: [1, 7, 10, 11, 13], etiquetas: ['Buey 100 %', 'Opción sin gluten'] },
+        { id: 'bikiniiberico', nombre: 'Bikini de Oreja Ibérico', desc: 'Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.', formatos: [['Unidad', 12]], alergenos: [1, 5, 7, 11, 13], etiquetas: ['Opción sin gluten'] },
+        { id: 'bretzel', nombre: 'Bretzel de Pollo', desc: 'Pollo crujiente, queso pata de mulo, cebolla caramelizada, bacon, alioli de kimchi, lechuga y tomate en pan bretzel.', formatos: [['Unidad', 14.95]], alergenos: [1, 5, 7, 11, 12] }
       ]
     },
     {
-      id: 'postres', nombre: 'Postres Artesanales', corto: 'Postres',
-      intro: 'Hechos en casa cada mañana.',
+      id: 'bodega', nombre: 'Vinoteca · Bodega de CyL', corto: 'Bodega CyL', lema: 'Vinos de Castilla y León',
+      intro: 'Más de 500 referencias de Castilla y León en nuestra tienda. Pregúntanos por la bodega completa.',
+      aviso: 'Selección de ejemplo: pendiente de la carta de vinos real del local',
       platos: [
-        { id: 'ponche', nombre: 'Ponche segoviano', desc: 'El clásico de Segovia: bizcocho, crema pastelera y mazapán tostado.', formatos: [['Porción', 5.5]], alergenos: ['gluten', 'huevo', 'leche', 'frutos'], etiquetas: ['Típico de Segovia'] },
-        { id: 'tarta', nombre: 'Tarta de queso de oveja', desc: 'Cremosa, al horno, con queso de oveja de la zona.', formatos: [['Porción', 5.5]], alergenos: ['gluten', 'huevo', 'leche'], etiquetas: [] },
-        { id: 'torrija', nombre: 'Torrija caramelizada', desc: 'Pan brioche empapado en leche infusionada, caramelizado al momento, con helado de leche merengada.', formatos: [['Porción', 5]], alergenos: ['gluten', 'huevo', 'leche'], etiquetas: [] },
-        { id: 'coulant', nombre: 'Coulant de chocolate artesano', desc: 'Con chocolate artesano de nuestra tienda y corazón fundente.', formatos: [['Porción', 6]], alergenos: ['gluten', 'huevo', 'leche', 'soja'], etiquetas: [] },
-        { id: 'lechefrita', nombre: 'Leche frita', desc: 'Con azúcar y canela, como la de siempre.', formatos: [['Porción', 4.5]], alergenos: ['gluten', 'huevo', 'leche'], etiquetas: [] }
+        { id: 'verdejo', nombre: 'Verdejo · D.O. Rueda', desc: 'Blanco fresco y aromático.', formatos: [['Copa', 3], ['Botella', 16]], alergenos: [12], etiquetas: ['Blanco'] },
+        { id: 'roble', nombre: 'Tinto Roble · D.O. Ribera del Duero', desc: 'Tempranillo con un paso corto por barrica.', formatos: [['Copa', 3.5], ['Botella', 19]], alergenos: [12], etiquetas: ['Tinto'] },
+        { id: 'crianza', nombre: 'Tinto Crianza · D.O. Ribera del Duero', desc: 'Estructura, fruta madura y final largo.', formatos: [['Copa', 4.5], ['Botella', 26]], alergenos: [12], etiquetas: ['Tinto'] },
+        { id: 'toro', nombre: 'Tinta de Toro · D.O. Toro', desc: 'Potente y carnoso, ideal con la brasa.', formatos: [['Copa', 4], ['Botella', 22]], alergenos: [12], etiquetas: ['Tinto'] },
+        { id: 'mencia', nombre: 'Mencía · D.O. Bierzo', desc: 'Tinto atlántico, fresco y floral.', formatos: [['Copa', 3.5], ['Botella', 20]], alergenos: [12], etiquetas: ['Tinto'] },
+        { id: 'cigales', nombre: 'Rosado · D.O. Cigales', desc: 'El rosado clásico de Valladolid.', formatos: [['Copa', 3], ['Botella', 15]], alergenos: [12], etiquetas: ['Rosado'] },
+        { id: 'vermut', nombre: 'Vermut de Coca', desc: 'Nuestro vermut, tinto de barrica o blanco.', formatos: [['Copa', 3]], alergenos: [12], etiquetas: ['De la casa'] }
       ]
+    },
+    {
+      id: 'postres', nombre: 'La repostería de Auténticos', corto: 'Repostería', lema: 'El cierre de nuestra cocina',
+      intro: 'En Auténticos creemos que un gran postre no destaca por ser el más dulce, sino por estar elaborado con el mismo respeto por el producto, la misma técnica y la misma pasión que el resto de nuestra cocina.',
+      platos: [
+        { id: 'tartaqueso', nombre: 'Tarta cremosa de queso', desc: 'Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.', formatos: [['Porción', 7.95]], alergenos: [5, 9, 13] },
+        { id: 'pavlova', nombre: 'Pavlova primaveral de mango, pasión, yogur y lima', desc: 'Pavlova de vainilla y lima, curd de mango y pasión, helado de yogur, crumble de coco y lima, mango fresco aliñado y aceite de albahaca.', formatos: [['Porción', 8.95]], alergenos: [1, 5, 13], etiquetas: ['Opcional sin gluten'] },
+        { id: 'huevocorral', nombre: 'Huevo de corral', desc: 'Trampantojo de mousse de chocolate blanco, núcleo de fruta de la pasión, nido de pasta kataifi, yogur y chocolate.', formatos: [['Porción', 8.95]], alergenos: [1, 5, 7, 9, 13] },
+        { id: 'mojito', nombre: 'Mojito Auténticos', desc: 'Granizado de lima, helado de yogur, espuma de hierbabuena y menta, teja de azúcar y gel de ron.', formatos: [['Porción', 8.95]], alergenos: [13], etiquetas: ['Nuevo'] },
+        { id: 'huerta', nombre: 'Huerta en Flor', desc: 'Crema inglesa de vainilla, tomate rosa osmotizado, tartar de melocotón marinado, crujiente de almendra, gel de tomate, consomé de fresa y albahaca, aceite de albahaca y helado de yogur.', formatos: [['Porción', 9.5]], alergenos: [5, 9, 13], etiquetas: ['Nuevo'] }
+      ],
+      cierre: 'Nuestro mejor reconocimiento es que el último bocado despierte las ganas de volver.'
     }
   ];
 
@@ -301,7 +338,7 @@
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const euros = n => n.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 });
-  const PLATOS = Object.fromEntries(SECCIONES.flatMap(s => s.platos.map(p => [p.id, { ...p, seccion: s }])));
+  const PLATOS = Object.fromEntries(SECCIONES.flatMap(s => s.platos.map(p => [p.id, { etiquetas: [], ...p, seccion: s }])));
   const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
   const leer = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (e) { return d; } };
   function toast(msg) { const t = $('#toast'); t.firstElementChild.textContent = msg; t.style.opacity = 1; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.opacity = 0, 1800); }
@@ -316,7 +353,10 @@
   let comanda = leer('taperia-comanda', []).filter(l => PLATOS[l.id]);
   const clave = l => `${l.id}|${l.formato}|${l.nota || ''}`;
   const unidades = () => comanda.reduce((t, l) => t + l.cant, 0);
-  const total = () => Math.round(comanda.reduce((t, l) => t + l.precio * l.cant, 0) * 100) / 100;
+  let comensales = leer('taperia-comensales', 0);
+  const subtotal = () => Math.round(comanda.reduce((t, l) => t + l.precio * l.cant, 0) * 100) / 100;
+  const totalPan = () => comanda.length ? comensales * PAN : 0;
+  const total = () => Math.round((subtotal() + totalPan()) * 100) / 100;
   const cantPlato = id => comanda.filter(l => l.id === id).reduce((t, l) => t + l.cant, 0);
 
   function anadir(id, formato, precio, cant, nota = '') {
@@ -342,18 +382,19 @@
      CARTA Y PESTAÑAS
      ===================================================================== */
   let seccionActiva = SECCIONES.some(s => s.id === location.hash.slice(1)) ? location.hash.slice(1) : SECCIONES[0].id;
-  let filtroTapas = 'todas';
 
   function tarjeta(p) {
     const desde = Math.min(...p.formatos.map(f => f[1]));
+    p = PLATOS[p.id];
     return `<li>
       <article class="group relative flex gap-4 rounded-3xl border border-white/[.06] bg-pizarra-900 p-4 transition hover:border-oro-400/30">
         <button data-abrir="${p.id}" class="absolute inset-0 rounded-3xl" aria-label="Ver ${esc(p.nombre)}"></button>
         <div class="min-w-0 flex-1">
           <div class="flex flex-wrap gap-1.5">${p.etiquetas.map(e => `<span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">${esc(e)}</span>`).join('')}</div>
           <h3 class="${p.etiquetas.length ? 'mt-2' : ''} font-display text-[1.2rem] font-semibold leading-snug text-crema-100">${esc(p.nombre)}</h3>
-          <p class="mt-1 line-clamp-2 text-sm leading-relaxed text-crema-500">${esc(p.desc)}</p>
-          <p class="mt-2 text-sm text-crema-300"><span class="font-semibold text-oro-300 tabular-nums">${p.formatos.length > 1 ? 'desde ' : ''}${euros(desde)}</span>${p.formatos.length > 1 ? ` · ${p.formatos.map(f => esc(f[0].replace(/ \(.*\)/, ''))).join(' · ')}` : ''}</p>
+          ${p.desc ? `<p class="mt-1 line-clamp-2 text-sm leading-relaxed text-crema-500">${esc(p.desc)}</p>` : ''}
+          <p class="mt-2 text-sm text-crema-300"><span class="font-semibold text-oro-300 tabular-nums">${p.formatos.length > 1 ? 'desde ' : ''}${euros(desde)}${p.unidad ? ' / ud.' : ''}</span>${p.formatos.length > 1 ? ` · ${p.formatos.map(f => esc(f[0])).join(' · ')}` : ''}
+            ${p.alergenos.length ? `<span class="ml-1 text-xs text-crema-500">(${p.alergenos.join(', ')})</span>` : ''}</p>
         </div>
         <div class="relative flex shrink-0 flex-col items-end justify-between">
           <span data-insignia="${p.id}" class="hidden grid h-6 min-w-[1.5rem] place-items-center rounded-full bg-oro-400 px-1.5 text-xs font-bold text-pizarra-950"></span>
@@ -366,13 +407,18 @@
     $('#pestanas').innerHTML = SECCIONES.map(s => `<button role="tab" id="tab-${s.id}" aria-controls="panel-${s.id}" aria-selected="${s.id === seccionActiva}" data-seccion="${s.id}"
       class="shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${s.id === seccionActiva ? 'bg-crema-100 text-pizarra-950' : 'text-crema-300 hover:text-crema-100'}">${esc(s.corto)}</button>`).join('');
     $('#carta').innerHTML = SECCIONES.map(s => {
-      const lista = s.platos.filter(p => s.id !== 'tapas' || filtroTapas === 'todas' || p.estilo === filtroTapas);
+      let grupo;
+      const filas = s.platos.map(p => {
+        const cab = p.grupo && p.grupo !== grupo ? `<li class="pt-4"><h3 class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-oro-400">${esc(p.grupo)}<span class="h-px flex-1 bg-oro-400/25"></span></h3></li>` : '';
+        grupo = p.grupo; return cab + tarjeta(p);
+      }).join('');
       return `<section role="tabpanel" id="panel-${s.id}" aria-labelledby="tab-${s.id}" class="panel ${s.id === seccionActiva ? 'activo' : ''}">
-        <h2 class="font-display text-[2rem] font-semibold leading-tight">${esc(s.nombre)}</h2>
-        <p class="mt-1 text-[15px] leading-relaxed text-crema-500">${esc(s.intro)}</p>
-        ${s.filtros ? `<div class="mt-4 flex gap-2">${[['todas', 'Todas'], ...s.filtros].map(([k, t]) => `<button data-filtro="${k}" aria-pressed="${filtroTapas === k}"
-          class="rounded-full border px-4 py-1.5 text-sm font-medium transition ${filtroTapas === k ? 'border-oro-400 bg-oro-400/10 text-oro-300' : 'border-white/10 text-crema-300'}">${t}</button>`).join('')}</div>` : ''}
-        <ul class="mt-5 grid gap-3">${lista.map(tarjeta).join('')}</ul>
+        <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">${esc(s.lema)}</p>
+        <h2 class="mt-1 font-display text-[2rem] font-semibold leading-tight">${esc(s.nombre)}</h2>
+        <p class="mt-2 text-[15px] italic leading-relaxed text-crema-500">${esc(s.intro)}</p>
+        ${s.aviso ? `<p class="mt-3 inline-block rounded-full border border-vino-400/40 bg-vino-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-vino-300">${esc(s.aviso)}</p>` : ''}
+        <ul class="mt-5 grid gap-3">${filas}</ul>
+        ${s.cierre ? `<p class="mt-6 text-center font-display text-lg italic text-oro-300">${esc(s.cierre)}</p>` : ''}
       </section>`;
     }).join('');
     cambio();
@@ -392,7 +438,6 @@
     if (SECCIONES[i]) { irSeccion(SECCIONES[i].id); $('#tab-' + SECCIONES[i].id).focus(); }
   });
   $('#carta').addEventListener('click', ev => {
-    const f = ev.target.closest('[data-filtro]'); if (f) { filtroTapas = f.dataset.filtro; return pintarCarta(); }
     const r = ev.target.closest('[data-rapido]');
     if (r) { const p = PLATOS[r.dataset.rapido]; return p.formatos.length > 1 ? abrirPlato(p.id) : anadir(p.id, p.formatos[0][0], p.formatos[0][1], 1); }
     const a = ev.target.closest('[data-abrir]'); if (a) abrirPlato(a.dataset.abrir);
@@ -442,7 +487,7 @@
     $('#platoDesc').textContent = p.desc;
     $('#platoEtiquetas').innerHTML = p.etiquetas.map(e => `<span class="rounded-full bg-vino-500/15 px-3 py-1 text-xs font-semibold text-vino-300">${esc(e)}</span>`).join('');
     $('#platoAlergenos').innerHTML = p.alergenos.length
-      ? `<p class="text-xs text-crema-500"><span class="font-semibold text-crema-300">Alérgenos:</span> ${p.alergenos.map(a => ALERGENOS[a]).join(', ')}</p>`
+      ? `<div class="flex flex-wrap gap-1.5"><span class="mr-1 text-xs font-semibold text-crema-300">Alérgenos:</span>${p.alergenos.map(a => `<span class="rounded-full border border-white/10 px-2 py-0.5 text-xs text-crema-300"><b class="text-oro-300">${a}</b> ${ALERGENOS[a]}</span>`).join('')}</div>`
       : `<p class="text-xs text-crema-500">Sin alérgenos declarados. Consulta con nuestro equipo.</p>`;
     $('#platoNota').value = '';
     pintarPlato();
@@ -484,6 +529,9 @@
       <span class="w-20 text-right font-semibold tabular-nums">${euros(l.precio * l.cant)}</span>
     </li>`).join('') : `<li class="py-10 text-center text-crema-500">Tu comanda está vacía.<br>Toca un plato de la carta para añadirlo.</li>`;
     $('#comandaUnidades').textContent = unidades();
+    $('#comCant').textContent = comensales; $('#comMenos').disabled = comensales <= 0;
+    $('#comandaSubtotal').textContent = euros(subtotal());
+    $('#comandaPanN').textContent = comensales; $('#comandaPan').textContent = euros(totalPan());
     $('#comandaTotal').textContent = euros(total());
     $('#comandaEnviar').disabled = !comanda.length; $('#comandaEnviar').classList.toggle('opacity-40', !comanda.length);
   }
@@ -498,6 +546,9 @@
     pintarComanda(); abrirHoja('hojaComanda');
   }
   $('#btnVerComanda').addEventListener('click', abrirComanda);
+  const ponComensales = n => { comensales = Math.max(0, Math.min(40, n)); guardar('taperia-comensales', comensales); cambio(); pintarComanda(); };
+  $('#comMenos').addEventListener('click', () => ponComensales(comensales - 1));
+  $('#comMas').addEventListener('click', () => ponComensales(comensales + 1));
   $('#comandaVaciar').addEventListener('click', () => { if (!comanda.length) return; comanda = []; cambio(); toast('Comanda vaciada'); });
 
   /* =====================================================================
@@ -508,16 +559,21 @@
     const lineas = comanda.map(l => `• ${l.cant} × ${PLATOS[l.id].nombre}${PLATOS[l.id].formatos.length > 1 ? ` · ${l.formato}` : ''}${l.nota ? ` (${l.nota})` : ''}: ${euros(l.precio * l.cant)}`);
     return [
       `🧾 *COMANDA · ${CONFIG.local}*`,
-      [mesa ? `Mesa ${mesa}` : 'Sin mesa indicada', nombre ? `a nombre de ${nombre}` : ''].filter(Boolean).join(' · '),
+      [mesa ? `Mesa ${mesa}` : 'Sin mesa indicada', `${comensales} comensal${comensales === 1 ? '' : 'es'}`, nombre ? `a nombre de ${nombre}` : ''].filter(Boolean).join(' · '),
       '',
       ...lineas,
+      `• Servicio de pan: ${comensales} × ${euros(PAN)}: ${euros(totalPan())}`,
       '',
-      `*TOTAL: ${euros(total())}* (${unidades()} artículos, IVA incluido)`,
+      `*TOTAL: ${euros(total())}* (IVA incluido)`,
       nota ? `\n📝 ${nota}` : ''
     ].join('\n').trim();
   }
   function enviar() {
     if (!comanda.length) return toast('Añade algún plato a la comanda');
+    if (!comensales) {
+      if ($('#hojaComanda').classList.contains('hidden')) abrirComanda();
+      return toast('Indica cuántos comensales sois');
+    }
     guardar('taperia-mesa', $('#comandaMesa').value.trim()); guardar('taperia-nombre', $('#comandaNombre').value.trim());
     const texto = textoComanda();
     $('#envioTexto').textContent = texto;
