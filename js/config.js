@@ -12,11 +12,10 @@ window.TAPERIA = {
     comida: { nombre: 'Comida', horas: ['13:30', '14:00', '14:30', '15:00', '15:30'] },
     cena:   { nombre: 'Cena',   horas: ['20:30', '21:00', '21:30', '22:00', '22:30'] }
   },
-  // Días con servicio de cada turno (0 = domingo … 6 = sábado), según el horario
-  // publicado: martes solo mañana (sin comidas ni cenas); lunes y miércoles cierra
-  // a las 20:00 (sin cenas); de jueves a domingo abre hasta la noche.
+  // Días con servicio de cada turno (0 = domingo … 6 = sábado). Martes y miércoles
+  // cerrado (salvo festivos, según su Instagram); lunes cierra a las 20:00 (sin cenas).
   diasServicio: {
-    comida: [0, 1, 3, 4, 5, 6],
+    comida: [0, 1, 4, 5, 6],
     cena:   [0, 4, 5, 6]
   },
   maxPersonasWeb: 12,               // grupos mayores: por teléfono

@@ -19,7 +19,15 @@ NOTICIAS = json.loads((RAIZ / 'datos' / 'noticias.json').read_text(encoding='utf
 TEL, TEL_VISIBLE = '+34647413186', '647 41 31 86'
 WHATSAPP = 'https://wa.me/34647413186'
 REPSOL = 'https://www.guiarepsol.com/es/fichas/solete/autenticos-cyl-334575/'
-HORARIO = [('Lunes', '9:00 – 14:00 · 17:00 – 20:00'), ('Martes', '9:00 – 14:00'), ('Miércoles', '9:00 – 14:00 · 17:00 – 20:00'),
+REDES = [('Instagram', 'https://www.instagram.com/autenticoscylbartaperia/', '@autenticoscylbartaperia'),
+         ('Facebook', 'https://www.facebook.com/AutenticosCyLBarTaperia/', 'Auténticos CyL Bar Tapería'),
+         ('Threads', 'https://www.threads.net/@autenticoscylbartaperia', '@autenticoscylbartaperia')]
+ICONOS = {
+    'Instagram': '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>',
+    'Facebook': '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3Z"/></svg>',
+    'Threads': '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M16.5 11.2c-.5-2.4-2.3-3.6-4.6-3.6-2.8 0-4.4 2-4.4 4.6 0 3 1.9 4.9 4.8 4.9 2.3 0 3.9-1.2 3.9-3 0-2.9-4.9-3.3-6-1.4-.8 1.5.4 3 2 3 2.6 0 3.8-2.4 3.2-6.2M19 6.8C17.6 4.4 15.2 3 12.1 3 6.9 3 4 6.5 4 12s2.9 9 8.1 9c3.7 0 6.4-1.9 7.4-5"/></svg>'
+}
+HORARIO = [('Lunes', '9:00 – 14:00 · 17:00 – 20:00'), ('Martes', 'Cerrado'), ('Miércoles', 'Cerrado'),
            ('Jueves', '9:00 – 23:30'), ('Viernes', '9:00 – 23:30'), ('Sábado', '9:00 – 24:00'), ('Domingo', '9:00 – 24:00')]
 DIRECCION = 'C/ Calixto del Río, 8 · 40480 Coca (Segovia)'
 MAPA = 'https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Calle+Calixto+del+R%C3%ADo+8+Coca+Segovia'
@@ -45,6 +53,8 @@ def cabeza(titulo, descripcion):
   <title>{e(titulo)}</title>
   <meta name="description" content="{e(descripcion)}" />
   <meta name="theme-color" content="#121315" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/icono-192.png" />
   <meta property="og:title" content="{e(titulo)}" />
   <meta property="og:description" content="{e(descripcion)}" />
   <meta property="og:image" content="img/fachada.webp" />
@@ -90,9 +100,10 @@ def cabecera(actual):
     return f'''
   <header class="sticky top-0 z-40 border-b border-white/5 bg-pizarra-950/90 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-      <a href="index.html" class="min-w-0 leading-tight">
-        <span class="block font-display text-xl font-semibold text-crema-100">Auténticos CyL</span>
-        <span class="block text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Bar Tapería · Tienda · Coca</span>
+      <a href="index.html" class="flex min-w-0 items-center gap-3 leading-tight">
+        <img src="img/logo.webp" alt="" width="44" height="44" class="h-11 w-11 shrink-0 rounded-full" />
+        <span class="min-w-0"><span class="block font-display text-xl font-semibold text-crema-100">Auténticos CyL</span>
+        <span class="block truncate text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400">Bar Tapería · Tienda · Coca</span></span>
       </a>
       <nav class="hidden items-center gap-1 md:flex" aria-label="Principal">
         {enlaces}
@@ -119,6 +130,7 @@ def pie():
         <p class="mt-1 font-display italic text-oro-300">Sabores, Sensaciones y +</p>
         <p class="mt-4 text-sm leading-relaxed text-crema-500">Bar tapería y tienda de productos de Castilla y León, a los pies del castillo de Coca.</p>
         <div class="mt-5">{sello_solete()}</div>
+        <div class="mt-4 flex gap-2">{''.join(f'<a href="{u}" target="_blank" rel="noopener" aria-label="{n}" title="{n}" class="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-crema-300 transition hover:border-oro-400 hover:text-oro-300">{ICONOS[n]}</a>' for n, u, _ in REDES)}</div>
       </div>
       <div class="text-sm leading-relaxed text-crema-300">
         <p class="text-xs font-semibold uppercase tracking-[.22em] text-oro-400">Visítanos</p>
@@ -255,6 +267,7 @@ def pagina_inicio():
       <div>
         <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">El restaurante</p>
         <h2 class="mt-3 font-display text-4xl font-semibold leading-tight">Tradición y creatividad en cada plato</h2>
+        <ul class="mt-4 flex flex-wrap gap-2 text-sm font-semibold"><li class="rounded-full bg-oro-400/10 px-4 py-1.5 text-oro-300">Calidad</li><li class="rounded-full bg-oro-400/10 px-4 py-1.5 text-oro-300">Innovación</li><li class="rounded-full bg-vino-500/15 px-4 py-1.5 text-vino-300">Cocinamos con cabeza, trabajamos con el corazón</li></ul>
         <p class="mt-5 leading-relaxed text-crema-300">Nuestra carta nace del mejor producto de temporada y de la cocina a la brasa. Respetamos el producto, el fuego y el tiempo para llevar cada ingrediente a su máxima expresión: platos memorables, honestos y sorprendentes.</p>
         <p class="mt-4 leading-relaxed text-crema-300">De día, los imprescindibles de siempre, las carnes maduradas al josper y el mar. Cuando cae el sol llegan <strong class="text-crema-100">Las noches de Auténticos</strong>: hamburguesas de autor y bocados para disfrutar sin prisas, solo en las cenas.</p>
         <div class="mt-8 flex flex-wrap gap-3">{boton('carta.html', 'Ver la carta')}{boton('reservas.html', 'Reservar', False)}</div>
@@ -300,6 +313,27 @@ def pagina_inicio():
       </div>
     </section>
 
+    <!-- Otros servicios -->
+    <section class="mx-auto max-w-6xl px-5 pt-20">
+      <p class="text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Además</p>
+      <h2 class="mt-3 font-display text-4xl font-semibold">También te lo preparamos</h2>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <div class="rounded-3xl border border-white/5 bg-pizarra-900 p-6"><p class="font-display text-2xl font-semibold">Comida para llevar</p><p class="mt-2 leading-relaxed text-crema-300">Nuestra cocina para disfrutar en casa. Encárgala por teléfono o WhatsApp y pásate a recogerla.</p></div>
+        <div class="rounded-3xl border border-white/5 bg-pizarra-900 p-6"><p class="font-display text-2xl font-semibold">Menús de empresa y grupos</p><p class="mt-2 leading-relaxed text-crema-300">Comidas y cenas de empresa, celebraciones y grupos con menús a medida.</p></div>
+        <div class="rounded-3xl border border-white/5 bg-pizarra-900 p-6"><p class="font-display text-2xl font-semibold">Encargos de Navidad</p><p class="mt-2 leading-relaxed text-crema-300">Esta Navidad no vas a cocinar: platos por encargo y cestas con productos de Castilla y León.</p></div>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-3"><a href="tel:{TEL}" class="inline-flex items-center justify-center rounded-full bg-vino-500 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-vino-400">Llamar al {TEL_VISIBLE}</a><a href="{WHATSAPP}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Escribir por WhatsApp</a></div>
+    </section>
+
+    <!-- Instagram -->
+    <section class="mx-auto max-w-6xl px-5 pt-20">
+      <a href="{REDES[0][1]}" target="_blank" rel="noopener" class="group flex flex-col items-start gap-5 rounded-3xl border border-white/5 bg-gradient-to-br from-vino-600/40 via-pizarra-900 to-pizarra-900 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <span class="flex items-center gap-4"><img src="img/logo.webp" alt="" class="h-16 w-16 rounded-full" loading="lazy" />
+          <span><span class="block text-xs font-semibold uppercase tracking-[.25em] text-oro-400">Síguenos</span><span class="block font-display text-2xl font-semibold">@autenticoscylbartaperia</span><span class="block text-sm text-crema-300">Platos del día, novedades y horarios especiales.</span></span></span>
+        <span class="inline-flex items-center gap-2 rounded-full bg-crema-100 px-6 py-3 font-semibold text-pizarra-950">{ICONOS['Instagram']}Ver Instagram</span>
+      </a>
+    </section>
+
     <!-- Noticias -->
     <section class="mx-auto max-w-6xl px-5 pt-20">
       <div class="flex flex-wrap items-end justify-between gap-4">
@@ -324,7 +358,7 @@ def pagina_inicio():
         <dl class="mt-8 space-y-4">
           <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Dirección</dt><dd class="mt-1">{e(DIRECCION)}</dd></div>
           <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Teléfono</dt><dd class="mt-1"><a href="tel:{TEL}" class="text-lg font-semibold hover:text-oro-300">{TEL_VISIBLE}</a></dd></div>
-          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Horario</dt><dd><table class="mt-2 w-full max-w-sm text-sm"><tbody>{''.join(f'<tr class="border-b border-white/5"><th scope="row" class="py-1.5 pr-4 text-left font-medium text-crema-300">{d}</th><td class="py-1.5 text-right tabular-nums text-crema-100">{h}</td></tr>' for d, h in HORARIO)}</tbody></table><p class="mt-2 text-xs text-crema-500">Horario del bar y la tienda. Servicio de comidas y cenas según día: consúltanos.</p></dd></div>
+          <div><dt class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Horario</dt><dd><table class="mt-2 w-full max-w-sm text-sm"><tbody>{''.join(f'<tr class="border-b border-white/5"><th scope="row" class="py-1.5 pr-4 text-left font-medium text-crema-300">{d}</th><td class="py-1.5 text-right tabular-nums text-crema-100">{h}</td></tr>' for d, h in HORARIO)}</tbody></table><p class="mt-2 text-xs text-crema-500">Martes y miércoles cerrado, salvo festivos. Horarios especiales en fiestas: los publicamos en Instagram.</p></dd></div>
         </dl>
         <div class="mt-8 flex flex-wrap gap-3">{boton('reservas.html', 'Reservar mesa')}<a href="{WHATSAPP}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">WhatsApp</a><a href="{MAPA}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-crema-100/30 px-7 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Cómo llegar</a></div>
       </div>
@@ -506,7 +540,7 @@ def pagina_reservas():
       <div class="rounded-3xl border border-vino-400/30 bg-vino-500/10 p-6 text-sm leading-relaxed text-crema-300">
         <p class="font-semibold text-vino-300">Las noches de Auténticos</p>
         <p class="mt-1">Nuestras hamburguesas de autor solo se sirven en el turno de cenas.</p>
-        <p class="mt-3 text-crema-500">Cenas de jueves a domingo. Los martes no hay servicio de comidas ni cenas.</p>
+        <p class="mt-3 text-crema-500">Cenas de jueves a domingo. Martes y miércoles cerrado, salvo festivos.</p>
       </div>
     </aside>
   </main>
