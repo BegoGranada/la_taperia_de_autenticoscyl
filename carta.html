@@ -69,9 +69,9 @@
       <p class="mt-4 max-w-xl leading-relaxed text-crema-300">Producto de temporada, cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.</p>
     </header>
     <nav class="sticky top-[61px] z-30 -mx-5 mt-8 border-y border-white/5 bg-pizarra-950/95 px-5 py-3 backdrop-blur" aria-label="Secciones de la carta">
-      <div class="no-scrollbar flex gap-2 overflow-x-auto"><a href="#imprescindibles" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Imprescindibles</a><a href="#brasa" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Brasa y mar</a><a href="#noches" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Las Noches</a><a href="#postres" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Repostería</a><a href="#bodega" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Bodega</a></div>
+      <div id="chipsCarta" class="no-scrollbar flex gap-2 overflow-x-auto"><a href="#imprescindibles" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Imprescindibles</a><a href="#brasa" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Brasa y mar</a><a href="#noches" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Las Noches</a><a href="#postres" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Repostería</a><a href="#bodega" class="shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:border-oro-400 hover:text-oro-300">Bodega</a></div>
     </nav>
-    
+    <div id="secciones">
       <section id="imprescindibles" class="pt-14">
         <img src="img/brasa-mar.webp" alt="Chipirones en texturas con tomate y crujiente de torreznos" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover object-[center_40%] sm:h-72" />
         <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Verano · Brasa · Temporada</p>
@@ -519,6 +519,7 @@
         </ul>
         <p class="mt-6 text-center font-display text-lg italic text-oro-300">Nuestro mejor reconocimiento es que el último bocado despierte las ganas de volver.</p>
       </section>
+    </div>
     <section id="bodega" class="pt-14">
       <img src="img/tienda.webp" alt="Estanterías de vinos y productos de Castilla y León junto a la barra" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover sm:h-72" />
       <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Vinos de Castilla y León</p>
@@ -570,5 +571,8 @@
       document.querySelectorAll('[data-anio]').forEach(el => el.textContent = new Date().getFullYear());
     })();
   </script>
+  <!-- Modo demostración: si el propietario ha publicado cambios desde su área, se muestran aquí -->
+  <script src="js/carta-datos.js"></script>
+  <script src="js/carta-render.js"></script>
 </body>
 </html>

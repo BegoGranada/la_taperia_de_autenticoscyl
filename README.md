@@ -12,7 +12,7 @@ Web de **Auténticos CyL** (C/ Calixto del Río, 8 · Coca, Segovia): bar taper�
 | `carta.html` | **Carta** de verano, solo para consultar: imprescindibles, brasa y mar, Las noches de Auténticos (solo cenas), repostería y bodega. Incluye precios, alérgenos (1–14) y suplemento de pan. |
 | `noticias.html` | **Noticias y reconocimientos**. |
 | `reservas.html` | **Reservas**: formulario de solicitud (día, turno, hora, personas y datos de contacto). |
-| `gestor.html` | **Área de propietarios**: agenda por día y turno, aforo, solicitudes pendientes (confirmar o rechazar), llegadas y no presentados, reservas a mano, llamada y WhatsApp con mensaje de confirmación preparado. |
+| `gestor.html` | **Área de propietarios**. **Reservas:** agenda por día y turno, aforo, solicitudes pendientes (confirmar o rechazar), llegadas y no presentados, reservas a mano, llamada y WhatsApp con mensaje de confirmación preparado. **Carta:** editar, añadir, ordenar y quitar platos y secciones (precio, descripción, alérgenos, etiquetas y foto, también subida desde el móvil), marcar «Agotado hoy» u ocultar; borrador y botón *Publicar*; descarga de `carta.json`. |
 
 Todas las páginas públicas tienen el mismo menú: Inicio · Carta · Noticias · Reservas · Propietarios.
 
@@ -26,6 +26,17 @@ Las páginas públicas se generan con `python3 tools/generar.py`. Para cambiar e
 - **Fotos:** `img/` (webp optimizado para móvil).
 
 Después de editar, vuelve a ejecutar `python3 tools/generar.py`.
+
+## Cómo funciona la demo de la carta
+
+Los cambios del área de propietarios se guardan como **borrador**. Al pulsar **Publicar**, `carta.html` muestra la carta nueva en ese navegador (lo hace `js/carta-render.js`).
+
+Para dejar un cambio fijo en la web publicada:
+1. En el área de propietarios, pulsa *Descargar copia (carta.json)*.
+2. Pon ese archivo en `datos/carta.json`.
+3. Ejecuta `python3 tools/generar.py`.
+
+Con base de datos, *Publicar* lo hará directamente para todos los clientes.
 
 ## Cómo funciona la demo de reservas
 

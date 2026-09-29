@@ -372,12 +372,15 @@ def pagina_inicio():
 # CARTA (solo consulta)
 # ---------------------------------------------------------------------------
 def plato(p):
-    etiquetas = ''.join(f'<span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">{e(t)}</span>' for t in p['etiquetas'])
+    if p.get('estado') == 'oculto':
+        return ''
+    agotado = p.get('estado') == 'agotado'
+    etiquetas = ('<span class="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-crema-100">Agotado hoy</span>' if agotado else '') + ''.join(f'<span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">{e(t)}</span>' for t in p['etiquetas'])
     alerg = f'<span class="text-xs text-crema-500" title="Alérgenos: {e(", ".join(ALERGENOS[a] for a in p["alergenos"]))}">({", ".join(map(str, p["alergenos"]))})</span>' if p['alergenos'] else ''
     foto = f'<img src="{p["foto"]}" alt="{e(p["nombre"])}" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />' if p.get('foto') else ''
     precio = euros(p['precio']) + (' /ud.' if p['unidad'] else '')
     return f'''
-          <li class="flex gap-4 py-5">
+          <li class="flex gap-4 py-5{" opacity-50" if agotado else ""}">
             {foto}
             <div class="min-w-0 flex-1">
               <div class="flex items-baseline justify-between gap-4">
@@ -392,7 +395,7 @@ def plato(p):
 
 def seccion_carta(s):
     filas, grupo = [], None
-    for p in s['platos']:
+    for p in (x for x in s['platos'] if x.get('estado') != 'oculto'):
         if p.get('grupo') and p['grupo'] != grupo:
             filas.append(f'</ul><h3 class="mt-8 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-oro-400">{e(p["grupo"])}<span class="h-px flex-1 bg-oro-400/25"></span></h3><ul class="divide-y divide-white/5">')
         grupo = p.get('grupo')
@@ -425,9 +428,10 @@ def pagina_carta():
       <p class="mt-4 max-w-xl leading-relaxed text-crema-300">Producto de temporada, cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.</p>
     </header>
     <nav class="sticky top-[61px] z-30 -mx-5 mt-8 border-y border-white/5 bg-pizarra-950/95 px-5 py-3 backdrop-blur" aria-label="Secciones de la carta">
-      <div class="no-scrollbar flex gap-2 overflow-x-auto">{chips}</div>
+      <div id="chipsCarta" class="no-scrollbar flex gap-2 overflow-x-auto">{chips}</div>
     </nav>
-    {''.join(seccion_carta(s) for s in secciones)}
+    <div id="secciones">{''.join(seccion_carta(s) for s in secciones)}
+    </div>
     <section id="bodega" class="pt-14">
       <img src="img/tienda.webp" alt="Estanterías de vinos y productos de Castilla y León junto a la barra" loading="lazy" class="mb-8 h-56 w-full rounded-3xl object-cover sm:h-72" />
       <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">Vinos de Castilla y León</p>
@@ -441,7 +445,12 @@ def pagina_carta():
     </section>
     <div class="mt-10 flex flex-wrap justify-center gap-3">{boton('reservas.html', 'Reservar mesa')}</div>
   </main>
-''' + pie() + '</body>\n</html>\n'
+''' + pie() + '''  <!-- Modo demostración: si el propietario ha publicado cambios desde su área, se muestran aquí -->
+  <script src="js/carta-datos.js"></script>
+  <script src="js/carta-render.js"></script>
+</body>
+</html>
+'''
 
 
 # ---------------------------------------------------------------------------
@@ -607,6 +616,11 @@ def main():
                          ('noticias.html', pagina_noticias()), ('reservas.html', pagina_reservas())]:
         (RAIZ / nombre).write_text(html, encoding='utf-8')
         print('escrito', nombre)
+    # La carta base, para el editor de propietarios y para la carta de la demo
+    (RAIZ / 'js' / 'carta-datos.js').write_text(
+        '/* Generado por tools/generar.py a partir de datos/carta.json: no editar a mano */\n'
+        'window.CARTA_BASE = ' + json.dumps(CARTA, ensure_ascii=False, indent=1) + ';\n', encoding='utf-8')
+    print('escrito js/carta-datos.js')
 
 
 if __name__ == '__main__':

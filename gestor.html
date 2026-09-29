@@ -66,7 +66,7 @@
           </a>
           <div class="min-w-0 leading-tight">
             <p class="truncate font-display text-lg font-semibold">Auténticos CyL</p>
-            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Reservas · modo demostración</p>
+            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Propietarios · modo demostración</p>
           </div>
         </div>
         <button id="btnSalir" class="rounded-full px-3 py-2 text-sm text-crema-300 hover:bg-white/10">Salir</button>
@@ -90,6 +90,32 @@
         <h2 class="font-display text-3xl font-semibold">Solicitudes</h2>
         <p class="mt-1 text-sm text-crema-500">Reservas pendientes de confirmar, de la web y del resto de canales.</p>
         <div id="listaSolicitudes" class="mt-4 space-y-3"></div>
+      </section>
+
+      <!-- ---------- CARTA ---------- -->
+      <section id="p-carta" class="pantalla">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <h2 class="font-display text-3xl font-semibold">Carta</h2>
+            <p class="mt-1 text-sm text-crema-500">Cambia platos, precios y fotos. Nada sale en la web hasta que pulses <b class="text-crema-300">Publicar</b>.</p>
+          </div>
+          <span id="cartaEstado" class="shrink-0 rounded-full px-3 py-1 text-xs font-semibold"></span>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-2">
+          <button id="btnPublicar" class="rounded-full bg-vino-500 py-3 font-semibold transition hover:bg-vino-400 disabled:opacity-40">Publicar cambios</button>
+          <a href="carta.html" target="_blank" rel="noopener" class="rounded-full border border-white/15 py-3 text-center font-semibold">Ver la carta ↗</a>
+        </div>
+        <div id="cartaSecciones" class="mt-6 space-y-5"></div>
+        <button id="btnNuevaSeccion" class="mt-5 w-full rounded-3xl border border-dashed border-white/15 p-4 text-sm font-semibold text-crema-300">+ Nueva sección</button>
+        <div class="mt-6 rounded-3xl border border-white/5 bg-pizarra-900 p-5 text-sm">
+          <p class="font-semibold">Más opciones</p>
+          <div class="mt-3 grid gap-2 sm:grid-cols-2">
+            <button id="btnDescartar" class="rounded-full border border-white/15 py-3 font-semibold text-crema-300">Descartar cambios sin publicar</button>
+            <button id="btnExportar" class="rounded-full border border-white/15 py-3 font-semibold text-crema-300">Descargar copia (carta.json)</button>
+            <button id="btnRestaurar" class="rounded-full border border-vino-400/40 py-3 font-semibold text-vino-300 sm:col-span-2">Restaurar la carta original</button>
+          </div>
+          <p class="mt-3 text-xs leading-relaxed text-crema-500">Modo demostración: la carta publicada se guarda en este navegador y la web la muestra desde aquí. Con base de datos se publicará para todos los clientes.</p>
+        </div>
       </section>
 
       <!-- ---------- AJUSTES ---------- -->
@@ -117,11 +143,12 @@
 
     <!-- Navegación inferior -->
     <nav class="fixed inset-x-0 bottom-0 z-30 border-t border-white/5 bg-pizarra-950/95 pb-[env(safe-area-inset-bottom)] backdrop-blur" aria-label="Secciones">
-      <div class="mx-auto grid max-w-md grid-cols-4 text-[11px] font-semibold text-crema-500">
+      <div class="mx-auto grid max-w-lg grid-cols-5 text-[11px] font-semibold text-crema-500">
         <button data-ir="agenda" class="flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path stroke-linecap="round" d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda</button>
         <button data-ir="solicitudes" class="relative flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v11H8l-4 4V5Z"/></svg>Solicitudes
           <span id="badge" class="absolute right-3 top-1.5 hidden min-w-[20px] rounded-full bg-vino-500 px-1.5 py-0.5 text-[10px] font-bold text-crema-100"></span></button>
         <button id="btnNueva" class="flex flex-col items-center gap-1 py-2" aria-label="Nueva reserva"><span class="grid h-11 w-11 place-items-center rounded-full bg-vino-500 text-2xl text-crema-100 shadow-lg">+</span>Nueva</button>
+        <button data-ir="carta" class="flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm0 13a3 3 0 0 1 3-3h11M9 8h6"/></svg>Carta</button>
         <button data-ir="ajustes" class="flex flex-col items-center gap-1 py-3"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Ajustes</button>
       </div>
     </nav>
@@ -182,11 +209,93 @@
     </div>
   </div>
 
+  <!-- =================== FICHA DE PLATO (carta) =================== -->
+  <div id="dlgPlato" class="fixed inset-0 z-50 hidden items-end justify-center bg-black/70 sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="platoTitulo">
+    <div class="max-h-[94svh] w-full max-w-xl overflow-y-auto rounded-t-3xl bg-pizarra-900 p-5 sm:rounded-3xl">
+      <div class="flex items-start justify-between gap-3">
+        <div><p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Carta</p><h2 id="platoTitulo" class="font-display text-3xl font-semibold">Plato</h2></div>
+        <button data-cerrar-dlg class="rounded-full bg-white/5 p-2.5 text-crema-300" aria-label="Cerrar"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <form id="formPlato" class="mt-5 space-y-4" novalidate>
+        <input type="hidden" name="id" /><input type="hidden" name="foto" />
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Nombre del plato</span>
+          <input name="nombre" autocomplete="off" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Descripción (opcional)</span>
+          <textarea name="desc" rows="3" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3"></textarea></label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Precio (€)</span>
+            <input name="precio" inputmode="decimal" autocomplete="off" placeholder="0,00" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-right tabular-nums" /></label>
+          <label class="mt-7 flex items-center gap-3 text-sm"><input name="unidad" type="checkbox" class="h-5 w-5 accent-vino-500" /> Precio por unidad</label>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Sección</span>
+            <select name="seccion" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3 py-3"></select></label>
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Subgrupo (opcional)</span>
+            <input name="grupo" list="gruposCarta" autocomplete="off" placeholder="Ej.: Del mar" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /><datalist id="gruposCarta"></datalist></label>
+        </div>
+        <fieldset><legend class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Disponibilidad</legend>
+          <div class="mt-2 grid grid-cols-3 gap-2" id="estadosPlato"></div></fieldset>
+        <fieldset><legend class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Alérgenos</legend>
+          <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3" id="alergenosPlato"></div></fieldset>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Etiquetas (separadas por comas)</span>
+          <input name="etiquetas" autocomplete="off" placeholder="Opción sin gluten, Nuevo" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        <div class="-mt-2 flex flex-wrap gap-2" id="sugerenciasEtiquetas"></div>
+        <fieldset><legend class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Foto</legend>
+          <div class="mt-2 flex items-center gap-4">
+            <img id="platoFotoPrev" alt="" class="hidden h-24 w-24 rounded-2xl object-cover" />
+            <div class="flex flex-1 flex-wrap gap-2">
+              <label class="cursor-pointer rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">Subir foto<input id="platoFotoArchivo" type="file" accept="image/*" class="sr-only" /></label>
+              <button type="button" id="platoFotoQuitar" class="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-crema-300">Sin foto</button>
+            </div>
+          </div>
+          <p class="mt-3 text-xs text-crema-500">O elige una de las fotos de la web:</p>
+          <div class="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1" id="galeriaFotos"></div>
+        </fieldset>
+        <p id="errorPlato" class="hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300" role="alert"></p>
+        <button type="submit" class="w-full rounded-full bg-vino-500 py-4 font-semibold transition hover:bg-vino-400">Guardar plato</button>
+        <button type="button" id="btnEliminarPlato" class="hidden w-full rounded-full border border-vino-400/40 py-3 text-sm font-semibold text-vino-300">Eliminar plato</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =================== FICHA DE SECCIÓN (carta) =================== -->
+  <div id="dlgSeccion" class="fixed inset-0 z-50 hidden items-end justify-center bg-black/70 sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="seccionTitulo">
+    <div class="max-h-[94svh] w-full max-w-xl overflow-y-auto rounded-t-3xl bg-pizarra-900 p-5 sm:rounded-3xl">
+      <div class="flex items-start justify-between gap-3">
+        <div><p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Carta</p><h2 id="seccionTitulo" class="font-display text-3xl font-semibold">Sección</h2></div>
+        <button data-cerrar-dlg class="rounded-full bg-white/5 p-2.5 text-crema-300" aria-label="Cerrar"><svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <form id="formSeccion" class="mt-5 space-y-4" novalidate>
+        <input type="hidden" name="indice" />
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Nombre</span>
+          <input name="nombre" autocomplete="off" placeholder="Nuestros imprescindibles" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Nombre en el menú</span>
+            <input name="corto" autocomplete="off" placeholder="Imprescindibles" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+          <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Lema (opcional)</span>
+            <input name="lema" autocomplete="off" placeholder="Verano · Brasa" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        </div>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Texto de presentación (opcional)</span>
+          <textarea name="intro" rows="3" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3"></textarea></label>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Aviso destacado (opcional)</span>
+          <input name="aviso" autocomplete="off" placeholder="Solo disponible en servicio de cenas" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Frase de cierre (opcional)</span>
+          <input name="cierre" autocomplete="off" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3" /></label>
+        <label class="flex items-center gap-3 text-sm"><input name="oculta" type="checkbox" class="h-5 w-5 accent-vino-500" /> Ocultar la sección en la web</label>
+        <p id="errorSeccion" class="hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300" role="alert"></p>
+        <button type="submit" class="w-full rounded-full bg-vino-500 py-4 font-semibold transition hover:bg-vino-400">Guardar sección</button>
+        <button type="button" id="btnEliminarSeccion" class="hidden w-full rounded-full border border-vino-400/40 py-3 text-sm font-semibold text-vino-300">Eliminar sección</button>
+      </form>
+    </div>
+  </div>
+
   <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-0 bottom-24 z-[60] flex justify-center px-4 opacity-0 transition-opacity">
     <p class="rounded-full bg-oro-400 px-5 py-2.5 text-sm font-semibold text-pizarra-950 shadow-xl"></p>
   </div>
 
   <script src="js/config.js"></script>
+  <script src="js/carta-datos.js"></script>
+  <script src="js/carta-render.js"></script>
   <script>
   /* =====================================================================
      Utilidades
@@ -255,7 +364,7 @@
   function entrar() {
     D = cargar(); importarWeb();
     $('#vistaLogin').classList.add('hidden'); $('#vistaApp').classList.remove('hidden');
-    ir(pantalla); pintar();
+    ir(pantalla); pintar(); pintarCarta();
   }
   $('#formLogin').addEventListener('submit', ev => { ev.preventDefault(); try { sessionStorage.setItem('taperia-sesion', '1'); } catch (e) {} entrar(); });
   const reset = () => { try { localStorage.removeItem(CLAVE); } catch (e) {} D = cargar(); importarWeb(); if (!$('#vistaApp').classList.contains('hidden')) pintar(); toast('Datos de ejemplo restablecidos'); };
@@ -419,6 +528,224 @@
   $('#accEliminar').addEventListener('click', () => {
     if (!confirm('¿Eliminar esta reserva? Si solo se anula, mejor márcala como cancelada.')) return;
     D.reservas = D.reservas.filter(x => x.id !== F.id.value); guardar(); cerrarHoja(); pintar(); toast('Reserva eliminada');
+  });
+
+  /* =====================================================================
+     CARTA: edición por el propietario
+     Borrador (lo que se está editando) y carta publicada (la que ve la web).
+     Modo demostración: ambas en localStorage; la web la lee con js/carta-render.js.
+     ===================================================================== */
+  const CLAVE_BORRADOR = 'taperia-carta-borrador', CLAVE_PUB = window.CartaDemo.CLAVE_PUBLICADA;
+  const AL = window.CartaDemo.ALERGENOS, eurosC = window.CartaDemo.euros;
+  const FOTOS = ['img/chipirones.webp', 'img/croquetas.webp', 'img/torreznos.webp', 'img/tabla-duroc.webp', 'img/rabo-de-toro.webp',
+    'img/huevo-de-corral.webp', 'img/postre.webp', 'img/brasa-mar.webp', 'img/local.webp', 'img/tienda.webp'];
+  const SUGERIDAS = ['Nuevo', 'Opción sin gluten', 'Vegetariano', 'Para compartir', 'Para 2 personas', 'Picante', 'Del chef'];
+  const ESTADOS_PLATO = [['disponible', 'Disponible'], ['agotado', 'Agotado hoy'], ['oculto', 'Oculto']];
+  const clonar = o => JSON.parse(JSON.stringify(o));
+  // Carta base con ids fijos para poder comparar versiones
+  function normalizar(c) {
+    c = clonar(c);
+    c.secciones.forEach(s => s.platos.forEach((p, i) => { p.id = p.id || `${s.id}-${i + 1}`; p.estado = p.estado || 'disponible'; p.etiquetas = p.etiquetas || []; p.alergenos = p.alergenos || []; }));
+    return c;
+  }
+  const leerLS = k => { try { const d = JSON.parse(localStorage.getItem(k)); return d && Array.isArray(d.secciones) ? d : null; } catch (e) { return null; } };
+  const sinMarca = c => { const x = clonar(c); delete x.publicada; return JSON.stringify(x); };
+  const publicada = () => leerLS(CLAVE_PUB) || normalizar(window.CARTA_BASE);
+  let carta = leerLS(CLAVE_BORRADOR) || normalizar(publicada());
+  function guardarBorrador() {
+    try { localStorage.setItem(CLAVE_BORRADOR, JSON.stringify(carta)); }
+    catch (e) { toast('⚠️ No queda espacio en el navegador: usa fotos más pequeñas'); }
+    pintarCarta();
+  }
+  const hayCambios = () => sinMarca(carta) !== sinMarca(publicada());
+  const idNuevo = t => (t || 'seccion').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30) || 'seccion';
+
+  function pintarCarta() {
+    const cambios = hayCambios(), pub = leerLS(CLAVE_PUB), est = $('#cartaEstado');
+    est.textContent = cambios ? 'Cambios sin publicar' : pub?.publicada ? 'Publicada' : 'Carta original';
+    est.className = `shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${cambios ? 'bg-oro-400/15 text-oro-300' : 'bg-emerald-400/15 text-emerald-300'}`;
+    $('#btnPublicar').disabled = !cambios; $('#btnDescartar').disabled = !cambios; $('#btnDescartar').classList.toggle('opacity-40', !cambios);
+    $('#cartaSecciones').innerHTML = carta.secciones.map((s, si) => `
+      <div class="overflow-hidden rounded-3xl border border-white/5 bg-pizarra-900 ${s.oculta ? 'opacity-60' : ''}">
+        <div class="flex items-center justify-between gap-2 border-b border-white/5 px-4 py-3">
+          <button data-editar-seccion="${si}" class="min-w-0 text-left">
+            <p class="truncate font-display text-xl font-semibold">${esc(s.nombre)}</p>
+            <p class="text-xs text-crema-500">${s.platos.length} platos${s.oculta ? ' · oculta en la web' : ''} · <span class="text-oro-300">editar sección</span></p>
+          </button>
+          <div class="flex shrink-0 gap-1">
+            <button data-mover-seccion="${si}" data-dir="-1" ${si === 0 ? 'disabled' : ''} class="grid h-9 w-9 place-items-center rounded-full border border-white/10 disabled:opacity-30" aria-label="Subir sección">↑</button>
+            <button data-mover-seccion="${si}" data-dir="1" ${si === carta.secciones.length - 1 ? 'disabled' : ''} class="grid h-9 w-9 place-items-center rounded-full border border-white/10 disabled:opacity-30" aria-label="Bajar sección">↓</button>
+          </div>
+        </div>
+        <ul class="divide-y divide-white/5">${s.platos.map((p, pi) => `
+          <li class="flex items-center gap-3 px-4 py-3 ${p.estado === 'oculto' ? 'opacity-50' : ''}">
+            <button data-editar-plato="${si}:${pi}" class="flex min-w-0 flex-1 items-center gap-3 text-left">
+              ${p.foto ? `<img src="${esc(p.foto)}" alt="" class="h-11 w-11 shrink-0 rounded-xl object-cover" />` : '<span class="h-11 w-11 shrink-0 rounded-xl bg-white/5"></span>'}
+              <span class="min-w-0">
+                <span class="line-clamp-2 block font-semibold leading-snug">${esc(p.nombre)}</span>
+                <span class="block text-xs text-crema-500"><span class="tabular-nums text-oro-300">${eurosC(p.precio)}${p.unidad ? ' /ud.' : ''}</span>${p.grupo ? ' · ' + esc(p.grupo) : ''}${p.estado === 'oculto' ? ' · <b class="text-crema-300">Oculto</b>' : ''}</span>
+              </span>
+            </button>
+            <button data-agotado="${si}:${pi}" class="shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${p.estado === 'agotado' ? 'bg-vino-500 text-crema-100' : 'border border-white/10 text-crema-500'}" aria-pressed="${p.estado === 'agotado'}">${p.estado === 'agotado' ? 'Agotado' : 'Hay'}</button>
+            <span class="flex shrink-0 flex-col">
+              <button data-mover-plato="${si}:${pi}" data-dir="-1" ${pi === 0 ? 'disabled' : ''} class="px-1 leading-none text-crema-500 disabled:opacity-20" aria-label="Subir plato">▲</button>
+              <button data-mover-plato="${si}:${pi}" data-dir="1" ${pi === s.platos.length - 1 ? 'disabled' : ''} class="px-1 leading-none text-crema-500 disabled:opacity-20" aria-label="Bajar plato">▼</button>
+            </span>
+          </li>`).join('')}
+        </ul>
+        <button data-nuevo-plato="${si}" class="w-full border-t border-white/5 px-4 py-3 text-left text-sm font-semibold text-oro-300">+ Añadir plato</button>
+      </div>`).join('');
+  }
+  const mover = (lista, i, dir) => { const j = i + dir; if (j < 0 || j >= lista.length) return; [lista[i], lista[j]] = [lista[j], lista[i]]; };
+  $('#cartaSecciones').addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    if (b.dataset.editarSeccion) return abrirSeccion(+b.dataset.editarSeccion);
+    if (b.dataset.nuevoPlato) return abrirPlato(+b.dataset.nuevoPlato, null);
+    if (b.dataset.moverSeccion) { mover(carta.secciones, +b.dataset.moverSeccion, +b.dataset.dir); return guardarBorrador(); }
+    const [si, pi] = (b.dataset.editarPlato || b.dataset.agotado || b.dataset.moverPlato || ':').split(':').map(Number);
+    if (b.dataset.editarPlato) return abrirPlato(si, pi);
+    if (b.dataset.agotado) { const p = carta.secciones[si].platos[pi]; p.estado = p.estado === 'agotado' ? 'disponible' : 'agotado'; guardarBorrador(); return toast(p.estado === 'agotado' ? `«${p.nombre}» marcado como agotado` : `«${p.nombre}» vuelve a estar disponible`); }
+    if (b.dataset.moverPlato) { mover(carta.secciones[si].platos, pi, +b.dataset.dir); guardarBorrador(); }
+  });
+  $('#btnPublicar').addEventListener('click', () => {
+    const pub = { ...clonar(carta), publicada: new Date().toISOString() };
+    try { localStorage.setItem(CLAVE_PUB, JSON.stringify(pub)); } catch (e) { return toast('⚠️ No queda espacio en el navegador'); }
+    pintarCarta(); toast('✓ Carta publicada en la web');
+  });
+  $('#btnDescartar').addEventListener('click', () => {
+    if (!confirm('¿Descartar los cambios sin publicar y volver a la carta publicada?')) return;
+    carta = normalizar(publicada()); try { localStorage.removeItem(CLAVE_BORRADOR); } catch (e) {} pintarCarta(); toast('Cambios descartados');
+  });
+  $('#btnRestaurar').addEventListener('click', () => {
+    if (!confirm('¿Restaurar la carta original? Se perderán los cambios y la carta publicada desde aquí.')) return;
+    try { localStorage.removeItem(CLAVE_BORRADOR); localStorage.removeItem(CLAVE_PUB); } catch (e) {}
+    carta = normalizar(window.CARTA_BASE); pintarCarta(); toast('Carta original restaurada');
+  });
+  $('#btnExportar').addEventListener('click', () => {
+    const datos = clonar(carta); delete datos.publicada;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(datos, null, 2)], { type: 'application/json' }));
+    a.download = 'carta.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast('Copia descargada');
+  });
+  $('#btnNuevaSeccion').addEventListener('click', () => abrirSeccion(null));
+
+  /* ----- Diálogos de carta ----- */
+  function abrirDlg(id) { $('#' + id).classList.replace('hidden', 'flex'); document.body.style.overflow = 'hidden'; history.pushState({ dlg: id }, ''); }
+  function cerrarDlg(id, desdeHistorial) {
+    const d = $('#' + id); if (d.classList.contains('hidden')) return;
+    d.classList.replace('flex', 'hidden'); document.body.style.overflow = '';
+    if (!desdeHistorial && history.state && history.state.dlg === id) history.back();
+  }
+  ['dlgPlato', 'dlgSeccion'].forEach(id => $('#' + id).addEventListener('click', ev => { if (ev.target.id === id || ev.target.closest('[data-cerrar-dlg]')) cerrarDlg(id); }));
+  window.addEventListener('popstate', () => ['dlgPlato', 'dlgSeccion'].forEach(id => cerrarDlg(id, true)));
+  document.addEventListener('keydown', ev => { if (ev.key === 'Escape') ['dlgPlato', 'dlgSeccion'].forEach(id => cerrarDlg(id)); });
+
+  /* ----- Ficha de plato ----- */
+  const FP = $('#formPlato');
+  let editando = null; // [si, pi] o [si, null]
+  function pintarFoto() {
+    const f = FP.foto.value, prev = $('#platoFotoPrev');
+    prev.classList.toggle('hidden', !f); if (f) prev.src = f; else prev.removeAttribute('src');
+    $('#galeriaFotos').innerHTML = FOTOS.map(src => `<button type="button" data-foto="${src}" class="shrink-0 overflow-hidden rounded-xl border-2 ${src === f ? 'border-oro-400' : 'border-transparent'}"><img src="${src}" alt="" class="h-16 w-16 object-cover" /></button>`).join('');
+  }
+  function pintarEstado(v) {
+    $('#estadosPlato').innerHTML = ESTADOS_PLATO.map(([k, t]) => `<label class="flex cursor-pointer items-center justify-center rounded-2xl border px-2 py-3 text-center text-sm font-semibold ${k === v ? 'border-oro-400 bg-oro-400/10 text-oro-300' : 'border-white/10 text-crema-300'}"><input type="radio" name="estado" value="${k}" ${k === v ? 'checked' : ''} class="sr-only" />${t}</label>`).join('');
+  }
+  function abrirPlato(si, pi) {
+    FP.reset(); editando = [si, pi];
+    const p = pi === null ? { nombre: '', desc: '', precio: '', unidad: false, grupo: '', estado: 'disponible', alergenos: [], etiquetas: [], foto: '' } : carta.secciones[si].platos[pi];
+    FP.seccion.innerHTML = carta.secciones.map((s, i) => `<option value="${i}">${esc(s.nombre)}</option>`).join('');
+    FP.seccion.value = si;
+    FP.id.value = p.id || ''; FP.nombre.value = p.nombre; FP.desc.value = p.desc || '';
+    FP.precio.value = p.precio === '' ? '' : String(p.precio).replace('.', ','); FP.unidad.checked = !!p.unidad;
+    FP.grupo.value = p.grupo || ''; FP.etiquetas.value = (p.etiquetas || []).join(', '); FP.foto.value = p.foto || '';
+    $('#gruposCarta').innerHTML = [...new Set(carta.secciones.flatMap(s => s.platos.map(x => x.grupo).filter(Boolean)))].map(g => `<option value="${esc(g)}">`).join('');
+    $('#alergenosPlato').innerHTML = Object.entries(AL).map(([n, t]) => `<label class="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-sm"><input type="checkbox" name="alergeno" value="${n}" ${(p.alergenos || []).includes(+n) ? 'checked' : ''} class="h-4 w-4 accent-vino-500" /><b class="w-5 text-oro-300">${n}</b>${t}</label>`).join('');
+    $('#sugerenciasEtiquetas').innerHTML = SUGERIDAS.map(t => `<button type="button" data-etiqueta="${t}" class="rounded-full border border-white/10 px-3 py-1 text-xs text-crema-300">+ ${t}</button>`).join('');
+    pintarEstado(p.estado || 'disponible'); pintarFoto();
+    $('#platoTitulo').textContent = pi === null ? 'Nuevo plato' : p.nombre;
+    $('#btnEliminarPlato').classList.toggle('hidden', pi === null);
+    $('#errorPlato').classList.add('hidden');
+    abrirDlg('dlgPlato');
+  }
+  $('#estadosPlato').addEventListener('change', ev => pintarEstado(ev.target.value));
+  $('#galeriaFotos').addEventListener('click', ev => { const b = ev.target.closest('[data-foto]'); if (b) { FP.foto.value = b.dataset.foto; pintarFoto(); } });
+  $('#platoFotoQuitar').addEventListener('click', () => { FP.foto.value = ''; pintarFoto(); });
+  $('#sugerenciasEtiquetas').addEventListener('click', ev => {
+    const b = ev.target.closest('[data-etiqueta]'); if (!b) return;
+    const l = FP.etiquetas.value.split(',').map(x => x.trim()).filter(Boolean);
+    if (!l.includes(b.dataset.etiqueta)) l.push(b.dataset.etiqueta); FP.etiquetas.value = l.join(', ');
+  });
+  // Foto subida desde el móvil: se reduce a 900 px para que ocupe poco
+  $('#platoFotoArchivo').addEventListener('change', ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    if (!f.type.startsWith('image/')) return toast('Elige una imagen');
+    const r = new FileReader();
+    r.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const k = Math.min(1, 900 / Math.max(img.width, img.height)), c = document.createElement('canvas');
+        c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        FP.foto.value = c.toDataURL('image/jpeg', 0.8); pintarFoto(); ev.target.value = '';
+      };
+      img.onerror = () => toast('No se ha podido leer la imagen');
+      img.src = r.result;
+    };
+    r.readAsDataURL(f);
+  });
+  FP.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const err = $('#errorPlato'), precio = Math.round(parseFloat(FP.precio.value.replace(',', '.')) * 100) / 100;
+    const msg = !FP.nombre.value.trim() ? 'Escribe el nombre del plato.' : !(precio >= 0) ? 'Escribe el precio (por ejemplo 12,95).' : '';
+    if (msg) { err.textContent = msg; err.classList.remove('hidden'); return; }
+    const [si, pi] = editando, destino = +FP.seccion.value;
+    const p = {
+      id: FP.id.value || 'p-' + Date.now().toString(36), nombre: FP.nombre.value.trim(), desc: FP.desc.value.trim(), precio,
+      unidad: FP.unidad.checked, grupo: FP.grupo.value.trim() || null, estado: (FP.querySelector('[name=estado]:checked') || {}).value || 'disponible',
+      alergenos: $$('[name=alergeno]:checked', FP).map(x => +x.value), foto: FP.foto.value || null,
+      etiquetas: FP.etiquetas.value.split(',').map(x => x.trim()).filter(Boolean)
+    };
+    if (pi === null) carta.secciones[destino].platos.push(p);
+    else if (destino === si) carta.secciones[si].platos[pi] = p;
+    else { carta.secciones[si].platos.splice(pi, 1); carta.secciones[destino].platos.push(p); }
+    cerrarDlg('dlgPlato'); guardarBorrador(); toast('Plato guardado · recuerda publicar');
+  });
+  $('#btnEliminarPlato').addEventListener('click', () => {
+    const [si, pi] = editando, p = carta.secciones[si].platos[pi];
+    if (!confirm(`¿Eliminar «${p.nombre}» de la carta? Si solo es por hoy, mejor márcalo como agotado.`)) return;
+    carta.secciones[si].platos.splice(pi, 1); cerrarDlg('dlgPlato'); guardarBorrador(); toast('Plato eliminado');
+  });
+
+  /* ----- Ficha de sección ----- */
+  const FS = $('#formSeccion');
+  function abrirSeccion(i) {
+    FS.reset();
+    const s = i === null ? {} : carta.secciones[i];
+    FS.indice.value = i === null ? '' : i;
+    ['nombre', 'corto', 'lema', 'intro', 'aviso', 'cierre'].forEach(k => FS[k].value = s[k] || '');
+    FS.oculta.checked = !!s.oculta;
+    $('#seccionTitulo').textContent = i === null ? 'Nueva sección' : s.nombre;
+    $('#btnEliminarSeccion').classList.toggle('hidden', i === null);
+    $('#errorSeccion').classList.add('hidden');
+    abrirDlg('dlgSeccion');
+  }
+  FS.addEventListener('submit', ev => {
+    ev.preventDefault();
+    if (!FS.nombre.value.trim()) { $('#errorSeccion').textContent = 'Escribe el nombre de la sección.'; return $('#errorSeccion').classList.remove('hidden'); }
+    const datos = { nombre: FS.nombre.value.trim(), corto: FS.corto.value.trim() || FS.nombre.value.trim(), lema: FS.lema.value.trim(),
+      intro: FS.intro.value.trim(), aviso: FS.aviso.value.trim() || null, cierre: FS.cierre.value.trim() || null, oculta: FS.oculta.checked };
+    if (FS.indice.value === '') {
+      let id = idNuevo(datos.corto), n = 2; while (carta.secciones.some(s => s.id === id)) id = idNuevo(datos.corto) + '-' + n++;
+      carta.secciones.push({ id, foto: null, platos: [], ...datos });
+    } else Object.assign(carta.secciones[+FS.indice.value], datos);
+    cerrarDlg('dlgSeccion'); guardarBorrador(); toast('Sección guardada · recuerda publicar');
+  });
+  $('#btnEliminarSeccion').addEventListener('click', () => {
+    const i = +FS.indice.value, s = carta.secciones[i];
+    if (!confirm(`¿Eliminar la sección «${s.nombre}» y sus ${s.platos.length} platos?`)) return;
+    carta.secciones.splice(i, 1); cerrarDlg('dlgSeccion'); guardarBorrador(); toast('Sección eliminada');
   });
 
   try { if (sessionStorage.getItem('taperia-sesion') === '1') entrar(); } catch (e) {}

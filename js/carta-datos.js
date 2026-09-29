@@ -1,0 +1,607 @@
+/* Generado por tools/generar.py a partir de datos/carta.json: no editar a mano */
+window.CARTA_BASE = {
+ "temporada": "Verano",
+ "secciones": [
+  {
+   "id": "imprescindibles",
+   "nombre": "Nuestros imprescindibles",
+   "corto": "Imprescindibles",
+   "lema": "Verano · Brasa · Temporada",
+   "intro": "Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.",
+   "aviso": null,
+   "cierre": null,
+   "foto": [
+    "img/brasa-mar.webp",
+    "Chipirones en texturas con tomate y crujiente de torreznos"
+   ],
+   "platos": [
+    {
+     "nombre": "Patatas bravas de la Retamilla",
+     "desc": "",
+     "precio": 12,
+     "unidad": false,
+     "alergenos": [
+      7
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Torrezno de Soria bien crujiente",
+     "desc": "",
+     "precio": 8.95,
+     "unidad": false,
+     "alergenos": [
+      5
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": "img/torreznos.webp"
+    },
+    {
+     "nombre": "Croquetas súper cremosas de jamón",
+     "desc": "",
+     "precio": 15.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": "img/croquetas.webp"
+    },
+    {
+     "nombre": "Chipirones en texturas",
+     "desc": "Tomate al estilo tradicional y crujiente de torreznos de Soria.",
+     "precio": 18.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      4,
+      5
+     ],
+     "etiquetas": [
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": "img/chipirones.webp"
+    },
+    {
+     "nombre": "Huevos rotos, torreznos de Soria y tartufata",
+     "desc": "",
+     "precio": 17.95,
+     "unidad": false,
+     "alergenos": [
+      5
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Ensalada de tomate de la huerta",
+     "desc": "Con ventresca y pimientos asados al carbón.",
+     "precio": 15,
+     "unidad": false,
+     "alergenos": [
+      4,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica",
+     "desc": "Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.",
+     "precio": 16.95,
+     "unidad": false,
+     "alergenos": [
+      4,
+      6,
+      7
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Burrata, cerezas asadas, remolacha ahumada y pistachos tostados",
+     "desc": "",
+     "precio": 16,
+     "unidad": false,
+     "alergenos": [
+      5,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Bikini de oreja plancha",
+     "desc": "Queso pata de mulo ahumado y mojo rojo.",
+     "precio": 12,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      11,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Taco de maíz con atún rojo salvaje de Almadraba",
+     "desc": "Marinado en michelada.",
+     "precio": 8,
+     "unidad": true,
+     "alergenos": [
+      1,
+      4
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Pizza de sartén de salmón ahumado",
+     "desc": "Stracciatella, aguacate y tomate semiseco.",
+     "precio": 12.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      4,
+      5
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Empanada de pipián con ají de maní",
+     "desc": "Masa de empanada argentina, rellena de verduras y cacahuete.",
+     "precio": 4.5,
+     "unidad": true,
+     "alergenos": [
+      1,
+      9
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    }
+   ]
+  },
+  {
+   "id": "brasa",
+   "nombre": "A la brasa y el mar",
+   "corto": "Brasa y mar",
+   "lema": "Sabores · Sensaciones y +",
+   "intro": "Sabores que nacen del respeto al producto, del fuego y del tiempo. En Auténticos CyL elevamos cada ingrediente a su máxima expresión para ofrecerte platos memorables, honestos y sorprendentes.",
+   "aviso": null,
+   "cierre": null,
+   "foto": [
+    "img/tabla-duroc.webp",
+    "Tabla de carnes Duroc a la brasa con chorizo ibérico, pebre y chimichurri"
+   ],
+   "platos": [
+    {
+     "nombre": "Albóndigas crujientes de cochinillo segoviano",
+     "desc": "En su propio jugo, manzana ácida y kimchi.",
+     "precio": 18.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      2,
+      5,
+      7,
+      10,
+      12,
+      14
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Entrecot de vaca a la brasa del josper",
+     "desc": "Madurado un mínimo de 35 días para lograr la máxima terneza y un sabor profundo. 400 g aprox.",
+     "precio": 24.95,
+     "unidad": false,
+     "alergenos": [],
+     "etiquetas": [
+      "400 g aprox."
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Tabla de carnes Duroc a la brasa",
+     "desc": "Solomillo, secreto, presa, pluma y chorizo ibérico. Selección premium para 2 personas.",
+     "precio": 36,
+     "unidad": false,
+     "alergenos": [],
+     "etiquetas": [
+      "Para 2 personas"
+     ],
+     "grupo": null,
+     "foto": "img/tabla-duroc.webp"
+    },
+    {
+     "nombre": "Picaña de vaca madurada a la brasa",
+     "desc": "",
+     "precio": 22,
+     "unidad": false,
+     "alergenos": [
+      12
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Presa ibérica a baja temperatura",
+     "desc": "Crema de maíz ahumado y melocotón a la brasa.",
+     "precio": 19,
+     "unidad": false,
+     "alergenos": [
+      12,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Lasaña de morcillo madurado a fuego lento",
+     "desc": "Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.",
+     "precio": 16,
+     "unidad": false,
+     "alergenos": [
+      1,
+      7,
+      12
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Hamburguesa de rabo de toro",
+     "desc": "Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.",
+     "precio": 16.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      12
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": "img/rabo-de-toro.webp"
+    },
+    {
+     "nombre": "Lubina curada marcada en brasa",
+     "desc": "Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.",
+     "precio": 21.95,
+     "unidad": false,
+     "alergenos": [
+      4,
+      7,
+      8
+     ],
+     "etiquetas": [],
+     "grupo": "Del mar",
+     "foto": null
+    },
+    {
+     "nombre": "Bonito semicurado, ligeramente marcado a la brasa",
+     "desc": "Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.",
+     "precio": 19.9,
+     "unidad": false,
+     "alergenos": [
+      4,
+      7,
+      12
+     ],
+     "etiquetas": [],
+     "grupo": "Del mar",
+     "foto": null
+    },
+    {
+     "nombre": "Bowl de lechuga, tomate y cebolla encurtida",
+     "desc": "",
+     "precio": 6.95,
+     "unidad": false,
+     "alergenos": [],
+     "etiquetas": [],
+     "grupo": "Para acompañar nuestros platos",
+     "foto": null
+    },
+    {
+     "nombre": "Patatas fritas",
+     "desc": "",
+     "precio": 4.5,
+     "unidad": false,
+     "alergenos": [],
+     "etiquetas": [],
+     "grupo": "Para acompañar nuestros platos",
+     "foto": null
+    },
+    {
+     "nombre": "Patatas asadas con alioli de kimchi",
+     "desc": "",
+     "precio": 7.5,
+     "unidad": false,
+     "alergenos": [
+      8,
+      12,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": "Para acompañar nuestros platos",
+     "foto": null
+    },
+    {
+     "nombre": "Verduras al josper",
+     "desc": "",
+     "precio": 7.95,
+     "unidad": false,
+     "alergenos": [],
+     "etiquetas": [],
+     "grupo": "Para acompañar nuestros platos",
+     "foto": null
+    }
+   ]
+  },
+  {
+   "id": "noches",
+   "nombre": "Las noches de Auténticos",
+   "corto": "Las Noches",
+   "lema": "Noches · Brasa · Bocados",
+   "intro": "Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.",
+   "aviso": "Solo disponible en servicio de cenas",
+   "cierre": null,
+   "foto": [
+    "img/rabo-de-toro.webp",
+    "Hamburguesa de rabo de toro con cebolla encurtida y maíz crujiente, con patatas, en tabla de madera"
+   ],
+   "platos": [
+    {
+     "nombre": "La Rabo de Toro",
+     "desc": "Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.",
+     "precio": 16.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": "img/rabo-de-toro.webp"
+    },
+    {
+     "nombre": "La Bestia Castellana",
+     "desc": "Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.",
+     "precio": 17.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      9,
+      10,
+      11,
+      13
+     ],
+     "etiquetas": [
+      "Buey 100 %",
+      "Guanciale",
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Rock & Rolla",
+     "desc": "Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.",
+     "precio": 16.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      7,
+      10,
+      11,
+      13,
+      14
+     ],
+     "etiquetas": [
+      "Buey 100 %",
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Deluxe Macarra",
+     "desc": "Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.",
+     "precio": 16.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      7,
+      10,
+      11,
+      12,
+      13
+     ],
+     "etiquetas": [
+      "Buey 100 %",
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "La Castiza",
+     "desc": "Hamburguesa de buey 100 % certificada, queso de pata de mulo y beicon.",
+     "precio": 14.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      7,
+      10,
+      11,
+      13
+     ],
+     "etiquetas": [
+      "Buey 100 %",
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Bikini de Oreja Ibérico",
+     "desc": "Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.",
+     "precio": 12,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      11,
+      13
+     ],
+     "etiquetas": [
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Bretzel de Pollo",
+     "desc": "Pollo crujiente, queso pata de mulo, cebolla caramelizada, bacon, alioli de kimchi, lechuga y tomate en pan bretzel.",
+     "precio": 14.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      11,
+      12
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    }
+   ]
+  },
+  {
+   "id": "postres",
+   "nombre": "La repostería de Auténticos",
+   "corto": "Repostería",
+   "lema": "El cierre de nuestra cocina",
+   "intro": "En Auténticos creemos que un gran postre no destaca por ser el más dulce, sino por estar elaborado con el mismo respeto por el producto, la misma técnica y la misma pasión que el resto de nuestra cocina.",
+   "aviso": null,
+   "cierre": "Nuestro mejor reconocimiento es que el último bocado despierte las ganas de volver.",
+   "foto": [
+    "img/postre.webp",
+    "Postre de autor: esfera naranja sobre tierra de chocolate"
+   ],
+   "platos": [
+    {
+     "nombre": "Tarta cremosa de queso",
+     "desc": "Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.",
+     "precio": 7.95,
+     "unidad": false,
+     "alergenos": [
+      5,
+      9,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Pavlova primaveral de mango, pasión, yogur y lima",
+     "desc": "Pavlova de vainilla y lima, curd de mango y pasión, helado de yogur, crumble de coco y lima, mango fresco aliñado y aceite de albahaca.",
+     "precio": 8.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      13
+     ],
+     "etiquetas": [
+      "Opcional sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Huevo de corral",
+     "desc": "Trampantojo de mousse de chocolate blanco, núcleo de fruta de la pasión, nido de pasta kataifi, yogur y chocolate.",
+     "precio": 8.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      9,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": "img/huevo-de-corral.webp"
+    },
+    {
+     "nombre": "Mojito Auténticos",
+     "desc": "Granizado de lima, helado de yogur, espuma de hierbabuena y menta, teja de azúcar y gel de ron.",
+     "precio": 8.95,
+     "unidad": false,
+     "alergenos": [
+      13
+     ],
+     "etiquetas": [
+      "Nuevo"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Huerta en Flor",
+     "desc": "Crema inglesa de vainilla, tomate rosa osmotizado, tartar de melocotón marinado, crujiente de almendra, gel de tomate, consomé de fresa y albahaca, aceite de albahaca y helado de yogur.",
+     "precio": 9.5,
+     "unidad": false,
+     "alergenos": [
+      5,
+      9,
+      13
+     ],
+     "etiquetas": [
+      "Nuevo"
+     ],
+     "grupo": null,
+     "foto": null
+    }
+   ]
+  }
+ ]
+};
