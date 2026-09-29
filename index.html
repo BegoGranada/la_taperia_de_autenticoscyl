@@ -35,9 +35,9 @@
     .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
     /* Textura de pizarra muy sutil en la cabecera */
     .pizarra-tex { background:
+      linear-gradient(180deg, rgba(18,19,21,.55) 0%, rgba(18,19,21,.78) 55%, #121315 100%),
       radial-gradient(120% 80% at 50% -10%, rgba(140,42,58,.35), transparent 60%),
-      radial-gradient(60% 60% at 100% 0%, rgba(201,164,92,.10), transparent 70%),
-      repeating-linear-gradient(115deg, rgba(255,255,255,.018) 0 2px, transparent 2px 7px),
+      url(img/local.webp) center 35% / cover no-repeat,
       #121315; }
     .panel { display: none; } .panel.activo { display: block; animation: entra .28s ease-out; }
     @keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -53,7 +53,7 @@
 <body class="min-h-screen font-sans text-crema-100 antialiased">
 
   <!-- =================== CABECERA =================== -->
-  <header class="pizarra-tex border-b border-white/5 px-5 pb-7 pt-[max(1.5rem,env(safe-area-inset-top))]">
+  <header class="pizarra-tex border-b border-white/5 px-5 pb-8 pt-[max(1.5rem,env(safe-area-inset-top))]" role="banner" aria-label="La Tapería de Auténticos CyL: barra de madera y azulejos junto al castillo de Coca">
     <div class="mx-auto max-w-2xl">
       <div class="flex items-center justify-between gap-3">
         <span class="rounded-full border border-oro-400/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.18em] text-oro-300">Modo demostración</span>
@@ -109,6 +109,7 @@
     <div data-cerrar class="hoja-fondo absolute inset-0 bg-black/70 opacity-0"></div>
     <div class="hoja absolute inset-x-0 bottom-0 mx-auto max-h-[92svh] max-w-2xl translate-y-full overflow-y-auto rounded-t-[28px] border-t border-white/10 bg-pizarra-900 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
       <div class="mx-auto h-1.5 w-12 rounded-full bg-white/15"></div>
+      <img id="platoFoto" alt="" class="mt-4 hidden aspect-[16/10] w-full rounded-3xl object-cover" />
       <div class="mt-4 flex items-start justify-between gap-4">
         <div class="min-w-0">
           <p id="platoSeccion" class="text-[11px] font-semibold uppercase tracking-[.22em] text-oro-400"></p>
@@ -254,12 +255,13 @@
   const SECCIONES = [
     {
       id: 'imprescindibles', nombre: 'Nuestros imprescindibles', corto: 'Imprescindibles', lema: 'Verano · Brasa · Temporada',
+      foto: ['img/brasa-mar.webp', 'Chipirones en texturas con tomate y crujiente de torreznos'],
       intro: 'Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.',
       platos: [
         { id: 'bravas', nombre: 'Patatas bravas de la Retamilla', desc: '', formatos: [['Ración', 12]], alergenos: [7] },
         { id: 'torrezno', nombre: 'Torrezno de Soria bien crujiente', desc: '', formatos: [['Ración', 8.95]], alergenos: [5] },
         { id: 'croquetas', nombre: 'Croquetas súper cremosas de jamón', desc: '', formatos: [['Ración', 15.95]], alergenos: [1, 5, 13] },
-        { id: 'chipirones', nombre: 'Chipirones en texturas', desc: 'Tomate al estilo tradicional y crujiente de torreznos de Soria.', formatos: [['Ración', 18.95]], alergenos: [1, 4, 5], etiquetas: ['Opción sin gluten'] },
+        { id: 'chipirones', nombre: 'Chipirones en texturas', desc: 'Tomate al estilo tradicional y crujiente de torreznos de Soria.', formatos: [['Ración', 18.95]], alergenos: [1, 4, 5], etiquetas: ['Opción sin gluten'], foto: 'img/chipirones.webp' },
         { id: 'huevosrotos', nombre: 'Huevos rotos, torreznos de Soria y tartufata', desc: '', formatos: [['Ración', 17.95]], alergenos: [5] },
         { id: 'ensaladatomate', nombre: 'Ensalada de tomate de la huerta', desc: 'Con ventresca y pimientos asados al carbón.', formatos: [['Ración', 15]], alergenos: [4, 13] },
         { id: 'ensaladaahumados', nombre: 'Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica', desc: 'Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.', formatos: [['Ración', 16.95]], alergenos: [4, 6, 7] },
@@ -291,6 +293,7 @@
     },
     {
       id: 'noches', nombre: 'Las noches de Auténticos', corto: 'Las Noches', lema: 'Noches · Brasa · Bocados',
+      foto: ['img/hamburguesa.webp', 'Hamburguesa de buey en pan brioche con patatas, servida en tabla de madera'],
       intro: 'Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.',
       aviso: 'Solo disponible en servicio de cenas',
       platos: [
@@ -319,6 +322,7 @@
     },
     {
       id: 'postres', nombre: 'La repostería de Auténticos', corto: 'Repostería', lema: 'El cierre de nuestra cocina',
+      foto: ['img/postre.webp', 'Postre de autor: esfera naranja sobre tierra de chocolate'],
       intro: 'En Auténticos creemos que un gran postre no destaca por ser el más dulce, sino por estar elaborado con el mismo respeto por el producto, la misma técnica y la misma pasión que el resto de nuestra cocina.',
       platos: [
         { id: 'tartaqueso', nombre: 'Tarta cremosa de queso', desc: 'Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.', formatos: [['Porción', 7.95]], alergenos: [5, 9, 13] },
@@ -389,6 +393,7 @@
     return `<li>
       <article class="group relative flex gap-4 rounded-3xl border border-white/[.06] bg-pizarra-900 p-4 transition hover:border-oro-400/30">
         <button data-abrir="${p.id}" class="absolute inset-0 rounded-3xl" aria-label="Ver ${esc(p.nombre)}"></button>
+        ${p.foto ? `<img src="${p.foto}" alt="" loading="lazy" class="h-24 w-24 shrink-0 self-center rounded-2xl object-cover" />` : ''}
         <div class="min-w-0 flex-1">
           <div class="flex flex-wrap gap-1.5">${p.etiquetas.map(e => `<span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">${esc(e)}</span>`).join('')}</div>
           <h3 class="${p.etiquetas.length ? 'mt-2' : ''} font-display text-[1.2rem] font-semibold leading-snug text-crema-100">${esc(p.nombre)}</h3>
@@ -413,6 +418,7 @@
         grupo = p.grupo; return cab + tarjeta(p);
       }).join('');
       return `<section role="tabpanel" id="panel-${s.id}" aria-labelledby="tab-${s.id}" class="panel ${s.id === seccionActiva ? 'activo' : ''}">
+        ${s.foto ? `<figure class="mb-5 overflow-hidden rounded-3xl border border-white/5"><img src="${s.foto[0]}" alt="${esc(s.foto[1])}" loading="lazy" class="h-48 w-full object-cover object-[center_40%] sm:h-60" /></figure>` : ''}
         <p class="text-[11px] font-semibold uppercase tracking-[.3em] text-oro-400">${esc(s.lema)}</p>
         <h2 class="mt-1 font-display text-[2rem] font-semibold leading-tight">${esc(s.nombre)}</h2>
         <p class="mt-2 text-[15px] italic leading-relaxed text-crema-500">${esc(s.intro)}</p>
@@ -484,6 +490,8 @@
     sel = { id, formato: 0, cant: 1 };
     $('#platoSeccion').textContent = p.seccion.nombre;
     $('#platoNombre').textContent = p.nombre;
+    const foto = $('#platoFoto'); foto.classList.toggle('hidden', !p.foto);
+    if (p.foto) { foto.src = p.foto; foto.alt = p.nombre; } else foto.removeAttribute('src');
     $('#platoDesc').textContent = p.desc;
     $('#platoEtiquetas').innerHTML = p.etiquetas.map(e => `<span class="rounded-full bg-vino-500/15 px-3 py-1 text-xs font-semibold text-vino-300">${esc(e)}</span>`).join('');
     $('#platoAlergenos').innerHTML = p.alergenos.length

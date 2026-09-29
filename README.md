@@ -27,6 +27,6 @@ const CONFIG = {
 - **QR por mesa:** `index.html?mesa=5` muestra «Mesa 5» y la pone en la comanda.
 - **Enlace directo a una sección:** `index.html#bodega` (también `#imprescindibles`, `#brasa`, `#noches` y `#postres`).
 
-La carta está en el bloque `SECCIONES`. Cada plato tiene nombre, descripción, formatos con precio, alérgenos y etiquetas.
+La carta está en el bloque `SECCIONES`. Cada plato tiene nombre, descripción, formatos con precio, alérgenos, etiquetas y, si hay, `foto`. Cada sección puede llevar una `foto` de cabecera. Las imágenes están en `img/` (webp, recortadas y optimizadas para móvil).
 
 Un solo archivo HTML con Tailwind CSS por CDN, sin dependencias ni compilación.
