@@ -303,8 +303,10 @@ def pagina_inicio():
               {boton('reservas.html', 'Reservar para esta fecha')}
             </div>
           </div>
-          <div class="overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-2xl">
-            <video id="videoEventoSeccion" src="{EVENTO['videoUrl']}" controls autoplay loop muted playsinline class="aspect-video w-full rounded-2xl object-cover"></video>
+          <div class="flex items-center justify-center p-2">
+            <div class="relative w-full max-w-[300px] aspect-[9/16] overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
+              <video id="videoEventoSeccion" src="{EVENTO['videoUrl']}" controls autoplay loop muted playsinline class="h-full w-full rounded-2xl object-cover"></video>
+            </div>
           </div>
         </div>
       </div>
@@ -443,8 +445,10 @@ def pagina_inicio():
         
         <p class="mt-4 leading-relaxed text-crema-300" data-evento-desc>{e(EVENTO['descripcion'])}</p>
         
-        <div class="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-2xl">
-          <video id="videoEventoModal" src="{EVENTO['videoUrl']}" controls autoplay loop muted playsinline class="aspect-video w-full rounded-2xl object-cover"></video>
+        <div class="mt-5 flex justify-center">
+          <div class="relative w-full max-w-[260px] sm:max-w-[300px] aspect-[9/16] overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
+            <video id="videoEventoModal" src="{EVENTO['videoUrl']}" controls autoplay loop muted playsinline class="h-full w-full rounded-2xl object-cover"></video>
+          </div>
         </div>
 
         <div class="mt-7 flex flex-wrap gap-3">
