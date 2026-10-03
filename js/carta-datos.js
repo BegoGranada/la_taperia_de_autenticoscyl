@@ -541,7 +541,7 @@ window.CARTA_BASE = {
      ],
      "etiquetas": [],
      "grupo": "Otros Bocados",
-     "foto": null
+     "foto": "img/pizza-sarten.webp"
     }
    ]
   },
