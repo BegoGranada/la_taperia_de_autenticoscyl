@@ -304,9 +304,24 @@ def pagina_inicio():
               <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoSeccion" class="inline-flex items-center gap-2 rounded-full border border-crema-100/30 px-6 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Ver vídeo / Reel ↗</a>
             </div>
           </div>
-          <div class="overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-xl">
-            <div class="aspect-video w-full">
-              <iframe id="iframeVideoSeccion" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1645790413629479&show_text=false" class="h-full w-full border-0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-pizarra-950 shadow-2xl group">
+            <div class="relative aspect-video w-full overflow-hidden bg-pizarra-900">
+              <img src="img/fachada.webp" alt="Noche de fuegos artificiales en Auténticos CyL" class="h-full w-full object-cover opacity-40 transition duration-500 group-hover:scale-105 group-hover:opacity-50" />
+              <div class="absolute inset-0 bg-gradient-to-t from-pizarra-950 via-pizarra-950/40 to-transparent"></div>
+              <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoCardSeccion" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                <span class="grid h-16 w-16 place-items-center rounded-full bg-vino-500/90 text-crema-100 shadow-[0_0_35px_rgba(140,42,58,0.7)] backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-vino-400">
+                  <svg class="ml-1 h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+                <span class="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-pizarra-950/80 px-3.5 py-1 text-xs font-semibold text-oro-300 backdrop-blur">
+                  {ICONOS['Facebook']} Reel en Facebook
+                </span>
+                <p class="mt-2 font-display text-base font-semibold text-crema-100 sm:text-lg">Ver vídeo del evento ↗</p>
+              </a>
+            </div>
+            <div class="border-t border-white/5 bg-pizarra-900/90 px-4 py-3 text-center">
+              <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoSubSeccion" class="inline-flex items-center gap-2 text-xs font-semibold text-oro-300 hover:text-oro-200">
+                {ICONOS['Facebook']} Ver reel publicado en Facebook ↗
+              </a>
             </div>
           </div>
         </div>
@@ -443,13 +458,23 @@ def pagina_inicio():
         
         <p class="mt-4 leading-relaxed text-crema-300" data-evento-desc>{e(EVENTO['descripcion'])}</p>
         
-        <div class="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-          <div class="aspect-video w-full">
-            <iframe id="iframeVideoEvento" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1645790413629479&show_text=false" class="h-full w-full border-0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        <div class="mt-5 relative overflow-hidden rounded-2xl border border-white/10 bg-pizarra-950 shadow-2xl group">
+          <div class="relative aspect-video w-full overflow-hidden bg-pizarra-900">
+            <img src="img/fachada.webp" alt="Noche de fuegos artificiales en Auténticos CyL" class="h-full w-full object-cover opacity-40 transition duration-500 group-hover:scale-105 group-hover:opacity-50" />
+            <div class="absolute inset-0 bg-gradient-to-t from-pizarra-950 via-pizarra-950/40 to-transparent"></div>
+            <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoCardModal" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+              <span class="grid h-16 w-16 place-items-center rounded-full bg-vino-500/90 text-crema-100 shadow-[0_0_35px_rgba(140,42,58,0.7)] backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-vino-400">
+                <svg class="ml-1 h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span class="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-pizarra-950/80 px-3.5 py-1 text-xs font-semibold text-oro-300 backdrop-blur">
+                {ICONOS['Facebook']} Reel en Facebook
+              </span>
+              <p class="mt-2 font-display text-base font-semibold text-crema-100 sm:text-lg">Ver vídeo del evento ↗</p>
+            </a>
           </div>
-          <div class="p-3 text-center bg-pizarra-950/60 border-t border-white/5">
-            <a id="linkVideoEvento" href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4 hover:text-oro-200">
-              {ICONOS['Facebook']} Ver reel en Facebook ↗
+          <div class="border-t border-white/5 bg-pizarra-900/90 px-4 py-3 text-center">
+            <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoSubModal" class="inline-flex items-center gap-2 text-xs font-semibold text-oro-300 hover:text-oro-200">
+              {ICONOS['Facebook']} Ver reel publicado en Facebook ↗
             </a>
           </div>
         </div>
@@ -481,15 +506,10 @@ def pagina_inicio():
         document.querySelectorAll('[data-evento-fecha]').forEach(el => el.textContent = evData.fecha);
         document.querySelectorAll('[data-evento-desc]').forEach(el => el.textContent = evData.descripcion);
         if (evData.videoUrl) {{
-          const embedUrl = 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(evData.videoUrl) + '&show_text=false';
-          const iframeModal = document.getElementById('iframeVideoEvento');
-          if (iframeModal) iframeModal.src = embedUrl;
-          const iframeSeccion = document.getElementById('iframeVideoSeccion');
-          if (iframeSeccion) iframeSeccion.src = embedUrl;
-          const linkEvento = document.getElementById('linkVideoEvento');
-          if (linkEvento) linkEvento.href = evData.videoUrl;
-          const linkSeccion = document.getElementById('linkVideoSeccion');
-          if (linkSeccion) linkSeccion.href = evData.videoUrl;
+          ['linkVideoSeccion', 'linkVideoCardSeccion', 'linkVideoSubSeccion', 'linkVideoCardModal', 'linkVideoSubModal'].forEach(id => {{
+            const el = document.getElementById(id);
+            if (el) el.href = evData.videoUrl;
+          }});
         }}
         setTimeout(() => {{
           m.classList.replace('hidden', 'flex');
