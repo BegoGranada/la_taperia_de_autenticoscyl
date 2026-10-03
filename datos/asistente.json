@@ -79,7 +79,7 @@
  ],
  "alergenos_aviso": "Informamos de los 14 alérgenos de declaración obligatoria (Reglamento UE 1169/2011). Ante una alergia o intolerancia, avisar al personal: el asistente no puede garantizar la ausencia de trazas.",
  "carta": {
-  "temporada": "Verano",
+  "temporada": "Otoño",
   "secciones": [
    {
     "seccion": "Nuestros imprescindibles",
@@ -410,11 +410,7 @@
       "alergenos": [
        "Gluten",
        "Huevos",
-       "Mostaza",
        "Frutos secos",
-       "Cacahuetes",
-       "Sésamo",
-       "Sulfitos",
        "Lácteos",
        "Altramuces"
       ],
@@ -423,7 +419,23 @@
      },
      {
       "nombre": "La Bestia Castellana",
-      "descripcion": "Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.",
+      "descripcion": "Carne de buey certificada 200 g a la brasa, toffee de setas, mayonesa de guanciale, queso pata de mulo fundido, bacon, morcillo a baja temperatura, jugo de carne y palomitas de cerdo.",
+      "precio": 17.95,
+      "por_unidad": false,
+      "alergenos": [
+       "Gluten",
+       "Huevos",
+       "Lácteos",
+       "Altramuces"
+      ],
+      "etiquetas": [
+       "Opción sin gluten"
+      ],
+      "agotado": false
+     },
+     {
+      "nombre": "La Pícara",
+      "descripcion": "Dos pattys de carne de buey (2 x 100 g), queso pata de mulo fundido, mayonesa de chipotle agridulce, pimientos asados, pastrami a la brasa, cebolla encurtida y avellana tostada.",
       "precio": 17.95,
       "por_unidad": false,
       "alergenos": [
@@ -431,69 +443,60 @@
        "Huevos",
        "Mostaza",
        "Frutos secos",
-       "Cacahuetes",
-       "Sésamo",
        "Lácteos"
       ],
       "etiquetas": [
-       "Buey 100 %",
-       "Guanciale",
        "Opción sin gluten"
       ],
       "agotado": false
      },
      {
-      "nombre": "Rock & Rolla",
-      "descripcion": "Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.",
-      "precio": 16.95,
+      "nombre": "La Sibarita 👑",
+      "descripcion": "Hamburguesa de buey 100%, praliné salado de almendra tostada, panceta glaseada ahumada, salsa agridulce de las que pringan las manos, cebolla caramelizada en jugo de carne, higo a la brasa, queso comté y escalopa de foie.",
+      "precio": 19.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
+       "Huevos",
        "Mostaza",
-       "Cacahuetes",
-       "Sésamo",
+       "Frutos secos",
        "Lácteos",
        "Altramuces"
       ],
       "etiquetas": [
-       "Buey 100 %",
+       "Especial",
        "Opción sin gluten"
       ],
       "agotado": false
      },
      {
       "nombre": "Deluxe Macarra",
-      "descripcion": "Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.",
+      "descripcion": "Hamburguesa de buey 100% certificada, mermelada de bacon, queso pata de mulo y salsa Raising Cane's.",
       "precio": 16.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
-       "Mostaza",
-       "Cacahuetes",
+       "Huevos",
+       "Soja",
        "Sésamo",
-       "Sulfitos",
-       "Lácteos"
+       "Lácteos",
+       "Altramuces"
       ],
       "etiquetas": [
-       "Buey 100 %",
        "Opción sin gluten"
       ],
       "agotado": false
      },
      {
       "nombre": "La Castiza",
-      "descripcion": "Hamburguesa de buey 100 % certificada, queso de pata de mulo y beicon.",
+      "descripcion": "Hamburguesa de buey 100% certificada, queso de pata de mulo y bacon.",
       "precio": 14.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
-       "Mostaza",
-       "Cacahuetes",
-       "Sésamo",
        "Lácteos"
       ],
       "etiquetas": [
-       "Buey 100 %",
        "Opción sin gluten"
       ],
       "agotado": false
@@ -501,13 +504,11 @@
      {
       "nombre": "Bikini de Oreja Ibérico",
       "descripcion": "Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.",
-      "precio": 12,
+      "precio": 12.0,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
-       "Huevos",
        "Mostaza",
-       "Sésamo",
        "Lácteos"
       ],
       "etiquetas": [
@@ -516,16 +517,45 @@
       "agotado": false
      },
      {
-      "nombre": "Bretzel de Pollo",
-      "descripcion": "Pollo crujiente, queso pata de mulo, cebolla caramelizada, bacon, alioli de kimchi, lechuga y tomate en pan bretzel.",
+      "nombre": "Pastrami Gold 👑",
+      "descripcion": "Bikini de pastrami ahumado en casa, pan de centeno, queso comté fundido, cebolla melosa, pepinillo encurtido, mostaza de manzana y salsa especial Auténticos 2.0.",
       "precio": 14.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
-       "Huevos",
+       "Soja",
        "Mostaza",
+       "Frutos secos",
        "Sésamo",
-       "Sulfitos"
+       "Lácteos"
+      ],
+      "etiquetas": [
+       "Especial"
+      ],
+      "agotado": false
+     },
+     {
+      "nombre": "Bretzel de Pollo",
+      "descripcion": "Pollo crujiente, queso pata de mulo, bacon, alioli de kimchi, tomate y lechuga en pan bretzel.",
+      "precio": 14.95,
+      "por_unidad": false,
+      "alergenos": [
+       "Gluten",
+       "Mostaza",
+       "Lácteos"
+      ],
+      "etiquetas": [],
+      "agotado": false
+     },
+     {
+      "nombre": "Pizza a la sartén",
+      "descripcion": "Masa fina y crujiente, papada ahumada en casa, higos, stracciatella y berenjena al carbón.",
+      "precio": 14.95,
+      "por_unidad": false,
+      "alergenos": [
+       "Gluten",
+       "Frutos secos",
+       "Lácteos"
       ],
       "etiquetas": [],
       "agotado": false
@@ -537,42 +567,25 @@
     "aviso": null,
     "platos": [
      {
-      "nombre": "Tarta cremosa de queso",
-      "descripcion": "Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.",
+      "nombre": "Tarta de quesos de la zona",
+      "descripcion": "Tarta cremosa de quesos de la zona, acompañada de helado.",
       "precio": 7.95,
       "por_unidad": false,
       "alergenos": [
        "Huevos",
-       "Frutos secos",
        "Lácteos"
       ],
       "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Pavlova primaveral de mango, pasión, yogur y lima",
-      "descripcion": "Pavlova de vainilla y lima, curd de mango y pasión, helado de yogur, crumble de coco y lima, mango fresco aliñado y aceite de albahaca.",
-      "precio": 8.95,
-      "por_unidad": false,
-      "alergenos": [
-       "Gluten",
-       "Huevos",
-       "Lácteos"
-      ],
-      "etiquetas": [
-       "Opcional sin gluten"
-      ],
       "agotado": false
      },
      {
       "nombre": "Huevo de corral",
-      "descripcion": "Trampantojo de mousse de chocolate blanco, núcleo de fruta de la pasión, nido de pasta kataifi, yogur y chocolate.",
+      "descripcion": "Trampantojo de huevo de corral, mousse de chocolate blanco, interior de maracuyá, nido de pasta kataifi, yogur y chocolate.",
       "precio": 8.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
        "Huevos",
-       "Mostaza",
        "Frutos secos",
        "Lácteos"
       ],
@@ -580,30 +593,46 @@
       "agotado": false
      },
      {
-      "nombre": "Mojito Auténticos",
-      "descripcion": "Granizado de lima, helado de yogur, espuma de hierbabuena y menta, teja de azúcar y gel de ron.",
+      "nombre": "Chocolate y café",
+      "descripcion": "Bizcocho húmedo de café, cremoso de chocolate negro, gel de espresso, teja de cacao y avellanas tostadas.",
       "precio": 8.95,
       "por_unidad": false,
       "alergenos": [
+       "Gluten",
+       "Huevos",
+       "Frutos secos",
        "Lácteos"
       ],
-      "etiquetas": [
-       "Nuevo"
-      ],
+      "etiquetas": [],
       "agotado": false
      },
      {
-      "nombre": "Huerta en Flor",
-      "descripcion": "Crema inglesa de vainilla, tomate rosa osmotizado, tartar de melocotón marinado, crujiente de almendra, gel de tomate, consomé de fresa y albahaca, aceite de albahaca y helado de yogur.",
-      "precio": 9.5,
+      "nombre": "Café entre nubes",
+      "descripcion": "Emulamos una nube sedosa de mousse de café, rellena de un corazón de caramelo salado, crumble de cacao y namelaka de chocolate blanco tostado.",
+      "precio": 8.95,
       "por_unidad": false,
       "alergenos": [
+       "Gluten",
+       "Huevos",
+       "Frutos secos",
+       "Lácteos"
+      ],
+      "etiquetas": [],
+      "agotado": false
+     },
+     {
+      "nombre": "La Hojarasca",
+      "descripcion": "¿Qué tal si damos un paseo por nuestros pinares una tarde de lluvia a través de este postre? Crema de vainilla y castaña, manzana asada, gel de mandarina, musgo de pistacho, níscalos que no saben a níscalo, y esas hojas recién caídas de los árboles que crujen al pasar.",
+      "precio": 8.95,
+      "por_unidad": false,
+      "alergenos": [
+       "Gluten",
        "Huevos",
        "Frutos secos",
        "Lácteos"
       ],
       "etiquetas": [
-       "Nuevo"
+       "Especial de Otoño"
       ],
       "agotado": false
      }

@@ -1,13 +1,13 @@
 /* Generado por tools/generar.py a partir de datos/carta.json: no editar a mano */
 window.CARTA_BASE = {
- "temporada": "Verano",
+ "temporada": "Otoño",
  "secciones": [
   {
    "id": "imprescindibles",
    "nombre": "Nuestros imprescindibles",
    "corto": "Imprescindibles",
-   "lema": "Verano · Brasa · Temporada",
-   "intro": "Cada verano tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.",
+   "lema": "Otoño · Brasa · Temporada",
+   "intro": "Cada otoño tiene sus propios sabores. Nuestra carta nace del mejor producto de temporada, la cocina a la brasa y una forma de entender la gastronomía donde tradición y creatividad se encuentran en cada plato.",
    "aviso": null,
    "cierre": null,
    "foto": [
@@ -367,7 +367,7 @@ window.CARTA_BASE = {
    "nombre": "Las noches de Auténticos",
    "corto": "Las Noches",
    "lema": "Noches · Brasa · Bocados",
-   "intro": "Cuando cae el sol, la brasa se enciende y aparecen las propuestas más canallas de Auténticos CyL: hamburguesas de autor y bocados para disfrutar sin prisas, con las manos y en buena compañía.",
+   "intro": "Cuando cae el sol, comienza una experiencia diferente. La brasa se enciende, los sabores se intensifican y aparecen las propuestas más canallas de Auténticos CyL. Hamburguesas de autor, bocados irresistibles y recetas pensadas para disfrutar sin prisas, con las manos y en buena compañía. Una selección exclusiva disponible únicamente durante las cenas.",
    "aviso": "Solo disponible en servicio de cenas",
    "cierre": null,
    "foto": [
@@ -383,21 +383,34 @@ window.CARTA_BASE = {
      "alergenos": [
       1,
       5,
-      7,
       9,
-      10,
-      11,
-      12,
       13,
       14
      ],
      "etiquetas": [],
-     "grupo": null,
+     "grupo": "Hamburguesas",
      "foto": "img/rabo-de-toro.webp"
     },
     {
      "nombre": "La Bestia Castellana",
-     "desc": "Hamburguesa de buey 100 % certificada, queso de pata de mulo, toffee de setas de temporada, mayonesa de guanciale, bacon crujiente, crema de morcillo y palomitas de cerdo.",
+     "desc": "Carne de buey certificada 200 g a la brasa, toffee de setas, mayonesa de guanciale, queso pata de mulo fundido, bacon, morcillo a baja temperatura, jugo de carne y palomitas de cerdo.",
+     "precio": 17.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      13,
+      14
+     ],
+     "etiquetas": [
+      "Opción sin gluten"
+     ],
+     "grupo": "Hamburguesas",
+     "foto": null
+    },
+    {
+     "nombre": "La Pícara",
+     "desc": "Dos pattys de carne de buey (2 x 100 g), queso pata de mulo fundido, mayonesa de chipotle agridulce, pimientos asados, pastrami a la brasa, cebolla encurtida y avellana tostada.",
      "precio": 17.95,
      "unidad": false,
      "alergenos": [
@@ -405,109 +418,129 @@ window.CARTA_BASE = {
       5,
       7,
       9,
-      10,
-      11,
       13
      ],
      "etiquetas": [
-      "Buey 100 %",
-      "Guanciale",
       "Opción sin gluten"
      ],
-     "grupo": null,
+     "grupo": "Hamburguesas",
      "foto": null
     },
     {
-     "nombre": "Rock & Rolla",
-     "desc": "Hamburguesa de buey 100 % certificada, confitura de tomate, queso pata de mulo, ajetes Auténticos 2.0, pepinillos, pastrami, salsa de chiles agridulce y caramelos del mismo queso.",
+     "nombre": "La Sibarita 👑",
+     "desc": "Hamburguesa de buey 100%, praliné salado de almendra tostada, panceta glaseada ahumada, salsa agridulce de las que pringan las manos, cebolla caramelizada en jugo de carne, higo a la brasa, queso comté y escalopa de foie.",
+     "precio": 19.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      5,
+      7,
+      9,
+      13,
+      14
+     ],
+     "etiquetas": [
+      "Especial",
+      "Opción sin gluten"
+     ],
+     "grupo": "Hamburguesas",
+     "foto": null
+    },
+    {
+     "nombre": "Deluxe Macarra",
+     "desc": "Hamburguesa de buey 100% certificada, mermelada de bacon, queso pata de mulo y salsa Raising Cane's.",
      "precio": 16.95,
      "unidad": false,
      "alergenos": [
       1,
-      7,
-      10,
+      5,
+      6,
       11,
       13,
       14
      ],
      "etiquetas": [
-      "Buey 100 %",
       "Opción sin gluten"
      ],
-     "grupo": null,
-     "foto": null
-    },
-    {
-     "nombre": "Deluxe Macarra",
-     "desc": "Hamburguesa de buey 100 % certificada, mermelada de bacon, patata paja, queso pata de mulo y salsa Raising Cane’s.",
-     "precio": 16.95,
-     "unidad": false,
-     "alergenos": [
-      1,
-      7,
-      10,
-      11,
-      12,
-      13
-     ],
-     "etiquetas": [
-      "Buey 100 %",
-      "Opción sin gluten"
-     ],
-     "grupo": null,
+     "grupo": "Hamburguesas",
      "foto": null
     },
     {
      "nombre": "La Castiza",
-     "desc": "Hamburguesa de buey 100 % certificada, queso de pata de mulo y beicon.",
+     "desc": "Hamburguesa de buey 100% certificada, queso de pata de mulo y bacon.",
      "precio": 14.95,
      "unidad": false,
      "alergenos": [
       1,
-      7,
-      10,
-      11,
       13
      ],
      "etiquetas": [
-      "Buey 100 %",
       "Opción sin gluten"
      ],
-     "grupo": null,
+     "grupo": "Hamburguesas",
      "foto": null
     },
     {
      "nombre": "Bikini de Oreja Ibérico",
      "desc": "Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.",
-     "precio": 12,
+     "precio": 12.0,
      "unidad": false,
      "alergenos": [
       1,
-      5,
       7,
-      11,
       13
      ],
      "etiquetas": [
       "Opción sin gluten"
      ],
-     "grupo": null,
+     "grupo": "Otros Bocados",
      "foto": null
     },
     {
-     "nombre": "Bretzel de Pollo",
-     "desc": "Pollo crujiente, queso pata de mulo, cebolla caramelizada, bacon, alioli de kimchi, lechuga y tomate en pan bretzel.",
+     "nombre": "Pastrami Gold 👑",
+     "desc": "Bikini de pastrami ahumado en casa, pan de centeno, queso comté fundido, cebolla melosa, pepinillo encurtido, mostaza de manzana y salsa especial Auténticos 2.0.",
      "precio": 14.95,
      "unidad": false,
      "alergenos": [
       1,
-      5,
+      6,
       7,
+      9,
       11,
-      12
+      13
+     ],
+     "etiquetas": [
+      "Especial"
+     ],
+     "grupo": "Otros Bocados",
+     "foto": null
+    },
+    {
+     "nombre": "Bretzel de Pollo",
+     "desc": "Pollo crujiente, queso pata de mulo, bacon, alioli de kimchi, tomate y lechuga en pan bretzel.",
+     "precio": 14.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      7,
+      13
      ],
      "etiquetas": [],
-     "grupo": null,
+     "grupo": "Otros Bocados",
+     "foto": null
+    },
+    {
+     "nombre": "Pizza a la sartén",
+     "desc": "Masa fina y crujiente, papada ahumada en casa, higos, stracciatella y berenjena al carbón.",
+     "precio": 14.95,
+     "unidad": false,
+     "alergenos": [
+      1,
+      9,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": "Otros Bocados",
      "foto": null
     }
    ]
@@ -516,8 +549,8 @@ window.CARTA_BASE = {
    "id": "postres",
    "nombre": "La repostería de Auténticos",
    "corto": "Repostería",
-   "lema": "El cierre de nuestra cocina",
-   "intro": "En Auténticos creemos que un gran postre no destaca por ser el más dulce, sino por estar elaborado con el mismo respeto por el producto, la misma técnica y la misma pasión que el resto de nuestra cocina.",
+   "lema": "El último bocado · La parada más dulce",
+   "intro": "Llega el final de nuestro viaje, la parada más dulce de nuestra carta. Postres elaborados con el mejor producto, donde la tradición y la creatividad se encuentran en cada bocado.",
    "aviso": null,
    "cierre": "Nuestro mejor reconocimiento es que el último bocado despierte las ganas de volver.",
    "foto": [
@@ -526,13 +559,12 @@ window.CARTA_BASE = {
    ],
    "platos": [
     {
-     "nombre": "Tarta cremosa de queso",
-     "desc": "Tarta potente y profunda, de textura cremosa, donde combinamos queso semicurado de la Cruz del Pobre y queso crema.",
+     "nombre": "Tarta de quesos de la zona",
+     "desc": "Tarta cremosa de quesos de la zona, acompañada de helado.",
      "precio": 7.95,
      "unidad": false,
      "alergenos": [
       5,
-      9,
       13
      ],
      "etiquetas": [],
@@ -540,30 +572,13 @@ window.CARTA_BASE = {
      "foto": null
     },
     {
-     "nombre": "Pavlova primaveral de mango, pasión, yogur y lima",
-     "desc": "Pavlova de vainilla y lima, curd de mango y pasión, helado de yogur, crumble de coco y lima, mango fresco aliñado y aceite de albahaca.",
-     "precio": 8.95,
-     "unidad": false,
-     "alergenos": [
-      1,
-      5,
-      13
-     ],
-     "etiquetas": [
-      "Opcional sin gluten"
-     ],
-     "grupo": null,
-     "foto": null
-    },
-    {
      "nombre": "Huevo de corral",
-     "desc": "Trampantojo de mousse de chocolate blanco, núcleo de fruta de la pasión, nido de pasta kataifi, yogur y chocolate.",
+     "desc": "Trampantojo de huevo de corral, mousse de chocolate blanco, interior de maracuyá, nido de pasta kataifi, yogur y chocolate.",
      "precio": 8.95,
      "unidad": false,
      "alergenos": [
       1,
       5,
-      7,
       9,
       13
      ],
@@ -572,31 +587,48 @@ window.CARTA_BASE = {
      "foto": "img/huevo-de-corral.webp"
     },
     {
-     "nombre": "Mojito Auténticos",
-     "desc": "Granizado de lima, helado de yogur, espuma de hierbabuena y menta, teja de azúcar y gel de ron.",
+     "nombre": "Chocolate y café",
+     "desc": "Bizcocho húmedo de café, cremoso de chocolate negro, gel de espresso, teja de cacao y avellanas tostadas.",
      "precio": 8.95,
      "unidad": false,
      "alergenos": [
+      1,
+      5,
+      9,
       13
      ],
-     "etiquetas": [
-      "Nuevo"
-     ],
+     "etiquetas": [],
      "grupo": null,
      "foto": null
     },
     {
-     "nombre": "Huerta en Flor",
-     "desc": "Crema inglesa de vainilla, tomate rosa osmotizado, tartar de melocotón marinado, crujiente de almendra, gel de tomate, consomé de fresa y albahaca, aceite de albahaca y helado de yogur.",
-     "precio": 9.5,
+     "nombre": "Café entre nubes",
+     "desc": "Emulamos una nube sedosa de mousse de café, rellena de un corazón de caramelo salado, crumble de cacao y namelaka de chocolate blanco tostado.",
+     "precio": 8.95,
      "unidad": false,
      "alergenos": [
+      1,
+      5,
+      9,
+      13
+     ],
+     "etiquetas": [],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "La Hojarasca",
+     "desc": "¿Qué tal si damos un paseo por nuestros pinares una tarde de lluvia a través de este postre? Crema de vainilla y castaña, manzana asada, gel de mandarina, musgo de pistacho, níscalos que no saben a níscalo, y esas hojas recién caídas de los árboles que crujen al pasar.",
+     "precio": 8.95,
+     "unidad": false,
+     "alergenos": [
+      1,
       5,
       9,
       13
      ],
      "etiquetas": [
-      "Nuevo"
+      "Especial de Otoño"
      ],
      "grupo": null,
      "foto": null
