@@ -21,5 +21,20 @@ window.TAPERIA = {
   maxPersonasWeb: 12,               // grupos mayores: por teléfono
   // Demostración: las solicitudes de la web se guardan en este navegador y el área
   // de propietarios las recoge de aquí. Con una base de datos se sustituye por una API.
-  claveSolicitudes: 'taperia-solicitudes-web'
+  claveSolicitudes: 'taperia-solicitudes-web',
+  claveEvento: 'taperia-evento-especial',
+  eventoEspecial: {
+    activo: true,
+    titulo: 'Noche de fuegos artificiales',
+    fecha: '10 de octubre de 2026',
+    etiqueta: 'Fechas especiales y eventos',
+    descripcion: 'Esa noche solo estará disponible la carta para servicio de cenas y las hamburguesas solo serán para llevar.',
+    videoUrl: 'https://www.facebook.com/reel/1645790413629479',
+    detalles: [
+      'Servicio exclusivo de cenas',
+      'Hamburguesas únicamente para llevar',
+      'Recomendamos reservar tu mesa con antelación'
+    ]
+  }
 };
+

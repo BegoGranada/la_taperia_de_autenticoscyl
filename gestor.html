@@ -132,6 +132,37 @@
           </div>
           <button class="w-full rounded-full bg-vino-500 py-3 font-semibold">Guardar</button>
         </form>
+        <div class="mt-4 rounded-3xl border border-oro-400/30 bg-pizarra-900 p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Fechas especiales y eventos</p>
+              <h3 class="font-display text-xl font-semibold text-crema-100">Aviso emergente (pop-up) y evento</h3>
+            </div>
+            <span id="badgeEventoEstado" class="shrink-0 rounded-full px-3 py-1 text-xs font-semibold"></span>
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-crema-500">Configura el aviso emergente que se abre automáticamente al entrar en la web y la información del evento especial.</p>
+          <form id="formEventoEspecial" class="mt-4 space-y-4">
+            <label class="flex items-center gap-3 rounded-2xl border border-oro-400/20 bg-oro-400/5 p-3 text-sm font-semibold text-oro-300 cursor-pointer">
+              <input type="checkbox" name="activo" class="h-5 w-5 accent-vino-500" />
+              Activar pop-up emergente en la web al entrar
+            </label>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Título del evento</span>
+                <input name="titulo" autocomplete="off" placeholder="Noche de fuegos artificiales" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100" /></label>
+              <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Fecha del evento</span>
+                <input name="fecha" autocomplete="off" placeholder="10 de octubre" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100" /></label>
+            </div>
+            <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Descripción y condiciones especiales</span>
+              <textarea name="descripcion" rows="3" placeholder="Esa noche solo estará disponible la carta para servicio de cenas y las hamburguesas solo serán para llevar." class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100"></textarea></label>
+            <label class="block"><span class="text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Enlace al vídeo / Reel (Facebook, Instagram, etc.)</span>
+              <input name="videoUrl" type="url" autocomplete="off" placeholder="https://www.facebook.com/reel/1645790413629479" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100" /></label>
+            <div class="flex flex-wrap gap-2">
+              <button type="submit" class="flex-1 rounded-full bg-vino-500 py-3 font-semibold transition hover:bg-vino-400 text-crema-100">Guardar evento</button>
+              <button type="button" id="btnResetEvento" class="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-crema-300">Restablecer por defecto</button>
+            </div>
+          </form>
+        </div>
+
         <div class="mt-4 rounded-3xl border border-white/10 bg-pizarra-900 p-5 text-sm leading-relaxed text-crema-300">
           <p class="font-semibold text-crema-100">Horas de reserva</p>
           <p class="mt-1">Comida: <span id="horasComida"></span><br>Cena: <span id="horasCena"></span></p>
@@ -462,6 +493,7 @@
     // Ajustes
     $('#formAjustes').comida.value = D.ajustes.aforo.comida; $('#formAjustes').cena.value = D.ajustes.aforo.cena;
     $('#horasComida').textContent = C.turnos.comida.horas.join(' · '); $('#horasCena').textContent = C.turnos.cena.horas.join(' · ');
+    pintarEvento();
   }
   $('#tiraDias').addEventListener('click', ev => { const b = ev.target.closest('[data-dia]'); if (b) { dia = b.dataset.dia; pintar(); } });
   $('#btnHoy').addEventListener('click', () => { dia = hoyS(); pintar(); });
@@ -564,13 +596,75 @@
   }
   const leerLS = k => { try { const d = JSON.parse(localStorage.getItem(k)); return d && Array.isArray(d.secciones) ? d : null; } catch (e) { return null; } };
   const sinMarca = c => { const x = clonar(c); delete x.publicada; return JSON.stringify(x); };
-  const publicada = () => leerLS(CLAVE_PUB) || normalizar(window.CARTA_BASE);
-  let carta = leerLS(CLAVE_BORRADOR) || normalizar(publicada());
+  const baseCarta = normalizar(window.CARTA_BASE);
+  const publicada = () => {
+    const pub = leerLS(CLAVE_PUB);
+    if (pub && pub.temporada === baseCarta.temporada) return pub;
+    return baseCarta;
+  };
+  let carta = (() => {
+    const borrad = leerLS(CLAVE_BORRADOR);
+    if (borrad && borrad.temporada === baseCarta.temporada) return borrad;
+    return normalizar(publicada());
+  })();
   function guardarBorrador() {
     try { localStorage.setItem(CLAVE_BORRADOR, JSON.stringify(carta)); }
     catch (e) { toast('⚠️ No queda espacio en el navegador: usa fotos más pequeñas'); }
     pintarCarta();
   }
+
+  /* ----- Gestión de Eventos Especiales ----- */
+  const CLAVE_EVENTO = C.claveEvento || 'taperia-evento-especial';
+  function cargarEvento() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CLAVE_EVENTO));
+      if (saved) return saved;
+    } catch(e) {}
+    return C.eventoEspecial || {};
+  }
+  let eventoActual = cargarEvento();
+
+  function pintarEvento() {
+    const FE = $('#formEventoEspecial');
+    if (!FE) return;
+    FE.activo.checked = !!eventoActual.activo;
+    FE.titulo.value = eventoActual.titulo || '';
+    FE.fecha.value = eventoActual.fecha || '';
+    FE.descripcion.value = eventoActual.descripcion || '';
+    FE.videoUrl.value = eventoActual.videoUrl || '';
+
+    const b = $('#badgeEventoEstado');
+    if (b) {
+      b.textContent = eventoActual.activo ? 'Pop-up Activo' : 'Pop-up Inactivo';
+      b.className = `shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${eventoActual.activo ? 'bg-emerald-400/15 text-emerald-300' : 'bg-white/10 text-crema-500'}`;
+    }
+  }
+
+  $('#formEventoEspecial')?.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const FE = ev.target;
+    eventoActual = {
+      activo: FE.activo.checked,
+      titulo: FE.titulo.value.trim(),
+      fecha: FE.fecha.value.trim(),
+      descripcion: FE.descripcion.value.trim(),
+      videoUrl: FE.videoUrl.value.trim()
+    };
+    try {
+      localStorage.setItem(CLAVE_EVENTO, JSON.stringify(eventoActual));
+    } catch(e) {}
+    pintarEvento();
+    toast('✓ Evento guardado correctamente');
+  });
+
+  $('#btnResetEvento')?.addEventListener('click', () => {
+    if (!confirm('¿Restablecer el evento por defecto (Fuegos artificiales)?')) return;
+    try { localStorage.removeItem(CLAVE_EVENTO); } catch(e) {}
+    eventoActual = C.eventoEspecial || {};
+    pintarEvento();
+    toast('Evento restablecido');
+  });
+
   const hayCambios = () => sinMarca(carta) !== sinMarca(publicada());
   const idNuevo = t => (t || 'seccion').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30) || 'seccion';
 

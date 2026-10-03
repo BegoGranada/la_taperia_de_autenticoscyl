@@ -89,6 +89,36 @@
       </dl>
     </section>
 
+    <!-- Fechas especiales y eventos -->
+    <section id="eventos" class="mx-auto max-w-6xl px-5 pt-16">
+      <div class="overflow-hidden rounded-3xl border border-oro-400/30 bg-gradient-to-br from-vino-600/30 via-pizarra-900 to-pizarra-900 p-8 md:p-12">
+        <div class="grid items-center gap-8 md:grid-cols-2">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-oro-400/40 bg-oro-400/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-oro-300">
+              <svg class="h-4 w-4 fill-oro-400" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+              <span>Fechas especiales y eventos</span>
+            </div>
+            <h2 class="mt-4 font-display text-3xl font-semibold leading-tight sm:text-4xl" data-evento-titulo>Noche de fuegos artificiales</h2>
+            <p class="mt-2 text-sm font-semibold uppercase tracking-widest text-oro-400" data-evento-fecha>10 de octubre de 2026</p>
+            <p class="mt-4 text-base leading-relaxed text-crema-300" data-evento-desc>Esa noche solo estará disponible la carta para servicio de cenas y las hamburguesas solo serán para llevar.</p>
+            <ul class="mt-5 space-y-2 text-sm font-semibold text-crema-100">
+              <li class="flex items-center gap-2.5"><span class="h-2 w-2 rounded-full bg-oro-400"></span>Servicio únicamente de cenas esa noche</li>
+              <li class="flex items-center gap-2.5"><span class="h-2 w-2 rounded-full bg-oro-400"></span>Hamburguesas de autor solo para llevar</li>
+            </ul>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="reservas.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition bg-vino-500 text-crema-100 hover:bg-vino-400">Reservar para esta fecha</a>
+              <a href="https://www.facebook.com/reel/1645790413629479" target="_blank" rel="noopener" id="linkVideoSeccion" class="inline-flex items-center gap-2 rounded-full border border-crema-100/30 px-6 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Ver vídeo / Reel ↗</a>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-xl">
+            <div class="aspect-video w-full">
+              <iframe id="iframeVideoSeccion" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1645790413629479&show_text=false" class="h-full w-full border-0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- El restaurante -->
     <section id="restaurante" class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 md:grid-cols-2 md:gap-16">
       <img src="img/local.webp" alt="Interior de la tapería: barra de madera con azulejos azules y mesas de madera" loading="lazy" class="aspect-[4/3] w-full rounded-3xl object-cover" />
@@ -298,7 +328,79 @@
       </div>
       <img src="img/fachada.webp" alt="Fachada de ladrillo y piedra de Auténticos CyL, con un barril de vino en la puerta" loading="lazy" class="aspect-[4/3] w-full rounded-3xl object-cover" />
     </section>
+
+    <!-- Modal / Pop-up Fechas especiales y eventos -->
+    <div id="modalEventoEspecial" class="fixed inset-0 z-50 hidden items-center justify-center bg-pizarra-950/80 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="tituloEventoModal">
+      <div class="relative max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl border border-oro-400/40 bg-pizarra-900 p-6 shadow-2xl sm:p-8">
+        <button onclick="cerrarModalEvento()" class="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/10 text-crema-300 transition hover:bg-white/20 hover:text-white" aria-label="Cerrar modal">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        
+        <div class="inline-flex items-center gap-2 rounded-full border border-oro-400/40 bg-oro-400/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-oro-300">
+          <svg class="h-4 w-4 fill-oro-400" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <span data-evento-etiqueta>Fechas especiales y eventos</span>
+        </div>
+        
+        <h2 id="tituloEventoModal" class="mt-4 font-display text-3xl font-semibold leading-snug sm:text-4xl" data-evento-titulo>Noche de fuegos artificiales</h2>
+        <p class="mt-1 text-sm font-semibold uppercase tracking-widest text-oro-400" data-evento-fecha>10 de octubre de 2026</p>
+        
+        <p class="mt-4 leading-relaxed text-crema-300" data-evento-desc>Esa noche solo estará disponible la carta para servicio de cenas y las hamburguesas solo serán para llevar.</p>
+        
+        <div class="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+          <div class="aspect-video w-full">
+            <iframe id="iframeVideoEvento" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1645790413629479&show_text=false" class="h-full w-full border-0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          </div>
+          <div class="p-3 text-center bg-pizarra-950/60 border-t border-white/5">
+            <a id="linkVideoEvento" href="https://www.facebook.com/reel/1645790413629479" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-semibold text-oro-300 underline decoration-oro-400/40 underline-offset-4 hover:text-oro-200">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3Z"/></svg> Ver reel en Facebook ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="reservas.html" class="flex-1 inline-flex items-center justify-center rounded-full bg-vino-500 px-6 py-3.5 font-semibold text-crema-100 transition hover:bg-vino-400">Reservar mesa</a>
+          <button onclick="cerrarModalEvento()" class="rounded-full border border-crema-100/30 px-6 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Entendido / Cerrar</button>
+        </div>
+      </div>
+    </div>
   </main>
+  <script>
+    function cerrarModalEvento() {
+      const m = document.getElementById('modalEventoEspecial');
+      if (m) { m.classList.replace('flex', 'hidden'); document.body.style.overflow = ''; }
+    }
+    (function() {
+      let evData = null;
+      try {
+        const local = localStorage.getItem('taperia-evento-especial');
+        if (local) evData = JSON.parse(local);
+      } catch(e) {}
+      if (!evData && window.TAPERIA) evData = window.TAPERIA.eventoEspecial;
+      if (!evData || !evData.activo) return;
+
+      const m = document.getElementById('modalEventoEspecial');
+      if (m) {
+        document.querySelectorAll('[data-evento-titulo]').forEach(el => el.textContent = evData.titulo);
+        document.querySelectorAll('[data-evento-fecha]').forEach(el => el.textContent = evData.fecha);
+        document.querySelectorAll('[data-evento-desc]').forEach(el => el.textContent = evData.descripcion);
+        if (evData.videoUrl) {
+          const embedUrl = 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(evData.videoUrl) + '&show_text=false';
+          const iframeModal = document.getElementById('iframeVideoEvento');
+          if (iframeModal) iframeModal.src = embedUrl;
+          const iframeSeccion = document.getElementById('iframeVideoSeccion');
+          if (iframeSeccion) iframeSeccion.src = embedUrl;
+          const linkEvento = document.getElementById('linkVideoEvento');
+          if (linkEvento) linkEvento.href = evData.videoUrl;
+          const linkSeccion = document.getElementById('linkVideoSeccion');
+          if (linkSeccion) linkSeccion.href = evData.videoUrl;
+        }
+        setTimeout(() => {
+          m.classList.replace('hidden', 'flex');
+          document.body.style.overflow = 'hidden';
+        }, 600);
+      }
+    })();
+  </script>
 
   <footer class="border-t border-white/5 bg-pizarra-900">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3">
