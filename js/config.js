@@ -22,6 +22,7 @@ window.TAPERIA = {
   // Demostración: las solicitudes de la web se guardan en este navegador y el área
   // de propietarios las recoge de aquí. Con una base de datos se sustituye por una API.
   claveSolicitudes: 'taperia-solicitudes-web',
+  clavePedidos: 'taperia-pedidos-web',
   claveEvento: 'taperia-evento-especial',
   eventoEspecial: {
     activo: true,

@@ -71,7 +71,65 @@
    "Las noches de Auténticos (hamburguesas de autor) solo en servicio de cenas."
   ]
  },
+ "pedidos_para_llevar": {
+  "disponible": true,
+  "hacer_pedido_web": "https://www.autenticoscyl.com/para-llevar.html",
+  "instrucciones_agente": "El asistente debe ofrecer activamente las hamburguesas de autor para llevar. Puede facilitar el enlace a la web para-llevar.html o recoger el pedido del cliente directamente por WhatsApp (productos deseados, día y hora de recogida, nombre y teléfono).",
+  "hamburguesas_y_bocados": [
+   {
+    "nombre": "La Rabo de Toro",
+    "descripcion": "Medallón de 150 g de rabo de toro guisado, desmigado con su mismo jugo, boniato, cebolla encurtida, maíz frito, lechuga y tomate.",
+    "precio": 16.95
+   },
+   {
+    "nombre": "La Bestia Castellana",
+    "descripcion": "Carne de buey certificada 200 g a la brasa, toffee de setas, mayonesa de guanciale, queso pata de mulo fundido, bacon, morcillo a baja temperatura, jugo de carne y palomitas de cerdo.",
+    "precio": 17.95
+   },
+   {
+    "nombre": "La Pícara",
+    "descripcion": "Dos pattys de carne de buey (2 x 100 g), queso pata de mulo fundido, mayonesa de chipotle agridulce, pimientos asados, pastrami a la brasa, cebolla encurtida y avellana tostada.",
+    "precio": 17.95
+   },
+   {
+    "nombre": "La Sibarita 👑",
+    "descripcion": "Hamburguesa de buey 100%, praliné salado de almendra tostada, panceta glaseada ahumada, salsa agridulce de las que pringan las manos, cebolla caramelizada en jugo de carne, higo a la brasa, queso comté y escalopa de foie.",
+    "precio": 19.95
+   },
+   {
+    "nombre": "Deluxe Macarra",
+    "descripcion": "Hamburguesa de buey 100% certificada, mermelada de bacon, queso pata de mulo y salsa Raising Cane's.",
+    "precio": 16.95
+   },
+   {
+    "nombre": "La Castiza",
+    "descripcion": "Hamburguesa de buey 100% certificada, queso de pata de mulo y bacon.",
+    "precio": 14.95
+   },
+   {
+    "nombre": "Bikini de Oreja Ibérico",
+    "descripcion": "Oreja a la plancha, salsa de chiles ligeramente picantes y queso pata de mulo fundido.",
+    "precio": 12.0
+   },
+   {
+    "nombre": "Pastrami Gold 👑",
+    "descripcion": "Bikini de pastrami ahumado en casa, pan de centeno, queso comté fundido, cebolla melosa, pepinillo encurtido, mostaza de manzana y salsa especial Auténticos 2.0.",
+    "precio": 14.95
+   },
+   {
+    "nombre": "Bretzel de Pollo",
+    "descripcion": "Pollo crujiente, queso pata de mulo, bacon, alioli de kimchi, tomate y lechuga en pan bretzel.",
+    "precio": 14.95
+   },
+   {
+    "nombre": "Pizza a la sartén",
+    "descripcion": "Masa fina y crujiente, papada ahumada en casa, higos, stracciatella y berenjena al carbón.",
+    "precio": 14.95
+   }
+  ]
+ },
  "servicios": [
+  "Hamburguesas y bocados de autor para llevar (pedido online en para-llevar.html o por WhatsApp/teléfono)",
   "Comida para llevar (encargo por teléfono o WhatsApp)",
   "Menús de empresa y grupos",
   "Encargos de Navidad",

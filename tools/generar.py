@@ -37,7 +37,7 @@ MAPA = 'https://www.google.com/maps/search/?api=1&query=Aut%C3%A9nticos+CyL+Call
 TIENDA_ONLINE = 'https://www.autenticoscyl.com/'
 ALERGENOS = {1: 'Gluten', 2: 'Crustáceos', 3: 'Moluscos', 4: 'Pescado', 5: 'Huevos', 6: 'Soja', 7: 'Mostaza',
              8: 'Apio', 9: 'Frutos secos', 10: 'Cacahuetes', 11: 'Sésamo', 12: 'Sulfitos', 13: 'Lácteos', 14: 'Altramuces'}
-NAV = [('index.html', 'Inicio'), ('carta.html', 'Carta'), ('noticias.html', 'Noticias'), ('reservas.html', 'Reservas')]
+NAV = [('index.html', 'Inicio'), ('carta.html', 'Carta'), ('para-llevar.html', 'Para llevar'), ('noticias.html', 'Noticias'), ('reservas.html', 'Reservas')]
 LEGALES = [('aviso-legal.html', 'Aviso legal'), ('privacidad.html', 'Política de privacidad'), ('cookies.html', 'Política de cookies')]
 
 # Datos del titular para los textos legales. Los que van entre corchetes los tiene
@@ -840,14 +840,236 @@ def pagina_cookies():
     return pagina_legal('cookies.html', 'Política de cookies', 'Política de cookies de la web de Auténticos CyL.', cuerpo)
 
 
+def pagina_para_llevar():
+    noches_sec = next((s for s in CARTA['secciones'] if s['id'] == 'noches'), CARTA['secciones'][0])
+    hamburguesas = [p for p in noches_sec['platos'] if p.get('estado') != 'oculto']
+    
+    campo = 'mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none'
+    etiqueta = 'text-xs font-semibold uppercase tracking-[.2em] text-crema-500'
+    
+    platos_html = []
+    for i, p in enumerate(hamburguesas):
+        precio_str = euros(p['precio'])
+        foto = f'<img src="{p["foto"]}" alt="{e(p["nombre"])}" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />' if p.get('foto') else '<div class="h-20 w-20 shrink-0 rounded-2xl bg-white/5 grid place-items-center text-oro-400 font-display text-2xl font-semibold">🍔</div>'
+        etiquetas = ''.join(f'<span class="rounded-full bg-vino-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-vino-300">{e(t)}</span>' for t in p.get('etiquetas', []))
+        alerg = f'<span class="text-xs text-crema-500">({", ".join(map(str, p["alergenos"]))})</span>' if p.get('alergenos') else ''
+        
+        platos_html.append(f'''
+          <li class="flex flex-col gap-4 rounded-3xl border border-white/5 bg-pizarra-900 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-start gap-4 min-w-0 flex-1">
+              {foto}
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="font-display text-xl font-semibold leading-snug">{e(p["nombre"])}</h3>
+                  <p class="font-semibold tabular-nums text-oro-300">{precio_str}</p>
+                </div>
+                {f'<p class="mt-1 text-sm leading-relaxed text-crema-500">{e(p["desc"])}</p>' if p.get('desc') else ''}
+                {f'<div class="mt-2 flex flex-wrap items-center gap-1.5">{etiquetas} {alerg}</div>' if etiquetas or alerg else ''}
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 border-t border-white/5 pt-3 sm:border-t-0 sm:pt-0">
+              <span class="text-xs text-crema-500 sm:hidden">Cantidad:</span>
+              <div class="inline-flex items-center rounded-2xl border border-white/10 bg-pizarra-800 p-1">
+                <button type="button" onclick="cambiarCant({i}, -1)" class="grid h-9 w-9 place-items-center rounded-xl bg-white/5 text-lg font-bold text-crema-100 hover:bg-white/10" aria-label="Restar una unidad">-</button>
+                <input type="number" id="cant_{i}" data-nombre="{e(p['nombre'])}" data-precio="{p['precio']}" value="0" min="0" max="20" readonly class="w-12 text-center font-display text-lg font-semibold text-oro-300 bg-transparent focus:outline-none" />
+                <button type="button" onclick="cambiarCant({i}, 1)" class="grid h-9 w-9 place-items-center rounded-xl bg-white/5 text-lg font-bold text-crema-100 hover:bg-white/10" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+          </li>''')
+
+    return cabeza('Para llevar · Auténticos CyL, Coca',
+                  'Encarga tus hamburguesas de autor y bocados de Auténticos CyL para llevar en Coca (Segovia). Pedido online directo para recogida.') + cabecera('para-llevar.html') + f'''
+  <main class="mx-auto max-w-4xl px-5 pb-20 pt-14">
+    <header>
+      <div class="inline-flex items-center gap-2 rounded-full border border-oro-400/40 bg-oro-400/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-oro-300">
+        <span>🍔 Servicio de recogida en local</span>
+      </div>
+      <h1 class="mt-3 font-display text-5xl font-semibold">Hamburguesas para llevar</h1>
+      <p class="mt-4 max-w-2xl leading-relaxed text-crema-300">Haz tu pedido online y ven a recoger tus hamburguesas de autor y bocados de <strong class="text-crema-100">Las Noches de Auténticos</strong> recién hechos.</p>
+    </header>
+
+    <form id="formPedido" class="mt-10 space-y-8" novalidate>
+      <section>
+        <h2 class="font-display text-2xl font-semibold text-crema-100">1. Selecciona tus hamburguesas y bocados</h2>
+        <p class="mt-1 text-sm text-crema-500">Elige la cantidad de cada plato que deseas encargar.</p>
+        <ul class="mt-5 space-y-4">
+          {''.join(platos_html)}
+        </ul>
+      </section>
+
+      <section class="rounded-3xl border border-oro-400/30 bg-pizarra-900 p-6 sm:p-8">
+        <h2 class="font-display text-2xl font-semibold text-crema-100">2. Datos de recogida y contacto</h2>
+        <p class="mt-1 text-sm text-crema-500">Indica cuándo vienes a recoger tu pedido y cómo contactarte.</p>
+        
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <label class="block"><span class="{etiqueta}">Día de recogida</span>
+            <input name="fecha" type="date" required class="{campo}" /></label>
+          <label class="block"><span class="{etiqueta}">Hora aproximada de recogida</span>
+            <select name="hora" required class="{campo}">
+              <option value="20:30">20:30 h</option>
+              <option value="21:00">21:00 h</option>
+              <option value="21:30" selected>21:30 h</option>
+              <option value="22:00">22:00 h</option>
+              <option value="22:30">22:30 h</option>
+              <option value="23:00">23:00 h</option>
+            </select></label>
+          <label class="block"><span class="{etiqueta}">Nombre completo</span>
+            <input name="nombre" required autocomplete="name" placeholder="Tu nombre" class="{campo}" /></label>
+          <label class="block"><span class="{etiqueta}">Teléfono de contacto</span>
+            <input name="telefono" type="tel" required autocomplete="tel" placeholder="600 000 000" class="{campo}" /></label>
+          <label class="block sm:col-span-2"><span class="{etiqueta}">Comentarios u observaciones (opcional)</span>
+            <textarea name="notas" rows="2" placeholder="Punto de la carne, intolerancias, cebolla aparte..." class="{campo}"></textarea></label>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="mt-8 rounded-2xl border border-white/10 bg-pizarra-800 p-5">
+          <div class="flex items-center justify-between font-display text-xl font-semibold">
+            <span>Total del pedido:</span>
+            <span id="lblTotalPedido" class="tabular-nums text-oro-300">0,00 €</span>
+          </div>
+          <p id="lblResumenCant" class="mt-1 text-xs text-crema-500">0 productos seleccionados</p>
+        </div>
+
+        <label class="mt-6 flex items-start gap-3 text-sm text-crema-300">
+          <input name="privacidad" type="checkbox" required class="mt-1 h-5 w-5 accent-vino-500" />
+          <span>Acepto la <a href="privacidad.html" target="_blank" class="font-semibold text-oro-300 underline underline-offset-4">política de privacidad</a> para la gestión de este pedido para llevar.</span></label>
+
+        <p id="errorPedido" class="mt-4 hidden rounded-2xl bg-vino-500/15 px-4 py-3 text-sm text-vino-300" role="alert"></p>
+
+        <button type="submit" class="mt-6 w-full rounded-full bg-vino-500 py-4 font-semibold text-crema-100 transition hover:bg-vino-400">Confirmar y realizar pedido para llevar</button>
+      </section>
+    </form>
+
+    <div id="pedidoOk" class="mt-10 hidden rounded-3xl border border-oro-400/40 bg-pizarra-900 p-8 text-center" role="status">
+      <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-oro-400 text-pizarra-950 font-display text-3xl font-bold">✓</div>
+      <p class="mt-4 text-xs font-semibold uppercase tracking-[.3em] text-oro-400">Pedido registrado</p>
+      <h2 class="mt-2 font-display text-3xl font-semibold">¡Muchas gracias, <span id="okCliente"></span>!</h2>
+      <p id="okResumenPedido" class="mt-3 text-lg leading-relaxed text-crema-300"></p>
+      <div id="okDetalleItems" class="mx-auto mt-4 max-w-md rounded-2xl border border-white/10 bg-pizarra-800 p-4 text-left text-sm text-crema-300"></div>
+      <p class="mt-5 text-sm text-crema-500">Te confirmaremos la recogida por teléfono o WhatsApp. Si necesitas modificar tu pedido, llámanos al <a href="tel:{TEL}" class="font-semibold text-crema-100">{TEL_VISIBLE}</a>.</p>
+      <a href="index.html" class="mt-8 inline-block rounded-full bg-vino-500 px-8 py-3.5 font-semibold text-crema-100 transition hover:bg-vino-400">Volver al inicio</a>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script>
+    function cambiarCant(idx, delta) {{
+      const el = document.getElementById('cant_' + idx);
+      if (!el) return;
+      let val = (parseInt(el.value) || 0) + delta;
+      if (val < 0) val = 0;
+      if (val > 20) val = 20;
+      el.value = val;
+      actualizarTotal();
+    }}
+
+    function actualizarTotal() {{
+      let total = 0, cantTotal = 0;
+      document.querySelectorAll('[id^="cant_"]').forEach(el => {{
+        const c = parseInt(el.value) || 0;
+        const p = parseFloat(el.dataset.precio) || 0;
+        total += c * p;
+        cantTotal += c;
+      }});
+      const totalFmt = total.toFixed(2).replace('.', ',') + ' €';
+      document.getElementById('lblTotalPedido').textContent = totalFmt;
+      document.getElementById('lblResumenCant').textContent = cantTotal === 1 ? '1 producto seleccionado' : cantTotal + ' productos seleccionados';
+    }}
+
+    (() => {{
+      const hoy = new Date();
+      const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+      const F = document.getElementById('formPedido');
+      if (F && F.fecha) {{
+        F.fecha.min = iso(hoy);
+        F.fecha.value = iso(hoy);
+      }}
+
+      F.addEventListener('submit', ev => {{
+        ev.preventDefault();
+        const err = document.getElementById('errorPedido');
+        const items = [];
+        let total = 0;
+
+        document.querySelectorAll('[id^="cant_"]').forEach(el => {{
+          const cantidad = parseInt(el.value) || 0;
+          if (cantidad > 0) {{
+            const nombre = el.dataset.nombre;
+            const precio = parseFloat(el.dataset.precio) || 0;
+            const subtotal = cantidad * precio;
+            total += subtotal;
+            items.push({{ nombre, cantidad, precio, subtotal }});
+          }}
+        }});
+
+        const f = Object.fromEntries(new FormData(F));
+        const tel = (f.telefono || '').replace(/[\\s.-]/g, '');
+
+        let msg = '';
+        if (items.length === 0) msg = 'Por favor, selecciona al menos 1 hamburguesa o bocado para llevar.';
+        else if (!f.fecha) msg = 'Selecciona el día de recogida.';
+        else if (!f.nombre.trim()) msg = 'Escribe tu nombre.';
+        else if (!/^[0-9+]{{9,15}}$/.test(tel)) msg = 'Escribe un número de teléfono válido para contactarte.';
+        else if (!f.privacidad) msg = 'Debes aceptar la política de privacidad para realizar el pedido.';
+
+        if (msg) {{
+          err.textContent = msg;
+          err.classList.remove('hidden');
+          return;
+        }}
+        err.classList.add('hidden');
+
+        const pedidoObj = {{
+          id: 'ped-' + Date.now().toString(36),
+          fecha: f.fecha,
+          hora: f.hora,
+          cliente: f.nombre.trim(),
+          telefono: tel,
+          notas: (f.notas || '').trim(),
+          items: items,
+          total: total,
+          estado: 'pendiente',
+          origen: 'web',
+          creado: new Date().toISOString()
+        }};
+
+        // Guardar pedido en localStorage
+        try {{
+          const key = (window.TAPERIA && window.TAPERIA.clavePedidos) || 'taperia-pedidos-web';
+          const prev = JSON.parse(localStorage.getItem(key) || '[]');
+          prev.push(pedidoObj);
+          localStorage.setItem(key, JSON.stringify(prev));
+        }} catch(e) {{}}
+
+        // Mostrar pantalla de confirmación
+        F.classList.add('hidden');
+        document.getElementById('okCliente').textContent = pedidoObj.cliente.split(' ')[0];
+        document.getElementById('okResumenPedido').textContent = `Tu pedido de ${{items.reduce((a,b)=>a+b.cantidad,0)}} productos (${{total.toFixed(2).replace('.', ',')}} €) ha sido registrado para recogida el ${{pedidoObj.fecha}} a las ${{pedidoObj.hora}} h.`;
+        
+        let htmlItems = '<p class="font-semibold text-oro-300 border-b border-white/10 pb-2 mb-2">Resumen de productos:</p><ul class="space-y-1">';
+        items.forEach(it => {{
+          htmlItems += `<li class="flex justify-between"><span>${{it.cantidad}}x ${{it.nombre}}</span><span class="tabular-nums font-semibold">${{it.subtotal.toFixed(2).replace('.', ',')}} €</span></li>`;
+        }});
+        htmlItems += '</ul>';
+        document.getElementById('okDetalleItems').innerHTML = htmlItems;
+
+        const okBox = document.getElementById('pedidoOk');
+        okBox.classList.remove('hidden');
+        okBox.scrollIntoView({{ block: 'center' }});
+      }});
+    }})();
+  </script>
+''' + pie() + '</body>\n</html>\n'
+
+
 def datos_asistente():
     """Conocimiento para el asistente IA de WhatsApp: un único JSON que el agente (n8n)
     descarga de la web publicada. Se regenera con el resto de la web, así que siempre
     coincide con lo que ve el cliente. Ver docs/agente-whatsapp.md."""
     import re
     conf = (RAIZ / 'js' / 'config.js').read_text(encoding='utf-8')
-    dias = {k: json.loads(v) for k, v in re.findall(r'(comida|cena):\s*(\[[\d,\s]*\])', conf)}
-    horas = {k: json.loads(v.replace("'", '"')) for k, v in re.findall(r"(comida|cena):\s*\{[^}]*horas:\s*(\[[^\]]*\])", conf)}
+    dias = {k: json.loads(v) for k, v in re.findall(r'(comida|cena):\s*(\[[0-9,\s]*\])', conf)}
+    horas = {k: json.loads(v.replace("'", '"')) for k, v in re.findall(r'(comida|cena):\s*\{[^}]*horas:\s*(\[[^\]]*\])', conf)}
     nombres_dia = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
     carta = []
     for s in CARTA['secciones']:
@@ -858,6 +1080,15 @@ def datos_asistente():
              'por_unidad': bool(pl.get('unidad')), 'alergenos': [ALERGENOS[a] for a in pl.get('alergenos', [])],
              'etiquetas': pl.get('etiquetas', []), 'agotado': pl.get('estado') == 'agotado'}
             for pl in s['platos'] if pl.get('estado') != 'oculto']})
+
+    hamburguesas_para_llevar = []
+    noches = next((s for s in CARTA['secciones'] if s['id'] == 'noches'), None)
+    if noches:
+        hamburguesas_para_llevar = [
+            {'nombre': pl['nombre'], 'descripcion': pl.get('desc'), 'precio': pl['precio']}
+            for pl in noches['platos'] if pl.get('estado') != 'oculto'
+        ]
+
     return {
         'generado': 'tools/generar.py',
         'negocio': {'nombre': 'Auténticos CyL · Bar Tapería y Tienda', 'lema': LEMA, 'direccion': DIRECCION, 'como_llegar': MAPA,
@@ -872,7 +1103,14 @@ def datos_asistente():
                        'Grupos de más de 12 personas, menús de empresa y encargos: pasar el caso a una persona.',
                        'Para reservas en el mismo día, recomendar llamar al ' + TEL_VISIBLE + '.',
                        'Las noches de Auténticos (hamburguesas de autor) solo en servicio de cenas.']},
-        'servicios': ['Comida para llevar (encargo por teléfono o WhatsApp)', 'Menús de empresa y grupos', 'Encargos de Navidad',
+        'pedidos_para_llevar': {
+            'disponible': True,
+            'hacer_pedido_web': 'https://' + TITULAR['dominio'] + '/para-llevar.html',
+            'instrucciones_agente': 'El asistente debe ofrecer activamente las hamburguesas de autor para llevar. Puede facilitar el enlace a la web para-llevar.html o recoger el pedido del cliente directamente por WhatsApp (productos deseados, día y hora de recogida, nombre y teléfono).',
+            'hamburguesas_y_bocados': hamburguesas_para_llevar
+        },
+        'servicios': ['Hamburguesas y bocados de autor para llevar (pedido online en para-llevar.html o por WhatsApp/teléfono)',
+                      'Comida para llevar (encargo por teléfono o WhatsApp)', 'Menús de empresa y grupos', 'Encargos de Navidad',
                       'Tienda de productos de Castilla y León: ' + ', '.join(TIENDA)],
         'alergenos_aviso': 'Informamos de los 14 alérgenos de declaración obligatoria (Reglamento UE 1169/2011). '
                            'Ante una alergia o intolerancia, avisar al personal: el asistente no puede garantizar la ausencia de trazas.',
@@ -882,6 +1120,7 @@ def datos_asistente():
 
 def main():
     for nombre, html in [('index.html', pagina_inicio()), ('carta.html', pagina_carta()),
+                         ('para-llevar.html', pagina_para_llevar()),
                          ('noticias.html', pagina_noticias()), ('reservas.html', pagina_reservas()),
                          ('aviso-legal.html', pagina_aviso_legal()), ('privacidad.html', pagina_privacidad()),
                          ('cookies.html', pagina_cookies())]:
@@ -898,3 +1137,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
