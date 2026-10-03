@@ -29,7 +29,7 @@ window.TAPERIA = {
     fecha: '10 de octubre de 2026',
     etiqueta: 'Fechas especiales y eventos',
     descripcion: 'Esa noche solo estará disponible la carta para servicio de cenas y las hamburguesas solo serán para llevar.',
-    videoUrl: 'https://www.facebook.com/reel/1645790413629479',
+    videoUrl: 'img/fuegos-artificiales.mp4',
     detalles: [
       'Servicio exclusivo de cenas',
       'Hamburguesas únicamente para llevar',

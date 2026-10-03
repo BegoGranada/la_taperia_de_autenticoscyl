@@ -301,29 +301,14 @@ def pagina_inicio():
             </ul>
             <div class="mt-8 flex flex-wrap gap-3">
               {boton('reservas.html', 'Reservar para esta fecha')}
-              <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoSeccion" class="inline-flex items-center gap-2 rounded-full border border-crema-100/30 px-6 py-3.5 font-semibold text-crema-100 transition hover:bg-white/10">Ver vídeo / Reel ↗</a>
             </div>
           </div>
-          <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-pizarra-950 shadow-2xl group">
-            <div class="relative aspect-video w-full overflow-hidden bg-pizarra-900">
-              <img src="img/fachada.webp" alt="Noche de fuegos artificiales en Auténticos CyL" class="h-full w-full object-cover opacity-40 transition duration-500 group-hover:scale-105 group-hover:opacity-50" />
-              <div class="absolute inset-0 bg-gradient-to-t from-pizarra-950 via-pizarra-950/40 to-transparent"></div>
-              <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoCardSeccion" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                <span class="grid h-16 w-16 place-items-center rounded-full bg-vino-500/90 text-crema-100 shadow-[0_0_35px_rgba(140,42,58,0.7)] backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-vino-400">
-                  <svg class="ml-1 h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </span>
-                <span class="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-pizarra-950/80 px-3.5 py-1 text-xs font-semibold text-oro-300 backdrop-blur">
-                  {ICONOS['Facebook']} Reel en Facebook
-                </span>
-                <p class="mt-2 font-display text-base font-semibold text-crema-100 sm:text-lg">Ver vídeo del evento ↗</p>
-              </a>
-            </div>
-            <div class="border-t border-white/5 bg-pizarra-900/90 px-4 py-3 text-center">
-              <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoSubSeccion" class="inline-flex items-center gap-2 text-xs font-semibold text-oro-300 hover:text-oro-200">
-                {ICONOS['Facebook']} Ver reel publicado en Facebook ↗
-              </a>
-            </div>
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-2xl">
+            <video id="videoEventoSeccion" src="{EVENTO['videoUrl']}" controls autoplay loop muted playsinline class="aspect-video w-full rounded-2xl object-cover"></video>
           </div>
+        </div>
+      </div>
+    </section>
         </div>
       </div>
     </section>
@@ -458,25 +443,8 @@ def pagina_inicio():
         
         <p class="mt-4 leading-relaxed text-crema-300" data-evento-desc>{e(EVENTO['descripcion'])}</p>
         
-        <div class="mt-5 relative overflow-hidden rounded-2xl border border-white/10 bg-pizarra-950 shadow-2xl group">
-          <div class="relative aspect-video w-full overflow-hidden bg-pizarra-900">
-            <img src="img/fachada.webp" alt="Noche de fuegos artificiales en Auténticos CyL" class="h-full w-full object-cover opacity-40 transition duration-500 group-hover:scale-105 group-hover:opacity-50" />
-            <div class="absolute inset-0 bg-gradient-to-t from-pizarra-950 via-pizarra-950/40 to-transparent"></div>
-            <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoCardModal" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-              <span class="grid h-16 w-16 place-items-center rounded-full bg-vino-500/90 text-crema-100 shadow-[0_0_35px_rgba(140,42,58,0.7)] backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-vino-400">
-                <svg class="ml-1 h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </span>
-              <span class="mt-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-pizarra-950/80 px-3.5 py-1 text-xs font-semibold text-oro-300 backdrop-blur">
-                {ICONOS['Facebook']} Reel en Facebook
-              </span>
-              <p class="mt-2 font-display text-base font-semibold text-crema-100 sm:text-lg">Ver vídeo del evento ↗</p>
-            </a>
-          </div>
-          <div class="border-t border-white/5 bg-pizarra-900/90 px-4 py-3 text-center">
-            <a href="{EVENTO['videoUrl']}" target="_blank" rel="noopener" id="linkVideoSubModal" class="inline-flex items-center gap-2 text-xs font-semibold text-oro-300 hover:text-oro-200">
-              {ICONOS['Facebook']} Ver reel publicado en Facebook ↗
-            </a>
-          </div>
+        <div class="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-2xl">
+          <video id="videoEventoModal" src="{EVENTO['videoUrl']}" controls autoplay loop muted playsinline class="aspect-video w-full rounded-2xl object-cover"></video>
         </div>
 
         <div class="mt-7 flex flex-wrap gap-3">
@@ -491,32 +459,37 @@ def pagina_inicio():
       const m = document.getElementById('modalEventoEspecial');
       if (m) {{ m.classList.replace('flex', 'hidden'); document.body.style.overflow = ''; }}
     }}
-    (function() {{
+    function abrirModalEvento(evData) {{
+      const m = document.getElementById('modalEventoEspecial');
+      if (!m) return;
+      document.querySelectorAll('[data-evento-titulo]').forEach(el => el.textContent = evData.titulo);
+      document.querySelectorAll('[data-evento-fecha]').forEach(el => el.textContent = evData.fecha);
+      document.querySelectorAll('[data-evento-desc]').forEach(el => el.textContent = evData.descripcion);
+      if (evData.videoUrl) {{
+        const v1 = document.getElementById('videoEventoSeccion');
+        if (v1 && v1.getAttribute('src') !== evData.videoUrl) v1.src = evData.videoUrl;
+        const v2 = document.getElementById('videoEventoModal');
+        if (v2 && v2.getAttribute('src') !== evData.videoUrl) v2.src = evData.videoUrl;
+      }}
+      m.classList.replace('hidden', 'flex');
+      document.body.style.overflow = 'hidden';
+    }}
+    function initEventoModal() {{
       let evData = null;
       try {{
         const local = localStorage.getItem('taperia-evento-especial');
         if (local) evData = JSON.parse(local);
       }} catch(e) {{}}
       if (!evData && window.TAPERIA) evData = window.TAPERIA.eventoEspecial;
-      if (!evData || !evData.activo) return;
-
-      const m = document.getElementById('modalEventoEspecial');
-      if (m) {{
-        document.querySelectorAll('[data-evento-titulo]').forEach(el => el.textContent = evData.titulo);
-        document.querySelectorAll('[data-evento-fecha]').forEach(el => el.textContent = evData.fecha);
-        document.querySelectorAll('[data-evento-desc]').forEach(el => el.textContent = evData.descripcion);
-        if (evData.videoUrl) {{
-          ['linkVideoSeccion', 'linkVideoCardSeccion', 'linkVideoSubSeccion', 'linkVideoCardModal', 'linkVideoSubModal'].forEach(id => {{
-            const el = document.getElementById(id);
-            if (el) el.href = evData.videoUrl;
-          }});
-        }}
-        setTimeout(() => {{
-          m.classList.replace('hidden', 'flex');
-          document.body.style.overflow = 'hidden';
-        }}, 600);
+      if (evData && evData.activo) {{
+        abrirModalEvento(evData);
       }}
-    }})();
+    }}
+    if (document.readyState === 'loading') {{
+      document.addEventListener('DOMContentLoaded', initEventoModal);
+    }} else {{
+      initEventoModal();
+    }}
   </script>
 ''' + pie() + '</body>\n</html>\n'
 
