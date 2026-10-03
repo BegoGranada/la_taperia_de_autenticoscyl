@@ -16,9 +16,9 @@ window.CARTA_BASE = {
    ],
    "platos": [
     {
-     "nombre": "Patatas bravas de la Retamilla",
+     "nombre": "Patatas bravas de la retamilla.",
      "desc": "",
-     "precio": 12,
+     "precio": 12.0,
      "unidad": false,
      "alergenos": [
       7
@@ -28,20 +28,18 @@ window.CARTA_BASE = {
      "foto": null
     },
     {
-     "nombre": "Torrezno de Soria bien crujiente",
+     "nombre": "Torrezno de Soria bien crujiente.",
      "desc": "",
      "precio": 8.95,
      "unidad": false,
-     "alergenos": [
-      5
-     ],
+     "alergenos": [],
      "etiquetas": [],
      "grupo": null,
      "foto": "img/torreznos.webp"
     },
     {
-     "nombre": "Croquetas súper cremosas de jamón",
-     "desc": "",
+     "nombre": "Croquetas súper cremosas de jamón.",
+     "desc": "8ud.",
      "precio": 15.95,
      "unidad": false,
      "alergenos": [
@@ -54,14 +52,13 @@ window.CARTA_BASE = {
      "foto": "img/croquetas.webp"
     },
     {
-     "nombre": "Chipirones en texturas",
-     "desc": "Tomate al estilo tradicional y crujiente de torreznos de Soria.",
+     "nombre": "Chipirones en texturas, tomate al estilo tradicional y crujiente de torreznos de Soria.",
+     "desc": "",
      "precio": 18.95,
      "unidad": false,
      "alergenos": [
       1,
-      4,
-      5
+      4
      ],
      "etiquetas": [
       "Opción sin gluten"
@@ -70,7 +67,7 @@ window.CARTA_BASE = {
      "foto": "img/chipirones.webp"
     },
     {
-     "nombre": "Huevos rotos, torreznos de Soria y tartufata",
+     "nombre": "Huevos rotos, torreznos de Soria y trufa.",
      "desc": "",
      "precio": 17.95,
      "unidad": false,
@@ -82,26 +79,12 @@ window.CARTA_BASE = {
      "foto": null
     },
     {
-     "nombre": "Ensalada de tomate de la huerta",
-     "desc": "Con ventresca y pimientos asados al carbón.",
-     "precio": 15,
+     "nombre": "Ensalada de pimientos rojos al carbón, tomate Raff, sardina ahumada, cebolla encurtida y piparra.",
+     "desc": "",
+     "precio": 15.0,
      "unidad": false,
      "alergenos": [
       4,
-      13
-     ],
-     "etiquetas": [],
-     "grupo": null,
-     "foto": null
-    },
-    {
-     "nombre": "Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica",
-     "desc": "Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.",
-     "precio": 16.95,
-     "unidad": false,
-     "alergenos": [
-      4,
-      6,
       7
      ],
      "etiquetas": [],
@@ -109,38 +92,58 @@ window.CARTA_BASE = {
      "foto": null
     },
     {
-     "nombre": "Burrata, cerezas asadas, remolacha ahumada y pistachos tostados",
+     "nombre": "Ensalada templada de pato confitado, otoño y escabeche.",
      "desc": "",
-     "precio": 16,
-     "unidad": false,
-     "alergenos": [
-      5,
-      13
-     ],
-     "etiquetas": [],
-     "grupo": null,
-     "foto": null
-    },
-    {
-     "nombre": "Bikini de oreja plancha",
-     "desc": "Queso pata de mulo ahumado y mojo rojo.",
-     "precio": 12,
+     "precio": 16.95,
      "unidad": false,
      "alergenos": [
       1,
+      8,
+      9,
+      14
+     ],
+     "etiquetas": [
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Raíces de otoño.",
+     "desc": "Crema de calabaza ahumada, alcachofa frita, langostinos, huevo frito y jugo de sus cabezas.",
+     "precio": 17.0,
+     "unidad": false,
+     "alergenos": [
+      2,
       5,
-      7,
-      11,
-      13
+      8,
+      14
      ],
      "etiquetas": [],
      "grupo": null,
      "foto": null
     },
     {
-     "nombre": "Taco de maíz con atún rojo salvaje de Almadraba",
-     "desc": "Marinado en michelada.",
-     "precio": 8,
+     "nombre": "Sashimi de atún rojo Balfegó, shiitake ligeramente marinado y mandarina a la brasa.",
+     "desc": "",
+     "precio": 23.0,
+     "unidad": false,
+     "alergenos": [
+      1,
+      4,
+      6,
+      11
+     ],
+     "etiquetas": [
+      "Opción sin gluten"
+     ],
+     "grupo": null,
+     "foto": null
+    },
+    {
+     "nombre": "Atún rojo Balfegó, nori crujiente y manzana fermentada.",
+     "desc": "Atún rojo, manzana fermentada, shiitake y arroz crujiente, un juego de frescura, umami y texturas.",
+     "precio": 11.0,
      "unidad": true,
      "alergenos": [
       1,
@@ -151,108 +154,28 @@ window.CARTA_BASE = {
      "foto": null
     },
     {
-     "nombre": "Pizza de sartén de salmón ahumado",
-     "desc": "Stracciatella, aguacate y tomate semiseco.",
-     "precio": 12.95,
+     "nombre": "Pizza a la sartén de papada ahumada en casa, higos, stracciatella y berenjena al carbón.",
+     "desc": "Masa fina y crujiente, papada curada y ahumada, higos, stracciatella y berenjena al carbón.",
+     "precio": 14.95,
      "unidad": false,
      "alergenos": [
       1,
-      4,
-      5
+      7,
+      13
      ],
      "etiquetas": [],
      "grupo": null,
-     "foto": null
+     "foto": "img/pizza-sarten.webp"
     },
     {
-     "nombre": "Empanada de pipián con ají de maní",
-     "desc": "Masa de empanada argentina, rellena de verduras y cacahuete.",
-     "precio": 4.5,
-     "unidad": true,
-     "alergenos": [
-      1,
-      9
-     ],
-     "etiquetas": [],
-     "grupo": null,
-     "foto": null
-    }
-   ]
-  },
-  {
-   "id": "brasa",
-   "nombre": "A la brasa y el mar",
-   "corto": "Brasa y mar",
-   "lema": "Sabores · Sensaciones y +",
-   "intro": "Sabores que nacen del respeto al producto, del fuego y del tiempo. En Auténticos CyL elevamos cada ingrediente a su máxima expresión para ofrecerte platos memorables, honestos y sorprendentes.",
-   "aviso": null,
-   "cierre": null,
-   "foto": [
-    "img/tabla-duroc.webp",
-    "Tabla de carnes Duroc a la brasa con chorizo ibérico, pebre y chimichurri"
-   ],
-   "platos": [
-    {
-     "nombre": "Albóndigas crujientes de cochinillo segoviano",
-     "desc": "En su propio jugo, manzana ácida y kimchi.",
-     "precio": 18.95,
+     "nombre": "Bikini de oreja plancha, queso pata mulo ahumado y mojo rojo.",
+     "desc": "",
+     "precio": 12.0,
      "unidad": false,
      "alergenos": [
       1,
-      2,
       5,
       7,
-      10,
-      12,
-      14
-     ],
-     "etiquetas": [],
-     "grupo": null,
-     "foto": null
-    },
-    {
-     "nombre": "Entrecot de vaca a la brasa del josper",
-     "desc": "Madurado un mínimo de 35 días para lograr la máxima terneza y un sabor profundo. 400 g aprox.",
-     "precio": 24.95,
-     "unidad": false,
-     "alergenos": [],
-     "etiquetas": [
-      "400 g aprox."
-     ],
-     "grupo": null,
-     "foto": null
-    },
-    {
-     "nombre": "Tabla de carnes Duroc a la brasa",
-     "desc": "Solomillo, secreto, presa, pluma y chorizo ibérico. Selección premium para 2 personas.",
-     "precio": 36,
-     "unidad": false,
-     "alergenos": [],
-     "etiquetas": [
-      "Para 2 personas"
-     ],
-     "grupo": null,
-     "foto": "img/tabla-duroc.webp"
-    },
-    {
-     "nombre": "Picaña de vaca madurada a la brasa",
-     "desc": "",
-     "precio": 22,
-     "unidad": false,
-     "alergenos": [
-      12
-     ],
-     "etiquetas": [],
-     "grupo": null,
-     "foto": null
-    },
-    {
-     "nombre": "Presa ibérica a baja temperatura",
-     "desc": "Crema de maíz ahumado y melocotón a la brasa.",
-     "precio": 19,
-     "unidad": false,
-     "alergenos": [
-      12,
       13
      ],
      "etiquetas": [],
@@ -260,104 +183,37 @@ window.CARTA_BASE = {
      "foto": null
     },
     {
-     "nombre": "Lasaña de morcillo madurado a fuego lento",
-     "desc": "Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.",
-     "precio": 16,
+     "nombre": "Pastrami Gold 👑",
+     "desc": "Bikini de pastrami ahumado en casa, pan de centeno, queso comté fundido, cebolla melosa, pepinillo encurtido, mostaza de manzana y salsa especial auténticos 2.0.",
+     "precio": 14.95,
      "unidad": false,
      "alergenos": [
       1,
+      6,
       7,
-      12
+      9,
+      11,
+      13
      ],
-     "etiquetas": [],
+     "etiquetas": [
+      "Especial"
+     ],
      "grupo": null,
      "foto": null
     },
     {
-     "nombre": "Hamburguesa de rabo de toro",
-     "desc": "Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.",
-     "precio": 16.95,
+     "nombre": "Fingers de pluma ibérica.",
+     "desc": "Pluma de cerdo · rebozado crujiente · salsa BBQ de miel y mostaza.",
+     "precio": 14.0,
      "unidad": false,
      "alergenos": [
       1,
       5,
-      7,
-      12
+      6,
+      7
      ],
      "etiquetas": [],
      "grupo": null,
-     "foto": "img/rabo-de-toro.webp"
-    },
-    {
-     "nombre": "Lubina curada marcada en brasa",
-     "desc": "Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.",
-     "precio": 21.95,
-     "unidad": false,
-     "alergenos": [
-      4,
-      7,
-      8
-     ],
-     "etiquetas": [],
-     "grupo": "Del mar",
-     "foto": null
-    },
-    {
-     "nombre": "Bonito semicurado, ligeramente marcado a la brasa",
-     "desc": "Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.",
-     "precio": 19.9,
-     "unidad": false,
-     "alergenos": [
-      4,
-      7,
-      12
-     ],
-     "etiquetas": [],
-     "grupo": "Del mar",
-     "foto": null
-    },
-    {
-     "nombre": "Bowl de lechuga, tomate y cebolla encurtida",
-     "desc": "",
-     "precio": 6.95,
-     "unidad": false,
-     "alergenos": [],
-     "etiquetas": [],
-     "grupo": "Para acompañar nuestros platos",
-     "foto": null
-    },
-    {
-     "nombre": "Patatas fritas",
-     "desc": "",
-     "precio": 4.5,
-     "unidad": false,
-     "alergenos": [],
-     "etiquetas": [],
-     "grupo": "Para acompañar nuestros platos",
-     "foto": null
-    },
-    {
-     "nombre": "Patatas asadas con alioli de kimchi",
-     "desc": "",
-     "precio": 7.5,
-     "unidad": false,
-     "alergenos": [
-      8,
-      12,
-      13
-     ],
-     "etiquetas": [],
-     "grupo": "Para acompañar nuestros platos",
-     "foto": null
-    },
-    {
-     "nombre": "Verduras al josper",
-     "desc": "",
-     "precio": 7.95,
-     "unidad": false,
-     "alergenos": [],
-     "etiquetas": [],
-     "grupo": "Para acompañar nuestros platos",
      "foto": null
     }
    ]

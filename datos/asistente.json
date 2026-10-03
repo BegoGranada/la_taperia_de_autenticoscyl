@@ -144,9 +144,9 @@
     "aviso": null,
     "platos": [
      {
-      "nombre": "Patatas bravas de la Retamilla",
+      "nombre": "Patatas bravas de la retamilla.",
       "descripcion": null,
-      "precio": 12,
+      "precio": 12.0,
       "por_unidad": false,
       "alergenos": [
        "Mostaza"
@@ -155,19 +155,17 @@
       "agotado": false
      },
      {
-      "nombre": "Torrezno de Soria bien crujiente",
+      "nombre": "Torrezno de Soria bien crujiente.",
       "descripcion": null,
       "precio": 8.95,
       "por_unidad": false,
-      "alergenos": [
-       "Huevos"
-      ],
+      "alergenos": [],
       "etiquetas": [],
       "agotado": false
      },
      {
-      "nombre": "Croquetas súper cremosas de jamón",
-      "descripcion": null,
+      "nombre": "Croquetas súper cremosas de jamón.",
+      "descripcion": "8ud.",
       "precio": 15.95,
       "por_unidad": false,
       "alergenos": [
@@ -179,14 +177,13 @@
       "agotado": false
      },
      {
-      "nombre": "Chipirones en texturas",
-      "descripcion": "Tomate al estilo tradicional y crujiente de torreznos de Soria.",
+      "nombre": "Chipirones en texturas, tomate al estilo tradicional y crujiente de torreznos de Soria.",
+      "descripcion": null,
       "precio": 18.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
-       "Pescado",
-       "Huevos"
+       "Pescado"
       ],
       "etiquetas": [
        "Opción sin gluten"
@@ -194,7 +191,7 @@
       "agotado": false
      },
      {
-      "nombre": "Huevos rotos, torreznos de Soria y tartufata",
+      "nombre": "Huevos rotos, torreznos de Soria y trufa.",
       "descripcion": null,
       "precio": 17.95,
       "por_unidad": false,
@@ -205,61 +202,67 @@
       "agotado": false
      },
      {
-      "nombre": "Ensalada de tomate de la huerta",
-      "descripcion": "Con ventresca y pimientos asados al carbón.",
-      "precio": 15,
+      "nombre": "Ensalada de pimientos rojos al carbón, tomate Raff, sardina ahumada, cebolla encurtida y piparra.",
+      "descripcion": null,
+      "precio": 15.0,
       "por_unidad": false,
       "alergenos": [
        "Pescado",
-       "Lácteos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Ensalada de ahumados, cereza y avellana tostada con vinagreta cítrica",
-      "descripcion": "Bacalao y sardina ahumada, acompañado de cereza de temporada, avellana tostada, lascas de pepino, hinojo y vinagreta cítrica.",
-      "precio": 16.95,
-      "por_unidad": false,
-      "alergenos": [
-       "Pescado",
-       "Soja",
        "Mostaza"
       ],
       "etiquetas": [],
       "agotado": false
      },
      {
-      "nombre": "Burrata, cerezas asadas, remolacha ahumada y pistachos tostados",
+      "nombre": "Ensalada templada de pato confitado, otoño y escabeche.",
       "descripcion": null,
-      "precio": 16,
-      "por_unidad": false,
-      "alergenos": [
-       "Huevos",
-       "Lácteos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Bikini de oreja plancha",
-      "descripcion": "Queso pata de mulo ahumado y mojo rojo.",
-      "precio": 12,
+      "precio": 16.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
+       "Apio",
+       "Frutos secos",
+       "Altramuces"
+      ],
+      "etiquetas": [
+       "Opción sin gluten"
+      ],
+      "agotado": false
+     },
+     {
+      "nombre": "Raíces de otoño.",
+      "descripcion": "Crema de calabaza ahumada, alcachofa frita, langostinos, huevo frito y jugo de sus cabezas.",
+      "precio": 17.0,
+      "por_unidad": false,
+      "alergenos": [
+       "Crustáceos",
        "Huevos",
-       "Mostaza",
-       "Sésamo",
-       "Lácteos"
+       "Apio",
+       "Altramuces"
       ],
       "etiquetas": [],
       "agotado": false
      },
      {
-      "nombre": "Taco de maíz con atún rojo salvaje de Almadraba",
-      "descripcion": "Marinado en michelada.",
-      "precio": 8,
+      "nombre": "Sashimi de atún rojo Balfegó, shiitake ligeramente marinado y mandarina a la brasa.",
+      "descripcion": null,
+      "precio": 23.0,
+      "por_unidad": false,
+      "alergenos": [
+       "Gluten",
+       "Pescado",
+       "Soja",
+       "Sésamo"
+      ],
+      "etiquetas": [
+       "Opción sin gluten"
+      ],
+      "agotado": false
+     },
+     {
+      "nombre": "Atún rojo Balfegó, nori crujiente y manzana fermentada.",
+      "descripcion": "Atún rojo, manzana fermentada, shiitake y arroz crujiente, un juego de frescura, umami y texturas.",
+      "precio": 11.0,
       "por_unidad": true,
       "alergenos": [
        "Gluten",
@@ -269,188 +272,61 @@
       "agotado": false
      },
      {
-      "nombre": "Pizza de sartén de salmón ahumado",
-      "descripcion": "Stracciatella, aguacate y tomate semiseco.",
-      "precio": 12.95,
+      "nombre": "Pizza a la sartén de papada ahumada en casa, higos, stracciatella y berenjena al carbón.",
+      "descripcion": "Masa fina y crujiente, papada curada y ahumada, higos, stracciatella y berenjena al carbón.",
+      "precio": 14.95,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
-       "Pescado",
-       "Huevos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Empanada de pipián con ají de maní",
-      "descripcion": "Masa de empanada argentina, rellena de verduras y cacahuete.",
-      "precio": 4.5,
-      "por_unidad": true,
-      "alergenos": [
-       "Gluten",
-       "Frutos secos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     }
-    ]
-   },
-   {
-    "seccion": "A la brasa y el mar",
-    "aviso": null,
-    "platos": [
-     {
-      "nombre": "Albóndigas crujientes de cochinillo segoviano",
-      "descripcion": "En su propio jugo, manzana ácida y kimchi.",
-      "precio": 18.95,
-      "por_unidad": false,
-      "alergenos": [
-       "Gluten",
-       "Crustáceos",
-       "Huevos",
        "Mostaza",
-       "Cacahuetes",
-       "Sulfitos",
-       "Altramuces"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Entrecot de vaca a la brasa del josper",
-      "descripcion": "Madurado un mínimo de 35 días para lograr la máxima terneza y un sabor profundo. 400 g aprox.",
-      "precio": 24.95,
-      "por_unidad": false,
-      "alergenos": [],
-      "etiquetas": [
-       "400 g aprox."
-      ],
-      "agotado": false
-     },
-     {
-      "nombre": "Tabla de carnes Duroc a la brasa",
-      "descripcion": "Solomillo, secreto, presa, pluma y chorizo ibérico. Selección premium para 2 personas.",
-      "precio": 36,
-      "por_unidad": false,
-      "alergenos": [],
-      "etiquetas": [
-       "Para 2 personas"
-      ],
-      "agotado": false
-     },
-     {
-      "nombre": "Picaña de vaca madurada a la brasa",
-      "descripcion": null,
-      "precio": 22,
-      "por_unidad": false,
-      "alergenos": [
-       "Sulfitos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Presa ibérica a baja temperatura",
-      "descripcion": "Crema de maíz ahumado y melocotón a la brasa.",
-      "precio": 19,
-      "por_unidad": false,
-      "alergenos": [
-       "Sulfitos",
        "Lácteos"
       ],
       "etiquetas": [],
       "agotado": false
      },
      {
-      "nombre": "Lasaña de morcillo madurado a fuego lento",
-      "descripcion": "Morcillo estofado durante horas, velouté de coco y parmesano, queso comté gratinado y jugo reducido.",
-      "precio": 16,
-      "por_unidad": false,
-      "alergenos": [
-       "Gluten",
-       "Mostaza",
-       "Sulfitos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Hamburguesa de rabo de toro",
-      "descripcion": "Guiso de rabo de toro cocinado lentamente, prensado, rebozado y glaseado con su propia salsa, parmentier de boniato, maíz crujiente, cebolla encurtida, lechuga y tomate en pan brioche casero.",
-      "precio": 16.95,
+      "nombre": "Bikini de oreja plancha, queso pata mulo ahumado y mojo rojo.",
+      "descripcion": null,
+      "precio": 12.0,
       "por_unidad": false,
       "alergenos": [
        "Gluten",
        "Huevos",
        "Mostaza",
-       "Sulfitos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Lubina curada marcada en brasa",
-      "descripcion": "Ajo blanco de piñones, piñones tostados y brotes tiernos de pino.",
-      "precio": 21.95,
-      "por_unidad": false,
-      "alergenos": [
-       "Pescado",
-       "Mostaza",
-       "Apio"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Bonito semicurado, ligeramente marcado a la brasa",
-      "descripcion": "Yogur ahumado, fruta de verano y caldo frío elaborado con sus espinas.",
-      "precio": 19.9,
-      "por_unidad": false,
-      "alergenos": [
-       "Pescado",
-       "Mostaza",
-       "Sulfitos"
-      ],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Bowl de lechuga, tomate y cebolla encurtida",
-      "descripcion": null,
-      "precio": 6.95,
-      "por_unidad": false,
-      "alergenos": [],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Patatas fritas",
-      "descripcion": null,
-      "precio": 4.5,
-      "por_unidad": false,
-      "alergenos": [],
-      "etiquetas": [],
-      "agotado": false
-     },
-     {
-      "nombre": "Patatas asadas con alioli de kimchi",
-      "descripcion": null,
-      "precio": 7.5,
-      "por_unidad": false,
-      "alergenos": [
-       "Apio",
-       "Sulfitos",
        "Lácteos"
       ],
       "etiquetas": [],
       "agotado": false
      },
      {
-      "nombre": "Verduras al josper",
-      "descripcion": null,
-      "precio": 7.95,
+      "nombre": "Pastrami Gold 👑",
+      "descripcion": "Bikini de pastrami ahumado en casa, pan de centeno, queso comté fundido, cebolla melosa, pepinillo encurtido, mostaza de manzana y salsa especial auténticos 2.0.",
+      "precio": 14.95,
       "por_unidad": false,
-      "alergenos": [],
+      "alergenos": [
+       "Gluten",
+       "Soja",
+       "Mostaza",
+       "Frutos secos",
+       "Sésamo",
+       "Lácteos"
+      ],
+      "etiquetas": [
+       "Especial"
+      ],
+      "agotado": false
+     },
+     {
+      "nombre": "Fingers de pluma ibérica.",
+      "descripcion": "Pluma de cerdo · rebozado crujiente · salsa BBQ de miel y mostaza.",
+      "precio": 14.0,
+      "por_unidad": false,
+      "alergenos": [
+       "Gluten",
+       "Huevos",
+       "Soja",
+       "Mostaza"
+      ],
       "etiquetas": [],
       "agotado": false
      }

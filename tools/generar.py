@@ -237,7 +237,7 @@ def bloque_reconocimientos():
 # ---------------------------------------------------------------------------
 DESTACADOS = [
     ('img/chipirones.webp', 'Chipirones en texturas', 'Nuestros imprescindibles', 'imprescindibles'),
-    ('img/tabla-duroc.webp', 'Tabla de carnes Duroc a la brasa', 'A la brasa y el mar', 'brasa'),
+    ('img/pizza-sarten.webp', 'Pizza a la sartén', 'Nuestros imprescindibles', 'imprescindibles'),
     ('img/rabo-de-toro.webp', 'La Rabo de Toro', 'Las noches de Auténticos', 'noches'),
     ('img/croquetas.webp', 'Croquetas súper cremosas de jamón', 'Nuestros imprescindibles', 'imprescindibles'),
     ('img/torreznos.webp', 'Torrezno de Soria bien crujiente', 'Nuestros imprescindibles', 'imprescindibles'),
