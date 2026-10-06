@@ -102,6 +102,17 @@ def cabeza(titulo, descripcion):
     :focus-visible {{ outline: 2px solid #c9a45c; outline-offset: 2px; }}
     @media (prefers-reduced-motion: reduce) {{ html {{ scroll-behavior: auto; }} }}
     @media print {{
+      @page {{
+        size: 80mm auto;
+        margin: 0mm;
+      }}
+      html, body {{
+        width: 80mm;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+      }}
       body * {{ visibility: hidden !important; }}
       #contenedorTicketImpresion, #contenedorTicketImpresion * {{ visibility: visible !important; }}
       #contenedorTicketImpresion {{
@@ -110,11 +121,11 @@ def cabeza(titulo, descripcion):
         top: 0 !important;
         width: 80mm !important;
         margin: 0 !important;
-        padding: 4mm !important;
+        padding: 2mm !important;
         background: white !important;
         color: black !important;
       }}
-      @page {{ size: 80mm auto; margin: 0; }}
+      .no-print {{ display: none !important; }}
     }}
   </style>
 </head>
