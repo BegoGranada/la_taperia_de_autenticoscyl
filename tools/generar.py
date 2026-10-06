@@ -820,16 +820,13 @@ def pagina_carta():
             localStorage.setItem(key, JSON.stringify(prev));
           } catch(e) {}
 
-          // IMPRESIÓN DIRECTA DEL TICKET SIN PASOS INTERMEDIOS
-          imprimirTicketDirecto(pedidoObj);
-
           // Limpiar comanda
           Object.keys(itemsComanda).forEach(k => delete itemsComanda[k]);
           actualizarUiComanda();
 
-          // Confirmación
+          // Confirmación para el cliente
           bodyModal.classList.add('hidden');
-          document.getElementById('okComandaTexto').textContent = `Tu comanda para ${pedidoObj.mesa} ha sido enviada a barra y cocina y el ticket ha sido emitido.`;
+          document.getElementById('okComandaTexto').textContent = `Tu comanda para ${pedidoObj.mesa} ha sido enviada a barra y cocina. En breve te atenderemos.`;
           
           let htmlOk = `<p class="font-semibold text-oro-300 border-b border-white/10 pb-2 mb-2">Detalle de la comanda (${pedidoObj.total.toFixed(2).replace('.', ',')} €):</p><ul class="space-y-1">`;
           pedidoObj.items.forEach(it => {
@@ -841,72 +838,6 @@ def pagina_carta():
           document.getElementById('okComandaItems').innerHTML = htmlOk;
           okScreen.classList.remove('hidden');
         });
-      }
-
-      function imprimirTicketDirecto(p) {
-        const nowStr = new Date(p.creado || Date.now()).toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-        const esMesa = p.origen === 'comanda_mesa' || (p.mesa && p.mesa !== 'Para Llevar');
-        
-        let html = `
-          <div style="font-family: 'Courier New', monospace; width: 280px; margin: 0 auto; padding: 10px; background: #fff; color: #000;">
-            <div style="text-align: center; border-bottom: 2px dashed #000; padding-bottom: 8px;">
-              <h2 style="margin: 0; font-size: 16px; font-weight: bold; text-transform: uppercase;">AUTÉNTICOS CyL</h2>
-              <p style="margin: 2px 0 0 0; font-size: 11px;">Bar Tapería & Tienda Gourmet</p>
-              <p style="margin: 2px 0 0 0; font-size: 10px;">C/ Calixto del Río, 8 · Coca (Segovia)</p>
-              <p style="margin: 2px 0 0 0; font-size: 10px;">Teléfono: 647 41 31 86</p>
-            </div>
-            
-            <div style="border-bottom: 1px solid #000; padding: 8px 0; margin-bottom: 6px;">
-              <h3 style="margin: 0; font-size: 15px; font-weight: bold; text-align: center;">*** TICKET DE COMANDA ***</h3>
-              <p style="margin: 4px 0 0 0; font-size: 14px; font-weight: bold;">UBICACIÓN: ${p.mesa}</p>
-              <p style="margin: 2px 0 0 0; font-size: 11px;">TIPO: ${esMesa ? 'COMANDA DE MESA' : 'PEDIDO PARA LLEVAR'}</p>
-              <p style="margin: 2px 0 0 0; font-size: 10px;">FECHA: ${nowStr}</p>
-              <p style="margin: 2px 0 0 0; font-size: 10px;">Nº COMANDA: ${p.id}</p>
-            </div>
-
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 11px;">
-              <thead>
-                <tr style="border-bottom: 1px solid #000; text-align: left;">
-                  <th style="padding: 2px 0;">CANT.</th>
-                  <th style="padding: 2px 0;">DESCRIPCIÓN</th>
-                  <th style="padding: 2px 0; text-align: right;">TOTAL</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${(p.items || []).map(it => `
-                  <tr>
-                    <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">${it.cantidad}x</td>
-                    <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">${it.nombre}</td>
-                    <td style="padding: 4px 0; font-weight: bold; vertical-align: top; text-align: right;">${(it.subtotal || 0).toFixed(2).replace('.', ',')}€</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-
-            <div style="border-top: 2px dashed #000; padding-top: 6px; font-size: 14px; font-weight: bold; text-align: right;">
-              TOTAL COMANDA: ${(p.total || 0).toFixed(2).replace('.', ',')} €
-            </div>
-
-            ${p.notas ? `
-              <div style="margin-top: 8px; border: 1px solid #000; padding: 5px; font-size: 11px; background: #f9f9f9;">
-                <strong>OBSERVACIONES / NOTAS:</strong><br>${p.notas}
-              </div>
-            ` : ''}
-
-            <div style="text-align: center; margin-top: 14px; font-size: 10px; border-top: 1px solid #000; padding-top: 6px;">
-              ¡Comanda enviada a cocina!
-            </div>
-          </div>
-        `;
-
-        let contenedor = document.getElementById('contenedorTicketImpresion');
-        if (!contenedor) {
-          contenedor = document.createElement('div');
-          contenedor.id = 'contenedorTicketImpresion';
-          document.body.appendChild(contenedor);
-        }
-        contenedor.innerHTML = html;
-        window.print();
       }
 
       document.getElementById('btnCerrarOkComanda')?.addEventListener('click', cerrarModalComanda);
