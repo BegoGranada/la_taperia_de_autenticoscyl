@@ -27,16 +27,34 @@
     const al = p.alergenos || [];
     const alerg = al.length ? `<span class="text-xs text-crema-500" title="Alérgenos: ${esc(al.map(a => ALERGENOS[a]).join(', '))}">(${al.join(', ')})</span>` : '';
     const foto = p.foto ? `<img src="${esc(p.foto)}" alt="${esc(p.nombre)}" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />` : '';
+    const nom_esc = esc(p.nombre);
+    const precio_val = p.precio;
+    const btn_attr = `data-nombre="${nom_esc}" data-precio="${precio_val}"`;
+    const disabled_str = agotado ? 'disabled class="opacity-30 cursor-not-allowed grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-base font-bold text-crema-100"' : 'class="grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-base font-bold text-crema-100 hover:bg-white/10 transition active:scale-95"';
+
+    const control_comanda = `
+      <div class="inline-flex items-center rounded-2xl border border-white/10 bg-pizarra-800 p-1 shadow-inner">
+        <button type="button" data-cmd-accion="-1" ${btn_attr} aria-label="Restar una unidad" ${disabled_str}>-</button>
+        <span data-cmd-cant="${nom_esc}" class="w-8 text-center font-display text-base font-semibold text-oro-300">0</span>
+        <button type="button" data-cmd-accion="1" ${btn_attr} aria-label="Sumar una unidad" ${disabled_str}>+</button>
+      </div>`;
+
     return `
-          <li class="flex gap-4 py-5${agotado ? ' opacity-50' : ''}">
-            ${foto}
-            <div class="min-w-0 flex-1">
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">${esc(p.nombre)}</h3>
-                <p class="shrink-0 font-semibold tabular-nums text-oro-300">${euros(p.precio)}${p.unidad ? ' /ud.' : ''}</p>
+          <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-5${agotado ? ' opacity-50' : ''}">
+            <div class="flex items-start gap-4 min-w-0 flex-1">
+              ${foto}
+              <div class="min-w-0 flex-1">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="font-display text-[1.2rem] font-semibold leading-snug">${nom_esc}</h3>
+                  <p class="shrink-0 font-semibold tabular-nums text-oro-300">${euros(p.precio)}${p.unidad ? ' /ud.' : ''}</p>
+                </div>
+                ${p.desc ? `<p class="mt-1 text-sm leading-relaxed text-crema-500">${esc(p.desc)}</p>` : ''}
+                ${etiquetas || alerg ? `<div class="mt-2 flex flex-wrap items-center gap-1.5">${etiquetas} ${alerg}</div>` : ''}
               </div>
-              ${p.desc ? `<p class="mt-1 text-sm leading-relaxed text-crema-500">${esc(p.desc)}</p>` : ''}
-              ${etiquetas || alerg ? `<div class="mt-2 flex flex-wrap items-center gap-1.5">${etiquetas} ${alerg}</div>` : ''}
+            </div>
+            <div class="flex items-center justify-end gap-3 shrink-0 pt-1 sm:pt-0">
+              <span class="text-xs text-crema-500 sm:hidden">Pedir:</span>
+              ${control_comanda}
             </div>
           </li>`;
   }

@@ -509,16 +509,34 @@ def plato(p):
     alerg = f'<span class="text-xs text-crema-500" title="Alérgenos: {e(", ".join(ALERGENOS[a] for a in p["alergenos"]))}">({", ".join(map(str, p["alergenos"]))})</span>' if p['alergenos'] else ''
     foto = f'<img src="{p["foto"]}" alt="{e(p["nombre"])}" loading="lazy" class="h-20 w-20 shrink-0 rounded-2xl object-cover sm:h-24 sm:w-24" />' if p.get('foto') else ''
     precio = euros(p['precio']) + (' /ud.' if p['unidad'] else '')
+    nom_esc = e(p['nombre'])
+    precio_val = p['precio']
+    btn_attr = f'data-nombre="{nom_esc}" data-precio="{precio_val}"'
+    disabled_str = 'disabled class="opacity-30 cursor-not-allowed grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-base font-bold text-crema-100"' if agotado else 'class="grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-base font-bold text-crema-100 hover:bg-white/10 transition active:scale-95"'
+
+    control_comanda = f'''
+      <div class="inline-flex items-center rounded-2xl border border-white/10 bg-pizarra-800 p-1 shadow-inner">
+        <button type="button" data-cmd-accion="-1" {btn_attr} aria-label="Restar una unidad" {disabled_str}>-</button>
+        <span data-cmd-cant="{nom_esc}" class="w-8 text-center font-display text-base font-semibold text-oro-300">0</span>
+        <button type="button" data-cmd-accion="1" {btn_attr} aria-label="Sumar una unidad" {disabled_str}>+</button>
+      </div>'''
+
     return f'''
-          <li class="flex gap-4 py-5{" opacity-50" if agotado else ""}">
-            {foto}
-            <div class="min-w-0 flex-1">
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="font-display text-[1.2rem] font-semibold leading-snug">{e(p["nombre"])}</h3>
-                <p class="shrink-0 font-semibold tabular-nums text-oro-300">{precio}</p>
+          <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-5{" opacity-50" if agotado else ""}">
+            <div class="flex items-start gap-4 min-w-0 flex-1">
+              {foto}
+              <div class="min-w-0 flex-1">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="font-display text-[1.2rem] font-semibold leading-snug">{nom_esc}</h3>
+                  <p class="shrink-0 font-semibold tabular-nums text-oro-300">{precio}</p>
+                </div>
+                {f'<p class="mt-1 text-sm leading-relaxed text-crema-500">{e(p["desc"])}</p>' if p['desc'] else ''}
+                {f'<div class="mt-2 flex flex-wrap items-center gap-1.5">{etiquetas} {alerg}</div>' if etiquetas or alerg else ''}
               </div>
-              {f'<p class="mt-1 text-sm leading-relaxed text-crema-500">{e(p["desc"])}</p>' if p['desc'] else ''}
-              {f'<div class="mt-2 flex flex-wrap items-center gap-1.5">{etiquetas} {alerg}</div>' if etiquetas or alerg else ''}
+            </div>
+            <div class="flex items-center justify-end gap-3 shrink-0 pt-1 sm:pt-0">
+              <span class="text-xs text-crema-500 sm:hidden">Pedir:</span>
+              {control_comanda}
             </div>
           </li>'''
 
@@ -575,9 +593,241 @@ def pagina_carta():
     </section>
     <div class="mt-10 flex flex-wrap justify-center gap-3">{boton('reservas.html', 'Reservar mesa')}</div>
   </main>
-''' + pie() + '''  <!-- Modo demostración: si el propietario ha publicado cambios desde su área, se muestran aquí -->
-  <script src="js/carta-datos.js"></script>
+
+  <!-- Barra flotante de Mi Comanda -->
+  <div id="barComandaMesa" class="fixed bottom-5 left-4 right-4 z-40 mx-auto max-w-md hidden">
+    <button id="btnAbrirComanda" type="button" class="flex w-full items-center justify-between rounded-full bg-vino-500 px-6 py-4 text-base font-semibold text-crema-100 shadow-2xl backdrop-blur transition hover:bg-vino-400 active:scale-98">
+      <span class="flex items-center gap-2.5">
+        <span id="badgeCantComanda" class="grid h-7 w-7 place-items-center rounded-full bg-white/20 text-xs font-bold text-white">0</span>
+        <span>Hacer mi comanda de mesa</span>
+      </span>
+      <span id="totalComandaBar" class="font-display text-lg font-bold text-oro-300 tabular-nums">0,00 €</span>
+    </button>
+  </div>
+
+  <!-- Modal Comanda de Mesa -->
+  <div id="modalComandaMesa" class="fixed inset-0 z-50 hidden items-end justify-center bg-pizarra-950/80 p-0 sm:items-center sm:p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="tComandaMesa">
+    <div class="relative max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-oro-400/40 bg-pizarra-900 p-6 shadow-2xl">
+      <div class="flex items-start justify-between gap-3 border-b border-white/10 pb-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Comanda digital</p>
+          <h2 id="tComandaMesa" class="font-display text-2xl font-semibold">Tu comanda en mesa</h2>
+        </div>
+        <button id="btnCerrarComanda" type="button" class="rounded-full bg-white/10 p-2 text-crema-300 transition hover:bg-white/20" aria-label="Cerrar modal">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <div id="bodyComandaModal">
+        <div id="listaComandaItems" class="mt-4 space-y-2"></div>
+
+        <form id="formEnviarComanda" class="mt-6 space-y-4 border-t border-white/10 pt-4" novalidate>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Mesa / Ubicación *</label>
+            <select name="mesa" required class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 font-semibold text-base focus:border-oro-400 focus:outline-none">
+              <option value="Mesa 1">Mesa 1 (Comedor principal)</option>
+              <option value="Mesa 2">Mesa 2 (Comedor principal)</option>
+              <option value="Mesa 3">Mesa 3 (Comedor principal)</option>
+              <option value="Mesa 4">Mesa 4 (Comedor principal)</option>
+              <option value="Mesa 5">Mesa 5 (Comedor principal)</option>
+              <option value="Mesa 6">Mesa 6 (Comedor principal)</option>
+              <option value="Terraza 1">Terraza 1</option>
+              <option value="Terraza 2">Terraza 2</option>
+              <option value="Terraza 3">Terraza 3</option>
+              <option value="Barra">Barra</option>
+              <option value="Para Llevar">Para llevar</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Tu Nombre (opcional)</label>
+              <input name="nombre" placeholder="Ej: Maria" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 text-base focus:border-oro-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Teléfono (opcional)</label>
+              <input name="telefono" type="tel" placeholder="600000000" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 text-base focus:border-oro-400 focus:outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Notas para cocina / Alergias</label>
+            <textarea name="notas" rows="2" placeholder="Sin cebolla, salsa aparte, alérgico a los frutos secos…" class="mt-2 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 text-base focus:border-oro-400 focus:outline-none"></textarea>
+          </div>
+
+          <div id="errorComanda" class="hidden rounded-2xl bg-vino-500/20 p-3 text-sm font-semibold text-vino-300"></div>
+
+          <button type="submit" class="w-full rounded-full bg-vino-500 py-4 text-center font-semibold text-crema-100 transition hover:bg-vino-400 text-lg shadow-xl">
+            🚀 Enviar comanda a cocina y barra
+          </button>
+        </form>
+      </div>
+
+      <div id="okComandaScreen" class="hidden py-6 text-center">
+        <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-emerald-500/20 text-3xl font-bold text-emerald-400">✓</div>
+        <h3 class="mt-4 font-display text-3xl font-semibold text-crema-100">¡Comanda enviada! 👨‍🍳</h3>
+        <p id="okComandaTexto" class="mt-2 text-sm leading-relaxed text-crema-300"></p>
+        <div id="okComandaItems" class="mt-4 rounded-2xl border border-white/10 bg-pizarra-950/60 p-4 text-left text-sm text-crema-300"></div>
+        <button id="btnCerrarOkComanda" type="button" class="mt-6 w-full rounded-full bg-white/10 py-3.5 font-semibold text-crema-100 hover:bg-white/20">Cerrar y seguir en la carta</button>
+      </div>
+    </div>
+  </div>
+''' + pie() + '''  <script src="js/carta-datos.js"></script>
   <script src="js/carta-render.js"></script>
+  <script>
+    (() => {
+      const itemsComanda = {};
+
+      function actualizarUiComanda() {
+        let cantTotal = 0, totalEuro = 0;
+        document.querySelectorAll('[data-cmd-cant]').forEach(el => {
+          const nom = el.dataset.cmdCant;
+          const cant = itemsComanda[nom] ? itemsComanda[nom].cantidad : 0;
+          el.textContent = cant;
+        });
+
+        Object.values(itemsComanda).forEach(it => {
+          cantTotal += it.cantidad;
+          totalEuro += it.cantidad * it.precio;
+        });
+
+        const bar = document.getElementById('barComandaMesa');
+        const badge = document.getElementById('badgeCantComanda');
+        const totalBar = document.getElementById('totalComandaBar');
+
+        if (bar && badge && totalBar) {
+          if (cantTotal > 0) {
+            badge.textContent = cantTotal;
+            totalBar.textContent = totalEuro.toFixed(2).replace('.', ',') + ' €';
+            bar.classList.remove('hidden');
+          } else {
+            bar.classList.add('hidden');
+          }
+        }
+      }
+
+      document.addEventListener('click', ev => {
+        const btn = ev.target.closest('[data-cmd-accion]');
+        if (!btn) return;
+        const delta = parseInt(btn.dataset.cmdAccion);
+        const nom = btn.dataset.nombre;
+        const precio = parseFloat(btn.dataset.precio) || 0;
+
+        if (!itemsComanda[nom]) itemsComanda[nom] = { nombre: nom, cantidad: 0, precio: precio };
+        itemsComanda[nom].cantidad += delta;
+        if (itemsComanda[nom].cantidad <= 0) delete itemsComanda[nom];
+
+        actualizarUiComanda();
+      });
+
+      const modal = document.getElementById('modalComandaMesa');
+      const btnAbrir = document.getElementById('btnAbrirComanda');
+      const btnCerrar = document.getElementById('btnCerrarComanda');
+      const form = document.getElementById('formEnviarComanda');
+      const bodyModal = document.getElementById('bodyComandaModal');
+      const okScreen = document.getElementById('okComandaScreen');
+
+      function abrirModalComanda() {
+        const lista = document.getElementById('listaComandaItems');
+        let html = '<ul class="divide-y divide-white/5 max-h-48 overflow-y-auto pr-1">';
+        let total = 0;
+        Object.values(itemsComanda).forEach(it => {
+          const sub = it.cantidad * it.precio;
+          total += sub;
+          html += `<li class="flex items-center justify-between py-2 text-sm">
+            <span><strong>${it.cantidad}x</strong> ${it.nombre}</span>
+            <span class="font-semibold text-oro-300 tabular-nums">${sub.toFixed(2).replace('.', ',')} €</span>
+          </li>`;
+        });
+        html += `</ul><div class="flex justify-between items-center font-display text-lg font-bold border-t border-white/10 pt-3 mt-2 text-crema-100">
+          <span>Total comanda:</span>
+          <span class="text-oro-300 tabular-nums">${total.toFixed(2).replace('.', ',')} €</span>
+        </div>`;
+        lista.innerHTML = html;
+
+        bodyModal.classList.remove('hidden');
+        okScreen.classList.add('hidden');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function cerrarModalComanda() {
+        if (modal) modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      if (btnAbrir) btnAbrir.addEventListener('click', abrirModalComanda);
+      if (btnCerrar) btnCerrar.addEventListener('click', cerrarModalComanda);
+
+      if (form) {
+        form.addEventListener('submit', ev => {
+          ev.preventDefault();
+          const err = document.getElementById('errorComanda');
+          const f = Object.fromEntries(new FormData(form));
+          const itemsArr = Object.values(itemsComanda);
+
+          if (itemsArr.length === 0) {
+            err.textContent = 'Selecciona al menos 1 plato de la carta.';
+            err.classList.remove('hidden');
+            return;
+          }
+          if (!f.mesa) {
+            err.textContent = 'Indica el número de mesa o ubicación.';
+            err.classList.remove('hidden');
+            return;
+          }
+          err.classList.add('hidden');
+
+          const totalEuro = itemsArr.reduce((a, b) => a + (b.cantidad * b.precio), 0);
+          const now = new Date();
+          const horaFmt = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+          const fechaFmt = now.toISOString().split('T')[0];
+
+          const pedidoObj = {
+            id: 'cmd-' + Date.now().toString(36),
+            mesa: f.mesa,
+            cliente: (f.nombre || '').trim() || f.mesa,
+            telefono: (f.telefono || '').trim(),
+            fecha: fechaFmt,
+            hora: horaFmt,
+            notas: (f.notas || '').trim(),
+            items: itemsArr.map(i => ({ nombre: i.nombre, cantidad: i.cantidad, precio: i.precio, subtotal: i.cantidad * i.precio })),
+            total: totalEuro,
+            estado: 'pendiente',
+            origen: 'comanda_mesa',
+            creado: now.toISOString()
+          };
+
+          try {
+            const key = (window.TAPERIA && window.TAPERIA.clavePedidos) || 'taperia-pedidos-web';
+            const prev = JSON.parse(localStorage.getItem(key) || '[]');
+            prev.push(pedidoObj);
+            localStorage.setItem(key, JSON.stringify(prev));
+          } catch(e) {}
+
+          // Limpiar comanda
+          Object.keys(itemsComanda).forEach(k => delete itemsComanda[k]);
+          actualizarUiComanda();
+
+          // Confirmación
+          bodyModal.classList.add('hidden');
+          document.getElementById('okComandaTexto').textContent = `Tu comanda para ${pedidoObj.mesa} ha sido enviada a barra y cocina.`;
+          
+          let htmlOk = `<p class="font-semibold text-oro-300 border-b border-white/10 pb-2 mb-2">Detalle de la comanda (${pedidoObj.total.toFixed(2).replace('.', ',')} €):</p><ul class="space-y-1">`;
+          pedidoObj.items.forEach(it => {
+            htmlOk += `<li class="flex justify-between"><span>${it.cantidad}x ${it.nombre}</span><span class="tabular-nums font-semibold">${it.subtotal.toFixed(2).replace('.', ',')} €</span></li>`;
+          });
+          htmlOk += '</ul>';
+          if (pedidoObj.notas) htmlOk += `<p class="mt-2 text-xs italic text-crema-500 border-t border-white/10 pt-2">Notas: ${pedidoObj.notas}</p>`;
+          
+          document.getElementById('okComandaItems').innerHTML = htmlOk;
+          okScreen.classList.remove('hidden');
+        });
+      }
+
+      document.getElementById('btnCerrarOkComanda')?.addEventListener('click', cerrarModalComanda);
+    })();
+  </script>
 </body>
 </html>
 '''
