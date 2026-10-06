@@ -40,25 +40,32 @@
         margin: 0mm;
       }
       html, body {
-        width: 80mm;
+        width: 80mm !important;
         height: auto !important;
         margin: 0 !important;
         padding: 0 !important;
-        overflow: hidden;
+        background: #fff !important;
+        color: #000 !important;
+        overflow: visible !important;
       }
-      body * { visibility: hidden !important; }
-      #contenedorTicketImpresion, #contenedorTicketImpresion * { visibility: visible !important; }
+      body > *:not(#contenedorTicketImpresion) {
+        display: none !important;
+      }
       #contenedorTicketImpresion {
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
+        display: block !important;
+        position: static !important;
         width: 80mm !important;
         margin: 0 !important;
         padding: 2mm !important;
-        background: white !important;
-        color: black !important;
+        background: #fff !important;
+        color: #000 !important;
       }
-      .no-print { display: none !important; }
+      #contenedorTicketImpresion * {
+        visibility: visible !important;
+      }
+      .no-print {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -605,8 +612,8 @@
       <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
         <div class="flex flex-wrap gap-2">
           ${acciones}
-          <button type="button" onclick="imprimirTicketComanda('${p.id}')" class="rounded-full border border-oro-400/40 bg-oro-400/10 px-4 py-2 text-sm font-semibold text-oro-300 transition hover:bg-oro-400 hover:text-pizarra-950">
-            🖨️ Imprimir ticket
+          <button type="button" onclick="imprimirTicketComanda('${p.id}')" class="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-crema-300 transition hover:bg-white/10 hover:text-crema-100" title="Reimprimir copia si se ha acabado el papel o necesitas duplicado">
+            🖨️ Reimprimir copia
           </button>
         </div>
         ${p.telefono ? `<a href="tel:+${telIntl(p.telefono)}" class="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-crema-300">Llamar</a>` : ''}

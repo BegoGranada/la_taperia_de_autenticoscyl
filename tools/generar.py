@@ -107,25 +107,32 @@ def cabeza(titulo, descripcion):
         margin: 0mm;
       }}
       html, body {{
-        width: 80mm;
+        width: 80mm !important;
         height: auto !important;
         margin: 0 !important;
         padding: 0 !important;
-        overflow: hidden;
+        background: #fff !important;
+        color: #000 !important;
+        overflow: visible !important;
       }}
-      body * {{ visibility: hidden !important; }}
-      #contenedorTicketImpresion, #contenedorTicketImpresion * {{ visibility: visible !important; }}
+      body > *:not(#contenedorTicketImpresion) {{
+        display: none !important;
+      }}
       #contenedorTicketImpresion {{
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
+        display: block !important;
+        position: static !important;
         width: 80mm !important;
         margin: 0 !important;
         padding: 2mm !important;
-        background: white !important;
-        color: black !important;
+        background: #fff !important;
+        color: #000 !important;
       }}
-      .no-print {{ display: none !important; }}
+      #contenedorTicketImpresion * {{
+        visibility: visible !important;
+      }}
+      .no-print {{
+        display: none !important;
+      }}
     }}
   </style>
 </head>
