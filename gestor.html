@@ -1260,12 +1260,7 @@
   }
 
 
-  // Conectar handlers del backend
-  const tkn = getToken();
-  const usr = getUser();
-  if (tkn && usr && usr.username) {
-    iniciarPanelConUsuario(usr);
-  }
+// Conexión handlers backend preparada (inicialización al final del script)
 
   $('#formLogin').addEventListener('submit', async ev => {
     ev.preventDefault();
@@ -1870,7 +1865,16 @@
     carta.secciones.splice(i, 1); cerrarDlg('dlgSeccion'); guardarBorrador(); toast('Sección eliminada');
   });
 
-  try { if (sessionStorage.getItem('taperia-sesion') === '1') entrar(); } catch (e) {}
+    // Inicialización al final del script (todas las variables y funciones ya están disponibles en scope)
+  try {
+    const tkn = getToken();
+    const usr = getUser();
+    if (tkn && usr && usr.username) {
+      iniciarPanelConUsuario(usr);
+    }
+  } catch (e) {
+    console.error('Error al inicializar sesión:', e);
+  }
   </script>
 </body>
 </html>
