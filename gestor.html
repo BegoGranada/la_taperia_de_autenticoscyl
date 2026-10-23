@@ -827,6 +827,58 @@
 
   let stripeFlagActivo = false;
 
+  // Sincronizar reservas reales de la BD con el modelo local de agenda
+  async function sincronizarReservasBackend() {
+    try {
+      const res = await fetch(`${API}/admin/reservas`, { headers: authHeaders() });
+      if (!res.ok) return;
+      const apiReservas = await res.json();
+      if (!Array.isArray(apiReservas)) return;
+
+      if (!D || !Array.isArray(D.reservas)) D = cargar();
+
+      const estMap = {
+        'pending_admin_approval': 'pendiente',
+        'confirmed': 'confirmada',
+        'client_confirmed': 'confirmada',
+        'completed': 'sentada',
+        'rejected': 'cancelada',
+        'cancelled': 'cancelada',
+        'no_show': 'noshow'
+      };
+
+      apiReservas.forEach(r => {
+        const est = estMap[r.estado] || 'pendiente';
+        const horaFmt = r.hora ? r.hora.slice(0, 5) : '14:00';
+        const idx = D.reservas.findIndex(x => x.id === r.id);
+        const item = {
+          id: r.id,
+          fecha: r.fecha,
+          turno: r.turno,
+          hora: horaFmt,
+          personas: r.pax || 2,
+          nombre: r.cliente_nombre || 'Cliente',
+          telefono: r.cliente_telefono || '',
+          email: r.cliente_email || '',
+          notas: r.notas_cliente || '',
+          mesa: r.mesa_id || '',
+          origen: r.origen || 'web',
+          estado: est,
+          creado: r.created_at
+        };
+        if (idx >= 0) {
+          D.reservas[idx] = Object.assign(D.reservas[idx], item);
+        } else {
+          D.reservas.push(item);
+        }
+      });
+      guardar();
+    } catch(e) {
+      console.warn("Error sincronizando reservas:", e);
+    }
+  }
+
+
   async function iniciarPanelConUsuario(user) {
     if (!user || !user.username) return;
 
@@ -863,11 +915,19 @@
     $('#vistaLogin').classList.add('hidden');
     $('#vistaApp').classList.remove('hidden');
 
+    // Inicializar agenda y vistas
+    D = cargar();
+    importarWeb();
+    ir('agenda');
+    await sincronizarReservasBackend();
+    pintar();
+    pintarCarta();
+
     // Inicializar fecha por defecto en pánico
     const fPanico = document.getElementById('panicoFecha');
     if (fPanico && !fPanico.value) fPanico.value = hoyS();
 
-    // Cargar datos en vivo desde backend
+    // Cargar módulos backend en vivo
     await Promise.all([
       cargarSolicitudesPendientesAPI(),
       cargarTurnosBloqueadosAPI(),
@@ -978,6 +1038,8 @@
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || 'No se pudo actualizar el estado.');
       toast(nuevoEstado === 'confirmed' ? '✅ Reserva confirmada con éxito' : '❌ Reserva rechazada');
+      await sincronizarReservasBackend();
+      pintar();
       cargarSolicitudesPendientesAPI();
     } catch(err) {
       alert('Error: ' + err.message);
