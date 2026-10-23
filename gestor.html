@@ -1364,7 +1364,7 @@
   }
 
   const reset = () => { try { localStorage.removeItem(CLAVE); } catch (e) {} D = cargar(); importarWeb(); if (!$('#vistaApp').classList.contains('hidden')) pintar(); toast('Datos de ejemplo restablecidos'); };
-  $('#btnReset').addEventListener('click', reset);
+  const btnReset = $('#btnReset'); if (btnReset) btnReset.addEventListener('click', reset);
   $('#btnResetApp').addEventListener('click', () => { if (confirm('¿Restablecer los datos de ejemplo? Se perderán los cambios de la demostración.')) reset(); });
   $('#btnSalir').addEventListener('click', () => { try { sessionStorage.removeItem('taperia-sesion'); } catch (e) {} $('#vistaApp').classList.add('hidden'); $('#vistaLogin').classList.remove('hidden'); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && D) { importarWeb(); pintar(); } });
