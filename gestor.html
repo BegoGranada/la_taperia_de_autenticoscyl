@@ -827,6 +827,53 @@
 
   let stripeFlagActivo = false;
 
+  function aplicarPermisosNav(rol) {
+    const btnSolicitudes = document.querySelector('[data-ir="solicitudes"]');
+    const btnPedidos = document.querySelector('[data-ir="pedidos"]');
+    const btnNueva = document.getElementById('btnNueva');
+    const btnCarta = document.querySelector('[data-ir="carta"]');
+    const btnAjustes = document.querySelector('[data-ir="ajustes"]');
+    const navGrid = document.querySelector('nav div.grid');
+
+    const modPanico = document.getElementById('moduloPanico');
+    const modSala = document.getElementById('moduloSala');
+    const modNoticias = document.getElementById('moduloNoticias');
+    const modStripe = document.getElementById('moduloStripe');
+    const formAjustes = document.getElementById('formAjustes');
+
+    if (rol === 'admin') {
+      if (btnSolicitudes) btnSolicitudes.style.display = 'flex';
+      if (btnPedidos) btnPedidos.style.display = 'flex';
+      if (btnNueva) btnNueva.style.display = 'flex';
+      if (btnCarta) btnCarta.style.display = 'flex';
+      if (btnAjustes) btnAjustes.style.display = 'flex';
+      if (navGrid) navGrid.className = 'mx-auto grid max-w-lg grid-cols-6 text-[10px] font-semibold text-crema-500';
+
+      if (modPanico) modPanico.style.display = 'block';
+      if (modSala) modSala.style.display = 'block';
+      if (modNoticias) modNoticias.style.display = 'block';
+      if (modStripe) modStripe.style.display = 'block';
+      if (formAjustes) formAjustes.style.display = 'block';
+
+    } else if (rol === 'encargado') {
+      if (btnSolicitudes) btnSolicitudes.style.display = 'flex';
+      if (btnPedidos) btnPedidos.style.display = 'flex';
+      if (btnNueva) btnNueva.style.display = 'flex';
+      if (btnCarta) btnCarta.style.display = 'none';
+      if (btnAjustes) btnAjustes.style.display = 'none';
+      if (navGrid) navGrid.className = 'mx-auto grid max-w-sm grid-cols-4 text-[10px] font-semibold text-crema-500';
+
+    } else { // camarero
+      if (btnSolicitudes) btnSolicitudes.style.display = 'none';
+      if (btnPedidos) btnPedidos.style.display = 'flex';
+      if (btnNueva) btnNueva.style.display = 'none';
+      if (btnCarta) btnCarta.style.display = 'none';
+      if (btnAjustes) btnAjustes.style.display = 'none';
+      if (navGrid) navGrid.className = 'mx-auto grid max-w-xs grid-cols-2 text-[10px] font-semibold text-crema-500';
+    }
+  }
+
+
   // Sincronizar reservas reales de la BD con el modelo local de agenda
   async function sincronizarReservasBackend() {
     try {
@@ -887,7 +934,7 @@
     const badgeEl = document.getElementById('userRoleBadge');
     if (nameEl) nameEl.textContent = user.nombre || user.username;
     if (badgeEl) {
-      badgeEl.textContent = user.rol === 'admin' ? 'Administrador (Alfonso)' : (user.rol === 'encargado' ? 'Encargado' : 'Camarero (Lectura)');
+      badgeEl.textContent = user.rol === 'admin' ? 'Administrador (Alfonso)' : (user.rol === 'encargado' ? 'Encargado' : 'Camarero (Servicio)');
       badgeEl.className = user.rol === 'admin' 
         ? 'rounded-full bg-oro-400/20 text-oro-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-oro-400/30'
         : (user.rol === 'encargado' 
@@ -895,22 +942,8 @@
           : 'rounded-full bg-white/10 text-crema-400 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-white/20');
     }
 
-    // Aplicar Mínimo Privilegio en UI para rol 'camarero'
-    const esCamarero = user.rol === 'camarero';
-    const esAdmin = user.rol === 'admin';
-
-    // Desactivar controles sensibles si es camarero
-    const modPanico = document.getElementById('moduloPanico');
-    const modSala = document.getElementById('moduloSala');
-    const modNoticias = document.getElementById('moduloNoticias');
-    const modStripe = document.getElementById('moduloStripe');
-
-    if (!esAdmin) {
-      if (modPanico) modPanico.style.opacity = '0.5';
-      if (modStripe) modStripe.style.display = 'none';
-      if (modSala) modSala.querySelectorAll('button, input').forEach(el => el.disabled = true);
-      if (modNoticias) modNoticias.querySelectorAll('button, input, textarea').forEach(el => el.disabled = true);
-    }
+    // Ocultación total estricta por rol (Opción 1)
+    aplicarPermisosNav(user.rol);
 
     $('#vistaLogin').classList.add('hidden');
     $('#vistaApp').classList.remove('hidden');
@@ -1008,7 +1041,7 @@
 
               ${puedeConfirmar ? `
                 <div class="flex items-center gap-2">
-                  <button type="button" onclick="cambiarEstadoReservaAPI('${r.id}', 'confirmed')" class="rounded-full bg-emerald-500 hover:bg-emerald-400 px-4 py-1.5 text-xs font-bold text-pizarra-950 transition">
+                  <button type="button" onclick="cambiarEstadoReservaAPI('${r.id}', 'confirmed', '${r.telefono}', '${esc(r.nombre_cliente)}', { fecha: '${r.fecha}', hora: '${r.hora}', turno: '${r.turno}', personas: '${r.personas}' })" class="rounded-full bg-emerald-500 hover:bg-emerald-400 px-4 py-1.5 text-xs font-bold text-pizarra-950 transition">
                     ✅ Aprobar y Confirmar
                   </button>
                   <button type="button" onclick="cambiarEstadoReservaAPI('${r.id}', 'rejected')" class="rounded-full border border-rose-500/40 bg-rose-500/15 hover:bg-rose-500/25 px-3.5 py-1.5 text-xs font-bold text-rose-300 transition">
@@ -1027,7 +1060,37 @@
     }
   }
 
-  async function cambiarEstadoReservaAPI(id, nuevoEstado) {
+  async function cambiarEstadoReservaAPI(id, nuevoEstado, clienteTel = '', clienteNombre = '', reservaInfo = {}) {
+    if (nuevoEstado === 'rejected' && !confirm('¿Seguro que deseas rechazar esta solicitud de reserva?')) return;
+    try {
+      const res = await fetch(`${API}/admin/reservas/${id}/estado`, {
+        method: 'PATCH',
+        headers: authHeaders(),
+        body: JSON.stringify({ estado: nuevoEstado })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'No se pudo actualizar el estado.');
+      
+      toast(nuevoEstado === 'confirmed' ? '✅ Reserva confirmada' : '❌ Reserva rechazada');
+
+      // Si se confirma, enviar confirmación automática por WhatsApp al cliente
+      if (nuevoEstado === 'confirmed' && clienteTel) {
+        const telLimpio = String(clienteTel).replace(/\D/g, '');
+        const telDest = telLimpio.startsWith('34') ? telLimpio : ('34' + telLimpio);
+        const msg = encodeURIComponent(`¡Hola ${clienteNombre || 'estimado cliente'}!\n\nConfirmamos tu reserva en *La Tapería de Auténticos CyL* (Coca) para ${reservaInfo.personas || ''} comensales el día ${reservaInfo.fecha || ''} a las ${reservaInfo.hora || ''} (Turno ${String(reservaInfo.turno || '').toUpperCase()}).\n\n¡Estamos encantados de recibirte! Si necesitas modificar o cancelar avísanos al 647 41 31 86.\n\nAuténticos CyL · Sabores, Sensaciones y +`);
+        window.open(`https://api.whatsapp.com/send?phone=${telDest}&text=${msg}`, '_blank');
+      }
+
+      await sincronizarReservasBackend();
+      pintar();
+      cargarSolicitudesPendientesAPI();
+    } catch(err) {
+      alert('Error: ' + err.message);
+    }
+  }
+
+  // Versión legacy adaptada
+  async function _cambiarEstadoOld(id, nuevoEstado) {
     if (nuevoEstado === 'rejected' && !confirm('¿Seguro que deseas rechazar esta solicitud de reserva?')) return;
     try {
       const res = await fetch(`${API}/admin/reservas/${id}/estado`, {
@@ -1373,6 +1436,16 @@
   const proximoServicio = () => { let f = hoyS(); for (let i = 0; i < 7 && !['comida', 'cena'].some(t => C.diasServicio[t].includes(new Date(f + 'T12:00').getDay())); i++) f = sumar(f, 1); return f; };
   let pantalla = 'agenda', dia = proximoServicio();
   function ir(p) {
+    const u = getUser();
+    const rol = (u && u.rol) || 'admin';
+    const permitidas = {
+      admin: ['agenda', 'solicitudes', 'pedidos', 'carta', 'ajustes'],
+      encargado: ['agenda', 'solicitudes', 'pedidos'],
+      camarero: ['agenda', 'pedidos']
+    };
+    if (permitidas[rol] && !permitidas[rol].includes(p)) {
+      p = 'agenda';
+    }
     pantalla = p;
     $$('.pantalla').forEach(s => s.classList.toggle('activa', s.id === 'p-' + p));
     $$('[data-ir]').forEach(b => { b.classList.toggle('text-oro-300', b.dataset.ir === p); b.toggleAttribute('aria-current', b.dataset.ir === p); });
