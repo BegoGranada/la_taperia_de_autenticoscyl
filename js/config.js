@@ -2,6 +2,7 @@
    Configuración común de la web y del área de propietarios
    ============================================================================= */
 window.TAPERIA = {
+  apiUrl: 'https://granadaiatech.com/api/taperia',
   nombre: 'Auténticos CyL · Bar Tapería',
   telefono: '34647413186',          // formato internacional sin "+"
   telefonoVisible: '647 41 31 86',

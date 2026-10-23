@@ -79,11 +79,22 @@
       <h1 class="mt-2 text-center font-display text-4xl font-semibold">Auténticos CyL</h1>
       <p class="mt-2 text-center text-sm text-crema-500">Gestión de reservas del restaurante</p>
       <form id="formLogin" class="mt-8 space-y-4 rounded-3xl border border-white/10 bg-pizarra-900 p-6" novalidate>
-        <div class="rounded-2xl bg-oro-400/10 p-4 text-sm leading-relaxed text-oro-300">
-          <strong>Modo demostración.</strong> Todavía no hay base de datos: los datos son de ejemplo y se guardan solo en este navegador. Las solicitudes hechas desde la página de Reservas aparecen aquí.
+        <div id="errorLogin" class="hidden rounded-2xl bg-rose-500/15 border border-rose-500/30 p-3 text-xs text-rose-300"></div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Usuario</label>
+          <input id="loginUser" type="text" required placeholder="alfonso / encargado / camarero" autocomplete="username" class="mt-1.5 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" />
         </div>
-        <button id="btnEntrar" type="submit" class="w-full rounded-full bg-vino-500 py-4 font-semibold transition hover:bg-vino-400">Entrar en la demostración</button>
-        <button id="btnReset" type="button" class="w-full text-sm text-crema-500 underline underline-offset-4">Restablecer datos de ejemplo</button>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Contraseña</label>
+          <input id="loginPass" type="password" required placeholder="••••••••••••" autocomplete="current-password" class="mt-1.5 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-4 py-3 text-crema-100 placeholder:text-crema-500 focus:border-oro-400 focus:outline-none" />
+        </div>
+        <div class="rounded-2xl bg-oro-400/10 p-3.5 text-xs leading-relaxed text-oro-300 border border-oro-400/20">
+          🛡️ <strong>Acceso por Roles (RBAC Server-Side):</strong>
+          <br>• <strong>Alfonso (Admin):</strong> <code>alfonso</code> / <code>AlfonsoCyl2026!</code>
+          <br>• <strong>Encargado:</strong> <code>encargado</code> / <code>EncargadoCyl2026!</code>
+          <br>• <strong>Camarero:</strong> <code>camarero</code> / <code>CamareroCyl2026!</code>
+        </div>
+        <button id="btnEntrar" type="submit" class="w-full rounded-full bg-vino-500 py-3.5 font-semibold transition hover:bg-vino-400 text-crema-100">Iniciar Sesión Segura</button>
       </form>
       <p class="mt-6 text-center text-sm"><a href="index.html" class="text-crema-500 hover:text-crema-100">← Volver a la web</a></p>
     </div>
@@ -99,7 +110,10 @@
           </a>
           <div class="min-w-0 leading-tight">
             <p class="truncate font-display text-lg font-semibold">Auténticos CyL</p>
-            <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-oro-400">Propietarios · modo demostración</p>
+            <div class="flex items-center gap-2 mt-0.5">
+              <span id="userNameHeader" class="text-xs font-semibold text-crema-300">Cargando...</span>
+              <span id="userRoleBadge" class="rounded-full bg-oro-400/15 text-oro-300 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-oro-400/30">Admin</span>
+            </div>
           </div>
         </div>
         <button id="btnSalir" class="rounded-full px-3 py-2 text-sm text-crema-300 hover:bg-white/10">Salir</button>
@@ -170,6 +184,176 @@
       <!-- ---------- AJUSTES ---------- -->
       <section id="p-ajustes" class="pantalla">
         <h2 class="font-display text-3xl font-semibold">Ajustes</h2>
+        
+        <!-- =================== BOTÓN DEL PÁNICO (CIERRE MANUAL DE TURNOS) =================== -->
+        <div id="moduloPanico" class="rounded-3xl border border-rose-500/30 bg-rose-950/20 p-5 mt-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[.2em] text-rose-400">Control de Emergencia</p>
+              <h3 class="font-display text-xl font-semibold text-crema-100 flex items-center gap-2">🚨 Botón del Pánico: Cierre Manual de Turnos</h3>
+            </div>
+            <span id="badgePanicoEstado" class="rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 text-xs font-bold">🟢 Abierto</span>
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-crema-400">Permite bloquear inmediatamente la entrada de nuevas reservas online o por bot para un turno concreto (ignorando el aforo del 50%).</p>
+          
+          <div class="mt-4 grid gap-3 sm:grid-cols-3">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Fecha</label>
+              <input id="panicoFecha" type="date" class="mt-1 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3.5 py-2.5 text-sm text-crema-100" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Turno</label>
+              <select id="panicoTurno" class="mt-1 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3.5 py-2.5 text-sm text-crema-100">
+                <option value="comida">Comida (Mediodía)</option>
+                <option value="cena">Cena (Noche)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-[.2em] text-crema-500">Motivo</label>
+              <input id="panicoMotivo" type="text" placeholder="Lleno físico / Evento privado" class="mt-1 w-full rounded-2xl border border-white/10 bg-pizarra-800 px-3.5 py-2.5 text-sm text-crema-100" />
+            </div>
+          </div>
+          <div class="mt-4 flex gap-3">
+            <button id="btnCerrarTurnoPanico" type="button" class="flex-1 rounded-full bg-rose-600 hover:bg-rose-500 py-3 text-sm font-semibold text-white transition flex items-center justify-center gap-2">
+              🚨 Cerrar Turno Online (Bloquear)
+            </button>
+            <button id="btnAbrirTurnoPanico" type="button" class="flex-1 rounded-full border border-emerald-500/40 bg-emerald-500/20 hover:bg-emerald-500/30 py-3 text-sm font-semibold text-emerald-300 transition flex items-center justify-center gap-2">
+              🟢 Reabrir Turno (Permitir hasta 50%)
+            </button>
+          </div>
+          <div id="listaTurnosBloqueados" class="mt-4 pt-3 border-t border-rose-500/20 text-xs text-crema-400 space-y-1"></div>
+        </div>
+
+        <!-- =================== MÓDULO DE SALA (CRUD MESAS Y AFORO 50/50) =================== -->
+        <div id="moduloSala" class="rounded-3xl border border-white/10 bg-pizarra-900 p-5 mt-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Distribución y Capacidad</p>
+              <h3 class="font-display text-xl font-semibold text-crema-100">🏢 Módulo de Sala y Mesas</h3>
+            </div>
+            <button id="btnRefrescarSala" type="button" class="text-xs text-oro-300 hover:underline">Actualizar</button>
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-crema-500">Configura las mesas del local. El motor de reservas suma la capacidad total y reserva estrictamente el 50% para walk-in físico.</p>
+
+          <!-- Resumen de Aforo -->
+          <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+            <div class="rounded-2xl bg-pizarra-800 p-3 border border-white/5">
+              <span class="block text-[11px] font-semibold uppercase tracking-wider text-crema-500">Aforo Total</span>
+              <span id="salaTotalPax" class="text-2xl font-display font-semibold text-crema-100">--</span>
+              <span class="block text-[10px] text-crema-500">plazas físicas</span>
+            </div>
+            <div class="rounded-2xl bg-oro-400/10 p-3 border border-oro-400/20">
+              <span class="block text-[11px] font-semibold uppercase tracking-wider text-oro-400">Máx. Online (50%)</span>
+              <span id="salaOnlinePax" class="text-2xl font-display font-semibold text-oro-300">--</span>
+              <span class="block text-[10px] text-oro-400">reserva web/bot</span>
+            </div>
+            <div class="rounded-2xl bg-sky-400/10 p-3 border border-sky-400/20">
+              <span class="block text-[11px] font-semibold uppercase tracking-wider text-sky-400">Walk-in (50%)</span>
+              <span id="salaWalkinPax" class="text-2xl font-display font-semibold text-sky-300">--</span>
+              <span class="block text-[10px] text-sky-400">bloqueado paso</span>
+            </div>
+          </div>
+
+          <!-- Tabla de Mesas -->
+          <div class="mt-5 overflow-x-auto">
+            <table class="w-full text-left text-sm text-crema-300">
+              <thead class="border-b border-white/10 text-xs font-semibold uppercase text-crema-500">
+                <tr>
+                  <th class="py-2">Mesa</th>
+                  <th class="py-2">Zona</th>
+                  <th class="py-2">Pax Mín-Máx</th>
+                  <th class="py-2">Estado</th>
+                  <th class="py-2 text-right">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="tablaMesasBody" class="divide-y divide-white/5">
+                <tr><td colspan="5" class="py-4 text-center text-crema-500">Cargando mesas...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Form Añadir Mesa -->
+          <form id="formNuevaMesa" class="mt-4 pt-4 border-t border-white/10 grid gap-3 sm:grid-cols-5 items-end">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-crema-500">Mesa</label>
+              <input id="nuevaMesaNum" type="text" required placeholder="Ej: 14" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-crema-500">Zona</label>
+              <select id="nuevaMesaZona" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100">
+                <option value="comedor">Comedor</option>
+                <option value="terraza">Terraza</option>
+                <option value="barra">Barra</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-crema-500">Mín. Pax</label>
+              <input id="nuevaMesaMin" type="number" min="1" max="50" value="2" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-crema-500">Máx. Pax</label>
+              <input id="nuevaMesaMax" type="number" min="1" max="50" value="4" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100" />
+            </div>
+            <div>
+              <button type="submit" class="w-full rounded-xl bg-oro-400 hover:bg-oro-300 py-2 text-sm font-semibold text-pizarra-950 transition">+ Añadir Mesa</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- =================== MÓDULO DE NOTICIAS (CMS PUBLICACIONES) =================== -->
+        <div id="moduloNoticias" class="rounded-3xl border border-white/10 bg-pizarra-900 p-5 mt-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Contenidos Web</p>
+              <h3 class="font-display text-xl font-semibold text-crema-100">📰 CMS de Noticias y Novedades</h3>
+            </div>
+            <button id="btnRefrescarNoticias" type="button" class="text-xs text-oro-300 hover:underline">Actualizar</button>
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-crema-500">Publica reconocimientos, novedades o cambios de carta. Los textos se sanitizan automáticamente contra inyección y XSS antes de publicarse.</p>
+
+          <form id="formNuevaNoticia" class="mt-4 space-y-3">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div>
+                <label class="block text-xs font-semibold uppercase text-crema-500">Título de la Noticia</label>
+                <input id="noticiaTitulo" type="text" required placeholder="Ej: Nueva Carta de Temporada" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-crema-500">Imagen URL (Opcional)</label>
+                <input id="noticiaImagen" type="text" placeholder="img/local.webp" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-crema-500">Resumen breve (Subtítulo)</label>
+              <input id="noticiaResumen" type="text" required placeholder="Breve introducción de una o dos líneas" class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-crema-500">Contenido detallado (admite etiquetas seguras p, strong, em)</label>
+              <textarea id="noticiaContenido" rows="3" required placeholder="Texto completo del artículo..." class="mt-1 w-full rounded-xl border border-white/10 bg-pizarra-800 px-3 py-2 text-sm text-crema-100"></textarea>
+            </div>
+            <button type="submit" class="rounded-full bg-vino-500 hover:bg-vino-400 px-6 py-2.5 text-sm font-semibold text-crema-100 transition">+ Publicar Noticia en la Web</button>
+          </form>
+
+          <div id="listaNoticiasAdmin" class="mt-6 pt-4 border-t border-white/10 space-y-3">
+            <p class="text-sm text-crema-500">Cargando noticias...</p>
+          </div>
+        </div>
+
+        <!-- =================== PASARELA DE PAGOS STRIPE (FEATURE FLAG) =================== -->
+        <div id="moduloStripe" class="rounded-3xl border border-white/10 bg-pizarra-900 p-5 mt-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[.2em] text-oro-400">Pasarela de Pagos</p>
+              <h3 class="font-display text-xl font-semibold text-crema-100">💳 Fianza de Reserva con Stripe (10€)</h3>
+            </div>
+            <span id="badgeStripeFlag" class="rounded-full bg-white/10 text-crema-400 px-3 py-1 text-xs font-bold">Inactivo</span>
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-crema-500">Controlado por Feature Flag. Cuando está activo, exige un depósito de 10€ por reserva cobrado mediante checkout seguro de Stripe con validación webhook criptográfica.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-sm font-semibold text-crema-300">Cobro de fianza activo en motor de reservas</span>
+            <button id="btnToggleStripe" type="button" class="rounded-full bg-white/15 px-4 py-2 text-xs font-bold text-crema-200 hover:bg-white/20 transition">Activar Fianza</button>
+          </div>
+        </div>
+
         <form id="formAjustes" class="mt-4 space-y-4 rounded-3xl border border-white/10 bg-pizarra-900 p-5">
           <p class="font-semibold">Aforo por turno</p>
           <p class="-mt-2 text-sm text-crema-500">Número de comensales que caben en cada turno. El gestor avisa al pasarse.</p>
@@ -629,7 +813,499 @@
     $('#vistaLogin').classList.add('hidden'); $('#vistaApp').classList.remove('hidden');
     ir(pantalla); pintar(); pintarCarta();
   }
-  $('#formLogin').addEventListener('submit', ev => { ev.preventDefault(); try { sessionStorage.setItem('taperia-sesion', '1'); } catch (e) {} entrar(); });
+  
+  /* =====================================================================
+     CONEXIÓN BACKEND API & CONTROL DE ROLES RBAC (AUTÉNTICOS CYL)
+     ===================================================================== */
+  const API = (window.TAPERIA && window.TAPERIA.apiUrl) ? window.TAPERIA.apiUrl : 'https://granadaiatech.com/api/taperia';
+  const getToken = () => sessionStorage.getItem('taperia_token');
+  const getUser = () => { try { return JSON.parse(sessionStorage.getItem('taperia_user') || '{}'); } catch(e) { return {}; } };
+  const authHeaders = () => ({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${getToken()}`
+  });
+
+  let stripeFlagActivo = false;
+
+  async function iniciarPanelConUsuario(user) {
+    if (!user || !user.username) return;
+
+    // Actualizar cabecera de usuario
+    const nameEl = document.getElementById('userNameHeader');
+    const badgeEl = document.getElementById('userRoleBadge');
+    if (nameEl) nameEl.textContent = user.nombre || user.username;
+    if (badgeEl) {
+      badgeEl.textContent = user.rol === 'admin' ? 'Administrador (Alfonso)' : (user.rol === 'encargado' ? 'Encargado' : 'Camarero (Lectura)');
+      badgeEl.className = user.rol === 'admin' 
+        ? 'rounded-full bg-oro-400/20 text-oro-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-oro-400/30'
+        : (user.rol === 'encargado' 
+          ? 'rounded-full bg-sky-400/20 text-sky-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-sky-400/30'
+          : 'rounded-full bg-white/10 text-crema-400 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-white/20');
+    }
+
+    // Aplicar Mínimo Privilegio en UI para rol 'camarero'
+    const esCamarero = user.rol === 'camarero';
+    const esAdmin = user.rol === 'admin';
+
+    // Desactivar controles sensibles si es camarero
+    const modPanico = document.getElementById('moduloPanico');
+    const modSala = document.getElementById('moduloSala');
+    const modNoticias = document.getElementById('moduloNoticias');
+    const modStripe = document.getElementById('moduloStripe');
+
+    if (!esAdmin) {
+      if (modPanico) modPanico.style.opacity = '0.5';
+      if (modStripe) modStripe.style.display = 'none';
+      if (modSala) modSala.querySelectorAll('button, input').forEach(el => el.disabled = true);
+      if (modNoticias) modNoticias.querySelectorAll('button, input, textarea').forEach(el => el.disabled = true);
+    }
+
+    $('#vistaLogin').classList.add('hidden');
+    $('#vistaApp').classList.remove('hidden');
+
+    // Inicializar fecha por defecto en pánico
+    const fPanico = document.getElementById('panicoFecha');
+    if (fPanico && !fPanico.value) fPanico.value = hoyS();
+
+    // Cargar datos en vivo desde backend
+    await Promise.all([
+      cargarSolicitudesPendientesAPI(),
+      cargarTurnosBloqueadosAPI(),
+      cargarMesasAPI(),
+      cargarNoticiasAPI(),
+      cargarStripeFlagAPI()
+    ]);
+  }
+
+  // --- SOLICITUDES PENDIENTES (CONFIRMACIÓN MANUAL ALFONSO / ENCARGADO) ---
+  async function cargarSolicitudesPendientesAPI() {
+    const contenedor = document.getElementById('listaSolicitudes');
+    const badge = document.getElementById('badge');
+    if (!contenedor) return;
+
+    try {
+      const res = await fetch(`${API}/admin/reservas?estado=pending_admin_approval`, {
+        headers: authHeaders()
+      });
+      if (!res.ok) {
+        if (res.status === 401) {
+          sessionStorage.removeItem('taperia_token');
+          window.location.reload();
+          return;
+        }
+        throw new Error('Error al consultar reservas pendientes.');
+      }
+      const reservas = await res.json();
+      const count = Array.isArray(reservas) ? reservas.length : 0;
+      if (badge) {
+        badge.textContent = count;
+        badge.classList.toggle('hidden', count === 0);
+      }
+
+      if (count === 0) {
+        contenedor.innerHTML = '<p class="rounded-3xl border border-white/5 bg-pizarra-900 p-8 text-center text-crema-500">No hay solicitudes pendientes de confirmación. ¡Todo al día!</p>';
+        return;
+      }
+
+      const u = getUser();
+      const puedeConfirmar = u.rol === 'admin' || u.rol === 'encargado';
+
+      contenedor.innerHTML = reservas.map(r => {
+        const telLimpio = String(r.telefono || '').replace(/\D/g, '');
+        const telFmt = telLimpio.startsWith('34') ? telLimpio.slice(2) : telLimpio;
+        const msgWa = encodeURIComponent(`Hola ${r.nombre_cliente}! Te escribimos de La Tapería de Auténticos CyL en Coca para confirmar tu reserva del ${r.fecha} a las ${r.hora} (${r.personas} personas). ¡Te esperamos!`);
+        
+        return `
+          <article class="rounded-3xl border border-oro-400/25 bg-pizarra-900 p-5 shadow-lg">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <span class="font-display text-3xl font-semibold tabular-nums text-oro-300">${r.hora}</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-crema-100">${esc(r.nombre_cliente)}</h3>
+                  <p class="text-xs text-crema-400">📅 ${r.fecha} · Turno ${r.turno.toUpperCase()} · <strong class="text-oro-300">${r.personas} personas</strong></p>
+                </div>
+              </div>
+              <span class="rounded-full bg-oro-400/15 border border-oro-400/30 px-3 py-1 text-xs font-bold text-oro-300">Pendiente Aprobación</span>
+            </div>
+
+            <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-crema-400">
+              <span>📞 Tel: <a href="tel:${telLimpio}" class="text-crema-100 underline">${telFmt}</a></span>
+              ${r.email ? `<span>✉️ Email: <a href="mailto:${r.email}" class="text-crema-100 underline">${esc(r.email)}</a></span>` : ''}
+              <span>Origen: <b class="capitalize text-crema-300">${esc(r.origen)}</b></span>
+            </div>
+
+            ${r.notas ? `<p class="mt-2.5 rounded-2xl bg-white/5 p-2.5 text-xs text-crema-300 border border-white/5">💬 <em>"${esc(r.notas)}"</em></p>` : ''}
+
+            <div class="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <a href="https://wa.me/34${telLimpio}?text=${msgWa}" target="_blank" class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                  💬 WhatsApp
+                </a>
+                <a href="tel:${telLimpio}" class="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-crema-300 hover:bg-white/10 transition">
+                  📞 Llamar
+                </a>
+              </div>
+
+              ${puedeConfirmar ? `
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="cambiarEstadoReservaAPI('${r.id}', 'confirmed')" class="rounded-full bg-emerald-500 hover:bg-emerald-400 px-4 py-1.5 text-xs font-bold text-pizarra-950 transition">
+                    ✅ Aprobar y Confirmar
+                  </button>
+                  <button type="button" onclick="cambiarEstadoReservaAPI('${r.id}', 'rejected')" class="rounded-full border border-rose-500/40 bg-rose-500/15 hover:bg-rose-500/25 px-3.5 py-1.5 text-xs font-bold text-rose-300 transition">
+                    ❌ Rechazar
+                  </button>
+                </div>
+              ` : `<span class="text-xs text-crema-500 italic">Solo lectura para camareros</span>`}
+            </div>
+          </article>
+        `;
+      }).join('');
+
+    } catch (e) {
+      console.error('Error cargando solicitudes:', e);
+      contenedor.innerHTML = '<p class="rounded-3xl border border-rose-500/20 bg-rose-950/20 p-5 text-sm text-rose-300">Error conectando con el servidor de reservas.</p>';
+    }
+  }
+
+  async function cambiarEstadoReservaAPI(id, nuevoEstado) {
+    if (nuevoEstado === 'rejected' && !confirm('¿Seguro que deseas rechazar esta solicitud de reserva?')) return;
+    try {
+      const res = await fetch(`${API}/admin/reservas/${id}/estado`, {
+        method: 'PATCH',
+        headers: authHeaders(),
+        body: JSON.stringify({ estado: nuevoEstado })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'No se pudo actualizar el estado.');
+      toast(nuevoEstado === 'confirmed' ? '✅ Reserva confirmada con éxito' : '❌ Reserva rechazada');
+      cargarSolicitudesPendientesAPI();
+    } catch(err) {
+      alert('Error: ' + err.message);
+    }
+  }
+
+  // --- BOTÓN DEL PÁNICO (CIERRE MANUAL DE TURNOS) ---
+  async function cargarTurnosBloqueadosAPI() {
+    const listEl = document.getElementById('listaTurnosBloqueados');
+    if (!listEl) return;
+    try {
+      const res = await fetch(`${API}/admin/turnos/bloqueados`, { headers: authHeaders() });
+      if (!res.ok) return;
+      const turnos = await res.json();
+      
+      const badge = document.getElementById('badgePanicoEstado');
+      const fVal = document.getElementById('panicoFecha') ? document.getElementById('panicoFecha').value : hoyS();
+      const tVal = document.getElementById('panicoTurno') ? document.getElementById('panicoTurno').value : 'comida';
+      
+      const estaBloqueadoHoy = Array.isArray(turnos) && turnos.some(x => x.fecha === fVal && x.turno === tVal);
+      if (badge) {
+        badge.textContent = estaBloqueadoHoy ? '🔴 Turno Cerrado Manualmente' : '🟢 Turno Abierto (Regla 50%)';
+        badge.className = estaBloqueadoHoy 
+          ? 'rounded-full bg-rose-600 text-white px-3 py-1 text-xs font-bold'
+          : 'rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 text-xs font-bold';
+      }
+
+      if (!Array.isArray(turnos) || turnos.length === 0) {
+        listEl.innerHTML = '<span class="text-crema-500">Ningún turno bloqueado manualmente. Todas las fechas operan con aforo normal del 50%.</span>';
+        return;
+      }
+
+      listEl.innerHTML = '<strong class="block text-rose-300 mb-1">Turnos con cierre de emergencia activo:</strong>' + turnos.map(t => `
+        <div class="flex items-center justify-between py-1 border-b border-rose-500/10">
+          <span>📅 <strong>${t.fecha}</strong> - Turno <strong>${t.turno.toUpperCase()}</strong> ${t.motivo ? `(${esc(t.motivo)})` : ''}</span>
+          <button type="button" onclick="reabrirTurnoDirecto('${t.fecha}', '${t.turno}')" class="text-emerald-400 hover:underline text-[11px] font-bold">Desbloquear</button>
+        </div>
+      `).join('');
+    } catch(e) {
+      console.warn('Error cargando turnos bloqueados:', e);
+    }
+  }
+
+  async function togglePanico(bloquear) {
+    const u = getUser();
+    if (u.rol !== 'admin') {
+      alert('Permiso denegado: Solo el administrador (Alfonso) puede activar el Botón del Pánico.');
+      return;
+    }
+    const fecha = document.getElementById('panicoFecha').value;
+    const turno = document.getElementById('panicoTurno').value;
+    const motivo = document.getElementById('panicoMotivo').value.trim();
+    if (!fecha) { alert('Elige una fecha para el cierre de turno.'); return; }
+
+    try {
+      const res = await fetch(`${API}/admin/turnos/bloquear`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ fecha, turno, motivo: motivo || 'Cierre manual por aforo físico', bloqueado: bloquear })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'Error al aplicar cierre de turno.');
+      toast(bloquear ? '🚨 Turno cerrado manualmente a reservas online' : '🟢 Turno reabierto con regla del 50%');
+      cargarTurnosBloqueadosAPI();
+    } catch(err) {
+      alert('Error: ' + err.message);
+    }
+  }
+
+  async function reabrirTurnoDirecto(fecha, turno) {
+    try {
+      await fetch(`${API}/admin/turnos/bloquear`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ fecha, turno, motivo: 'Reapertura', bloqueado: false })
+      });
+      toast('🟢 Turno reabierto');
+      cargarTurnosBloqueadosAPI();
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  // --- MÓDULO DE SALA (CRUD MESAS) ---
+  async function cargarMesasAPI() {
+    const tbody = document.getElementById('tablaMesasBody');
+    if (!tbody) return;
+    try {
+      const res = await fetch(`${API}/admin/sala/mesas`, { headers: authHeaders() });
+      if (!res.ok) return;
+      const mesas = await res.json();
+      
+      let totalPax = 0;
+      mesas.forEach(m => { if (m.activa) totalPax += (m.capacidad_max || 0); });
+      const onlinePax = Math.floor(totalPax * 0.5);
+      const walkinPax = totalPax - onlinePax;
+
+      const totalEl = document.getElementById('salaTotalPax');
+      const onlineEl = document.getElementById('salaOnlinePax');
+      const walkinEl = document.getElementById('salaWalkinPax');
+      if (totalEl) totalEl.textContent = totalPax;
+      if (onlineEl) onlineEl.textContent = onlinePax;
+      if (walkinEl) walkinEl.textContent = walkinPax;
+
+      if (!Array.isArray(mesas) || mesas.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-crema-500">No hay mesas configuradas.</td></tr>';
+        return;
+      }
+
+      const u = getUser();
+      const esAdmin = u.rol === 'admin';
+
+      tbody.innerHTML = mesas.map(m => `
+        <tr class="hover:bg-white/5 transition">
+          <td class="py-2.5 font-bold text-crema-100">Mesa ${esc(m.numero)}</td>
+          <td class="py-2.5 capitalize text-crema-400">${esc(m.zona)}</td>
+          <td class="py-2.5 tabular-nums text-crema-300">${m.capacidad_min} - ${m.capacidad_max} pax</td>
+          <td class="py-2.5">
+            <span class="rounded-full px-2 py-0.5 text-[10px] font-bold ${m.activa ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">
+              ${m.activa ? 'Activa' : 'Inactiva'}
+            </span>
+          </td>
+          <td class="py-2.5 text-right">
+            ${esAdmin ? `<button type="button" onclick="eliminarMesaAPI('${m.id}')" class="text-rose-400 hover:text-rose-300 text-xs font-semibold">Eliminar</button>` : '<span class="text-crema-500 text-xs">-</span>'}
+          </td>
+        </tr>
+      `).join('');
+    } catch(e) {
+      console.warn('Error cargando mesas:', e);
+    }
+  }
+
+  async function eliminarMesaAPI(id) {
+    if (!confirm('¿Seguro que deseas eliminar esta mesa de la sala?')) return;
+    try {
+      const res = await fetch(`${API}/admin/sala/mesas/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders()
+      });
+      if (!res.ok) throw new Error('No se pudo eliminar la mesa.');
+      toast('Mesa eliminada');
+      cargarMesasAPI();
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  // --- MÓDULO DE NOTICIAS (CMS) ---
+  async function cargarNoticiasAPI() {
+    const listEl = document.getElementById('listaNoticiasAdmin');
+    if (!listEl) return;
+    try {
+      const res = await fetch(`${API}/noticias`);
+      if (!res.ok) return;
+      const noticias = await res.json();
+      if (!Array.isArray(noticias) || noticias.length === 0) {
+        listEl.innerHTML = '<p class="text-sm text-crema-500">No hay noticias publicadas.</p>';
+        return;
+      }
+      const u = getUser();
+      const esAdmin = u.rol === 'admin';
+
+      listEl.innerHTML = noticias.map(n => `
+        <div class="rounded-2xl border border-white/5 bg-pizarra-800 p-4 flex items-start justify-between gap-3">
+          <div>
+            <h4 class="font-semibold text-crema-100">${esc(n.titulo)}</h4>
+            <p class="text-xs text-crema-400 mt-1">${esc(n.resumen)}</p>
+            <span class="inline-block mt-2 text-[10px] text-oro-400 font-bold uppercase tracking-wider">${new Date(n.created_at).toLocaleDateString('es-ES')}</span>
+          </div>
+          ${esAdmin ? `<button type="button" onclick="eliminarNoticiaAPI('${n.id}')" class="text-rose-400 hover:text-rose-300 text-xs font-bold px-2 py-1">🗑️ Eliminar</button>` : ''}
+        </div>
+      `).join('');
+    } catch(e) { console.warn('Error cargando noticias CMS:', e); }
+  }
+
+  async function eliminarNoticiaAPI(id) {
+    if (!confirm('¿Eliminar esta noticia del portal web?')) return;
+    try {
+      const res = await fetch(`${API}/admin/noticias/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders()
+      });
+      if (!res.ok) throw new Error('Error eliminando noticia.');
+      toast('Noticia eliminada');
+      cargarNoticiasAPI();
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  // --- PASARELA STRIPE (FEATURE FLAG) ---
+  async function cargarStripeFlagAPI() {
+    try {
+      const res = await fetch(`${API}/admin/config/fianza-stripe`, { headers: authHeaders() });
+      if (!res.ok) return;
+      const data = await res.json();
+      stripeFlagActivo = !!data.activo;
+      const badge = document.getElementById('badgeStripeFlag');
+      const btn = document.getElementById('btnToggleStripe');
+      if (badge) {
+        badge.textContent = stripeFlagActivo ? '🟢 Activo (10€ fianza)' : '⚪ Inactivo (Sin fianza)';
+        badge.className = stripeFlagActivo ? 'rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 text-xs font-bold' : 'rounded-full bg-white/10 text-crema-400 px-3 py-1 text-xs font-bold';
+      }
+      if (btn) {
+        btn.textContent = stripeFlagActivo ? 'Desactivar Fianza' : 'Activar Fianza (10€)';
+      }
+    } catch(e) {}
+  }
+
+  async function toggleStripeFlag() {
+    const u = getUser();
+    if (u.rol !== 'admin') { alert('Solo Alfonso (admin) puede modificar la pasarela de pagos.'); return; }
+    try {
+      const nuevo = !stripeFlagActivo;
+      const res = await fetch(`${API}/admin/config/fianza-stripe`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ activo: nuevo, importe_eur: 10.0 })
+      });
+      if (!res.ok) throw new Error('Error al modificar feature flag de Stripe.');
+      toast(nuevo ? 'Fianza Stripe activada' : 'Fianza Stripe desactivada');
+      cargarStripeFlagAPI();
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+
+  // Conectar handlers del backend
+  const tkn = getToken();
+  const usr = getUser();
+  if (tkn && usr && usr.username) {
+    iniciarPanelConUsuario(usr);
+  }
+
+  $('#formLogin').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const u = $('#loginUser').value.trim();
+    const p = $('#loginPass').value;
+    const errEl = $('#errorLogin');
+    const btn = $('#btnEntrar');
+    if (!u || !p) {
+      errEl.textContent = 'Introduce usuario y contraseña';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Accediendo...';
+    errEl.classList.add('hidden');
+    try {
+      const resp = await fetch(`${API}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: u, password: p })
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.detail || 'Credenciales no válidas.');
+      sessionStorage.setItem('taperia_token', data.access_token);
+      sessionStorage.setItem('taperia_user', JSON.stringify(data.user));
+      iniciarPanelConUsuario(data.user);
+    } catch(err) {
+      errEl.textContent = err.message;
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Iniciar Sesión Segura';
+    }
+  });
+
+  $('#btnSalir').addEventListener('click', () => {
+    sessionStorage.removeItem('taperia_token');
+    sessionStorage.removeItem('taperia_user');
+    window.location.reload();
+  });
+
+  // Event Listeners Módulos Admin
+  if (document.getElementById('btnCerrarTurnoPanico')) {
+    document.getElementById('btnCerrarTurnoPanico').addEventListener('click', () => togglePanico(true));
+  }
+  if (document.getElementById('btnAbrirTurnoPanico')) {
+    document.getElementById('btnAbrirTurnoPanico').addEventListener('click', () => togglePanico(false));
+  }
+  if (document.getElementById('panicoFecha')) {
+    document.getElementById('panicoFecha').addEventListener('change', cargarTurnosBloqueadosAPI);
+    document.getElementById('panicoTurno').addEventListener('change', cargarTurnosBloqueadosAPI);
+  }
+  if (document.getElementById('btnRefrescarSala')) {
+    document.getElementById('btnRefrescarSala').addEventListener('click', cargarMesasAPI);
+  }
+  if (document.getElementById('formNuevaMesa')) {
+    document.getElementById('formNuevaMesa').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      try {
+        const num = document.getElementById('nuevaMesaNum').value.trim();
+        const zona = document.getElementById('nuevaMesaZona').value;
+        const minP = parseInt(document.getElementById('nuevaMesaMin').value, 10);
+        const maxP = parseInt(document.getElementById('nuevaMesaMax').value, 10);
+        const res = await fetch(`${API}/admin/sala/mesas`, {
+          method: 'POST',
+          headers: authHeaders(),
+          body: JSON.stringify({ numero: num, zona, capacidad_min: minP, capacidad_max: maxP, activa: true })
+        });
+        if (!res.ok) throw new Error('Error guardando mesa.');
+        toast('Mesa guardada');
+        document.getElementById('formNuevaMesa').reset();
+        cargarMesasAPI();
+      } catch(e) { alert('Error: ' + e.message); }
+    });
+  }
+  if (document.getElementById('btnRefrescarNoticias')) {
+    document.getElementById('btnRefrescarNoticias').addEventListener('click', cargarNoticiasAPI);
+  }
+  if (document.getElementById('formNuevaNoticia')) {
+    document.getElementById('formNuevaNoticia').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      try {
+        const titulo = document.getElementById('noticiaTitulo').value.trim();
+        const imagen = document.getElementById('noticiaImagen').value.trim();
+        const resumen = document.getElementById('noticiaResumen').value.trim();
+        const contenido = document.getElementById('noticiaContenido').value.trim();
+        const res = await fetch(`${API}/admin/noticias`, {
+          method: 'POST',
+          headers: authHeaders(),
+          body: JSON.stringify({ titulo, resumen, contenido, imagen_url: imagen || null })
+        });
+        if (!res.ok) throw new Error('Error publicando noticia.');
+        toast('Noticia publicada en la web');
+        document.getElementById('formNuevaNoticia').reset();
+        cargarNoticiasAPI();
+      } catch(e) { alert('Error: ' + e.message); }
+    });
+  }
+  if (document.getElementById('btnToggleStripe')) {
+    document.getElementById('btnToggleStripe').addEventListener('click', toggleStripeFlag);
+  }
+
   const reset = () => { try { localStorage.removeItem(CLAVE); } catch (e) {} D = cargar(); importarWeb(); if (!$('#vistaApp').classList.contains('hidden')) pintar(); toast('Datos de ejemplo restablecidos'); };
   $('#btnReset').addEventListener('click', reset);
   $('#btnResetApp').addEventListener('click', () => { if (confirm('¿Restablecer los datos de ejemplo? Se perderán los cambios de la demostración.')) reset(); });

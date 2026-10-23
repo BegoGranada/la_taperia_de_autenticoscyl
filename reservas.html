@@ -135,7 +135,7 @@
         <h2 class="mt-2 font-display text-3xl font-semibold">¡Gracias, <span id="okNombre"></span>!</h2>
         <p id="okResumen" class="mt-3 leading-relaxed text-crema-300"></p>
         <p class="mt-3 text-sm text-crema-500">Te confirmaremos la reserva por teléfono o WhatsApp. Si necesitas cambiar algo, llámanos al <a href="tel:+34647413186" class="font-semibold text-crema-100">647 41 31 86</a>.</p>
-        <p class="mt-4 rounded-2xl bg-oro-400/10 px-4 py-3 text-xs leading-relaxed text-oro-300">Modo demostración: la solicitud se ha guardado en este navegador y ya aparece en el área de propietarios.</p>
+        <p class="mt-4 rounded-2xl bg-oro-400/10 px-4 py-3 text-xs leading-relaxed text-oro-300">🛡️ <strong>Solicitud registrada con éxito:</strong> Queda pendiente de aprobación manual por el administrador (Alfonso) o el equipo del restaurante. Te confirmaremos por WhatsApp o llamada lo antes posible.</p>
         <button id="otraReserva" class="mt-6 rounded-full border border-crema-100/30 px-6 py-3 text-sm font-semibold">Hacer otra reserva</button>
       </div>
     </div>
@@ -235,7 +235,7 @@
     F.fecha.addEventListener('change', pintar);
     pintar();
     const fechaLarga = s => new Date(s + 'T12:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
-    F.addEventListener('submit', ev => {
+    F.addEventListener('submit', async ev => {
       ev.preventDefault();
       const f = Object.fromEntries(new FormData(F)), err = $('#errorReserva');
       const tel = (f.telefono || '').replace(/[\s.-]/g, '');
@@ -248,12 +248,60 @@
         : !f.privacidad ? 'Acepta el uso de tus datos para gestionar la reserva.' : '';
       if (msg) { err.textContent = msg; err.classList.remove('hidden'); return; }
       err.classList.add('hidden');
-      const sol = { id: 'web-' + Date.now().toString(36), fecha: f.fecha, turno, hora, personas: +f.personas, nombre: f.nombre.trim(),
-        telefono: tel, email: f.email.trim(), notas: f.notas.trim(), origen: 'web', estado: 'pendiente', creado: new Date().toISOString() };
-      try { const l = JSON.parse(localStorage.getItem(C.claveSolicitudes) || '[]'); l.push(sol); localStorage.setItem(C.claveSolicitudes, JSON.stringify(l)); } catch (e) {}
-      $('#okNombre').textContent = sol.nombre.split(' ')[0];
-      $('#okResumen').textContent = `Has solicitado mesa para ${sol.personas} ${sol.personas === 1 ? 'persona' : 'personas'} el ${fechaLarga(sol.fecha)} a las ${sol.hora} (${C.turnos[turno].nombre.toLowerCase()}).`;
-      F.classList.add('hidden'); const ok = $('#reservaOk'); ok.classList.remove('hidden'); ok.focus(); ok.scrollIntoView({ block: 'center' });
+
+      const submitBtn = F.querySelector('button[type="submit"]') || F.querySelector('button:not([type="button"])');
+      const origBtnText = submitBtn ? submitBtn.innerHTML : 'Enviar solicitud';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'Enviando solicitud...'; }
+
+      try {
+        const payload = {
+          fecha: f.fecha,
+          turno: turno,
+          hora: hora,
+          personas: +f.personas,
+          nombre_cliente: f.nombre.trim(),
+          telefono: tel,
+          email: f.email ? f.email.trim() : null,
+          notas: f.notas ? f.notas.trim() : null,
+          origen: 'web'
+        };
+
+        const apiUrl = (window.TAPERIA && window.TAPERIA.apiUrl) ? window.TAPERIA.apiUrl : 'https://granadaiatech.com/api/taperia';
+        const res = await fetch(`${apiUrl}/reservas`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.detail || 'No se pudo procesar la reserva en este momento.');
+        }
+
+        // Si la fianza Stripe estuviera activa y devuelve URL de pasarela
+        if (data.checkout_url) {
+          window.location.href = data.checkout_url;
+          return;
+        }
+
+        $('#okNombre').textContent = payload.nombre_cliente.split(' ')[0];
+        $('#okResumen').textContent = `Has solicitado mesa para ${payload.personas} ${payload.personas === 1 ? 'persona' : 'personas'} el ${fechaLarga(payload.fecha)} a las ${payload.hora} (${C.turnos[turno].nombre.toLowerCase()}).`;
+        F.classList.add('hidden');
+        const ok = $('#reservaOk');
+        ok.classList.remove('hidden');
+        ok.focus();
+        ok.scrollIntoView({ block: 'center' });
+
+      } catch (e) {
+        err.textContent = e.message || 'Lo sentimos, el aforo online para este turno está completo o cerrado. Te recomendamos llamarnos al 647 41 31 86 para consultar mesas presenciales (walk-in).';
+        err.classList.remove('hidden');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origBtnText;
+        }
+      }
     });
     $('#otraReserva').addEventListener('click', () => { F.reset(); F.fecha.value = iso(hoy); F.personas.value = 2; hora = ''; pintar(); $('#reservaOk').classList.add('hidden'); F.classList.remove('hidden'); });
   })();
